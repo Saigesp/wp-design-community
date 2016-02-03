@@ -25,7 +25,7 @@
 						<div id="title" class="titlearticle">
 							<div class="divtextarticle">
 								<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-								<h3 class="subtitletextarticle titlesarticle"><?php the_subtitle(); ?></h3>
+								<h3 class="subtitletextarticle titlesarticle"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>
 							</div>
 						</div>
 						<div class="categoryarticle">
@@ -35,14 +35,16 @@
 					<section id="wraparticle">
 					  <?php include(locate_template( 'buttons-share.php')); ?>
 						<div class="contentauthorarticle">
-							<figure class="authorimage authorbuble" style="background-color: #666;">
-								<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
-									<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
-								</a>
-							</figure>
+							<?php if(function_exists('get_wp_user_avatar_src')){?>
+								<figure class="authorimage authorbuble" style="background-color: #666;">
+									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
+										<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
+									</a>
+								</figure>
+							<?php } ?>
 							<p class="authorarticle"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
 							<p class="datearticle"><?php the_date();?></p>
-							<p class="datearch viewarch"><?php the_svg_icon('eye');?> <?php echo wpp_get_views(get_the_ID(),'all');?></p>
+							<p class="datearch viewarch"><?php if(function_exists('wpp_get_views')){ the_svg_icon('eye'); echo wpp_get_views(get_the_ID(),'all');}?></p>
 						</div>
 						<div id="content-<?php the_ID(); ?>" class="contentarticle">
 							<?php the_content(); ?>
@@ -50,15 +52,16 @@
 						<div class="backcontainer">
 							<div class="postdownload">
 								<?php
-								$archive = get_field( "postarchive" );
-								$archivename = get_field( "postarchivename" );
-								if( $archive ) { ?>
-								    	<p>
-								    		<a href="<?php echo $archive;?>">
-								    			<?php the_svg_icon('download');?> <?php echo 'Descarga <span class="filename">'. $archivename.'</span>';?>
-								    		</a>
-								    	</p>
-								<?php }	?>
+								if(function_exists('get_field')){
+									$archive = get_field( "postarchive" );
+									$archivename = get_field( "postarchivename" );
+									if( $archive ) { ?>
+									    	<p>
+									    		<a href="<?php echo $archive;?>">
+									    			<?php the_svg_icon('download');?> <?php echo 'Descarga <span class="filename">'. $archivename.'</span>';?>
+									    		</a>
+									    	</p>
+								<?php } } ?>
 							</div>
 							<footer id="footer-<?php the_ID(); ?>" class="footerarticle">
 								<div class="contentauthorarticlefoot">

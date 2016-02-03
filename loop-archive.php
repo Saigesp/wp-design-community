@@ -30,7 +30,7 @@
       <div class="contentauthor">
         <p class="authorarch"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
         <p class="datearch"><?php echo get_the_date();?></p>
-        <p class="datearch viewarch"><?php the_svg_icon('eye');?> <?php if(function_exists('wpp_get_views')) echo wpp_get_views(get_the_ID(),'all');?></p>
+        <?php if(function_exists('wpp_get_views')){ ?><p class="datearch viewarch"><?php the_svg_icon('eye');?> <?php echo wpp_get_views(get_the_ID(),'all');?></p><?php } ?>
       </div>
    	</section>
   </article>

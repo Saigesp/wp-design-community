@@ -1,16 +1,15 @@
 <?php
 
 /**
- * FUNCIONES GENERALES
+ * GENERAL FUNCTIONS
  ***********************************/
-
-// Ocultar barra de administración
+// Hide admin bar
 add_filter('show_admin_bar', '__return_false');
 
-// Activar thumbnails
+// Active thumbnails
 add_theme_support( 'post-thumbnails' );
 
-// Activar menus
+// Active menus
 register_nav_menus( array(
 	'menutop' => 'Top Menu',
   'menumiddle' => 'Menu medio',
@@ -19,11 +18,36 @@ register_nav_menus( array(
 
 
 
-/**
- * FUNCIONES DE PUBLICACIÓN
- ***********************************/
 
-// Añadir contador de caracteres en excerpt
+/**
+ * THEMING FUNCTIONS
+ ***********************************/
+// Require & recomend plugins for WP
+// http://tgmpluginactivation.com/
+require_once dirname( __FILE__ ) . '/plugins/tgm-plugin-activation/class-tgm-plugin-activation.php';
+add_action( 'tgmpa_register', 'mytheme_require_plugins' );
+
+function mytheme_require_plugins() {
+ 
+    $plugins = array(
+      array(
+        'name'      => 'WP Subtitle',
+        'slug'      => 'wp-subtitle',
+        'required'  => false, // this plugin is recommended
+      )
+    );
+    $config = array( /* The array to configure TGM Plugin Activation */ );
+ 
+    tgmpa( $plugins, $config );
+  }
+
+
+
+
+/**
+ * PUBLICH FUNCTIONS
+ ***********************************/
+// Add character counter on excerpt
 function excerpt_count_js(){
     $limite = 100;
     if ('page' != get_post_type()) {
@@ -63,6 +87,11 @@ function my_theme_add_editor_styles() {
     add_editor_style( $font_url );
 }
 add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
+
+
+
+
+
 
 
 /**

@@ -1,7 +1,21 @@
-		<footer id="colophon" <?php if(is_home() || is_page('homer')) echo 'class="footerhomer"';?>>
-      <p> <a href="http://xn--diseadoresindustriales-nec.es/"> &#169 <?php echo current_time( 'Y' );?> Diseñadoresindustriales.es</a> | <a href="http://xn--diseadoresindustriales-nec.es/terminos-y-condiciones/">Aviso legal</a></p>
-		</footer><!-- #colophon -->
-		</div><!-- #main -->
-	<?php wp_footer();?>
-	</body>
-</html>
+<footer id="footerpage" class="footerback">
+	<div id="colophon" class="wraparch wrapfoot">
+    	<div class="divleft">
+    		<p>Talk&amp;Code | The Digital Software Factory.</p>
+    	</div>
+		<div class="divright">
+			<p><a href="http://www.talkandcode.com/Terms">Aviso legal</a>
+				<a href="https://www.facebook.com/talkandcode"><?php the_svg_icon('facebook');?></a>
+				<a href="https://twitter.com/talkandcode"><?php the_svg_icon('twitter');?></a>
+				<a href="https://www.linkedin.com/company/5321507"><?php the_svg_icon('linkedin');?></a>
+			</p>
+    	</div>
+	</div>
+</footer> <!-- end footer -->
+
+<?php wp_footer(); ?>
+</div>
+
+</body>
+
+</html> <!-- The End. what a ride! -->

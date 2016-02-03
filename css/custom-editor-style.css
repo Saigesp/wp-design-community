@@ -1,0 +1,116 @@
+
+ /**
+ * TEXT & FONTS
+ ***********************************/
+
+body#tinymce.wp-editor h1,
+body#tinymce.wp-editor h2,
+body#tinymce.wp-editor h3,
+body#tinymce.wp-editor h4,
+body#tinymce.wp-editor .subtitletextarticle {
+	font-family: 'Open Sans', sans-serif;
+}
+body#tinymce.wp-editor p,
+body#tinymce.wp-editor ul,
+body#tinymce.wp-editor ol,
+body#tinymce.wp-editor figcaption {
+	font-family: 'Merriweather', serif;
+}
+body#tinymce.wp-editor a {
+	color: rgb(40,180,184);
+}
+body#tinymce.wp-editor a:hover {
+	color: rgb(34,153,155);
+}
+
+body#tinymce.wp-editor h1,
+body#tinymce.wp-editor h2,
+body#tinymce.wp-editor h3,
+body#tinymce.wp-editor h4,
+body#tinymce.wp-editor p,
+body#tinymce.wp-editor ul,
+body#tinymce.wp-editor ol {
+	max-width: 700px;
+	margin: 10px 15px;
+	line-height: 2rem;
+	font-size: 1rem;
+}
+body#tinymce.wp-editor h1,
+body#tinymce.wp-editor h2 {
+	margin: 60px 15px 10px;
+	color: rgb(40,180,183);
+	font-weight: 400;
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+body#tinymce.wp-editor h3,
+body#tinymce.wp-editor h4 {
+	margin: 60px 15px 10px;
+	color: rgb(40,180,183);
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	line-height: 1rem;
+}
+body#tinymce.wp-editor ul,
+body#tinymce.wp-editor ol {
+	margin-left: 35px;
+}
+body#tinymce.wp-editor blockquote {
+	max-width: 700px;
+	border-left: 1px solid #666;
+	margin: 20px 0 20px 15px;
+	color: #000;
+}
+body#tinymce.wp-editor blockquote p {
+	margin-left: 10px;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+}
+body#tinymce.wp-editor code {
+	background-color: #dedede;
+	padding: 1px 3px;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+}
+
+/* IMAGENES */
+body#tinymce.wp-editor img,
+body#tinymce.wp-editor .wp-caption {
+	width: initial;
+	max-width: 100%;
+	margin: 20px auto;
+	height: auto;
+	display: block;
+}
+body#tinymce.wp-editor .wp-caption .wp-caption-text {
+  margin: -10px 10px 10px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  font-style: italic;
+}
+/* VIDEO */
+body#tinymce.wp-editor .video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+
+}
+body#tinymce.wp-editor .video-wrap {
+	max-width: 700px;
+	display: block;
+	margin: 10px auto;
+}
+body#tinymce.wp-editor .video-container iframe,
+body#tinymce.wp-editor .video-container object,
+body#tinymce.wp-editor .video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

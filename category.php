@@ -1,17 +1,22 @@
 <?php get_header(); ?>
 
  <?php include( locate_template(  'header-masonry.php' )); ?> 
+
  <?php include( locate_template(  'menu-middle.php' )); ?>
+
+
 
 <?php 
   $pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
   $post_per_page = get_option( 'posts_per_page', '10' );
+  $categoria = get_query_var('cat');
 ?>
 
 <?php
   $args = array (
     'order' => 'DESC',
     'posts_per_page' => -1,
+    'cat' => get_query_var('cat'),
   );
   $post_count_query = new wp_query( $args );
   $post_count = $post_count_query->found_posts;
@@ -22,23 +27,19 @@
   $args = array( 
     'order' => 'DESC',
     'posts_per_page' => $post_per_page,
+    'cat' => get_query_var('cat'),
     'offset'    => $offset,
   );
   $wp_query = new wp_query( $args );
 ?>
 
 <div id="divwrap" class="wraparch index iascontainer">
-  <?php
-    if (have_posts()) : 
-      $cont = 0;
-      while (have_posts()) : 
-        the_post();
-        include( locate_template(  'loop-archive.php' ));
-
-  		endwhile;
-  	else :
-  	endif;
-  ?>
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <?php include( locate_template(  'loop-archive.php' )); ?> 
+    <?php endwhile; ?>
+  <?php else : ?>
+  <?php endif; ?>
   <div class="navigation">
     <?php
     $base = get_bloginfo( 'url' ). '%_%';

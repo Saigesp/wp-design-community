@@ -1,0 +1,27 @@
+
+.rrssb-buttons.large-format li a,.rrssb-buttons.large-format li a .rrssb-text{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden}
+.rrssb-buttons,.rrssb-buttons li,.rrssb-buttons li a{-moz-box-sizing:border-box;box-sizing:border-box}
+.clearfix{*zoom:1}
+.clearfix:after{clear:both}
+.clearfix:before,.clearfix:after{content:" ";display:table}
+
+.rrssb-buttons{font-family:"Open sans",sans-serif;height:36px;margin:0;padding:0;width:100%}
+.rrssb-buttons li{float:left;height:100%;line-height:13px;list-style:none;margin:0;padding:0 2.5px}
+.rrssb-buttons li.rrssb-email a{background-color:#0a88ff}
+.rrssb-buttons li.rrssb-email a:hover{background-color:#006ed6}
+.rrssb-buttons li.rrssb-facebook a{background-color:#306199}
+.rrssb-buttons li.rrssb-facebook a:hover{background-color:#244872}
+.rrssb-buttons li.rrssb-linkedin a{background-color:#007bb6}
+.rrssb-buttons li.rrssb-linkedin a:hover{background-color:#005983}
+.rrssb-buttons li.rrssb-twitter a{background-color:#26c4f1}
+.rrssb-buttons li.rrssb-twitter a:hover{background-color:#0eaad6}
+.rrssb-buttons li.rrssb-googleplus a{background-color:#e93f2e}
+.rrssb-buttons li.rrssb-googleplus a:hover{background-color:#ce2616}
+
+.rrssb-buttons li a{background-color:#ccc;border-radius:2px;display:block;font-size:11px;font-weight:bold;height:100%;padding:11px 7px 12px 27px;position:relative;text-align:center;text-decoration:none;text-transform:uppercase;width:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-transition:background-color 0.2s ease-in-out;-moz-transition:background-color 0.2s ease-in-out;-o-transition:background-color 0.2s ease-in-out;transition:background-color 0.2s ease-in-out}
+
+.rrssb-buttons li a .rrssb-icon{display:block;height:100%;left:9px;padding-top:9px;position:absolute;top:0;width:10%}
+.rrssb-buttons li a .rrssb-icon svg{height:17px;width:17px}
+.rrssb-buttons li a .rrssb-icon svg path,.rrssb-buttons li a .rrssb-icon svg polygon{fill:#fff}
+.rrssb-buttons li a .rrssb-text{color:#fff}
+.rrssb-buttons li a:active{box-shadow:inset 1px 3px 15px 0 rgba(22,0,0,0.25)}

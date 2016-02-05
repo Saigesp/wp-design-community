@@ -1,6 +1,5 @@
 <?php get_header(); ?> 
 
-
 <?php 
   $pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
   $post_per_page = get_option( 'posts_per_page', '10' );
@@ -31,9 +30,11 @@
 
 <div class="contentauthorarticlefoot contentauthorauthor">
   <hr class="separatorauthor separatorauthorup">
-  <figure class="authorimagefoot authorbuble" style="background-color: #666;">
-    <img src="<?php echo get_wp_user_avatar_src($term_slug, 100, 'medium'); ?>"/>
-  </figure>
+    <figure class="authorimagefoot authorbuble" style="background-color: #666;">
+      <img src="<?php if(function_exists('get_wp_user_avatar_src'))
+        echo get_wp_user_avatar_src($term_slug, 100, 'medium');
+        else echo get_stylesheet_directory_uri().'/img/nophoto.png'; ?>"/>
+    </figure>
   <p class="authorarticlefoot">
     <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
       <?php the_author(); ?>

@@ -22,30 +22,80 @@ register_nav_menus( array(
 /**
  * THEMING FUNCTIONS
  ***********************************/
-// Require & recomend plugins for WP
+// Require & recommend plugins for WP
 // http://tgmpluginactivation.com/
 require_once dirname( __FILE__ ) . '/plugins/tgm-plugin-activation/class-tgm-plugin-activation.php';
 add_action( 'tgmpa_register', 'mytheme_require_plugins' );
 
 function mytheme_require_plugins() {
- 
     $plugins = array(
       array(
         'name'      => 'WP Subtitle',
         'slug'      => 'wp-subtitle',
-        'required'  => false, // this plugin is recommended
+        'required'  => false,
+      ),
+      array(
+        'name'      => 'Disqus Comment System',
+        'slug'      => 'disqus-comment-system',
+        'required'  => false, 
+      ),
+      array(
+        'name'      => 'WP User Avatar',
+        'slug'      => 'wp-user-avatar',
+        'required'  => false, 
       )
     );
-    $config = array( /* The array to configure TGM Plugin Activation */ );
- 
+    $config = array();
     tgmpa( $plugins, $config );
-  }
+}
+
+
+/**
+ * CUSTOMIZE FUNCTIONS
+ ***********************************/
+// Add section
+function wpdcom_customize_register($wp_customize) {
+  $wp_customize->add_section("colors", array(
+    "title" => __("Colors", "customizer_colors_sections"),
+    "priority" => 30,
+  ));
+
+  $wp_customize->add_setting("colors_code", array(
+    "default" => "",
+    "transport" => "refresh",
+  ));
+
+  $wp_customize->add_control( 
+    new WP_Customize_Color_Control( 
+    $wp_customize, 
+    'first_color', 
+    array(
+      'label'      => __( 'First Color', 'wp-design-community' ),
+      'section'    => 'colors',
+      'settings'   => 'colors_code',
+    ) ) 
+  );
+  $wp_customize->add_control( 
+    new WP_Customize_Color_Control( 
+    $wp_customize, 
+    'second_color', 
+    array(
+      'label'      => __( 'Second Color', 'wp-design-community' ),
+      'section'    => 'colors',
+      'settings'   => 'colors_code',
+    ) ) 
+  );
+}
+
+add_action("customize_register","wpdcom_customize_register");
+
+
 
 
 
 
 /**
- * PUBLICH FUNCTIONS
+ * PUBLISH FUNCTIONS
  ***********************************/
 // Add character counter on excerpt
 function excerpt_count_js(){
@@ -68,20 +118,20 @@ function excerpt_count_js(){
 add_action( 'admin_head-post.php', 'excerpt_count_js');
 add_action( 'admin_head-post-new.php', 'excerpt_count_js');
 
-// Añadir visualizador de estilos en WYSIWYG
+// Add style select on WYSIWYG
 function my_mce_buttons_2( $buttons ) {
     array_unshift( $buttons, 'styleselect' );
     return $buttons;
 }
 add_filter( 'mce_buttons_2', 'my_mce_buttons_2' );
 
-// Añadir estilos al editor WYSIWYG
-function tac_editor_styles() {
+// Add styles on WYSIWYG
+function wpdcom_editor_styles() {
     add_editor_style( get_stylesheet_directory_uri().'/css/custom-editor-style.css' );
 }
-add_action( 'admin_init', 'tac_editor_styles' );
+add_action( 'admin_init', 'wpdcom_editor_styles' );
 
-// Añadir tipografía al editor
+// Add typography on WYSIWYG
 function my_theme_add_editor_styles() {
     $font_url = str_replace( ',', '%2C', '//fonts.googleapis.com/css?family=Merriweather:400italic,400,900,300,700,700italic|Merriweather+Sans:400,700,800|Open+Sans:400italic,400,300,700,800,600' );
     add_editor_style( $font_url );

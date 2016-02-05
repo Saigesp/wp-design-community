@@ -14,6 +14,8 @@
  * @copyright Copyright (c) 2011, Thomas Griffin
  * @license   GPL-2.0+
  *
+ * @update 2.2.2016
+ *
  * @wordpress-plugin
  * Plugin Name: TGM Plugin Activation
  * Plugin URI:

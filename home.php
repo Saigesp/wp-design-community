@@ -27,6 +27,11 @@
   $wp_query = new wp_query( $args );
 ?>
 
+  <div id="ads_box">
+    <?php echo get_theme_mod("colors_code");
+    ?>
+  </div>
+
 <div id="divwrap" class="wraparch index iascontainer">
   <?php
     if (have_posts()) : 

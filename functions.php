@@ -56,7 +56,7 @@ function mytheme_require_plugins() {
 // Add section
 function wpdcom_customize_register($wp_customize) {
   $wp_customize->add_section("colors", array(
-    "title" => __("Colors", "customizer_colors_sections"),
+    "title" => __("Colores", "customizer_colors_sections"),
     "priority" => 30,
   ));
 
@@ -65,31 +65,60 @@ function wpdcom_customize_register($wp_customize) {
     "transport" => "refresh",
   ));
 
-  $wp_customize->add_control( 
+  $wp_customize->add_control(
     new WP_Customize_Color_Control( 
     $wp_customize, 
     'first_color', 
     array(
-      'label'      => __( 'First Color', 'wp-design-community' ),
+      'label'      => __( 'Color principal', 'wp-design-community' ),
       'section'    => 'colors',
       'settings'   => 'colors_code',
     ) ) 
   );
-  $wp_customize->add_control( 
+  $wp_customize->add_setting("colors_code_back", array(
+    "default" => "",
+    "transport" => "refresh",
+  ));
+  $wp_customize->add_control(
     new WP_Customize_Color_Control( 
     $wp_customize, 
-    'second_color', 
+    'background_color', 
     array(
-      'label'      => __( 'Second Color', 'wp-design-community' ),
+      'label'      => __( 'Color de fondo', 'wp-design-community' ),
       'section'    => 'colors',
-      'settings'   => 'colors_code',
+      'settings'   => 'colors_code_back',
     ) ) 
   );
 }
 
 add_action("customize_register","wpdcom_customize_register");
 
-
+function customizer_css() {
+    ?>
+    <style type="text/css">
+        /* Color principal */
+        a, .menumiddlenav > ul > li > a {
+          color: <?php echo get_theme_mod( 'colors_code' ); ?>;
+        }
+        .footerback, .menumiddlenav ul > li.has-sub > a:before, .menumiddlenav ul > li.has-sub > a:after {
+          background-color: <?php echo get_theme_mod( 'colors_code' ); ?>;
+        }
+        #hamburguer {
+          fill: <?php echo get_theme_mod( 'colors_code' ); ?>;
+        }
+        /* Color de fondo */
+        body, #wraparticle, .menumiddlenav > ul > li > a {
+          background-color: <?php echo get_theme_mod( 'colors_code_back' ); ?>;
+        }
+        @media only screen and (min-width: 550px){
+          .authorarch a {
+            color: <?php echo get_theme_mod( 'colors_code' ); ?>;
+          }
+        }
+    </style>
+    <?php
+}
+add_action( 'wp_head', 'customizer_css' );
 
 
 

@@ -10,15 +10,15 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <base href="http://blog.talkandcode.com">
+  <base href="">
   <meta name="keywords" content="">
   <meta name="robots" content="INDEX,follow">
-  <meta name="copyright" content="Talk&amp;Code www.talkandcode.com">
+  <meta name="copyright" content="">
   <meta name="revisit-after" content="7 days">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary"> 
-  <meta name="twitter:site" content="@talkandcode"> 
-  <meta name="twitter:creator" content="@talkandcode"> 
+  <meta name="twitter:site" content="@"> 
+  <meta name="twitter:creator" content="@"> 
   <meta name="google-site-verification" content="" />
   
 	<?php if (is_single()) { ?>
@@ -66,7 +66,6 @@
   <meta name="theme-color" content="#ffffff">
 
   <!-- estilos -->
-  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/jquery.mmenu.all.css">
   <?php if(is_single()){?>
     <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/selection.sharer.css">
   <?php } ?>
@@ -80,14 +79,6 @@
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.imagesloaded.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.imagefill.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/selection.sharer.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.mmenu.min.all.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.talkandcodeblog.js"></script>
-  <script type="text/javascript" src="//cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js" ></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/moment.min.js"></script>
-  <audio src="<?php echo get_template_directory_uri(); ?>/alt/Maraca.ogg" style="display:none;" controls="controls"></audio>
-  <?php if(is_single()){?>
-    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.talkandcodeblogsingle.js"></script>
-  <?php } ?>
 
   <script>
 $(document).ready(function() {
@@ -97,32 +88,16 @@ $(document).ready(function() {
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
  
-  ga('create', 'UA-65262764-1', 'auto');
+  ga('create', 'XXXXXXX', 'auto');
   ga('send', 'pageview');
 
-  // Menu mobile
-  $("#navtop").mmenu({
-        navbar    : false,
-        navbars   : { 
-          height  : 4,
-          content : [ '<img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/logowhite.png"/><div><form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>"><div><label class="screen-reader-text" for="s"><?php _x( 'Search for:', 'label' ); ?></label><input type="text" value="<?php echo get_search_query(); ?>" placeholder="Buscar" name="s" id="s" /><input type="submit" id="searchsubmit" value="<?php echo esc_attr_x( 'Search', 'submit button' ); ?>" /></div></form></div>',]
-        },
-  });
-  
-  // Esconder menú hasta carga de plugins
-  $('#navtop a').css( "display", "block" );
-  $('#masonrywrap').css( "visibility", "visible" );
-
-  var maraca = document.querySelector('audio');
-
-  cheet('m a r a c a', function () {
-    maraca.play();
-  });
 });
   </script>
 		
-  <?php wp_head(); ?>
-  <?php include( locate_template(  'functions-svg.php' )); ?>  
+  <?php
+  wp_head();
+  include(locate_template('functions-svg.php'));
+  ?>  
   
 </head>
 

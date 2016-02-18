@@ -1,2 +1,2 @@
 # WP Design Community
-Wordpress theme for communities
+Wordpress theme for communities.

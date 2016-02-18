@@ -1,7 +1,7 @@
 <footer id="footerpage" class="footerback">
 	<div id="colophon" class="wraparch wrapfoot">
     	<div class="divleft">
-    		<p>Talk&amp;Code | The Digital Software Factory.</p>
+    		<p><?php bloginfo('sitename'); ?></p>
     	</div>
 		<div class="divright">
 			<p><a href="http://www.talkandcode.com/Terms">Aviso legal</a>

@@ -61,10 +61,9 @@ function wpdcom_customize_register($wp_customize) {
   ));
 
   $wp_customize->add_setting("colors_code", array(
-    "default" => "",
+    "default" => "#7c6d6f",
     "transport" => "refresh",
   ));
-
   $wp_customize->add_control(
     new WP_Customize_Color_Control( 
     $wp_customize, 
@@ -75,8 +74,24 @@ function wpdcom_customize_register($wp_customize) {
       'settings'   => 'colors_code',
     ) ) 
   );
+
+  $wp_customize->add_setting("colors_code_hover", array(
+    "default" => "#c1312c",
+    "transport" => "refresh",
+  ));
+  $wp_customize->add_control(
+    new WP_Customize_Color_Control( 
+    $wp_customize, 
+    'hover_color', 
+    array(
+      'label'      => __( 'Hover Color', 'wp-design-community' ),
+      'section'    => 'colors',
+      'settings'   => 'colors_code_hover',
+    ) ) 
+  );
+
   $wp_customize->add_setting("colors_code_back", array(
-    "default" => "",
+    "default" => "#f7f7f7",
     "transport" => "refresh",
   ));
   $wp_customize->add_control(
@@ -89,6 +104,37 @@ function wpdcom_customize_register($wp_customize) {
       'settings'   => 'colors_code_back',
     ) ) 
   );
+
+  $wp_customize->add_setting("colors_code_head", array(
+    "default" => "#7c6d6f",
+    "transport" => "refresh",
+  ));
+  $wp_customize->add_control(
+    new WP_Customize_Color_Control( 
+    $wp_customize, 
+    'head_color', 
+    array(
+      'label'      => __( 'Head y Footer', 'wp-design-community' ),
+      'section'    => 'colors',
+      'settings'   => 'colors_code_head',
+    ) ) 
+  );
+
+  $wp_customize->add_setting("colors_code_head_c", array(
+    "default" => "#ffffff",
+    "transport" => "refresh",
+  ));
+  $wp_customize->add_control(
+    new WP_Customize_Color_Control( 
+    $wp_customize, 
+    'head_c_color', 
+    array(
+      'label'      => __( 'Head y Footer Texto', 'wp-design-community' ),
+      'section'    => 'colors',
+      'settings'   => 'colors_code_head_c',
+    ) ) 
+  );
+
 }
 
 add_action("customize_register","wpdcom_customize_register");
@@ -97,22 +143,42 @@ function customizer_css() {
     ?>
     <style type="text/css">
         /* Color principal */
-        a, .menumiddlenav > ul > li > a, .titletextarch a, .categoryarch a {
+        a, .menumiddlenav > ul > li > a, .titletextarch a, .categoryarch a, .articlearch--nothumb .authorarch a,
+        .articlearch--nothumb .datearch {
           color: <?php echo get_theme_mod( 'colors_code' ); ?>;
         }
-        .footerback, .menumiddlenav ul > li.has-sub > a:before, .menumiddlenav ul > li.has-sub > a:after {
+        .menumiddlenav ul > li.has-sub > a:before, .menumiddlenav ul > li.has-sub > a:after {
           background-color: <?php echo get_theme_mod( 'colors_code' ); ?>;
         }
-        #hamburguer, .sharecontainer svg {
-          fill: <?php echo get_theme_mod( 'colors_code' ); ?>;
+        /* Hover color */
+        .titletextarch a:hover, .titletextarch a:focus, .titletextarch a:active, .footerback p a:hover {
+          color: <?php echo get_theme_mod( 'colors_code_hover' ); ?>;
+        }
+        #hamburguer:hover, .sharecontainer svg:hover, .footerback svg:hover {
+          fill: <?php echo get_theme_mod( 'colors_code_hover' ); ?>;
         }
         /* Color de fondo */
         body, #wraparticle, .menumiddlenav > ul > li > a {
           background-color: <?php echo get_theme_mod( 'colors_code_back' ); ?>;
         }
+        /* Color de cabecera y footer */
+        #headertop, .footerback {
+          background-color: <?php echo get_theme_mod( 'colors_code_head' ); ?>;
+        }
+        /* Color de cabecera y footer texto */
+        .footerback p, .footerback p a {
+          color: <?php echo get_theme_mod( 'colors_code_head_c' ); ?>;
+        }
+        #hamburguer, .sharecontainer svg, .footerback svg {
+          fill: <?php echo get_theme_mod( 'colors_code_head_c' ); ?>;
+        }
         @media only screen and (min-width: 550px){
           .authorarch a {
             color: <?php echo get_theme_mod( 'colors_code' ); ?>;
+          }
+          /* Hover color */
+          .articlearch .titletextarch a:hover, .articlearch .categoryarch a:hover {
+            color: <?php echo get_theme_mod( 'colors_code_hover' ); ?>;
           }
         }
     </style>

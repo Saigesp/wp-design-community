@@ -879,11 +879,25 @@ code {
     padding: 0;
 }
 
-.articlearch--nothumb .categoryarch {
+.articlearch--nothumb .categoryarch,
+.articlearch--nothumb .contentauthor {
     position: relative;
     top: auto;
     left: auto;
+    right: auto;
     margin: 10px;
+}
+
+
+
+.articlearch--nothumb .authorarch,
+.articlearch--nothumb .datearch {
+	text-align: left;
+}
+
+.articlearch--nothumb .authorarch a,
+.articlearch--nothumb .datearch {
+	color: black;
 }
 
 
@@ -897,7 +911,6 @@ code {
 .article {
 	padding-top: 50px;
 }
-/* HEADER */
  .headerarticle {
  	position: relative;
  	z-index: -1;
@@ -921,6 +934,7 @@ code {
 .titlesarticle {
 	text-align: center;
   	color: rgba(255,255,255,.9);
+  	line-height: 1.2;
 }
 .titletextarticle {
 	font-size: 1.3rem;
@@ -929,6 +943,28 @@ code {
 	font-size: 0.9rem;
 	font-weight: 300;
   	margin-top: 0;
+}
+
+/**
+ * SINGLE POST NO THUMBNAIL
+ ***********************************/
+.article--nothumb .titlearticle,
+.article--nothumb .categoryarticle {
+	position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+	bottom: auto;
+}
+
+.article--nothumb .categoryarticle {
+	margin: 15px;
+}
+
+.article--nothumb .titlesarticle,
+.article--nothumb .categoryarticle p,
+.article--nothumb .categoryarticle a {
+	color: black;
 }
 
 /**
@@ -1412,13 +1448,20 @@ blockquote p {
 		display: block;
 	}
 	#divwrap {
-		margin: 0 auto;
+		/*margin: 0 auto;*/
+		margin: 55px auto 0;
 	}
 	/* ARCHIVE */
-	.articlearch{
+	.articlearch {
 		margin: 10px 1%;
 		width: 98%;
   	}
+
+	.articlearch.articlearch--nothumb {
+	    padding: 10px;
+	    width: auto;
+	}
+
   	.separatorarch {
   		display: block;
   		margin: 20px 1%;
@@ -1442,16 +1485,29 @@ blockquote p {
 		position: relative;
 		height: auto;
 	}
+  	.articlearch--nothumb .sectionarch{
+		width: 100%;
+		margin: 0;
+  	}
 	.categoryarch {
 		float: right;
 		position: relative;
 		top: 0;
 		left: 0;
 	}
+	.articlearch--nothumb .categoryarch {
+		float: none;
+    	margin: 0;
+	}
 	.headerarch {
 		height: auto;
 		position: absolute;
 		bottom: 10px;
+	}
+	.articlearch--nothumb .headerarch {
+	    position: relative;
+	    bottom: auto;
+	    padding: 0;
 	}
 	.titlearch {
   		position: relative;
@@ -1459,7 +1515,7 @@ blockquote p {
   	}
   	.titletextarch {
   		font-size: 4vw;
-  		margin-bottom: 0;
+  		margin-bottom: 10px;
   	}
   	.contentarch {
   		display: block;
@@ -1469,6 +1525,9 @@ blockquote p {
 		top: initial;
 		right: initial;
 		bottom: 0;
+	}
+	.articlearch--nothumb .contentauthor {
+		margin: 0;
 	}
 	.authorarch {
 		font-size: 16px;
@@ -1617,6 +1676,9 @@ blockquote p {
 	}
 	.titletextarch {
 		font-size: 24px;
+	}
+	.article--nothumb .categoryarticle p {
+		text-align: center;
 	}
 	.masonrysizer, .thumnbsizer {
 		height: 180px; 

@@ -16,6 +16,9 @@ register_nav_menus( array(
 	'menufooter' => 'Menu inferior',
 ) );
 
+// Add more functions
+include_once(locate_template('functions-options.php'));
+include_once(locate_template('functions-twitter.php'));
 
 
 

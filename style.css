@@ -550,6 +550,11 @@ code {
 
 /**
  * ARCHIVE POST
+ ************************************************************************************************/
+ 
+
+ /**
+ * ARCHIVE POST GENERAL
  ***********************************/
 
  .wraparch {
@@ -767,10 +772,6 @@ code {
 	color: white;
 }
 
-
-
-
-
 /**
  * ARCHIVE POST MORE INFO
  ***********************************/
@@ -851,17 +852,49 @@ code {
 
 
 
+/**
+ * ARCHIVE POST NO THUMBNAIL
+ ***********************************/
+.articlearch--nothumb {
+    display: block;
+}
+
+.articlearch--nothumb .sectionarch {
+    position: static;
+    top: auto;
+    right: auto;
+}
+
+.articlearch--nothumb .headerarch {
+	padding: 10px;
+}
+
+.articlearch--nothumb .contentarch,
+.articlearch--nothumb .separatorarch {
+	display: block;
+}
+
+.articlearch--nothumb .titlearch {
+    position: static;
+    padding: 0;
+}
+
+.articlearch--nothumb .categoryarch {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 10px;
+}
 
 
-
-
-
-
+/**
+ * SINGLE POSTS
+ *************************************************************************************************/
 
 /**
  * SINGLE POSTS HEADER
  ***********************************/
-.sectionarticle {
+.article {
 	padding-top: 50px;
 }
 /* HEADER */

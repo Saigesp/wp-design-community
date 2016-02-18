@@ -5,16 +5,18 @@
 ?>
 
 <div class="iasitem">
+  <?php  if ( has_post_thumbnail() ) { ?>
   <hr class="separatorarch">
-  <article id="archiclearch-<?php the_ID(); ?>" class="articlearch">
-    <?php  if ( has_post_thumbnail() ) { ?>
+  <?php }  ?>
+  <article id="archiclearch-<?php the_ID(); ?>" class="articlearch <?php if(!has_post_thumbnail()) echo 'articlearch--nothumb';?>">
+    <?php if(has_post_thumbnail()){?>
       <figure id="thumbarch-<?php the_ID(); ?>" class="thumbarch">
           <a href="<?php the_permalink() ?>">
             <?php the_post_thumbnail('medium');  ?>
             <div class="overflow overflow--blue__hover overflow--blend__hover"></div>
         </a>
       </figure>
-    <?php }  ?>
+    <?php } ?>
     <section id="section-<?php the_ID(); ?>" class="sectionarch">
       <div id="header-<?php the_ID(); ?>" class="headerarch">
         <header id="title-<?php the_ID(); ?>" class="titlearch">
@@ -24,9 +26,11 @@
           <p class="contentp"><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $word_limit, $txt_end, $more_txt); ?></p>
         </div>
       </div>
+      <?php if(has_category()){?>
       <div class="categoryarch">
         <p><?php the_category(', ');?></p>
       </div>
+      <?php } ?>
       <div class="contentauthor">
         <p class="authorarch"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
         <p class="datearch"><?php echo get_the_date();?></p>

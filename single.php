@@ -1,8 +1,11 @@
-<?php get_header(); ?>
+<?php
+get_header();
+?>
 <div id="divwraparticle" class="wraparticle">
 	<?php if (have_posts()) : ?>
-		<article id="articlemain">
+		<div id="articlemain">
 			<?php while (have_posts()) : the_post(); ?>
+				<?php if(is_plugin_active('disqus-comment-system/disqus.php')){?>
 				<script type="text/javascript">
 		          var disqus_shortname = 'talkcodeblog';
 		          var disqus_identifier = '<?php the_ID();?>';
@@ -14,7 +17,8 @@
 		              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		          })();
 		    	</script>
-				<section id="section-<?php the_ID(); ?>" class="sectionarticle">
+		    	<?php } ?>
+				<article id="article-<?php the_ID(); ?>" class="article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
 					<header id="header-<?php the_ID(); ?>" class="headerarticle">
 						<?php  if ( has_post_thumbnail() ) { ?>
 							<figure id="thumbnail" class="thumbarticle">
@@ -32,7 +36,7 @@
               				<p><?php the_category(', ');?></p>
             			</div>
 					</header>
-					<section id="wraparticle">
+					<section>
 					  <?php include(locate_template( 'buttons-share.php')); ?>
 						<div class="contentauthorarticle">
 							<?php if(function_exists('get_wp_user_avatar_src')){?>
@@ -66,17 +70,21 @@
 							<footer id="footer-<?php the_ID(); ?>" class="footerarticle">
 								<div class="contentauthorarticlefoot">
 									<hr class="separatorauthor separatorauthorup">
+									<?php if (function_exists('get_wp_user_avatar_src')){ ?>
 									<figure class="authorimagefoot authorbuble" style="background-color: #666;">
 										<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
 									</figure>
+									<?php } ?>
 									<p class="authorarticlefoot">
 										<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
 											<?php the_author(); ?>
 										</a>
 										<br>
-										<?php echo get_user_meta(get_the_author_meta('ID'),position,true);?>
-										<br>
-										<?php if(get_user_meta(get_the_author_meta('ID'),twitter,true) != '') { ?>
+										<?php if ( get_user_meta(get_the_author_meta('ID'),position,true) != '') {
+											echo get_user_meta(get_the_author_meta('ID'),position,true);
+											echo '<br>';
+										}
+										if(get_user_meta(get_the_author_meta('ID'),twitter,true) != '') { ?>
 											<a href="<?php echo 'https://twitter.com/'.get_user_meta(get_the_author_meta('ID'),twitter,true);?>" target="_blank">
 												<?php the_svg_icon('twitter');?>
 											</a>
@@ -151,9 +159,9 @@
 							  ?>
 						</div>
 					</section>
-				</section>
+				</article>
 			<?php endwhile; ?>
-		</article>
+		</div>
 	<?php else : ?>
 	<?php endif; ?>
 </div>

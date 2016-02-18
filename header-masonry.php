@@ -7,8 +7,8 @@
   $query_mas = new WP_Query( $args );
 ?>
 
-<div id="masonrywrap" class="masonrycontainer">
- <?php if ($query_mas->have_posts()) : ?>
+<?php if ($query_mas->have_posts() && $query_mas->post_count > 4) { ?>
+  <div id="masonrywrap" class="masonrycontainer">
     <?php while ($query_mas->have_posts()) : $query_mas->the_post(); ?>
       <div class="masonryitem <?php echo ($cont == 0) ? 'masonrysizer2' : 'masonrysizer';?>">
         <article id="archiclemasonry-<?php the_ID(); ?>" class="articlemasonry">
@@ -37,13 +37,14 @@
           <?php }  ?>
         </article>
       </div>
-    <?php
-      $cont++;
-      endwhile;
-    ?>
-  <?php else : ?>
   <?php
-    endif;
-    wp_reset_postdata();
-  ?>
-</div>
+  $cont++;
+  endwhile;
+} else {
+
+}
+?>
+  </div>
+<?php
+  wp_reset_postdata();
+?>

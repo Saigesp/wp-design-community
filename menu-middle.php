@@ -25,42 +25,13 @@ $('#navmiddleres li.active').addClass('open').children('ul').show();
 <div id="menumiddle" class="menumiddle" >  
 	<div class="wrapmenumiddle">
 		<nav id="navmiddleres" class="navmiddle menumiddlenav">
+			<?php if (has_nav_menu($menumiddle)) { ?>
 			<ul class="selectcategory">
 				<li class='has-sub'><a href="#">Secciones</a>
 					<?php  wp_nav_menu( array( 'theme_location' => 'menumiddle', 'container' => false ) ); ?>
 				</li>
 			</ul>
-			<ul class="selectcategory">
-				<li class='has-sub'>
-					<a href="#">
-						<?php
-						if(is_tax('customlanguage')) {
-							$termino = get_term_by('slug', get_query_var( 'customlanguage' ), 'customlanguage');
-							echo 'Idioma: ' . $termino->name;
-						}else {
-							echo 'Idiomas';
-						}
-						?>
-					</a>
-					<?php 
-					$languages_reg = get_terms('customlanguage', array(
-					 	'orderby'    => 'name',
-					 	'hide_empty' => true,
-					));
-					if (!empty($languages_reg) && !is_wp_error($languages_reg)){?>
-						<ul>
-							<?php
-							foreach ($languages_reg as $lang) {?>
-								<li>
-									<a href="<?php bloginfo('url'); echo '/languages/'. $lang->slug;?>">
-										<?php echo $lang->name; ?>
-									</a>
-								</li>
-							<?php }?>
-						</ul>
-					<?php } ?>
-				</li>
-			</ul>
+			<?php } ?>
 		</nav>
   </div>
 </div>

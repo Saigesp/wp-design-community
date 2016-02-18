@@ -97,13 +97,13 @@ function customizer_css() {
     ?>
     <style type="text/css">
         /* Color principal */
-        a, .menumiddlenav > ul > li > a {
+        a, .menumiddlenav > ul > li > a, .titletextarch a, .categoryarch a {
           color: <?php echo get_theme_mod( 'colors_code' ); ?>;
         }
         .footerback, .menumiddlenav ul > li.has-sub > a:before, .menumiddlenav ul > li.has-sub > a:after {
           background-color: <?php echo get_theme_mod( 'colors_code' ); ?>;
         }
-        #hamburguer {
+        #hamburguer, .sharecontainer svg {
           fill: <?php echo get_theme_mod( 'colors_code' ); ?>;
         }
         /* Color de fondo */

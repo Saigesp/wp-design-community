@@ -97,6 +97,7 @@ $(document).ready(function() {
   <?php
   wp_head();
   include(locate_template('functions-svg.php'));
+  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
   ?>  
   
 </head>

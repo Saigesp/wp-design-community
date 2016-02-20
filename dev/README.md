@@ -1,6 +1,3 @@
-# WP Design Community
-Wordpress theme for communities.
+### WP Design Community
 
-Side project to develop a wordpress theme centered in user communities, to improve little organitzation's workflow.
-
-Currently mixing and cleaning old code.
+# Dev directory

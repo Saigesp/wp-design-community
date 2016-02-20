@@ -8,7 +8,7 @@
         <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
           <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
         <?php } else { ?>
-    		  <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/logo.png"/>
+    		  <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
         <?php } ?>
     	</a>
     </div>

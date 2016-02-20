@@ -44,7 +44,7 @@ var 	gulp         = require('gulp'),
 		mqpacker 	 = require('css-mqpacker'),
 		csswring 	 = require('csswring'),
 		del 		 = require('del'),
-		opn 		 = require('opn');
+		es           = require('event-stream');
 
 
 /* default
@@ -54,16 +54,25 @@ gulp.task('default', function() {
   // place code for your default task here
 });
 
-/* Build
+/* Build (Create /dist)
 *  
 ***********************************/
 gulp.task('build',['minjs', 'mincss', 'minimg', 'mintheme']);
 
 
-/* Build dist
+/* Server (Create wamp folder, watch for /dev changes)
 *  
 ***********************************/
-gulp.task('mintheme', function(cb) {
+gulp.task('serve',['browser-sync'], function(){
+ 	gulp.watch(dev+'style.css', ['update:style']); 
+ 	gulp.watch(dev+'*.php', ['update:php', browserSync.reload]);
+});
+
+
+/* Build php & basic template files
+*  
+***********************************/
+gulp.task('mintheme', function() {
 	return gulp.src(devpath, {base: dev})
 		.pipe(gulp.dest(dist, {overwrite: true}));
 });
@@ -71,12 +80,12 @@ gulp.task('mintheme', function(cb) {
 /* Build images
 *  
 ***********************************/
-gulp.task('minimg', function(cb) {
+gulp.task('minimg', function() {
 	return gulp.src([dev+'img/*/*.*', dev+'img/*.*', '!**/*.ai'])
 		.pipe(gulp.dest(dist+'img/', {overwrite: true}));
 });
 
-/* Minimize JS
+/* Minimize & build JS
 *  
 ***********************************/
 gulp.task('minjs', function() {
@@ -86,7 +95,7 @@ gulp.task('minjs', function() {
     	.pipe(gulp.dest(dist+'plugins/', {overwrite: true}));
 });
 
-/* Minimize CSS
+/* Minimize & build CSS
 *  
 ***********************************/
 gulp.task('mincss', function () {
@@ -99,28 +108,36 @@ gulp.task('mincss', function () {
 			.pipe(gulp.dest(dist+'plugins/', {overwrite: true}));	
 });
 
-
-
-/* Gulp Serve
+/* Copy to WAMP folder
 *  
 ***********************************/
-gulp.task('serve',['browser-sync']);
-
-/* Wamperize
-*  
-***********************************/
-gulp.task('wamp', ['build'], function(cb) {
+gulp.task('wamp', ['build'], function() {
 	return gulp.src(distpath, {base: dist})
 		.pipe(gulp.dest(wamp, {overwrite: true}));
 });
 
-/* Open browser
-*  
+
+
+
+
+
+
+
+/* Live Reload Style
+*
 ***********************************/
-/*gulp.task('open', function() {
-  //opn(url);
-  opn('http://localhost/'+project );
-});*/
+gulp.task('update:style', function() {
+	return gulp.src(dev+'style.css', {base: dev})
+		.pipe(gulp.dest(wamp, {overwrite: true}));
+});
+
+/* Live Reload PHP
+*
+***********************************/
+gulp.task('update:php', function() {
+	return gulp.src(dev+'*.php', {base: dev})
+		.pipe(gulp.dest(wamp, {overwrite: true}));
+});
 
 
 /* Browser sync

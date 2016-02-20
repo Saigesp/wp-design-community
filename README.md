@@ -31,9 +31,9 @@ gulp build
 ```
 #### Build & live preview
 
--Build `/dev` to `/dist`
--Build `/dev` to `wamp folder` (see [Configure with WAMP](#wamp_config) )
--Watch for changes in `/dev` and update `wamp folder`
+ - Build `/dev` to `/dist`
+ - Build `/dev` to `wamp folder` (see [Configure with WAMP](#wamp_config) )
+ - Watch for changes in `/dev` and update `wamp folder`
 ```
 gulp serve
 ```

@@ -103,5 +103,5 @@ $(document).ready(function() {
 </head>
 
 <body>
-  <div>
+  <div id="wrapper">
     <?php include( locate_template(  'menu-header.php' )); ?>

@@ -1,3 +1,4 @@
+<?php if (has_nav_menu($menumiddle)) { ?>
 <script>
 $(document).ready(function(){
 
@@ -25,13 +26,14 @@ $('#navmiddleres li.active').addClass('open').children('ul').show();
 <div id="menumiddle" class="menumiddle" >  
 	<div class="wrapmenumiddle">
 		<nav id="navmiddleres" class="navmiddle menumiddlenav">
-			<?php if (has_nav_menu($menumiddle)) { ?>
+			
 			<ul class="selectcategory">
 				<li class='has-sub'><a href="#">Secciones</a>
 					<?php  wp_nav_menu( array( 'theme_location' => 'menumiddle', 'container' => false ) ); ?>
 				</li>
 			</ul>
-			<?php } ?>
+			
 		</nav>
   </div>
 </div>
+<?php } ?>

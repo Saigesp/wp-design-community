@@ -39,12 +39,14 @@
       </div>
   <?php
   $cont++;
-  endwhile;
+  endwhile; ?>
+  </div>
+  <?php
 } else {
 
 }
 ?>
-  </div>
+  
 <?php
   wp_reset_postdata();
 ?>

@@ -1,6 +1,8 @@
 <header id="headertop" class="headertop" >
   <div class="headertopwrap">
-  	<a href="#navtop"><?php the_svg_icon('hamburguer')?></a>
+    <?php if (has_nav_menu($menutop)) { ?>
+  	   <a href="#navtop"><?php the_svg_icon('hamburguer')?></a>
+    <?php } ?>
     <div class="logocontainer">
     	<a href="<?php bloginfo('url'); ?>">
         <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
@@ -17,6 +19,8 @@
     <?php } ?>
   </div>
 </header>
-<nav id="navtop" class="navtop">
- 	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
-</nav>
+<?php if (has_nav_menu($menutop)) { ?>
+  <nav id="navtop" class="navtop">
+   	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
+  </nav>
+<?php } ?>

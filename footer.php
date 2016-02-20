@@ -14,8 +14,7 @@
 </footer> <!-- end footer -->
 
 <?php wp_footer(); ?>
-</div>
-
+</div><!-- end of wrapper -->
 </body>
 
 </html> <!-- The End. what a ride! -->

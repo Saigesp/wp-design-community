@@ -58,6 +58,7 @@ function mytheme_require_plugins() {
  ***********************************/
 // Add section
 function wpdcom_customize_register($wp_customize) {
+  /* Colores */
   $wp_customize->add_section("colors", array(
     "title" => __("Colores", "customizer_colors_sections"),
     "priority" => 30,
@@ -135,6 +136,28 @@ function wpdcom_customize_register($wp_customize) {
       'label'      => __( 'Head y Footer Texto', 'wp-design-community' ),
       'section'    => 'colors',
       'settings'   => 'colors_code_head_c',
+    ) ) 
+  );
+
+  /* Logo */
+  $wp_customize->add_section("logo", array(
+    "title" => __("Logo", "customizer_logo_sections"),
+    "priority" => 10,
+  ));
+
+  $wp_customize->add_setting("logo_file", array(
+    "default" => "",
+    "transport" => "refresh",
+  ));
+  $wp_customize->add_control(
+    new WP_Customize_Media_Control( 
+    $wp_customize, 
+    'basic_logo_file', 
+    array(
+      'label'      => __( 'Logo medio 240x80 px', 'wp-design-community' ),
+      'section'    => 'logo',
+      'settings'   => 'logo_file',
+      'mime_type' => 'image'
     ) ) 
   );
 

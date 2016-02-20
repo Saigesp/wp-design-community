@@ -269,7 +269,8 @@ code {
   margin: -38px auto 0;
 }
 .logocontainer img {
-	width: 100%;
+	width: auto;
+    max-height: 40px;
 }
 
 

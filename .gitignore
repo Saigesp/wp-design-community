@@ -1,6 +1,4 @@
 /node_modules
-/dist
-/.tmp
-/img/RAW/
-/.sass-cache
 /bower_components
+/.tmp
+/.sass-cache

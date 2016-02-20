@@ -30,13 +30,13 @@ Build `/dev` to `/dist
 gulp build
 ```
 #### Build & live preview
-Build `/dev` to `/dist` and create a copy in the **wamp folder** (see [Configure with WAMP](#Wamp%20Config)
+Build `/dev` to `/dist` and create a copy in the **wamp folder** (see [Configure with WAMP](#wamp_config)
 ```
 gulp serve
 ```
 ----------
 
-## WAMP Config
+## <a name="wamp_config"></a>Configure with WAMP
 Set wamp folder in `gulpfile.js`:
 ```
 wamp = 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',

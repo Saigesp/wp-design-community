@@ -1,15 +1,21 @@
 // Project configuration
 var project 	= 'wp-design-community', 
 	url 		= 'http://localhost/wp-design-community/',
+	local_port 	= 5000,
 	bower 		= './bower_components/',
 	node 		= './node_modules/',
 	dev 		= './dev/',
 	dist 		= './dist/',
-	themepath 	= [
+	wamp 		= 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',
+	devpath 	= [
 				dev+'*.php',
-				dev+'plugins/*.php',
+				dev+'plugins/**/*.*',
 				dev+'style.css',
 				dev+'screenshot.png',
+			],
+	distpath 	= [
+				//dist+'*.php',
+				dist+'**/*.*'
 			];
 
 // Load plugins
@@ -58,7 +64,7 @@ gulp.task('build',['minjs', 'mincss', 'minimg', 'mintheme']);
 *  
 ***********************************/
 gulp.task('mintheme', function(cb) {
-	return gulp.src(themepath, {base: dev})
+	return gulp.src(devpath, {base: dev})
 		.pipe(gulp.dest(dist, {overwrite: true}));
 });
 
@@ -66,7 +72,7 @@ gulp.task('mintheme', function(cb) {
 *  
 ***********************************/
 gulp.task('minimg', function(cb) {
-	return gulp.src([dev+'img/**.*', '!'+dev+'img/RAW'])
+	return gulp.src([dev+'img/*/*.*', dev+'img/*.*', '!**/*.ai'])
 		.pipe(gulp.dest(dist+'img/', {overwrite: true}));
 });
 
@@ -95,9 +101,50 @@ gulp.task('mincss', function () {
 
 
 
+/* Gulp Serve
+*  
+***********************************/
+gulp.task('serve',['browser-sync']);
+
+/* Wamperize
+*  
+***********************************/
+gulp.task('wamp', ['build'], function(cb) {
+	return gulp.src(distpath, {base: dist})
+		.pipe(gulp.dest(wamp, {overwrite: true}));
+});
+
 /* Open browser
 *  
 ***********************************/
-gulp.task('open', function() {
-  opn(url);
+/*gulp.task('open', function() {
+  //opn(url);
+  opn('http://localhost/'+project );
+});*/
+
+
+/* Browser sync
+*  
+***********************************/
+gulp.task('browser-sync',['wamp'], function() {
+	var files = [
+					'**/*.php',
+					'**/*.{png,jpg,gif}'
+				];
+	browserSync.init(files, {
+
+		// Read here http://www.browsersync.io/docs/options/
+		proxy: url,
+		//port: local_port,
+
+		// Tunnel the Browsersync server through a random Public URL
+		// tunnel: true,
+
+		// Attempt to use the URL "http://my-private-site.localtunnel.me"
+		// tunnel: "ppress",
+
+		// Inject CSS changes
+		//injectChanges: true
+
+	});
 });

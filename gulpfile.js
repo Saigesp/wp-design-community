@@ -54,72 +54,51 @@ gulp.task('default', function() {
   // place code for your default task here
 });
 
-/* Build (Create /dist)
-*  
-***********************************/
-gulp.task('build',['minjs', 'mincss', 'minimg', 'mintheme']);
-
-
-/* Server (Create wamp folder, watch for /dev changes)
-*  
-***********************************/
-gulp.task('serve',['browser-sync'], function(){
- 	gulp.watch(dev+'style.css', ['update:style']); 
- 	gulp.watch(dev+'*.php', ['update:php', browserSync.reload]);
-});
-
-
 /* Build php & basic template files
 *  
 ***********************************/
-gulp.task('mintheme', function() {
-	return gulp.src(devpath, {base: dev})
-		.pipe(gulp.dest(dist, {overwrite: true}));
-});
+gulp.task('copy:phptodist', function() { return gulp.src(devpath, {base: dev}).pipe(gulp.dest(dist, {overwrite: true})); });
+gulp.task('copy:phptowamp', function() { return gulp.src(devpath, {base: dev}).pipe(gulp.dest(wamp, {overwrite: true})); });
 
 /* Build images
 *  
 ***********************************/
-gulp.task('minimg', function() {
-	return gulp.src([dev+'img/*/*.*', dev+'img/*.*', '!**/*.ai'])
-		.pipe(gulp.dest(dist+'img/', {overwrite: true}));
-});
+gulp.task('min:imgtodist', function() { return gulp.src([dev+'img/*/*.*', dev+'img/*.*', '!**/RAW/**/*']).pipe(gulp.dest(dist+'img/', {overwrite: true})); });
+gulp.task('min:imgtowamp', function() { return gulp.src([dev+'img/*/*.*', dev+'img/*.*', '!**/RAW/**/*']).pipe(gulp.dest(wamp+'img/', {overwrite: true})); });
 
 /* Minimize & build JS
 *  
 ***********************************/
-gulp.task('minjs', function() {
+gulp.task('min:jstodist', function() {
   	return gulp.src([dev+'plugins/*/*.js', node +'*/dist/*.js', '!'+node +'*/dist/*.min.js'])
   		.pipe(rename({ suffix: '.min' }))
     	.pipe(uglify())
     	.pipe(gulp.dest(dist+'plugins/', {overwrite: true}));
 });
 
+gulp.task('min:jstowamp', function() {
+  	return gulp.src([dev+'plugins/*/*.js', node +'*/dist/*.js', '!'+node +'*/dist/*.min.js'])
+  		.pipe(rename({ suffix: '.min' }))
+    	.pipe(uglify())
+    	.pipe(gulp.dest(wamp+'plugins/', {overwrite: true}));
+});
+
 /* Minimize & build CSS
 *  
 ***********************************/
-gulp.task('mincss', function () {
+gulp.task('min:csstodist', function () {
 	return 	gulp.src([dev+'plugins/*/*.css', node +'*/dist/*.css', '!'+node +'*/dist/*.min.css'])
-			//.pipe(reload({stream:true}))
 			.pipe(rename({ suffix: '.min' }))
-			.pipe(minifycss({
-				maxLineLen: 80
-			}))
+			.pipe(minifycss({ maxLineLen: 80 }))
 			.pipe(gulp.dest(dist+'plugins/', {overwrite: true}));	
 });
 
-/* Copy to WAMP folder
-*  
-***********************************/
-gulp.task('wamp', ['build'], function() {
-	return gulp.src(distpath, {base: dist})
-		.pipe(gulp.dest(wamp, {overwrite: true}));
+gulp.task('min:csstowamp', function () {
+	return 	gulp.src([dev+'plugins/*/*.css', node +'*/dist/*.css', '!'+node +'*/dist/*.min.css'])
+			.pipe(rename({ suffix: '.min' }))
+			.pipe(minifycss({ maxLineLen: 80 }))
+			.pipe(gulp.dest(wamp+'plugins/', {overwrite: true}));	
 });
-
-
-
-
-
 
 
 
@@ -140,28 +119,80 @@ gulp.task('update:php', function() {
 });
 
 
-/* Browser sync
+/* Clean directories
+*
+***********************************/
+gulp.task('clean',['clean:dist', 'clean:wamp']);
+
+gulp.task('clean:dist', [], function() {
+  console.log("Clean all files in dist folder");
+  return gulp.src(dist+'*', { read: false }).pipe(rimraf());
+});
+
+gulp.task('clean:wamp', [], function() {
+  console.log("Clean all files in wamp folder");
+  return gulp.src(wamp+'*', { read: false }).pipe(rimraf());
+});
+
+
+
+
+/* Build (Create /dist)
 *  
 ***********************************/
-gulp.task('browser-sync',['wamp'], function() {
+gulp.task('build',['build:dist', 'build:wamp']);
+gulp.task('build:dist',['min:jstodist', 'min:csstodist', 'min:imgtodist', 'copy:phptodist']);
+gulp.task('build:wamp',['min:jstowamp', 'min:csstowamp', 'min:imgtowamp', 'copy:phptowamp']);
+
+
+
+/* Build & synchronize
+*  
+***********************************/
+gulp.task('browser',['build:wamp'], function() {
 	var files = [
 					'**/*.php',
 					'**/*.{png,jpg,gif}'
 				];
 	browserSync.init(files, {
+		proxy: url,
+	});
+});
 
+
+/* Browser sync
+*  
+***********************************/
+gulp.task('browser:sync', function() {
+	var files = [
+					'**/*.php',
+					'**/*.{png,jpg,gif}'
+				];
+	browserSync.init(files, {
 		// Read here http://www.browsersync.io/docs/options/
 		proxy: url,
 		//port: local_port,
-
-		// Tunnel the Browsersync server through a random Public URL
 		// tunnel: true,
-
-		// Attempt to use the URL "http://my-private-site.localtunnel.me"
-		// tunnel: "ppress",
-
+		// tunnel: "ppress", // Attempt to use the URL "http://my-private-site.localtunnel.me"
 		// Inject CSS changes
 		//injectChanges: true
 
 	});
+});
+
+
+/* Serve (Create wamp folder, watch for /dev changes)
+*  
+***********************************/
+gulp.task('server',['browser'], function(){
+ 	gulp.watch(dev+'style.css', ['update:style']); 
+ 	gulp.watch(dev+'*.php', ['update:php', browserSync.reload]);
+});
+
+/* Server (Only watch for /dev changes)
+*  
+***********************************/
+gulp.task('server:up',['browser:sync'], function(){
+ 	gulp.watch(dev+'style.css', ['update:style']); 
+ 	gulp.watch(dev+'*.php', ['update:php', browserSync.reload]);
 });

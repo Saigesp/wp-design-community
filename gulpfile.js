@@ -21,7 +21,7 @@ var project 	= 'wp-design-community',
 var wamp_inject_path_slice = wamp.length + 3; //Change it to adjust the url of injected scripts
 var dist_inject_path_slice = dist.length - 2;
 var favicon_data_file = dev+'faviconData.json';
-var favicon_master_img = dev+'img/default/logo600x600.png';
+var favicon_master_img = dev+'img/favicon.png';
 var favicon_output_path = dev+'img/favicon/';
 var favicon_icon_path = '<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/'; //Prepared to wordpress
 

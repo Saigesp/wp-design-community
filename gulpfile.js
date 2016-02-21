@@ -156,6 +156,8 @@ gulp.task('browser',['build:wamp'], function() {
 				];
 	browserSync.init(files, {
 		proxy: url,
+		tunnel: true,
+		injectChanges: true
 	});
 });
 
@@ -169,13 +171,9 @@ gulp.task('browser:sync', function() {
 					'**/*.{png,jpg,gif}'
 				];
 	browserSync.init(files, {
-		// Read here http://www.browsersync.io/docs/options/
 		proxy: url,
-		//port: local_port,
-		// tunnel: true,
-		// tunnel: "ppress", // Attempt to use the URL "http://my-private-site.localtunnel.me"
-		// Inject CSS changes
-		//injectChanges: true
+		tunnel: true,
+		injectChanges: true
 
 	});
 });

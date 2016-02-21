@@ -35,7 +35,7 @@ Also exists `gulp build:dist` and `gulp build:wamp`
 
 #### Build wamp folder with live preview
 
- - Copy & minimize files from `/dev` to `/wamp` (see [Configure with WAMP](#wamp_config) )
+ - Copy & minimize files from `/dev` to `/wamp` (see [Configure with WAMP](#wamp_config))
  - Start browser sync in `/wamp`
  - Watch for changes in `/dev` and update `/wamp`
 

@@ -3,6 +3,12 @@
 /**
  * GENERAL FUNCTIONS
  ***********************************/
+// Add more functions
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+include_once(locate_template('functions-options.php'));
+include_once(locate_template('functions-twitter.php'));
+include_once(locate_template('functions-svg.php'));
+
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
 
@@ -16,9 +22,8 @@ register_nav_menus( array(
 	'menufooter' => 'Menu inferior',
 ) );
 
-// Add more functions
-include_once(locate_template('functions-options.php'));
-include_once(locate_template('functions-twitter.php'));
+
+
 
 
 

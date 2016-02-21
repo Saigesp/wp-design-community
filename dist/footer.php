@@ -15,6 +15,13 @@
 
 <?php wp_footer(); ?>
 </div><!-- end of wrapper -->
+  <!-- inject:js -->
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/selection-sharer/dist/bookmarklet.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/selection-sharer/dist/selection-sharer.min.js"></script>
+  <!-- endinject -->
 </body>
 
 </html> <!-- The End. what a ride! -->

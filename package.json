@@ -5,7 +5,9 @@
   "main": "gulpfile.js",
   "dependencies": {
     "flickity": "^1.1.2",
-    "jquery": "^2.2.0"
+    "imagesloaded": "^4.1.0",
+    "jquery": "^2.2.0",
+    "masonry-layout": "^4.0.0"
   },
   "devDependencies": {
     "browser-sync": "^2.11.1",
@@ -21,12 +23,14 @@
     "gulp-filter": "^3.0.1",
     "gulp-ignore": "^2.0.1",
     "gulp-imagemin": "^2.4.0",
+    "gulp-inject": "^3.0.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-newer": "^1.1.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.1.0",
     "gulp-print": "^2.0.1",
+    "gulp-real-favicon": "^0.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.0",
@@ -42,7 +46,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "napa xdamman/selection-sharer"
+    "install": "napa xdamman/selection-sharer && napa webcreate/infinite-ajax-scroll && napa johnpolacek/imagefill.js"
   },
   "repository": {
     "type": "git",

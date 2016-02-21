@@ -15,6 +15,8 @@
 
 <?php wp_footer(); ?>
 </div><!-- end of wrapper -->
+  <!-- inject:js -->
+  <!-- endinject -->
 </body>
 
 </html> <!-- The End. what a ride! -->

@@ -42,11 +42,17 @@
     "gulp-zip": "^3.2.0",
     "napa": "^2.3.0",
     "opn": "^4.0.0",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.1.5",
+    "stream-series": "^0.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "napa xdamman/selection-sharer && napa webcreate/infinite-ajax-scroll && napa johnpolacek/imagefill.js"
+    "install": "napa"
+  },
+  "napa": {
+    "github-selection-sharer": "xdamman/selection-sharer",
+    "github-ias": "webcreate/infinite-ajax-scroll",
+    "github-imagefill": "johnpolacek/imagefill.js"
   },
   "repository": {
     "type": "git",

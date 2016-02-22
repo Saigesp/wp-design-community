@@ -24,19 +24,8 @@ npm install
 
 
 ## Gulp tasks
-#### Build
- - Copy & minimize files from `/dev` to `/dist`
- - Copy & minimize files from `/dev` to `/wamp`
- - Inject JS & CSS files from plugins in `header.php` and `footer.php`
-
-```
-gulp build
-```
-Also exists `gulp build:dist` and `gulp build:wamp`
-
-#### Build wamp folder with live preview
-
- - Copy & minimize files from `/dev` to **only** `/wamp` (see [Configure with WAMP](#wamp_config))
+#### Server
+ - Copy & minimize files from `/dev` to `/wamp` (see [Configure with WAMP](#wamp_config))
  - Inject JS & CSS files from plugins in `header.php` and `footer.php`
  - Start browser sync in `/wamp`
  - Watch for changes in `/dev` and update `/wamp`
@@ -44,27 +33,27 @@ Also exists `gulp build:dist` and `gulp build:wamp`
 ```
 gulp server
 ```
+`gulp server:up` to start browser sync in `/wamp` and watch for changes.
 
-#### Only live preview
+#### Build dist
 
- - Start browser sync in `/wamp`
- - Watch for changes in `/dev` and update `/wamp`
+ - Copy & minimize files from `/dev` to `/dist` || `/wamp`.
+ - Inject JS & CSS files from plugins in `header.php` and `footer.php`
 
 ```
-gulp server:up
+gulp build:dist
+gulp build:wamp
 ```
 
 #### Generate favicon
 
- - Generate real favicon files from `/dev/img/favicon.png` and place it in `/dev/img/favicon/`.
- - Inject file's link tags in `/dev/header.php`.
+ - Generate favicon from `/dev/img/favicon.png` and place it in `/dev` && `/dist` && `/wamp`.
+ - Inject file's in `/dev/header.php`.
  - See [Real Favicon Generator](http://realfavicongenerator.net/) for more info.
 
 ```
-gulp favicon
+npm build:favicon
 ```
-`npm build:favicon` is same as below, but it affects `/dist` && `/wamp` (not only `/dev`).
-
 
 ## <a name="wamp_config"></a>Configure with WAMP
 To develop locally a theme in Wordpress, yo need setup a local server based on LAMP (Linux, Apache, MySql & PHP). To do that, is strongly recommended to use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 

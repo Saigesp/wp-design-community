@@ -69,4 +69,4 @@
 <meta name="theme-color" content="#ffffff"></head>
  <body>
   <div id="wrapper">
-    <?php include( locate_template(  'menu-header.php' )); ?></div></body></html>
+    <?php include( locate_template(  'menu-header.php' )); ?>

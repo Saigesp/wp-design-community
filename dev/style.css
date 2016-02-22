@@ -621,6 +621,7 @@ code {
 	position: absolute;
 	top: 10px;
 	left: 10px;
+	display: none;
 }
 .categoryarch p {
 	text-transform: uppercase;
@@ -907,6 +908,7 @@ code {
     left: auto;
     right: auto;
     margin: 10px;
+    display: block;
 }
 
 
@@ -1438,6 +1440,10 @@ blockquote p {
 *
 ***********************************/
 @media only screen and (min-width : 350px) {
+	.categoryarch, 
+	.contentauthor {
+		display: block;
+	}
 	.contentauthorarticle {
 		display: flex;
 		display: -ms-flexbox;
@@ -1546,14 +1552,16 @@ blockquote p {
   	.contentarch {
   		display: block;
 	}
-  	.contentauthor {
+  	.contentauthor { /* Ey */
 		position: absolute;
 		top: initial;
 		right: initial;
 		bottom: 0;
+		display: none;
 	}
 	.articlearch--nothumb .contentauthor {
 		margin: 0;
+		display: block;
 	}
 	.authorarch {
 		font-size: 16px;

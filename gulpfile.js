@@ -12,7 +12,6 @@ var project = 'wp-design-community',
         dev + 'plugins/**/*',
         '!' + dev + 'plugins/**/*.css',
         '!' + dev + 'plugins/**/*.js',
-        dev + 'style.css',
         dev + 'screenshot.png',
     ],
     min_files_css = [ // CSS Archives to minimize
@@ -254,15 +253,14 @@ gulp.task('copy:phptowamp', function() {
 /* Create /dist && /wamp
  *  
  ***********************************/
-gulp.task('build', ['build:dist', 'build:wamp']);
 gulp.task('build:dist', ['inject:jsondist', 'copy:imgtodist']);
-gulp.task('build:wamp', ['inject:jsonwamp', 'copy:imgtowamp']);
+gulp.task('build:wamp', ['inject:jsonwamp', 'copy:imgtowamp', 'copy:styletowamp']);
 
 
 /* Create /wamp && open browser && watch /dev
  *  
  ***********************************/
-gulp.task('server', ['build:wamp'], function() {
+gulp.task('server:build', ['build:wamp'], function() {
     var files = [
         dev+'**/*.php',
         dev+'**/*.js',
@@ -294,7 +292,12 @@ gulp.task('server:up', function() {
 });
 
 
-
+/* Create /wamp && open browser && watch /dev && update extrafiles
+ *  
+ ***********************************/
+gulp.task('server', ['server:build'], function() {
+    gulp.watch(dev+'style.css', ['copy:styletowamp']); 
+});
 
 
 /* Clean favicon on /dev && /dist

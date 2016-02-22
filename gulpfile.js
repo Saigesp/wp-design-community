@@ -25,10 +25,10 @@ var project = 'wp-design-community',
         node + '*/js/jquery-imagefill.js'
     ],
     node_files_css = [ // CSS Archives to copy
-        node + '*/dist/*.min.css',
+        node + '*/dist/**/*.min.css',
     ],
     node_files_js = [ // JS Archives to copy
-        node + '*/dist/*.min.js',
+        node + '*/dist/**/*.min.js',
         node + 'imagesloaded/imagesloaded.pkgd.min.js'
 
     ];
@@ -85,7 +85,7 @@ gulp.task('default', function() {
 /* Clean /dist
  *
  ***********************************/
-gulp.task('clean:dist', [], function() {
+gulp.task('clean:dist', function() {
     console.log("Clean all files in dist folder");
     return gulp.src(dist + '*', { read: false }).pipe(rimraf());
 });

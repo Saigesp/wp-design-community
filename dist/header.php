@@ -44,6 +44,14 @@
 	<link href="http://fonts.googleapis.com/css?family=Merriweather:400italic,400,900,300,700,700italic|Merriweather+Sans:400,700,800|Open+Sans:400italic,400,300,700,800,600" rel="stylesheet" type="text/css">
   <!-- inject:css -->
   <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/medium-editor.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/beagle.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/default.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/flat.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/mani.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/roman.min.css"/>
+  <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/css/themes/tim.min.css"/>
   <!-- endinject -->
   <?php wp_head(); ?>  
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/apple-touch-icon-57x57.png">

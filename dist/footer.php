@@ -23,6 +23,7 @@
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-imagefill/js/jquery-imagefill.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
   <!-- endinject -->
 </body>
 

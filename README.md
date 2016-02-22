@@ -57,12 +57,14 @@ gulp server:up
 #### Generate favicon
 
  - Generate real favicon files from `/dev/img/favicon.png` and place it in `/dev/img/favicon/`.
- - Inject file's link tags in `header.php`.
+ - Inject file's link tags in `/dev/header.php`.
  - See [Real Favicon Generator](http://realfavicongenerator.net/) for more info.
 
 ```
 gulp favicon
 ```
+Also `npm build:favicon` is same as below, but it affects `/dist` && `/wamp` (not only `/dev`).
+
 
 ## <a name="wamp_config"></a>Configure with WAMP
 To develop locally a theme in Wordpress, yo had to set up a LAMP server (Linux, Apache, MySql & PHP). To do that, I recommend you use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 

@@ -9,7 +9,7 @@ var project = 'wp-design-community',
     wamp = 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',
     dev_basic_files = [
         dev + '*.php',
-        dev + 'plugins/**/*.*',
+        dev + 'plugins/**/*',
         '!' + dev + 'plugins/**/*.css',
         '!' + dev + 'plugins/**/*.js',
         dev + 'style.css',
@@ -91,7 +91,7 @@ gulp.task('clean:dist', [], function() {
     return gulp.src(dist + '*', { read: false }).pipe(rimraf());
 });
 
-/* Build php & basic template files
+/* Copy PHP && dev_basic_files from /dev 
  *  
  ***********************************/
 gulp.task('copy:phptodist', ['clean:dist'], function() {
@@ -115,19 +115,19 @@ gulp.task('copy:nodejstodist', function() {
 gulp.task('copy:nodejstowamp', function() {
     return gulp.src(node_files_js, { base: node }).pipe(gulp.dest(wamp+'plugins', { overwrite: true })); });
 
-/* Build images
+/* Copy images from /dev
  *  
  ***********************************/
-gulp.task('min:imgtodist', function() {
-    return gulp.src([dev + 'img/*/*.*', dev + 'img/*.*', '!**/RAW/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
-gulp.task('min:imgtowamp', function() {
-    return gulp.src([dev + 'img/*/*.*', dev + 'img/*.*', '!**/RAW/**/*']).pipe(gulp.dest(wamp + 'img/', { overwrite: true })); });
+gulp.task('copy:imgtodist', function() {
+    return gulp.src([dev + 'img/**/*', '!'+dev+'img/RAW/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
+gulp.task('copy:imgtowamp', function() {
+    return gulp.src([dev + 'img/**/*', '!'+dev+'img/RAW/**/*']).pipe(gulp.dest(wamp + 'img/', { overwrite: true })); });
 
 
 
 
 
-/* Minimize & build CSS
+/* Copy & minimize CSS from /dev && node_modules
  *  
  ***********************************/
 gulp.task('min:csstodist', ['copy:phptodist'], function() {
@@ -157,7 +157,7 @@ gulp.src('./src/index.html')
 
 
 
-/* Inject CSS plugins files
+/* Inject CSS from /dist || /wamp to header.php
  *  
  ***********************************/
 gulp.task('inject:cssondist', ['min:csstodist', 'copy:nodecsstodist'], function() {
@@ -189,7 +189,7 @@ gulp.task('inject:cssonwamp', ['min:csstowamp', 'copy:nodecsstowamp'], function(
 });
 
 
-/* Minimize & build JS
+/* Copy & minimize JS from /dev && node_modules
  *  
  ***********************************/
 gulp.task('min:jstodist', ['inject:cssondist'], function() {
@@ -207,7 +207,7 @@ gulp.task('min:jstowamp', ['inject:cssonwamp'], function() {
 });
 
 
-/* Inject JS plugins files
+/* Inject CSS from /dist || /wamp to footer.php
  *  
  ***********************************/
 gulp.task('inject:jsondist', ['min:jstodist', 'copy:nodejstodist'], function() {
@@ -234,38 +234,39 @@ gulp.task('inject:jsonwamp', ['min:jstowamp', 'copy:nodejstowamp'], function() {
         .pipe(gulp.dest(wamp));
 });
 
-/* Live Reload Style
+/* Copy dev/style.css to /wamp
  *
  ***********************************/
-gulp.task('update:style', function() {
+gulp.task('copy:styletowamp', function() {
     return gulp.src(dev + 'style.css', { base: dev })
         .pipe(gulp.dest(wamp, { overwrite: true }));
 });
 
-/* Live Reload PHP
+/* Copy PHP files from /dev to /wamp
  *
  ***********************************/
-gulp.task('update:php', function() {
+gulp.task('copy:phptowamp', function() {
     return gulp.src(dev + '*.php', { base: dev })
         .pipe(gulp.dest(wamp, { overwrite: true }));
 });
 
 
-/* Build (Create /dist)
+/* Create /dist && /wamp
  *  
  ***********************************/
 gulp.task('build', ['build:dist', 'build:wamp']);
-gulp.task('build:dist', ['inject:jsondist', 'min:imgtodist']);
-gulp.task('build:wamp', ['inject:jsonwamp', 'min:imgtowamp']);
+gulp.task('build:dist', ['inject:jsondist', 'copy:imgtodist']);
+gulp.task('build:wamp', ['inject:jsonwamp', 'copy:imgtowamp']);
 
 
-/* Build & synchronize
+/* Create /wamp && open browser && watch /dev
  *  
  ***********************************/
-gulp.task('browser', ['build:wamp'], function() {
+gulp.task('server', ['build:wamp'], function() {
     var files = [
-        '**/*.php',
-        '**/*.{png,jpg,gif}'
+        dev+'**/*.php',
+        dev+'**/*.js',
+        dev+'**/*.{png,jpg,gif}'
     ];
     browserSync.init(files, {
         proxy: url,
@@ -275,13 +276,14 @@ gulp.task('browser', ['build:wamp'], function() {
 });
 
 
-/* Browser sync
+/* Open browser && watch /dev
  *  
  ***********************************/
-gulp.task('browser:sync', function() {
+gulp.task('server:up', function() {
     var files = [
-        '**/*.php',
-        '**/*.{png,jpg,gif}'
+        dev+'**/*.php',
+        dev+'**/*.js',
+        dev+'**/*.{png,jpg,gif}'
     ];
     browserSync.init(files, {
         proxy: url,
@@ -292,41 +294,20 @@ gulp.task('browser:sync', function() {
 });
 
 
-/* Serve (Create wamp folder, watch for /dev changes)
- *  
- ***********************************/
-gulp.task('server', ['browser'], function() {
-    gulp.watch(dev + 'style.css', ['update:style']);
-    gulp.watch(dev + '*.php', ['update:php', browserSync.reload]);
-});
-
-/* Server (Only watch for /dev changes)
- *  
- ***********************************/
-gulp.task('server:up', ['browser:sync'], function() {
-    gulp.watch(dev + 'style.css', ['update:style']);
-    gulp.watch(dev + '*.php', ['update:php', browserSync.reload]);
-});
 
 
 
-
-
-
-
-
-
-/* Clean directories favicon
+/* Clean favicon on /dev && /dist
  *
  ***********************************/
 gulp.task('clean:favicon', [], function() {
     console.log("Clean all files in dev/img/favicon folder");
-    return gulp.src(dev + 'img/favicon/*', { read: false }).pipe(rimraf());
+    return gulp.src([dev + 'img/favicon/**/*', dist + 'img/favicon/**/*'], { read: false }).pipe(rimraf());
 });
 
 
 
-/* Create favicon
+/* Create favicon on /dev
  *  
  ***********************************/
 gulp.task('generate-favicon', ['clean:favicon'], function(done) {
@@ -374,11 +355,32 @@ gulp.task('generate-favicon', ['clean:favicon'], function(done) {
     });
 });
 
-/* Inject the favicon markups in your HTML pages.
+/* Copy favicon from /dev to /dist || /wamp
+ *  
+ ***********************************/
+gulp.task('copy:favicontodist', ['generate-favicon'], function() {
+    return gulp.src([dev + 'img/favicon/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
+gulp.task('copy:favicontowamp', ['copy:favicontodist'], function() {
+    return gulp.src([dev + 'img/favicon/*']).pipe(gulp.dest(wamp + 'img/', { overwrite: true })); });
+
+
+
+/* Copy favicon && Inject markup in /dev && /dist && /wamp
+ *  
+ ***********************************/
+gulp.task('build:favicon', ['copy:favicontodist', 'copy:favicontowamp'], function() {
+    gulp.src([dev + 'header.php', dist + 'header.php', wamp + 'header.php'])
+        .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(favicon_data_file)).favicon.html_code))
+        .pipe(replace('</div></body></html>', '')) // Fix to separate in two php files
+        .pipe(gulp.dest(dev));
+});
+
+
+/* Copy favicon && Inject markup in /dev && /dist && /wamp
  *  
  ***********************************/
 gulp.task('favicon', ['generate-favicon'], function() {
-    gulp.src([dev + 'header.php'])
+    gulp.src(dev + 'header.php')
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(favicon_data_file)).favicon.html_code))
         .pipe(replace('</div></body></html>', '')) // Fix to separate in two php files
         .pipe(gulp.dest(dev));

@@ -63,11 +63,11 @@ gulp server:up
 ```
 gulp favicon
 ```
-Also `npm build:favicon` is same as below, but it affects `/dist` && `/wamp` (not only `/dev`).
+`npm build:favicon` is same as below, but it affects `/dist` && `/wamp` (not only `/dev`).
 
 
 ## <a name="wamp_config"></a>Configure with WAMP
-To develop locally a theme in Wordpress, yo had to set up a LAMP server (Linux, Apache, MySql & PHP). To do that, I recommend you use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 
+To develop locally a theme in Wordpress, yo need setup a local server based on LAMP (Linux, Apache, MySql & PHP). To do that, is strongly recommended to use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 
 
 Set wamp folder in `gulpfile.js`:
 ```

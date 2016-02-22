@@ -96,7 +96,7 @@ gulp.task('clean:dist', function() {
 gulp.task('copy:phptodist', ['clean:dist'], function() {
     return gulp.src(dev_basic_files, { base: dev }).pipe(gulp.dest(dist, { overwrite: true })); });
 gulp.task('copy:phptowamp', function() {
-    return gulp.src(dev_basic_files, { base: dev }).pipe(gulp.dest(wamp, { overwrite: true })); });
+    return gulp.src(dev_basic_files, { base: dev }).pipe(gulp.dest(wamp, { overwrite: true })).pipe(notify({ message: 'PHP to wamp complete', onLast: true })); });
 
 /* Copy CSS from node_modules
  *  
@@ -238,15 +238,8 @@ gulp.task('inject:jsonwamp', ['min:jstowamp', 'copy:nodejstowamp'], function() {
  ***********************************/
 gulp.task('copy:styletowamp', function() {
     return gulp.src(dev + 'style.css', { base: dev })
-        .pipe(gulp.dest(wamp, { overwrite: true }));
-});
-
-/* Copy PHP files from /dev to /wamp
- *
- ***********************************/
-gulp.task('copy:phptowamp', function() {
-    return gulp.src(dev + '*.php', { base: dev })
-        .pipe(gulp.dest(wamp, { overwrite: true }));
+        .pipe(gulp.dest(wamp, { overwrite: true }))
+        .pipe(notify({ message: 'Styles to wamp complete', onLast: true }));
 });
 
 
@@ -285,9 +278,7 @@ gulp.task('server:up', function() {
     ];
     browserSync.init(files, {
         proxy: url,
-        tunnel: true,
-        injectChanges: true
-
+        tunnel: true
     });
 });
 
@@ -297,6 +288,7 @@ gulp.task('server:up', function() {
  ***********************************/
 gulp.task('server', ['server:build'], function() {
     gulp.watch(dev+'style.css', ['copy:styletowamp']); 
+    gulp.watch(dev+'*.php', ['copy:phptowamp', browserSync.reload]); 
 });
 
 

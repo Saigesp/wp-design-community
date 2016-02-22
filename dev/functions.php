@@ -32,8 +32,8 @@ register_nav_menus( array(
  ***********************************/
 // Require & recommend plugins for WP
 // http://tgmpluginactivation.com/
-//require_once dirname( __FILE__ ) . '/plugins/tgm-plugin-activation/class-tgm-plugin-activation.php';
-//add_action( 'tgmpa_register', 'mytheme_require_plugins' );
+require_once dirname( __FILE__ ) . '/plugins/tgm-plugin-activation/class-tgm-plugin-activation.php';
+add_action( 'tgmpa_register', 'mytheme_require_plugins' );
 
 function mytheme_require_plugins() {
     $plugins = array(

@@ -22,6 +22,13 @@ Install dependencies (be sure you're in sudo/admin mode):
 npm install
 ```
 
+### <a name="wamp_config"></a>Configure with WAMP
+To develop locally a theme in Wordpress, yo need setup a local server based on LAMP (Linux, Apache, MySql & PHP). To do that, is strongly recommended to use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 
+
+Set wamp folder in `gulpfile.js`:
+```
+wamp = 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',
+```
 
 ## Gulp tasks
 #### Server
@@ -55,10 +62,19 @@ gulp build:wamp
 npm build:favicon
 ```
 
-## <a name="wamp_config"></a>Configure with WAMP
-To develop locally a theme in Wordpress, yo need setup a local server based on LAMP (Linux, Apache, MySql & PHP). To do that, is strongly recommended to use [WAMP](http://www.wampserver.com/en/)/[MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html). 
+## Theme dependencies
 
-Set wamp folder in `gulpfile.js`:
-```
-wamp = 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',
-```
+#### Recommended Wordpress Plugins
+ - WP Subtitle
+ - Disqus Comment System
+ - WP User Avatar
+
+#### Others scripts (injected)
+ - jQuery
+ - Imagesloaded
+ - Imagefill.js
+ - Flickity
+ - Masonry
+ - Medium editor
+ - Selection-sharer
+ - Infinite Ajax Scroll

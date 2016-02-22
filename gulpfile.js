@@ -218,7 +218,8 @@ gulp.task('inject:jsondist', ['min:jstodist', 'copy:nodejstodist'], function() {
                             return '<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>' + filepath.slice(dist_inject_path_slice) + '"></script>';
                         }
                     } ))
-        .pipe(gulp.dest(dist));
+        .pipe(gulp.dest(dist))
+        .pipe(notify({ message: 'Build dist complete', onLast: true }));
 });
 
 gulp.task('inject:jsonwamp', ['min:jstowamp', 'copy:nodejstowamp'], function() {
@@ -230,7 +231,8 @@ gulp.task('inject:jsonwamp', ['min:jstowamp', 'copy:nodejstowamp'], function() {
                             return '<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>' + filepath.slice(wamp_inject_path_slice) + '"></script>';
                         }
                     } ))
-        .pipe(gulp.dest(wamp));
+        .pipe(gulp.dest(wamp))
+        .pipe(notify({ message: 'Build wamp complete', onLast: true }));
 });
 
 /* Copy dev/style.css to /wamp

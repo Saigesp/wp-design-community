@@ -193,7 +193,7 @@ function customizer_css() {
           background-color: <?php echo get_theme_mod( 'colors_code_back' ); ?>;
         }
         /* Color de cabecera y footer */
-        #headertop, .footerback {
+        .headertop, .footerback {
           background-color: <?php echo get_theme_mod( 'colors_code_head' ); ?>;
         }
         /* Color de cabecera y footer texto */

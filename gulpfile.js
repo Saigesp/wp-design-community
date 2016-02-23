@@ -275,6 +275,9 @@ gulp.task('server:build', ['build:wamp'], function() {
 gulp.task('server:up', function() {
     var files = [
         dev+'**/*.php',
+        '!'+dev+'header.php',
+        '!'+dev+'footer.php',
+        dev+'**/*.css',
         dev+'**/*.js',
         dev+'**/*.{png,jpg,gif}'
     ];

@@ -189,7 +189,7 @@ function customizer_css() {
           fill: <?php echo get_theme_mod( 'colors_code_hover' ); ?>;
         }
         /* Color de fondo */
-        body, #wraparticle, .menumiddlenav > ul > li > a {
+        body, #wrapper, .menumiddlenav > ul > li > a {
           background-color: <?php echo get_theme_mod( 'colors_code_back' ); ?>;
         }
         /* Color de cabecera y footer */

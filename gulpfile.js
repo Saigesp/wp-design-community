@@ -257,7 +257,6 @@ gulp.task('build:wamp', ['inject:jsonwamp', 'copy:imgtowamp', 'copy:styletowamp'
  ***********************************/
 gulp.task('server:build', ['build:wamp'], function() {
     var files = [
-        dev+'**/*.php',
         dev+'**/*.js',
         dev+'**/*.{png,jpg,gif}'
     ];
@@ -274,9 +273,6 @@ gulp.task('server:build', ['build:wamp'], function() {
  ***********************************/
 gulp.task('server:up', function() {
     var files = [
-        dev+'**/*.php',
-        '!'+dev+'header.php',
-        '!'+dev+'footer.php',
         dev+'**/*.css',
         dev+'**/*.js',
         dev+'**/*.{png,jpg,gif}'
@@ -293,7 +289,7 @@ gulp.task('server:up', function() {
  ***********************************/
 gulp.task('server', ['server:build'], function() {
     gulp.watch(dev+'style.css', ['copy:styletowamp']); 
-    gulp.watch([dev+'*.php', '!'+dev+'header.php', '!'+dev+'footer.php'], ['copy:phptowamp', browserSync.reload]); 
+    gulp.watch([dev+'*.php', '!'+dev+'header.php', '!'+dev+'footer.php'], ['build:wamp', browserSync.reload]); 
     gulp.watch([dev+'header.php', dev+'footer.php'], ['build:wamp', browserSync.reload]); 
 });
 

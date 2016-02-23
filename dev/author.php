@@ -27,49 +27,57 @@
   );
   $wp_query = new wp_query( $args );
 ?>
+<div class="flexboxer flexboxer--author">
+  <section class="wrap wrap--author">
+      <figure class="authorimagefoot authorbuble" style="background-color: #666;">
+        <img src="<?php if(function_exists('get_wp_user_avatar_src'))
+          echo get_wp_user_avatar_src($term_slug, 100, 'medium');
+          else echo get_stylesheet_directory_uri().'/img/nophoto.png'; ?>"/>
+      </figure>
+    <p class="authorarticlefoot">
+      <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
+        <?php the_author(); ?>
+      </a>
+      <br>
+      <?php echo get_user_meta($term_slug,position,true);?>
+      <br>
+      <?php if(get_user_meta($term_slug,twitter,true) != '') { ?>
+      <a href="<?php echo 'https://twitter.com/'.get_user_meta($term_slug,twitter,true);?>">
+        <?php the_svg_icon('twitter');?>
+      </a>
+      <?php } ?>
+      <?php if(get_user_meta($term_slug,googleplus,true) != '') { ?>
+      <a rel="author" href="<?php echo get_user_meta($term_slug,googleplus,true);?>">
+        <?php the_svg_icon('gplus');?>
+      </a>
+      <?php } ?>
+      <?php if(get_user_meta($term_slug,linkedin,true) != '') { ?>
+      <a href="<?php echo get_user_meta($term_slug,linkedin,true);?>">
+        <?php the_svg_icon('linkedin');?>
+      </a>
+      <?php } ?>
+    </p>
+    <p class="description"><?php echo $user_info->description;?></p>
+  </section><!-- end of author -->
+  <section class="wrap wrap--slider">
+    <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>
+      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+    </div>
+  </section>
+</div><!-- end of flexboxer -->
 
-<section class="wrap--author">
-    <figure class="authorimagefoot authorbuble" style="background-color: #666;">
-      <img src="<?php if(function_exists('get_wp_user_avatar_src'))
-        echo get_wp_user_avatar_src($term_slug, 100, 'medium');
-        else echo get_stylesheet_directory_uri().'/img/nophoto.png'; ?>"/>
-    </figure>
-  <p class="authorarticlefoot">
-    <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
-      <?php the_author(); ?>
-    </a>
-    <br>
-    <?php echo get_user_meta($term_slug,position,true);?>
-    <br>
-    <?php if(get_user_meta($term_slug,twitter,true) != '') { ?>
-    <a href="<?php echo 'https://twitter.com/'.get_user_meta($term_slug,twitter,true);?>">
-      <?php the_svg_icon('twitter');?>
-    </a>
-    <?php } ?>
-    <?php if(get_user_meta($term_slug,googleplus,true) != '') { ?>
-    <a rel="author" href="<?php echo get_user_meta($term_slug,googleplus,true);?>">
-      <?php the_svg_icon('gplus');?>
-    </a>
-    <?php } ?>
-    <?php if(get_user_meta($term_slug,linkedin,true) != '') { ?>
-    <a href="<?php echo get_user_meta($term_slug,linkedin,true);?>">
-      <?php the_svg_icon('linkedin');?>
-    </a>
-    <?php } ?>
-  </p>
-  <p class="description"><?php echo $user_info->description;?></p>
-</section>
-
-<div id="divwrap" class="wraparch index iascontainer customtax">
-  <?php if (have_posts()) : ?>
+<!-- <div id="divwrap" class="wraparch index iascontainer customtax"> -->
+  <?php /* if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
       <?php include( locate_template(  'loop-archive.php' )); ?>
     <?php endwhile; ?>
   <?php else : ?>
-  <?php endif; ?>
+  <?php endif; */ ?>
 
-  <div class="navigation">
-    <?php
+  <!-- <div class="navigation"> -->
+    <?php /*
     $base = get_bloginfo( 'url' ). '%_%';
     echo paginate_links( array(
       'base' => $base,
@@ -77,7 +85,7 @@
       'format'   => '?pag=%#%',
       'current'  => $pagec,
     ) );
-    ?>
-  </div>
-</div>
+    */ ?>
+  <!-- </div> -->
+<!-- </div> -->
 <?php get_footer(); ?>

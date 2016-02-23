@@ -1374,8 +1374,8 @@ blockquote p {
  * PAGE AUTHOR (author.php)
  ***********************************/
 .wrap--author {
-	padding: 20px;
-    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
 }
 .wrap--author .description{
 	margin: 0;
@@ -1437,7 +1437,7 @@ blockquote p {
 		margin-right: 15px;
 	}
 	.wrap--author .authorimagefoot {
-	    margin-left: 10px;
+	    margin: 0 10px 0 0;
 	}
 	.authorarticlefoot {
 		display: inline-block;
@@ -1734,10 +1734,8 @@ blockquote p {
 	  margin: 25px auto 20px;
 	}
 	.wrap--author {
-	    width: 100%;
 	    max-width: 860px;
-	    margin: 0px auto 20px;
-    	padding-top: 70px;
+	    margin: 10px auto;
 	}
 	.morecontent .listthumb {
 		display: initial;

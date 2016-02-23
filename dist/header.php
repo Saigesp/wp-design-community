@@ -2,7 +2,6 @@
 <!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<html <?php="" language_attributes();?="">>
 <!-- Google Chrome Frame for IE -->
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
 <head>
@@ -76,5 +75,5 @@
 <meta name="msapplication-config" content="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff"></head>
  <body>
+  <?php include( locate_template(  'menu-header.php' )); ?>
   <div id="wrapper">
-    <?php include( locate_template(  'menu-header.php' )); ?>

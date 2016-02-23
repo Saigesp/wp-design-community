@@ -67,5 +67,5 @@
 <meta name="msapplication-config" content="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff"></head>
  <body>
+  <?php include( locate_template(  'menu-header.php' )); ?>
   <div id="wrapper">
-    <?php include( locate_template(  'menu-header.php' )); ?>

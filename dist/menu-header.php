@@ -1,9 +1,9 @@
-<header id="headertop" class="headertop" >
-  <div class="headertopwrap">
+<header class="headertop">
+  <div class="wrapper">
     <?php if (has_nav_menu($menutop)) { ?>
-  	   <a href="#navtop"><?php the_svg_icon('hamburguer')?></a>
+  	   <?php the_svg_icon('hamburguer')?>
     <?php } ?>
-    <div class="logocontainer">
+    <div class="wrap wrap--logo">
     	<a href="<?php bloginfo('url'); ?>">
         <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
           <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
@@ -12,8 +12,13 @@
         <?php } ?>
     	</a>
     </div>
+    <?php if(is_author()){ ?>
+      <div class="wrap wrap--path showontablet">
+        <h3><span class="current"><?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?></span></h3>
+      </div>
+    <?php } ?>
     <?php if(is_single()){  ?>
-      <div id="sharebuttoncont" class="sharecontainer">
+      <div class="wrap wrap--share sharecontainer">
       	<?php the_svg_icon('share');?>
       </div>
     <?php } ?>

@@ -28,8 +28,7 @@
   $wp_query = new wp_query( $args );
 ?>
 
-<div class="contentauthorarticlefoot contentauthorauthor">
-  <hr class="separatorauthor separatorauthorup">
+<section class="wrap--author">
     <figure class="authorimagefoot authorbuble" style="background-color: #666;">
       <img src="<?php if(function_exists('get_wp_user_avatar_src'))
         echo get_wp_user_avatar_src($term_slug, 100, 'medium');
@@ -59,8 +58,7 @@
     <?php } ?>
   </p>
   <p class="description"><?php echo $user_info->description;?></p>
-  <hr class="separatorauthor separatorauthordown">
-</div>
+</section>
 
 <div id="divwrap" class="wraparch index iascontainer customtax">
   <?php if (have_posts()) : ?>

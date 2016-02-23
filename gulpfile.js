@@ -290,7 +290,8 @@ gulp.task('server:up', function() {
  ***********************************/
 gulp.task('server', ['server:build'], function() {
     gulp.watch(dev+'style.css', ['copy:styletowamp']); 
-    gulp.watch(dev+'*.php', ['copy:phptowamp', browserSync.reload]); 
+    gulp.watch([dev+'*.php', '!'+dev+'header.php', '!'+dev+'footer.php'], ['copy:phptowamp', browserSync.reload]); 
+    gulp.watch([dev+'header.php', dev+'footer.php'], ['build:wamp', browserSync.reload]); 
 });
 
 

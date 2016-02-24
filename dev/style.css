@@ -105,6 +105,7 @@ body {
 #wrapper {
 	min-height:100%;
 	position:relative;
+	padding-bottom: 76px;
 }
 
 body,
@@ -1373,7 +1374,8 @@ blockquote p {
 /**
  * PAGE AUTHOR (author.php)
  ***********************************/
-.wrap--author {
+.wrap--author,
+.wrap--cv {
     padding: 20px;
     background: #f5f5f5;
 }
@@ -1387,14 +1389,21 @@ blockquote p {
 	margin: 6px 10px 0 0;
 }
 
+.flexboxer--author > section:last-of-type{
+	margin-bottom: 0;
+}
 
 
 
 
 
 
-
-
+/**
+ * SLIDER (node_modules/flickity)
+ ***********************************/
+.flickity-page-dots {
+	display: none;
+}
 
 
 
@@ -1733,8 +1742,13 @@ blockquote p {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.wrap--author {
+	.wrap--author,
+	.wrap--cv {
 	    max-width: 860px;
+	    margin: 10px auto;
+	}
+	.wrap--slider {
+	    max-width: 900px;
 	    margin: 10px auto;
 	}
 	.morecontent .listthumb {

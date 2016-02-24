@@ -1389,6 +1389,10 @@ blockquote p {
 	margin: 6px 10px 0 0;
 }
 
+.wrap--cv p {
+	margin-bottom: 0;
+}
+
 .flexboxer--author > section:last-of-type{
 	margin-bottom: 0;
 }

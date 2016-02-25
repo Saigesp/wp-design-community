@@ -459,6 +459,45 @@ jQuery(document).ready(function($) {
 add_action('admin_head','hide_personal_options');
 
 
+/*
+* LOGIN REDIRECT
+*********************************************/
+/* redirect nonadmin users after login */
+function soi_login_redirect( $redirect_to, $request, $user  ) {
+  return ( is_array( $user->roles ) && ( in_array('administrator',$user->roles) || in_array('editor',$user->roles) ) ) ? 'http://xn--diseadoresindustriales-nec.es/wp-admin' : 'http://xn--diseadoresindustriales-nec.es/modificar-perfil/';
+} 
+add_filter( 'login_redirect', 'soi_login_redirect', 10, 3 );
+
+/* redirect all users after logout */
+function go_home(){
+  wp_redirect( home_url() );
+  exit();
+}
+add_action('wp_logout','go_home');
+
+/* redirect after fail login */
+function my_front_end_login_fail($username){
+    $referrer = $_SERVER['HTTP_REFERER'];
+    if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
+        wp_redirect('http://xn--diseadoresindustriales-nec.es/iniciar-sesion/'); 
+    exit;
+    }
+}
+add_action('wp_login_failed', 'my_front_end_login_fail'); 
+
+/* register last login */
+add_action('wp_login','reg_last_login');
+function reg_last_login($login) {
+    global $user_ID;
+    $user = get_userdatabylogin($login);
+    update_usermeta($user->ID, 'last_login', current_time('mysql'));
+}
+function the_last_login($user_id) {
+    $last_login = get_user_meta($user_id, 'last_login', true);
+    echo $last_login;
+}
+
+
 /**
  * FUNCIONES DE FILTRO DE IDIOMA
  ***********************************/

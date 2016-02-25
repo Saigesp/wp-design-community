@@ -4,9 +4,8 @@ var project = 'wp-design-community',
     local_port = 5000,
     bower = './bower_components/',
     node = './node_modules/',
-    dev = './dev/',
+    dev = './',
     dist = './dist/',
-    wamp = 'C:/wamp/www/wp-design-community/wp-content/themes/wp-design-community/',
     dev_basic_files = [
         dev + '*.php',
         dev + 'plugins/**/*',
@@ -27,13 +26,12 @@ var project = 'wp-design-community',
     node_files_css = [ // CSS Archives to copy
         node + '*/dist/**/*.min.css',
     ],
-    node_files_js = [ // JS Archives to copy
+    js_minimized_files = [ // JS Archives to copy
         node + '*/dist/**/*.min.js',
         node + 'imagesloaded/imagesloaded.pkgd.min.js'
 
     ];
 
-var wamp_inject_path_slice = wamp.length + 3; //Change it to adjust the url of injected scripts
 var dist_inject_path_slice = dist.length - 2;
 var favicon_data_file = dev + 'faviconData.json';
 var favicon_master_img = dev + 'img/favicon.png';
@@ -77,7 +75,7 @@ var gulp = require('gulp'),
  *  
  ***********************************/
 gulp.task('default', function() {
-    // place code for your default task here
+
 });
 
 
@@ -90,175 +88,104 @@ gulp.task('clean:dist', function() {
     return gulp.src(dist + '*', { read: false }).pipe(rimraf());
 });
 
-/* Copy PHP && dev_basic_files from /dev 
+/* Copy PHP && dev_basic_files to /dist 
  *  
  ***********************************/
-gulp.task('copy:phptodist', ['clean:dist'], function() {
+gulp.task('copy:basicfiles:dist', ['clean:dist'], function() {
     return gulp.src(dev_basic_files, { base: dev }).pipe(gulp.dest(dist, { overwrite: true })); });
-gulp.task('copy:phptowamp', function() {
-    return gulp.src(dev_basic_files, { base: dev }).pipe(gulp.dest(wamp, { overwrite: true })).pipe(notify({ message: 'PHP to wamp complete', onLast: true })); });
 
-/* Copy CSS from node_modules
+/* Copy CSS minimized from modules
  *  
  ***********************************/
-gulp.task('copy:nodecsstodist', function() {
-    return gulp.src(node_files_css, { base: node }).pipe(gulp.dest(dist+'plugins/', { overwrite: true })); });
-gulp.task('copy:nodecsstowamp', function() {
-    return gulp.src(node_files_css, { base: node }).pipe(gulp.dest(wamp+'plugins/', { overwrite: true })); });
+gulp.task('copy:cssminimized:dev', function() {
+    return gulp.src(node_files_css, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
-/* Copy JS from node_modules
+/* Copy JS minimized from modules
  *  
  ***********************************/
-gulp.task('copy:nodejstodist', function() {
-    return gulp.src(node_files_js, { base: node }).pipe(gulp.dest(dist+'plugins', { overwrite: true })); });
-gulp.task('copy:nodejstowamp', function() {
-    return gulp.src(node_files_js, { base: node }).pipe(gulp.dest(wamp+'plugins', { overwrite: true })); });
+gulp.task('copy:jsminimized:dev', function() {
+    return gulp.src(js_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
-/* Copy images from /dev
+/* Copy images from /dev to /dist
  *  
  ***********************************/
-gulp.task('copy:imgtodist', function() {
+gulp.task('copy:img:dist', function() {
     return gulp.src([dev + 'img/**/*', '!'+dev+'img/RAW/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
-gulp.task('copy:imgtowamp', function() {
-    return gulp.src([dev + 'img/**/*', '!'+dev+'img/RAW/**/*']).pipe(gulp.dest(wamp + 'img/', { overwrite: true })); });
-
-
-
-
 
 /* Copy & minimize CSS from /dev && node_modules
  *  
  ***********************************/
-gulp.task('min:csstodist', ['copy:phptodist'], function() {
+gulp.task('min:csstominimize:dev', function() {
     return gulp.src(min_files_css)
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss({ maxLineLen: 80 }))
-        //.pipe(rename({dirname: ''}))
-        .pipe(gulp.dest(dist + 'plugins/', { overwrite: true }));
+        .pipe(gulp.dest(dev + 'plugins/', { overwrite: true }));
 });
 
-gulp.task('min:csstowamp', ['copy:phptowamp'], function() {
-    return gulp.src(min_files_css)
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss({ maxLineLen: 80 }))
-        .pipe(gulp.dest(wamp + 'plugins/', { overwrite: true }));
-});
-
-
-var vendorStream = gulp.src(['./src/vendors/*.js'], {read: false});
- 
-var appStream = gulp.src(['./src/app/*.js'], {read: false});
- 
-gulp.src('./src/index.html')
-  .pipe(inject(series(vendorStream, appStream))) // This will always inject vendor files before app files 
-  .pipe(gulp.dest('./dist'));
-
-
-
-
-/* Inject CSS from /dist || /wamp to header.php
+/* Inject CSS to header.php
  *  
  ***********************************/
-gulp.task('inject:cssondist', ['min:csstodist', 'copy:nodecsstodist'], function() {
-    return gulp.src(dist + 'header.php')
+gulp.task('inject:css:dev', ['min:csstominimize:dev', 'copy:cssminimized:dev'], function() {
+    return gulp.src(dev + 'header.php')
         .pipe(inject(
-            gulp.src([dist + 'plugins/**/*.css'], { read: false }), {
+            gulp.src([dev + 'plugins/**/*.css'], { read: false }), {
                 transform: function(filepath) {
                     //  if (filepath.slice(-5) === '.docx') {
-                    return '<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>' + filepath.slice(dist_inject_path_slice) + '"/>';
+                    return '<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>' + filepath + '"/>';
                     //  }
                     // Use the default transform as fallback: 
                     //return inject.transform.apply(inject.transform, arguments);
                 }
             }
         ))
-        .pipe(gulp.dest(dist));
+        .pipe(gulp.dest(dev));
 });
-
-gulp.task('inject:cssonwamp', ['min:csstowamp', 'copy:nodecsstowamp'], function() {
-    return gulp.src(wamp + 'header.php')
-        .pipe(inject(
-            gulp.src([wamp + 'plugins/**/*.css'], { read: false }), {
-                transform: function(filepath) {
-                    return '<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>' + filepath.slice(wamp_inject_path_slice) + '"/>';
-                }
-            }
-        ))
-        .pipe(gulp.dest(wamp));
-});
-
 
 /* Copy & minimize JS from /dev && node_modules
  *  
  ***********************************/
-gulp.task('min:jstodist', ['inject:cssondist'], function() {
+gulp.task('min:jstominimize:dev', function() {
     return gulp.src(min_files_js)
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
-        .pipe(gulp.dest(dist + 'plugins/', { overwrite: true }));
-});
-
-gulp.task('min:jstowamp', ['inject:cssonwamp'], function() {
-    return gulp.src(min_files_js)
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(uglify())
-        .pipe(gulp.dest(wamp + 'plugins/', { overwrite: true }));
+        .pipe(gulp.dest(dev + 'plugins/', { overwrite: true }));
 });
 
 
-/* Inject CSS from /dist || /wamp to footer.php
+/* Inject JS to footer.php
  *  
  ***********************************/
-gulp.task('inject:jsondist', ['min:jstodist', 'copy:nodejstodist'], function() {
-	var firstStream = gulp.src([dist + 'plugins/**/jquery.min.js'], { read: false });
-	var lastStream = gulp.src([dist + 'plugins/**/*.js', '!'+ dist + 'plugins/**/jquery.min.js'], { read: false });
-    return gulp.src(dist + 'footer.php')
+gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:dev'], function() {
+	var firstStream = gulp.src([dev + 'plugins/**/jquery.min.js'], { read: false });
+	var lastStream = gulp.src([dev + 'plugins/**/*.js', '!'+ dev + 'plugins/**/jquery.min.js'], { read: false });
+    return gulp.src(dev + 'footer.php')
         .pipe(inject( series(firstStream, lastStream), {
                         transform: function(filepath) {
-                            return '<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>' + filepath.slice(dist_inject_path_slice) + '"></script>';
+                            return '<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>' + filepath + '"></script>';
                         }
                     } ))
-        .pipe(gulp.dest(dist))
-        .pipe(notify({ message: 'Build dist complete', onLast: true }));
-});
-
-gulp.task('inject:jsonwamp', ['min:jstowamp', 'copy:nodejstowamp'], function() {
-	var firstStream = gulp.src([wamp + 'plugins/**/jquery.min.js'], { read: false });
-	var lastStream = gulp.src([wamp + 'plugins/**/*.js', '!'+ wamp + 'plugins/**/jquery.min.js'], { read: false });
-    return gulp.src(wamp + 'footer.php')
-        .pipe(inject( series(firstStream, lastStream), {
-                        transform: function(filepath) {
-                            return '<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>' + filepath.slice(wamp_inject_path_slice) + '"></script>';
-                        }
-                    } ))
-        .pipe(gulp.dest(wamp))
-        .pipe(notify({ message: 'Build wamp complete', onLast: true }));
-});
-
-/* Copy dev/style.css to /wamp
- *
- ***********************************/
-gulp.task('copy:styletowamp', function() {
-    return gulp.src(dev + 'style.css', { base: dev })
-        .pipe(gulp.dest(wamp, { overwrite: true }))
-        .pipe(notify({ message: 'Styles to wamp complete', onLast: true }));
+        .pipe(gulp.dest(dev))
+        .pipe(notify({ message: 'Build dev complete', onLast: true }));
 });
 
 
-/* Create /dist && /wamp
+/* Create /dev
  *  
  ***********************************/
-gulp.task('build:dist', ['inject:jsondist', 'copy:imgtodist']);
-gulp.task('build:wamp', ['inject:jsonwamp', 'copy:imgtowamp', 'copy:styletowamp']);
+gulp.task('build', ['inject:js:dev', 'inject:css:dev']);
+
+
 
 
 /* Create /wamp && open browser && watch /dev
  *  
  ***********************************/
-gulp.task('server:build', ['build:wamp'], function() {
+gulp.task('upserver', function() {
     var files = [
+        dev+'**/*.css',
         dev+'**/*.js',
-        dev+'**/*.{png,jpg,gif}'
+        '!'+node+'**/*',
+        '!'+dist+'**/*'
     ];
     browserSync.init(files, {
         proxy: url,
@@ -268,37 +195,32 @@ gulp.task('server:build', ['build:wamp'], function() {
 });
 
 
-/* Open browser && watch /dev
- *  
- ***********************************/
-gulp.task('server:up', function() {
-    var files = [
-        dev+'**/*.css',
-        dev+'**/*.js',
-        dev+'**/*.{png,jpg,gif}'
-    ];
-    browserSync.init(files, {
-        proxy: url,
-        tunnel: true
-    });
-});
-
-
 /* Create /wamp && open browser && watch /dev && update extrafiles
  *  
  ***********************************/
-gulp.task('server', ['server:build'], function() {
-    gulp.watch(dev+'style.css', ['copy:styletowamp']); 
-    gulp.watch([dev+'*.php', '!'+dev+'header.php', '!'+dev+'footer.php'], ['build:wamp', browserSync.reload]); 
-    gulp.watch([dev+'header.php', dev+'footer.php'], ['build:wamp', browserSync.reload]); 
+gulp.task('server', ['upserver'], function() {
+    gulp.watch(dev+'style.css', [browserSync.reload]); 
+    gulp.watch([dev+'**/*.php', '!'+node+'**/*.php', '!'+dist+'**/*.php'], [browserSync.reload]); 
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Clean favicon on /dev && /dist
  *
  ***********************************/
 gulp.task('clean:favicon', [], function() {
-    console.log("Clean all files in dev/img/favicon folder");
+    console.log("Clean all files in dev && dist folder");
     return gulp.src([dev + 'img/favicon/**/*', dist + 'img/favicon/**/*'], { read: false }).pipe(rimraf());
 });
 
@@ -352,32 +274,19 @@ gulp.task('generate-favicon', ['clean:favicon'], function(done) {
     });
 });
 
-/* Copy favicon from /dev to /dist || /wamp
+/* Copy favicon from /dev to /dist
  *  
  ***********************************/
 gulp.task('copy:favicontodist', ['generate-favicon'], function() {
     return gulp.src([dev + 'img/favicon/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
-gulp.task('copy:favicontowamp', ['copy:favicontodist'], function() {
-    return gulp.src([dev + 'img/favicon/*']).pipe(gulp.dest(wamp + 'img/', { overwrite: true })); });
 
 
 
-/* Copy favicon && Inject markup in /dev && /dist && /wamp
+/* Copy favicon && Inject markup in /dev && /dist
  *  
  ***********************************/
-gulp.task('build:favicon', ['copy:favicontodist', 'copy:favicontowamp'], function() {
-    gulp.src([dev + 'header.php', dist + 'header.php', wamp + 'header.php'])
-        .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(favicon_data_file)).favicon.html_code))
-        .pipe(replace('</div></body></html>', '')) // Fix to separate in two php files
-        .pipe(gulp.dest(dev));
-});
-
-
-/* Copy favicon && Inject markup in /dev && /dist && /wamp
- *  
- ***********************************/
-gulp.task('favicon', ['generate-favicon'], function() {
-    gulp.src(dev + 'header.php')
+gulp.task('favicon', ['copy:favicontodist'], function() {
+    gulp.src([dev + 'header.php', dist + 'header.php'])
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(favicon_data_file)).favicon.html_code))
         .pipe(replace('</div></body></html>', '')) // Fix to separate in two php files
         .pipe(gulp.dest(dev));

@@ -36,7 +36,7 @@
       </figure>
     <p class="authorarticlefoot">
       <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
-        <?php the_author(); ?>
+        <?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?>
       </a>
       <br>
       <?php echo get_user_meta($term_slug,position,true);?>
@@ -61,10 +61,14 @@
   </section><!-- end of author -->
   <section class="wrap wrap--slider">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>
-      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-      <div class="gallery-cell"><img src="http://localhost:3000/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
+      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
     </div>
+  </section>
+  <section class="wrap wrap--cv">
+    <p class="description"><?php echo $user_info->description;?></p>
   </section>
 </div><!-- end of flexboxer -->
 

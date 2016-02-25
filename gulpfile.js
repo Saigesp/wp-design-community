@@ -12,8 +12,7 @@ var project = 'wp-design-community',
         dev + 'plugins/**/*',
         dev + 'img/**/*',
         '!'+dev+'img/RAW/**/*',
-        dev + 'screenshot.png',
-
+        dev + 'screenshot.png'
     ],
     min_files_css = [ // CSS Archives to minimize
         dev + 'plugins/**/*.css',

@@ -292,5 +292,6 @@ gulp.task('favicon', ['copy:favicontodist'], function() {
     gulp.src([dev + 'header.php', dist + 'header.php'])
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(favicon_data_file)).favicon.html_code))
         .pipe(replace('</div></body></html>', '')) // Fix to separate in two php files
+        .pipe(replace('</div></body>', '')) // Fix to separate in two php files
         .pipe(gulp.dest(dev));
 });

@@ -18,4 +18,4 @@
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-TileImage" content="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/mstile-144x144.png">
 <meta name="msapplication-config" content="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff"></head> <body>  <?php include( locate_template(  'menu-header.php' )); ?>  <div id="wrapper"></div></body>
+<meta name="theme-color" content="#ffffff"></head> <body>  <?php include( locate_template(  'menu-header.php' )); ?>  <div id="wrapper">

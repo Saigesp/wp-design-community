@@ -182,15 +182,11 @@ gulp.task('build', ['inject:js:dev', 'inject:css:dev']);
  ***********************************/
 gulp.task('upserver', function() {
     var files = [
-        dev+'**/*.css',
-        dev+'**/*.js',
-        '!'+node+'**/*',
-        '!'+dist+'**/*'
+        dev+'**/*.css'
     ];
     browserSync.init(files, {
         proxy: url,
-        tunnel: true,
-        injectChanges: true
+        tunnel: true
     });
 });
 
@@ -200,7 +196,7 @@ gulp.task('upserver', function() {
  ***********************************/
 gulp.task('server', ['upserver'], function() {
     gulp.watch(dev+'style.css', [browserSync.reload]); 
-    gulp.watch([dev+'**/*.php', '!'+node+'**/*.php', '!'+dist+'**/*.php'], [browserSync.reload]); 
+    gulp.watch(dev+'*.php', [browserSync.reload]); 
 });
 
 

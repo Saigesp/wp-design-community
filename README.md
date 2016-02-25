@@ -19,7 +19,7 @@ Install dependencies (be sure you're in sudo/admin mode):
 ```
 npm install
 ```
-## Build dist
+## Build (Inject plugins && minimize files)
 ```
 gulp build
 ```
@@ -51,8 +51,6 @@ gulp build
 ```
 gulp dist
 ```
-
-dist 
 
 #### Generate favicon
 

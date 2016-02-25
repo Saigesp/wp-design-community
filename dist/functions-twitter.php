@@ -2,7 +2,7 @@
 /* Función enviar tweets desde wordpress */
 function sendTweet($mensaje){
         ini_set('display_errors', 1);
-        require_once('TwitterAPIExchange.php');
+        require_once('plugins/twitter-api-exchange/TwitterAPIExchange.php');
         $settings = array(
             'oauth_access_token' => get_option("access_token"),
             'oauth_access_token_secret' => get_option("access_token_secret"),
@@ -18,7 +18,7 @@ function sendTweet($mensaje){
 
 function follow($usuario){
         ini_set('display_errors', 1);
-        require_once('TwitterAPIExchange.php');
+        require_once('plugins/twitter-api-exchange/TwitterAPIExchange.php');
         $settings = array(
             'oauth_access_token' => get_option("access_token"),
             'oauth_access_token_secret' => get_option("access_token_secret"),

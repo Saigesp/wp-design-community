@@ -26,7 +26,6 @@ register_nav_menus( array(
 
 
 
-
 /**
  * REQUIRE WP PLUGINS
  ***********************************/
@@ -269,6 +268,31 @@ add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
 
 
 
+/**
+ * FUNCIONES DE POSTS
+ ***********************************/
+
+// Create pages to extend theme
+function new_page_title($post_title){
+  if(get_page_by_title($post_title) == NULL){
+    global $user_ID;
+    $new_post = array(
+      'post_title' => $post_title,
+      'post_content' => '[WP-Design-Community-Page]',
+      'post_status' => 'publish',
+      'post_date' => date('Y-m-d H:i:s'),
+      'post_author' => $user_ID,
+      'post_type' => 'page',
+      'post_category' => array(0)
+    );
+    $post_id = wp_insert_post($new_post);
+  }
+}
+
+new_page_title('Edit Profile');
+
+
+
 
 /**
  * FUNCIONES DE IMÁGENES Y VÍDEO
@@ -421,6 +445,11 @@ function is_user_role( $role, $user_id = null ) {
     else $user = wp_get_current_user();
     if (empty($user))	return false;
     return in_array( $role, (array) $user->roles );
+}
+
+// Check if post ID exist
+function post_id_exists( $id ) {
+  return is_string( get_post_status( $id ) );
 }
 
 // Añadir meta de usuario

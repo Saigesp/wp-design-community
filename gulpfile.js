@@ -8,10 +8,12 @@ var project = 'wp-design-community',
     dist = './dist/',
     dev_basic_files = [
         dev + '*.php',
+        dev + 'style.css',
         dev + 'plugins/**/*',
-        '!' + dev + 'plugins/**/*.css',
-        '!' + dev + 'plugins/**/*.js',
+        dev + 'img/**/*',
+        '!'+dev+'img/RAW/**/*',
         dev + 'screenshot.png',
+
     ],
     min_files_css = [ // CSS Archives to minimize
         dev + 'plugins/**/*.css',
@@ -106,12 +108,6 @@ gulp.task('copy:cssminimized:dev', function() {
 gulp.task('copy:jsminimized:dev', function() {
     return gulp.src(js_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
-/* Copy images from /dev to /dist
- *  
- ***********************************/
-gulp.task('copy:img:dist', function() {
-    return gulp.src([dev + 'img/**/*', '!'+dev+'img/RAW/**/*']).pipe(gulp.dest(dist + 'img/', { overwrite: true })); });
-
 /* Copy & minimize CSS from /dev && node_modules
  *  
  ***********************************/
@@ -176,13 +172,19 @@ gulp.task('build', ['inject:js:dev', 'inject:css:dev']);
 
 
 
+/* Create /dist
+ *  
+ ***********************************/
+gulp.task('dist', ['copy:basicfiles:dist']);
+
+
 
 /* Create /wamp && open browser && watch /dev
  *  
  ***********************************/
 gulp.task('upserver', function() {
     var files = [
-        dev+'**/*.css'
+        dev+'*.css'
     ];
     browserSync.init(files, {
         proxy: url,
@@ -195,15 +197,21 @@ gulp.task('upserver', function() {
  *  
  ***********************************/
 gulp.task('server', ['upserver'], function() {
-    gulp.watch(dev+'style.css', [browserSync.reload]); 
-    gulp.watch(dev+'*.php', [browserSync.reload]); 
+    gulp.watch(dev+'style.css', ['notify',browserSync.reload]); 
+    gulp.watch(dev+'*.php', ['notify',browserSync.reload]); 
 });
 
 
 
 
 
-
+/* Notify changes
+ *  
+ ***********************************/
+gulp.task('notify', function() {
+    return gulp.src(dev+'*.php')
+        .pipe(notify({ message: 'Changes detected', onLast: true }));
+});
 
 
 

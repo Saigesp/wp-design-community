@@ -873,7 +873,8 @@ code {
 }
  .headerarticle {
  	position: relative;
- 	z-index: -1;
+ 	z-index: 0;
+ 	overflow: hidden;
  }
  .titlearticle {
  	position: absolute;
@@ -1336,14 +1337,25 @@ blockquote p {
 
 
 
-
-
 /**
- * USER
+ * EVENTS
  *************************************************************************************************/
 
 /**
- * PAGE AUTHOR (author.php)
+ * ARCHIVE EVENTS (archive-event.php)
+ ***********************************/
+.flexboxer--event .wrap {
+    background: #f5f5f5;
+}
+
+
+
+/**
+ * USERS
+ *************************************************************************************************/
+
+/**
+ * ARCHIVE AUTHOR (author.php)
  ***********************************/
 .flexboxer--author .wrap {
     padding: 20px;
@@ -1400,6 +1412,10 @@ blockquote p {
 	color: rgba(255,255,255,0.5);
 }
 
+.flexboxer--author__edit form {
+	position: relative;
+}
+
 .flexboxer--author__edit input[type="text"],
 .flexboxer--author__edit .js-medium-editor {
 	background: transparent;
@@ -1418,9 +1434,22 @@ blockquote p {
 	background: rgba(0,0,0,0.1);
 }
 
+.flexboxer--author__edit .button--submit{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 
 
 
+/**
+ * FORMULARIOS
+ ***********************************/
+
+input[type="submit"] {
+    border: 0;
+    padding: 7px 10px;
+}
 
 
 
@@ -1438,6 +1467,8 @@ blockquote p {
 textarea.js-medium-editor {
 	display: none;
 }
+
+
 
 /**
  * OVERFLOW
@@ -1817,11 +1848,12 @@ textarea.js-medium-editor {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.flexboxer--author .wrap {
+	.flexboxer--author .wrap--author {
 	    max-width: 860px;
 	    margin: 10px auto;
 	}
-	.flexboxer--author .wrap--slider {
+	.flexboxer--author .wrap--slider,
+	.flexboxer--event .wrap--event {
 	    max-width: 900px;
 	    margin: 10px auto;
 	}

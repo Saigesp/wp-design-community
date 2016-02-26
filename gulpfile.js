@@ -24,8 +24,9 @@ var project = 'wp-design-community',
         node + '*/src/jquery-ias.js',
         node + '*/js/jquery-imagefill.js'
     ],
-    node_files_css = [ // CSS Archives to copy
-        node + '*/dist/**/*.min.css',
+    css_minimized_files = [ // CSS Archives to copy
+        node + 'flickity/*/flickity.min.css',
+        node + 'medium-editor/dist/css/*/flat.min.css'
     ],
     js_minimized_files = [ // JS Archives to copy
         node + '*/dist/**/*.min.js',
@@ -99,7 +100,7 @@ gulp.task('copy:basicfiles:dist', ['clean:dist'], function() {
  *  
  ***********************************/
 gulp.task('copy:cssminimized:dev', function() {
-    return gulp.src(node_files_css, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
+    return gulp.src(css_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
 /* Copy JS minimized from modules
  *  

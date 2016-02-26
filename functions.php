@@ -64,6 +64,11 @@ function mytheme_require_plugins() {
         'required'  => false, 
       ),
       array(
+        'name'      => 'Events Manager',
+        'slug'      => 'events-manager',
+        'required'  => false, 
+      ),
+      array(
         'name'      => 'WP User Avatar',
         'slug'      => 'wp-user-avatar',
         'required'  => false, 

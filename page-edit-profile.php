@@ -35,6 +35,7 @@
 		  <?php } ?>
 		</p>
     	<textarea class="description js-medium-editor"><?php echo $current_user->description;?></textarea>
+    	<input type="submit" value="Guardar" class="button button--submit">
     </form>
   </section><!-- end of author -->
 

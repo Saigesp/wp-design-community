@@ -121,56 +121,23 @@ body,
 	padding-bottom: 66px;
 }
 
-/**
- * OVERFLOW
- ***********************************/
-.overflow {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-}
-.overflow--blend,
-.overflow--blend__hover {
-  -webkit-mix-blend-mode: color;
-  -moz-mix-blend-mode: color;
-  -ms-mix-blend-mode: color;
-  -o-mix-blend-mode: color;
-  mix-blend-mode: color;
+#wraparticle {
+	padding-top: 1px;
+	position: relative;
 }
 
-/* En versión móvil queremos que la clase
-*  .overflow--blue sea negra y siempre visible.
-*  Será azul en resoluciones mayores, y solo
-*  activable como hover. 
-****************************/
-.overflow--blue,
-.overflow--blue__hover {
-	background: #2fb6ce;
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmZiNmNlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjhiNGI3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMmFiNzliIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-	background: -moz-linear-gradient(-45deg, #2fb6ce 0%, #28b4b7 50%, #2ab79b 99%);
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#2fb6ce), color-stop(50%,#28b4b7), color-stop(99%,#2ab79b));
-	background: -webkit-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: -o-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: -ms-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: linear-gradient(135deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fb6ce', endColorstr='#2ab79b',GradientType=1 );  	
-}
-.overflow--black,
-.overflow--black__hover {
-	background-color: rgba(0,0,0,.5);
-}
+
 
  /**
  * TEXT & FONTS
  ***********************************/
 
-#wraparticle {
-	padding-top: 1px;
-	position: relative;
-}
-h1, h2, h3, h4, p, .subtitletextarticle, .flexboxer--author .description, .medium-editor-placeholder {
+
+h1, h2, h3, h4, p, input, textarea
+.subtitletextarticle,
+.flexboxer--author
+.description,
+.medium-editor-placeholder {
 	font-family: 'Open Sans', sans-serif;
 }
 .contentarticle p,
@@ -1431,6 +1398,14 @@ blockquote p {
 	color: rgba(255,255,255,0.5);
 }
 
+.flexboxer--author__edit input[type="text"] {
+	background: transparent;
+    border: 0;
+}
+.flexboxer--author__edit input[type="text"]:focus {
+	outline: 0;
+}
+
 
 
 
@@ -1444,6 +1419,55 @@ blockquote p {
  ***********************************/
 .flickity-page-dots {
 	display: none;
+}
+
+
+/**
+ * MEDIUM EDITOR (node_modules/medium-editor)
+ ***********************************/
+textarea.js-medium-editor {
+	display: none;
+}
+
+/**
+ * OVERFLOW
+ ***********************************/
+.overflow {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
+.overflow--blend,
+.overflow--blend__hover {
+  -webkit-mix-blend-mode: color;
+  -moz-mix-blend-mode: color;
+  -ms-mix-blend-mode: color;
+  -o-mix-blend-mode: color;
+  mix-blend-mode: color;
+}
+
+/* En versión móvil queremos que la clase
+*  .overflow--blue sea negra y siempre visible.
+*  Será azul en resoluciones mayores, y solo
+*  activable como hover. 
+****************************/
+.overflow--blue,
+.overflow--blue__hover {
+	background: #2fb6ce;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmZiNmNlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjhiNGI3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMmFiNzliIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(-45deg, #2fb6ce 0%, #28b4b7 50%, #2ab79b 99%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#2fb6ce), color-stop(50%,#28b4b7), color-stop(99%,#2ab79b));
+	background: -webkit-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: -o-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: -ms-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: linear-gradient(135deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fb6ce', endColorstr='#2ab79b',GradientType=1 );  	
+}
+.overflow--black,
+.overflow--black__hover {
+	background-color: rgba(0,0,0,.5);
 }
 
 

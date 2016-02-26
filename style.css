@@ -170,7 +170,7 @@ body,
 	padding-top: 1px;
 	position: relative;
 }
-h1, h2, h3, h4, p, .subtitletextarticle {
+h1, h2, h3, h4, p, .subtitletextarticle, .flexboxer--author .description, .medium-editor-placeholder {
 	font-family: 'Open Sans', sans-serif;
 }
 .contentarticle p,
@@ -1369,33 +1369,70 @@ blockquote p {
 
 
 
-
+/**
+ * USER
+ *************************************************************************************************/
 
 /**
  * PAGE AUTHOR (author.php)
  ***********************************/
-.wrap--author,
-.wrap--cv {
+.flexboxer--author .wrap {
     padding: 20px;
     background: #f5f5f5;
 }
-.wrap--author .description{
+
+.flexboxer--author .wrap--slider {
+    padding: 0;
+}
+
+.flexboxer--author .description {
 	margin: 0;
 }
-.wrap--author svg {
+.flexboxer--author .wrap--author svg {
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
 	margin: 6px 10px 0 0;
 }
 
-.wrap--cv p {
+.flexboxer--author .wrap p {
 	margin-bottom: 0;
 }
 
 .flexboxer--author > section:last-of-type{
 	margin-bottom: 0;
 }
+
+
+.flexboxer--author .wrap--slider {
+
+}
+
+
+/**
+ * PAGE EDIT PROFILE (page-edit-profile.php)
+ ***********************************/
+.flexboxer--author__edit .wrap--empty {
+	background: rgba(0,0,0,0.1);
+	cursor: pointer;
+	transition: background 500ms ease;
+}
+.flexboxer--author__edit .wrap--empty:hover {
+	background: rgba(0,0,0,0.2);
+}
+.flexboxer--author__edit .more--section {
+	margin: 0;
+	text-align: center;
+	color:rgba(0,0,0,0.2);
+	transition: color 500ms ease;
+}
+
+.flexboxer--author__edit .wrap--empty:hover .more--section {
+	color: rgba(255,255,255,0.5);
+}
+
+
+
 
 
 
@@ -1746,12 +1783,11 @@ blockquote p {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.wrap--author,
-	.wrap--cv {
+	.flexboxer--author .wrap {
 	    max-width: 860px;
 	    margin: 10px auto;
 	}
-	.wrap--slider {
+	.flexboxer--author .wrap--slider {
 	    max-width: 900px;
 	    margin: 10px auto;
 	}

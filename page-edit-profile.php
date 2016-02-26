@@ -5,7 +5,7 @@
   $current_user_id = $current_user->ID;
 ?>
 
-<div class="flexboxer flexboxer--author">
+<div class="flexboxer flexboxer--author flexboxer--author__edit">
   <section class="wrap wrap--author">
   	<form action="">
 		<figure class="authorimagefoot authorbuble" style="background-color: #666;">
@@ -48,8 +48,13 @@
       <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
     </div>
   </section>
+
   <section class="wrap wrap--cv">
     <p class="description"><?php echo $current_user->description;?></p>
+  </section>
+
+  <section class="wrap wrap--empty">
+    <h3 class="more more--section">Add a section</h3>
   </section>
 
 </div><!-- end of flexboxer -->

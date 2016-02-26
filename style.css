@@ -215,12 +215,14 @@ code {
 }
 
 .headertop .wrap--path {
-	margin: 6px 10px;
+	margin: 11px 10px 6px;
 }
 
 .headertop .wrap--path h3 {
 	display: inline-block;
 	margin: 0;
+	font-weight: 100;
+	font-size: 1.2rem;
 }
 
 .headertop .wrap--path .current {
@@ -1398,15 +1400,23 @@ blockquote p {
 	color: rgba(255,255,255,0.5);
 }
 
-.flexboxer--author__edit input[type="text"] {
+.flexboxer--author__edit input[type="text"],
+.flexboxer--author__edit .js-medium-editor {
 	background: transparent;
-    border: 0;
+	border: 0;
+	transition: background 500ms ease;
 }
+
+
 .flexboxer--author__edit input[type="text"]:focus {
 	outline: 0;
 }
 
-
+.flexboxer--author__edit input[type="text"]:focus,
+.flexboxer--author__edit input[type="text"]:hover,
+.flexboxer--author__edit .js-medium-editor:hover {
+	background: rgba(0,0,0,0.1);
+}
 
 
 

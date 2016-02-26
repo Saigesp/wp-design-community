@@ -187,7 +187,7 @@ gulp.task('upserver', function() {
     ];
     browserSync.init(files, {
         proxy: url,
-        tunnel: true
+        tunnel: false
     });
 });
 

@@ -1,7 +1,6 @@
 <?php get_header(); ?> 
 
 <?php 
-  global $current_user;
   $current_user_id = $current_user->ID;
 ?>
 

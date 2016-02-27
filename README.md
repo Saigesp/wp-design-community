@@ -68,6 +68,7 @@ gulp favicon
  - WP Subtitle
  - Disqus Comment System
  - WP User Avatar
+ - Events Manager
 
 #### Others scripts (injected)
  - jQuery

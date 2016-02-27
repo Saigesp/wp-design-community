@@ -1353,11 +1353,36 @@ blockquote p {
     padding: 0;
 }
 
-.flexboxer .wrap--content h3:first-of-type {
+.flexboxer .wrap--flexboxer {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.flexboxer .wrap--flexboxer .wrap--flexed {
+	padding: 20px;
+}
+
+.flexboxer .wrap--flexboxer .wrap--flexed__middle {
+	flex: 1 0 calc(50% - 40px);
+}
+.flexboxer .wrap--flexboxer .wrap--flexed__frame {
+	flex: 1 0 50%;
+	padding: 0;
+}
+
+.flexboxer .wrap--flexboxer .em-location-map-container {
+	width: 100% !important;
+}
+
+.flexboxer .wrap h2:first-of-type,
+.flexboxer .wrap h3:first-of-type,
+.flexboxer .wrap h4:first-of-type {
 	margin-top: 0;
 }
 
-.flexboxer .wrap--content p:last-of-type {
+.flexboxer .wrap--content p:last-of-type,
+.flexboxer .wrap--frame p:last-of-type {
 	margin: 0;
 }
 
@@ -1371,6 +1396,58 @@ blockquote p {
 .flexboxer > section:last-of-type{
 	margin-bottom: 0;
 }
+
+
+/**
+ * BOOKINS (single-event.php)
+ ***********************************/
+.wrap--emailregistration {
+	
+}
+
+.wrap--emailregistration label {
+	width: 100%;
+	display: block;
+}
+
+.wrap--emailregistration input[type="text"],
+.wrap--emailregistration input[type="password"] {
+width: 100%;
+display: block;
+background: rgba(0,0,0,0.1);
+}
+
+
+.wrap .em-booking {
+	margin: 0;
+}
+.wrap .em-booking-form {
+
+}
+.wrap .em-booking-form-details {
+	padding: 0;
+}
+
+
+.wrap .em-booking input{
+	background: rgba(0,0,0,0.1);
+}
+.wrap .em-booking-login {
+	padding: 0;
+	border: 0;
+}
+.wrap .em-booking-login-form{
+
+}
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -1399,18 +1476,6 @@ blockquote p {
 	position: relative;
 }
 
-.flexboxer--author__edit input[type="text"],
-.flexboxer--author__edit .js-medium-editor {
-	background: transparent;
-	border: 0;
-	transition: background 500ms ease;
-}
-
-
-.flexboxer--author__edit input[type="text"]:focus {
-	outline: 0;
-}
-
 .flexboxer--author__edit input[type="text"]:focus,
 .flexboxer--author__edit input[type="text"]:hover,
 .flexboxer--author__edit .js-medium-editor:hover {
@@ -1428,6 +1493,17 @@ blockquote p {
 /**
  * FORMULARIOS
  ***********************************/
+input[type="text"],
+input[type="password"]{
+	background: transparent;
+	border: 0;
+	transition: background 500ms ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	outline: 0;
+}
 
 input[type="submit"] {
     border: 0;

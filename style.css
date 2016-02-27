@@ -24,7 +24,9 @@ Query utilities
 	.showontablet
 	.showondesktop
 
+Color base (css)
 
+turquesa: rgb(40,180,184);
 */
 
 
@@ -93,7 +95,7 @@ td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0
  * GENERAL
  ***********************************/
 html {
-	font-size: 62,5%;
+	font-size: 62.5%;
 	height: 100%;
 }
 body {
@@ -1353,31 +1355,32 @@ blockquote p {
     padding: 0;
 }
 
-.flexboxer .wrap--flexboxer {
+.flexboxer .wrap--flex {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
 }
 
-.flexboxer .wrap--flexboxer .wrap--flexed {
+.flexboxer .wrap--flex .wrap--flexed {
 	padding: 20px;
 }
 
-.flexboxer .wrap--flexboxer .wrap--flexed__middle {
-	flex: 1 0 calc(50% - 40px);
+.flexboxer .wrap--flex .wrap--flexed__middlecontent {
+	flex: 1 0 calc(100% - 40px);
 }
-.flexboxer .wrap--flexboxer .wrap--flexed__frame {
+.flexboxer .wrap--flex .wrap--flexed__middleframe {
 	flex: 1 0 50%;
 	padding: 0;
 }
 
-.flexboxer .wrap--flexboxer .em-location-map-container {
+.flexboxer .wrap--flex .em-location-map-container {
 	width: 100% !important;
 }
 
 .flexboxer .wrap h2:first-of-type,
 .flexboxer .wrap h3:first-of-type,
-.flexboxer .wrap h4:first-of-type {
+.flexboxer .wrap h4:first-of-type,
+.flexboxer .wrap p:first-of-type {
 	margin-top: 0;
 }
 
@@ -1417,32 +1420,66 @@ display: block;
 background: rgba(0,0,0,0.1);
 }
 
-
 .wrap .em-booking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 	margin: 0;
 }
-.wrap .em-booking-form {
 
+/* Booking form */
+.wrap .em-booking-form {
+	flex: 1 0 calc(100% - 40px);
+	display: block;
+    position: static;
 }
 .wrap .em-booking-form-details {
 	padding: 0;
 }
 
-
 .wrap .em-booking input{
 	background: rgba(0,0,0,0.1);
 }
+
+/* Login if user is not */
 .wrap .em-booking-login {
-	padding: 0;
-	border: 0;
+    flex: 1 0 calc(100% - 40px);
+    padding: 0;
+    border: 0;
+    margin: 0;
 }
 .wrap .em-booking-login-form{
 
 }
 
+.wrap .em-booking-login-form label{
+	    width: 45%;
+}
 
+.wrap .em-booking-login-form input[type="text"],
+.wrap .em-booking-login-form input[type="password"]{
+	width: 50%;
+}
+.wrap .em-booking-login-form input[type="submit"]{
+    width: 50%;
+    display: block;
+    margin: 0 0 0 calc(45% + 4px);
+}
 
+#em_rememberme,
+#em_rememberme + label {
+	display: none;
+}
 
+.wrap .em-booking-login-form a:last-of-type{
+	text-align: right;
+    width: 50%;
+    display: block;
+    margin: 0 0 0 calc(45% + 4px);
+    font-size: 1rem;
+    line-height: 1;
+    margin-top: -10px;
+}
 
 
 
@@ -1491,7 +1528,7 @@ background: rgba(0,0,0,0.1);
 
 
 /**
- * FORMULARIOS
+ * FORMS 
  ***********************************/
 input[type="text"],
 input[type="password"]{
@@ -1510,6 +1547,10 @@ input[type="submit"] {
     padding: 7px 10px;
 }
 
+.wrap .em-booking input[type="submit"]{
+	background-color: rgb(40,180,184);
+	color: white;
+}
 
 
 /**
@@ -1907,6 +1948,21 @@ textarea.js-medium-editor {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
+	.flexboxer .wrap {
+	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    	box-shadow: 0 1px 3px rgba(0,0,0,.13);
+	}
+	.flexboxer .wrap--flex {
+	    flex-wrap: nowrap;
+	}
+	.wrap .em-booking-form,
+	.wrap .em-booking-login,
+	.flexboxer .wrap--flex .wrap--flexed__middlecontent {
+	    flex: 1 0 calc(50% - 40px);
+	}
+	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+	    flex: 1 0 50%;
+	}
 	.flexboxer .wrap--content {
 	    max-width: 860px;
 	    margin: 10px auto;
@@ -1914,6 +1970,9 @@ textarea.js-medium-editor {
 	.flexboxer .wrap--frame {
 	    max-width: 900px;
 	    margin: 10px auto;
+	}
+	.wrap .em-booking-login p {
+		margin-top: 0 !important;
 	}
 	.morecontent .listthumb {
 		display: initial;

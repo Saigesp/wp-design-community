@@ -24,7 +24,9 @@ Query utilities
 	.showontablet
 	.showondesktop
 
+Color base (css)
 
+turquesa: rgb(40,180,184);
 */
 
 
@@ -93,7 +95,7 @@ td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0
  * GENERAL
  ***********************************/
 html {
-	font-size: 62,5%;
+	font-size: 62.5%;
 	height: 100%;
 }
 body {
@@ -121,56 +123,23 @@ body,
 	padding-bottom: 66px;
 }
 
-/**
- * OVERFLOW
- ***********************************/
-.overflow {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-}
-.overflow--blend,
-.overflow--blend__hover {
-  -webkit-mix-blend-mode: color;
-  -moz-mix-blend-mode: color;
-  -ms-mix-blend-mode: color;
-  -o-mix-blend-mode: color;
-  mix-blend-mode: color;
+#wraparticle {
+	padding-top: 1px;
+	position: relative;
 }
 
-/* En versión móvil queremos que la clase
-*  .overflow--blue sea negra y siempre visible.
-*  Será azul en resoluciones mayores, y solo
-*  activable como hover. 
-****************************/
-.overflow--blue,
-.overflow--blue__hover {
-	background: #2fb6ce;
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmZiNmNlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjhiNGI3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMmFiNzliIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-	background: -moz-linear-gradient(-45deg, #2fb6ce 0%, #28b4b7 50%, #2ab79b 99%);
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#2fb6ce), color-stop(50%,#28b4b7), color-stop(99%,#2ab79b));
-	background: -webkit-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: -o-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: -ms-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	background: linear-gradient(135deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fb6ce', endColorstr='#2ab79b',GradientType=1 );  	
-}
-.overflow--black,
-.overflow--black__hover {
-	background-color: rgba(0,0,0,.5);
-}
+
 
  /**
  * TEXT & FONTS
  ***********************************/
 
-#wraparticle {
-	padding-top: 1px;
-	position: relative;
-}
-h1, h2, h3, h4, p, .subtitletextarticle {
+
+h1, h2, h3, h4, p, input, textarea
+.subtitletextarticle,
+.flexboxer--author
+.description,
+.medium-editor-placeholder {
 	font-family: 'Open Sans', sans-serif;
 }
 .contentarticle p,
@@ -248,12 +217,14 @@ code {
 }
 
 .headertop .wrap--path {
-	margin: 6px 10px;
+	margin: 11px 10px 6px;
 }
 
 .headertop .wrap--path h3 {
 	display: inline-block;
 	margin: 0;
+	font-weight: 100;
+	font-size: 1.2rem;
 }
 
 .headertop .wrap--path .current {
@@ -904,7 +875,8 @@ code {
 }
  .headerarticle {
  	position: relative;
- 	z-index: -1;
+ 	z-index: 0;
+ 	overflow: hidden;
  }
  .titlearticle {
  	position: absolute;
@@ -1367,39 +1339,218 @@ blockquote p {
 
 
 
-
-
-
-
 /**
- * PAGE AUTHOR (author.php)
- ***********************************/
-.wrap--author,
-.wrap--cv {
-    padding: 20px;
+ * FLEXBOXER
+ *************************************************************************************************/
+
+.flexboxer .wrap {
     background: #f5f5f5;
 }
-.wrap--author .description{
+
+.flexboxer .wrap--content {
+	padding: 20px;
+}
+
+.flexboxer .wrap--frame {
+    padding: 0;
+}
+
+.flexboxer .wrap--flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.flexboxer .wrap--flex .wrap--flexed {
+	padding: 20px;
+}
+
+.flexboxer .wrap--flex .wrap--flexed__middlecontent {
+	flex: 1 0 calc(100% - 40px);
+}
+.flexboxer .wrap--flex .wrap--flexed__middleframe {
+	flex: 1 0 50%;
+	padding: 0;
+}
+
+.flexboxer .wrap--flex .em-location-map-container {
+	width: 100% !important;
+}
+
+.flexboxer .wrap h2:first-of-type,
+.flexboxer .wrap h3:first-of-type,
+.flexboxer .wrap h4:first-of-type,
+.flexboxer .wrap p:first-of-type {
+	margin-top: 0;
+}
+
+.flexboxer .wrap--content p:last-of-type,
+.flexboxer .wrap--frame p:last-of-type {
 	margin: 0;
 }
-.wrap--author svg {
+
+.flexboxer .wrap--content svg {
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
 	margin: 6px 10px 0 0;
 }
 
-.wrap--cv p {
-	margin-bottom: 0;
-}
-
-.flexboxer--author > section:last-of-type{
+.flexboxer > section:last-of-type{
 	margin-bottom: 0;
 }
 
 
+/**
+ * BOOKINS (single-event.php)
+ ***********************************/
+.wrap--emailregistration {
+	
+}
+
+.wrap--emailregistration label {
+	width: 100%;
+	display: block;
+}
+
+.wrap--emailregistration input[type="text"],
+.wrap--emailregistration input[type="password"] {
+width: 100%;
+display: block;
+background: rgba(0,0,0,0.1);
+}
+
+.wrap .em-booking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+/* Booking form */
+.wrap .em-booking-form {
+	flex: 1 0 calc(100% - 40px);
+	display: block;
+    position: static;
+}
+.wrap .em-booking-form-details {
+	padding: 0;
+}
+
+.wrap .em-booking input{
+	background: rgba(0,0,0,0.1);
+}
+
+/* Login if user is not */
+.wrap .em-booking-login {
+    flex: 1 0 calc(100% - 40px);
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.wrap .em-booking-login-form{
+
+}
+
+.wrap .em-booking-login-form label{
+	    width: 45%;
+}
+
+.wrap .em-booking-login-form input[type="text"],
+.wrap .em-booking-login-form input[type="password"]{
+	width: 50%;
+}
+.wrap .em-booking-login-form input[type="submit"]{
+    width: 50%;
+    display: block;
+    margin: 0 0 0 calc(45% + 4px);
+}
+
+#em_rememberme,
+#em_rememberme + label {
+	display: none;
+}
+
+.wrap .em-booking-login-form a:last-of-type{
+	text-align: right;
+    width: 50%;
+    display: block;
+    margin: 0 0 0 calc(45% + 4px);
+    font-size: 1rem;
+    line-height: 1;
+    margin-top: -10px;
+}
 
 
+
+
+
+
+
+/**
+ * PAGE EDIT PROFILE (page-edit-profile.php)
+ ***********************************/
+.flexboxer--author__edit .wrap--empty {
+	background: rgba(0,0,0,0.1);
+	cursor: pointer;
+	transition: background 500ms ease;
+}
+.flexboxer--author__edit .wrap--empty:hover {
+	background: rgba(0,0,0,0.2);
+}
+.flexboxer--author__edit .more--section {
+	margin: 0;
+	text-align: center;
+	color:rgba(0,0,0,0.2);
+	transition: color 500ms ease;
+}
+
+.flexboxer--author__edit .wrap--empty:hover .more--section {
+	color: rgba(255,255,255,0.5);
+}
+
+.flexboxer--author__edit form {
+	position: relative;
+}
+
+.flexboxer--author__edit input[type="text"]:focus,
+.flexboxer--author__edit input[type="text"]:hover,
+.flexboxer--author__edit .js-medium-editor:hover {
+	background: rgba(0,0,0,0.1);
+}
+
+.flexboxer--author__edit .button--submit{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+
+
+/**
+ * FORMS 
+ ***********************************/
+input[type="text"],
+input[type="password"]{
+	background: transparent;
+	border: 0;
+	transition: background 500ms ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	outline: 0;
+}
+
+input[type="submit"] {
+    border: 0;
+    padding: 7px 10px;
+}
+
+.wrap .em-booking input[type="submit"]{
+	background-color: rgb(40,180,184);
+	color: white;
+}
 
 
 /**
@@ -1407,6 +1558,57 @@ blockquote p {
  ***********************************/
 .flickity-page-dots {
 	display: none;
+}
+
+
+/**
+ * MEDIUM EDITOR (node_modules/medium-editor)
+ ***********************************/
+textarea.js-medium-editor {
+	display: none;
+}
+
+
+
+/**
+ * OVERFLOW
+ ***********************************/
+.overflow {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
+.overflow--blend,
+.overflow--blend__hover {
+  -webkit-mix-blend-mode: color;
+  -moz-mix-blend-mode: color;
+  -ms-mix-blend-mode: color;
+  -o-mix-blend-mode: color;
+  mix-blend-mode: color;
+}
+
+/* En versión móvil queremos que la clase
+*  .overflow--blue sea negra y siempre visible.
+*  Será azul en resoluciones mayores, y solo
+*  activable como hover. 
+****************************/
+.overflow--blue,
+.overflow--blue__hover {
+	background: #2fb6ce;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmZiNmNlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjhiNGI3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMmFiNzliIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(-45deg, #2fb6ce 0%, #28b4b7 50%, #2ab79b 99%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#2fb6ce), color-stop(50%,#28b4b7), color-stop(99%,#2ab79b));
+	background: -webkit-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: -o-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: -ms-linear-gradient(-45deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	background: linear-gradient(135deg, #2fb6ce 0%,#28b4b7 50%,#2ab79b 99%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fb6ce', endColorstr='#2ab79b',GradientType=1 );  	
+}
+.overflow--black,
+.overflow--black__hover {
+	background-color: rgba(0,0,0,.5);
 }
 
 
@@ -1746,14 +1948,31 @@ blockquote p {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.wrap--author,
-	.wrap--cv {
+	.flexboxer .wrap {
+	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    	box-shadow: 0 1px 3px rgba(0,0,0,.13);
+	}
+	.flexboxer .wrap--flex {
+	    flex-wrap: nowrap;
+	}
+	.wrap .em-booking-form,
+	.wrap .em-booking-login,
+	.flexboxer .wrap--flex .wrap--flexed__middlecontent {
+	    flex: 1 0 calc(50% - 40px);
+	}
+	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+	    flex: 1 0 50%;
+	}
+	.flexboxer .wrap--content {
 	    max-width: 860px;
 	    margin: 10px auto;
 	}
-	.wrap--slider {
+	.flexboxer .wrap--frame {
 	    max-width: 900px;
 	    margin: 10px auto;
+	}
+	.wrap .em-booking-login p {
+		margin-top: 0 !important;
 	}
 	.morecontent .listthumb {
 		display: initial;

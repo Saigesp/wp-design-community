@@ -25,6 +25,23 @@ register_nav_menus( array(
 
 
 
+// Wordpress title
+function filter_wp_title( $title ) {
+  if (is_author()){
+    $filtered_title = get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1);
+    return $filtered_title;
+  }elseif(is_search()){
+    $filtered_title = 'Búsqueda';
+    return $filtered_title;
+  }else{
+    return $title;
+  }
+}
+add_filter( 'wp_title', 'filter_wp_title' );
+
+
+
+
 
 /**
  * REQUIRE WP PLUGINS
@@ -44,6 +61,11 @@ function mytheme_require_plugins() {
       array(
         'name'      => 'Disqus Comment System',
         'slug'      => 'disqus-comment-system',
+        'required'  => false, 
+      ),
+      array(
+        'name'      => 'Events Manager',
+        'slug'      => 'events-manager',
         'required'  => false, 
       ),
       array(
@@ -214,7 +236,7 @@ function customizer_css() {
     </style>
     <?php
 }
-add_action( 'wp_head', 'customizer_css' );
+//add_action( 'wp_head', 'customizer_css' );
 
 
 
@@ -487,19 +509,7 @@ jQuery(document).ready(function($) {
 }
 add_action('admin_head','hide_personal_options');
 
-/* Encabezados meta de author.php */
-function filter_wp_title( $title ) {
-  if (is_author()){
-    $filtered_title = get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1);
-    return $filtered_title;
-  }elseif(is_search()){
-    $filtered_title = 'Búsqueda';
-    return $filtered_title;
-  }else{
-    return $title;
-  }
-}
-add_filter( 'wp_title', 'filter_wp_title' );
+
 
 /*
 * LOGIN REDIRECT

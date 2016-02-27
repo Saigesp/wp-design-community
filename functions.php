@@ -236,7 +236,7 @@ function customizer_css() {
     </style>
     <?php
 }
-add_action( 'wp_head', 'customizer_css' );
+//add_action( 'wp_head', 'customizer_css' );
 
 
 

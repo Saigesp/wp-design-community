@@ -27,6 +27,19 @@
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
   <!-- endinject -->
+
+<script>
+$(window).ready(function() {
+  $('#widgets').css("width", $(document).width() - $('#controlmenu').outerWidth());
+  $('.listinfo').css("width", $('.listitem').width() - $('.listimage').outerWidth() - 10 - 25);
+  var editor = new MediumEditor('.js-medium-editor',{
+    placeholder: {
+      text: 'Descripción'
+    }
+  })
+});
+</script>
+
 </body>
 
 </html> <!-- The End. what a ride! -->

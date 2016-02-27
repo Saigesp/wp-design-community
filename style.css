@@ -1338,55 +1338,38 @@ blockquote p {
 
 
 /**
- * EVENTS
+ * FLEXBOXER
  *************************************************************************************************/
 
-/**
- * ARCHIVE EVENTS (archive-event.php)
- ***********************************/
-.flexboxer--event .wrap {
+.flexboxer .wrap {
     background: #f5f5f5;
 }
 
-
-
-/**
- * USERS
- *************************************************************************************************/
-
-/**
- * ARCHIVE AUTHOR (author.php)
- ***********************************/
-.flexboxer--author .wrap {
-    padding: 20px;
-    background: #f5f5f5;
+.flexboxer .wrap--content {
+	padding: 20px;
 }
 
-.flexboxer--author .wrap--slider {
+.flexboxer .wrap--frame {
     padding: 0;
 }
 
-.flexboxer--author .description {
+.flexboxer .wrap--content h3:first-of-type {
+	margin-top: 0;
+}
+
+.flexboxer .wrap--content p:last-of-type {
 	margin: 0;
 }
-.flexboxer--author .wrap--author svg {
+
+.flexboxer .wrap--content svg {
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
 	margin: 6px 10px 0 0;
 }
 
-.flexboxer--author .wrap p {
+.flexboxer > section:last-of-type{
 	margin-bottom: 0;
-}
-
-.flexboxer--author > section:last-of-type{
-	margin-bottom: 0;
-}
-
-
-.flexboxer--author .wrap--slider {
-
 }
 
 
@@ -1848,12 +1831,11 @@ textarea.js-medium-editor {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.flexboxer--author .wrap--author {
+	.flexboxer .wrap--content {
 	    max-width: 860px;
 	    margin: 10px auto;
 	}
-	.flexboxer--author .wrap--slider,
-	.flexboxer--event .wrap--event {
+	.flexboxer .wrap--frame {
 	    max-width: 900px;
 	    margin: 10px auto;
 	}

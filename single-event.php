@@ -78,7 +78,6 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 			<h3>Registro</h3>
 			<?php if($EM_Event->event_rsvp == 1){ // If registration is enabled ?>
 					<?php echo $EM_Event->output('#_BOOKINGFORM');?>
-					<?php echo $EM_Event->output('#_BOOKINGBUTTON');?>
 			<?php }else echo '<p>Registro no disponible</p>'; ?>
 		</section>
 	<?php }else{ ?>

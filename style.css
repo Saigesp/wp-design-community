@@ -18,15 +18,19 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 
 /*
-Query utilities
+Media Query utilities
 
 	.showonmobile
 	.showontablet
 	.showondesktop
 
-Color base (css)
 
+Colors
 turquesa: rgb(40,180,184);
+turquesa hover: rgb(34,153,155);
+
+
+
 */
 
 
@@ -84,7 +88,7 @@ input[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}
 button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}
 textarea {overflow: auto;vertical-align: top;}
 table,th,td {border: 1px solid rgba(0, 0, 0, 0.1);}
-table {border-collapse: separate;border-spacing: 0;border-width: 1px 0 0 1px;margin-bottom: 24px;width: 100%;}
+table {border-collapse: separate;border-spacing: 0;border-width: 0;margin-bottom: 24px;width: 100%;}
 caption,th,td {	font-weight: normal;text-align: left;}th {border-width: 0 1px 1px 0;font-weight: bold;}
 td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0, 0, 0, 0.1);border: 0;height: 1px;margin-bottom: 23px;}
 ::selection {background: rgb(40,180,183);color: #fff;text-shadow: none;}
@@ -113,7 +117,7 @@ body {
 body,
 #wrapper,
 #wraparticle {
-	background: #f5f5f5;
+	background: #ECECEC;
 }
 
 #divwrap {
@@ -1401,85 +1405,7 @@ blockquote p {
 }
 
 
-/**
- * BOOKINS (single-event.php)
- ***********************************/
-.wrap--emailregistration {
-	
-}
 
-.wrap--emailregistration label {
-	width: 100%;
-	display: block;
-}
-
-.wrap--emailregistration input[type="text"],
-.wrap--emailregistration input[type="password"] {
-width: 100%;
-display: block;
-background: rgba(0,0,0,0.1);
-}
-
-.wrap .em-booking {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-	margin: 0;
-}
-
-/* Booking form */
-.wrap .em-booking-form {
-	flex: 1 0 calc(100% - 40px);
-	display: block;
-    position: static;
-}
-.wrap .em-booking-form-details {
-	padding: 0;
-}
-
-.wrap .em-booking input{
-	background: rgba(0,0,0,0.1);
-}
-
-/* Login if user is not */
-.wrap .em-booking-login {
-    flex: 1 0 calc(100% - 40px);
-    padding: 0;
-    border: 0;
-    margin: 0;
-}
-.wrap .em-booking-login-form{
-
-}
-
-.wrap .em-booking-login-form label{
-	    width: 45%;
-}
-
-.wrap .em-booking-login-form input[type="text"],
-.wrap .em-booking-login-form input[type="password"]{
-	width: 50%;
-}
-.wrap .em-booking-login-form input[type="submit"]{
-    width: 50%;
-    display: block;
-    margin: 0 0 0 calc(45% + 4px);
-}
-
-#em_rememberme,
-#em_rememberme + label {
-	display: none;
-}
-
-.wrap .em-booking-login-form a:last-of-type{
-	text-align: right;
-    width: 50%;
-    display: block;
-    margin: 0 0 0 calc(45% + 4px);
-    font-size: 1rem;
-    line-height: 1;
-    margin-top: -10px;
-}
 
 
 
@@ -1527,9 +1453,26 @@ background: rgba(0,0,0,0.1);
 
 
 
+
+
+
+
 /**
- * FORMS 
- ***********************************/
+ * TABLES
+ *************************************************************************************************/
+table,
+th,
+td {
+	border: 0;
+}
+
+
+
+
+
+/**
+ * FORMS
+ *************************************************************************************************/
 input[type="text"],
 input[type="password"]{
 	background: transparent;
@@ -1537,19 +1480,226 @@ input[type="password"]{
 	transition: background 500ms ease;
 }
 
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+select {
+	cursor: pointer;
+}
+
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+select:focus,
+select:focus option,
+textarea:focus{
 	outline: 0;
 }
 
 input[type="submit"] {
     border: 0;
     padding: 7px 10px;
+    background-color: rgb(40,180,184);
+	color: white;
+	transition: all 300ms ease;
 }
 
-.wrap .em-booking input[type="submit"]{
-	background-color: rgb(40,180,184);
-	color: white;
+input[type="submit"]:hover {
+    background-color: rgb(34,153,155);
+}
+
+
+
+
+/**
+ * MÓDULOS
+ *************************************************************************************************/
+/**
+ * EVENTS MANAGER 
+ ***********************************/
+.em-booking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-booking input,
+.em-booking textarea,
+.em-booking select{
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
+}
+
+/* Bookings form details */
+.em-booking .em-booking-form-details {
+	padding: 0;
+	width: 100%;
+}
+
+.em-booking .em-booking-form-details p {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+.em-booking .em-booking-form-details label,
+.em-booking .em-booking-form-details textarea{
+	flex: 1 0 50%;
+}
+.em-booking .em-booking-form-details textarea{
+	border: 0;
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
+}
+.em-booking .em-booking-form-details .input-field-booking_comment {
+	margin-top: 10px;
+}
+
+.em-booking .em-booking-form-details .em-booking-buttons{
+	margin: 10px 0;
+}
+
+.em-booking .em-booking-form-details input[type="submit"]{
+    width: 50%;
+    display: block;
+    margin: 0 0 0 50%;
+}
+/* User registration */
+.em-booking .em-booking-form-details .input-user-field {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+.em-booking .em-booking-form-details .input-user-field + .input-user-field {
+	margin-top: 10px;
+}
+.em-booking .em-booking-form-details .input-user-field label,
+.em-booking .em-booking-form-details .input-user-field input,
+.em-booking .em-booking-form-details .input-user-field select {
+	flex: 1 0 100px;
+}
+.em-booking .em-booking-form-details .input-user-field label {
+	line-height: 32px;
+}
+.em-booking .em-booking-form-details .input-user-field input {
+	background: rgba(0,0,0,0.1);
+}
+
+/* Booking form */
+.em-booking .em-booking-form {
+	flex: 1 0 calc(100% - 40px);
+	display: block;
+	position: static;
+	max-width: 100%;
+}
+.em-booking .em-booking-form p{
+    width: 100%;
+}
+
+.em-booking .em-booking-form tr {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin: 0;
+	align-content: stretch;
+}
+.em-booking .em-booking-form th,
+.em-booking .em-booking-form td {
+    padding: 5px 0;
+    flex: 1 1 100px;
+}
+
+.em-booking .em-booking-form th {
+	display: none;
+}
+
+.em-booking .em-booking-form .em-ticket + .em-ticket {
+	margin-top: 10px;
+}
+
+.em-booking .em-booking-form .em-bookings-ticket-table-type {
+	flex: 1 1 200px;
+	font-weight: 700;
+}
+.em-booking .em-booking-form .em-bookings-ticket-table-spaces {
+	flex: 1 1 100px;
+}
+.em-booking .em-booking-form .em-bookings-ticket-table-type .ticket-desc {
+	font-weight: 300;
+}
+
+
+.em-booking .em-booking-form select {
+	width: 100%;
+	background: rgba(0,0,0,0.1);
+	border: 0;
+	padding: 5px;
+}
+
+.em-booking .em-booking-form option {
+	padding: 5px 0;
+}
+
+.em-booking .em-booking-form .ticket-price,
+.em-booking .em-booking-form .em-tickets-spaces {
+	margin: 10px 0;
+}
+.em-booking .em-booking-form .em-tickets-spaces {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.em-booking .em-booking-form .em-tickets-spaces label,
+.em-booking .em-booking-form .em-tickets-spaces select{
+	flex: 1 1 100px;
+}
+
+/* Login if user is not */
+.em-booking .em-booking-login {
+    flex: 1 0 calc(100% - 40px);
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.em-booking .em-booking-login-form p{
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-booking .em-booking-login-form label{
+	flex: 1 0 50%;
+	line-height: 32px;
+}
+
+.em-booking .em-booking-login-form input[type="text"],
+.em-booking .em-booking-login-form input[type="password"]{
+	flex: 1 0 50%;
+	background: rgba(0,0,0,0.1);
+}
+.em-booking .em-booking-login-form input[type="submit"]{
+    display: block;
+    margin-left: 50%;
+    width: 50%;
+}
+
+.em-booking #em_rememberme,
+.em-booking #em_rememberme + label,
+.em-booking .input-dbem_fax {
+	display: none !important;
+}
+
+.em-booking .em-booking-login-form a:last-of-type{
+	text-align: right;
+    width: 50%;
+    display: block;
+    margin-left: 50%;
+    font-size: 1rem;
+    line-height: 1;
+    margin-top: -10px;
 }
 
 
@@ -1615,11 +1765,8 @@ textarea.js-medium-editor {
 
 
 /**
-*
-* MEDIA QUERYS
-*
-*
-***********************************/
+ * MEDIA QUERYS
+ *************************************************************************************************/
 @media only screen and (max-width : 349px) {
 	.showonmobile {
 		display: none !important;
@@ -1888,6 +2035,17 @@ textarea.js-medium-editor {
 	.articlemasonry a:active {
 	  color: rgb(40,180,183);
 	}
+	/* FORULARIO EVENTOS */
+	.em-booking .em-booking-form .em-ticket + .em-ticket {
+		margin-top: 0;
+	}
+	.em-booking .em-booking-form th {
+		display: initial;
+	}
+	.em-booking .em-booking-form td + td,
+	.em-booking .em-booking-form th + th {
+		margin-left: 10px;
+	}
 	/* FOOTER */
 	.footerback .divright {
 		float: right;
@@ -1959,6 +2117,10 @@ textarea.js-medium-editor {
 	.wrap .em-booking-login,
 	.flexboxer .wrap--flex .wrap--flexed__middlecontent {
 	    flex: 1 0 calc(50% - 40px);
+	}
+	.wrap .em-booking-login {
+		flex: 1 0 calc(50% - 50px);
+	    margin-left: 10px;
 	}
 	.flexboxer .wrap--flex .wrap--flexed__middleframe {
 	    flex: 1 0 50%;

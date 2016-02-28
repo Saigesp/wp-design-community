@@ -1489,7 +1489,8 @@ td {
  *************************************************************************************************/
 input[type="text"],
 input[type="password"]{
-	background: transparent;
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
 	border: 0;
 	transition: background 500ms ease;
 }

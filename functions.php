@@ -22,11 +22,25 @@ register_nav_menus( array(
 	'menufooter' => 'Menu inferior',
 ) );
 
+// Create pages
+function new_page_title($post_title){
+  if(get_page_by_title($post_title) == NULL){
+    global $user_ID;
+    $new_post = array(
+      'post_title' => $post_title,
+      'post_content' => '[WP-Design-Community-Page]',
+      'post_status' => 'publish',
+      'post_date' => date('Y-m-d H:i:s'),
+      'post_author' => $user_ID,
+      'post_type' => 'page',
+      'post_category' => array(0)
+    );
+    $post_id = wp_insert_post($new_post);
+  }
+}
 
-
-
-// Wordpress title
-function filter_wp_title( $title ) {
+// Configure meta title
+function filter_wp_title($title) {
   if (is_author()){
     $filtered_title = get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1);
     return $filtered_title;
@@ -38,6 +52,26 @@ function filter_wp_title( $title ) {
   }
 }
 add_filter( 'wp_title', 'filter_wp_title' );
+
+// Get current url
+function current_url() {
+    global $wp;
+    $current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+    return $current_url;
+}
+
+// Check user role
+function is_user_role( $role, $user_id = null ) {
+    if (is_numeric($user_id)) $user = get_userdata($user_id);
+    else $user = wp_get_current_user();
+    if (empty($user)) return false;
+    return in_array( $role, (array) $user->roles );
+}
+
+// Check if post ID exist
+function post_id_exists( $id ) {
+  return is_string( get_post_status( $id ) );
+}
 
 
 
@@ -264,6 +298,9 @@ function inject_html_in_bookings() {
 }
 add_action( 'wp_head', 'inject_html_in_bookings' );
 
+// Create pages to extend theme
+new_page_title('Edit Event');
+
 
 
 
@@ -317,25 +354,8 @@ add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
 
 
 /**
- * FUNCIONES DE POSTS
+ * FUNCIONES DE PERFILES
  ***********************************/
-
-// Create pages to extend theme
-function new_page_title($post_title){
-  if(get_page_by_title($post_title) == NULL){
-    global $user_ID;
-    $new_post = array(
-      'post_title' => $post_title,
-      'post_content' => '[WP-Design-Community-Page]',
-      'post_status' => 'publish',
-      'post_date' => date('Y-m-d H:i:s'),
-      'post_author' => $user_ID,
-      'post_type' => 'page',
-      'post_category' => array(0)
-    );
-    $post_id = wp_insert_post($new_post);
-  }
-}
 
 new_page_title('Edit Profile');
 
@@ -487,19 +507,6 @@ add_action( 'admin_menu', 'remove_menu_item' );
  * FUNCIONES DE USUARIO
  ***********************************/
 
-// Comprobar rol de usuario
-function is_user_role( $role, $user_id = null ) {
-    if (is_numeric($user_id))	$user = get_userdata($user_id);
-    else $user = wp_get_current_user();
-    if (empty($user))	return false;
-    return in_array( $role, (array) $user->roles );
-}
-
-// Check if post ID exist
-function post_id_exists( $id ) {
-  return is_string( get_post_status( $id ) );
-}
-
 // Añadir meta de usuario
 if (!function_exists('cb_contact_data')) {  
     function cb_contact_data($contactmethods) {
@@ -622,13 +629,5 @@ function retrieve_languages() {
   return $languages;
 }
 
-
-
-//Obtener url actual
-function current_url() {
-    global $wp;
-    $current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
-    return $current_url;
-}
 
 ?>

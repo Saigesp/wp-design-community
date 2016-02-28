@@ -13,23 +13,20 @@
 	</div>
 </footer> <!-- end footer -->
 
-<?php wp_footer(); ?>
+
 </div><!-- end of wrapper -->
   <!-- inject:js -->
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/wp-design-community/wpdc.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/wp-design-community/wpdc.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-imagefill/js/jquery-imagefill.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.slim.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
   <!-- endinject -->
-
+<?php wp_footer(); ?>
 <script>
-$(window).ready(function() {
+jQuery(document).ready(function($) {
   $('#widgets').css("width", $(document).width() - $('#controlmenu').outerWidth());
   $('.listinfo').css("width", $('.listitem').width() - $('.listimage').outerWidth() - 10 - 25);
   var editor = new MediumEditor('.js-medium-editor',{

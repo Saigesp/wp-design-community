@@ -19,9 +19,9 @@ get_header();
 		    	</script>
 		    	<?php } ?>
 				<article id="article-<?php the_ID(); ?>" class="article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
-					<header id="header-<?php the_ID(); ?>" class="headerarticle">
+					<header id="header-<?php the_ID(); ?>" class="header header--article">
 						<?php  if ( has_post_thumbnail() ) { ?>
-							<figure id="thumbnail" class="thumbarticle">
+							<figure id="thumbnail" class="thumb--article js-thumbfull">
 								<?php the_post_thumbnail('full');  ?>
 							</figure>
 							<div class="overflow overflow--black"></div>

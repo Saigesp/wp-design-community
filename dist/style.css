@@ -14,19 +14,33 @@ GitHub Branch:
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
-*/
 
-
-/*
-Query utilities
+Media Query utilities
 
 	.showonmobile
 	.showontablet
 	.showondesktop
 
-Color base (css)
+	.hideonmobile
+	.hideontablet
+	.hideondesktop
 
-turquesa: rgb(40,180,184);
+	.breaklinemobile
+	.breaklinetablet
+
+
+Colors
+
+	turquesa			rgb(40,180,184);
+	turquesa hover		rgb(34,153,155);
+
+
+Messages
+
+	Error background	#EFA6A6;
+	Error color			#970808;
+
+
 */
 
 
@@ -84,7 +98,7 @@ input[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}
 button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}
 textarea {overflow: auto;vertical-align: top;}
 table,th,td {border: 1px solid rgba(0, 0, 0, 0.1);}
-table {border-collapse: separate;border-spacing: 0;border-width: 1px 0 0 1px;margin-bottom: 24px;width: 100%;}
+table {border-collapse: separate;border-spacing: 0;border-width: 0;margin-bottom: 0;width: 100%;}
 caption,th,td {	font-weight: normal;text-align: left;}th {border-width: 0 1px 1px 0;font-weight: bold;}
 td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0, 0, 0, 0.1);border: 0;height: 1px;margin-bottom: 23px;}
 ::selection {background: rgb(40,180,183);color: #fff;text-shadow: none;}
@@ -113,7 +127,7 @@ body {
 body,
 #wrapper,
 #wraparticle {
-	background: #f5f5f5;
+	background: #ECECEC;
 }
 
 #divwrap {
@@ -564,8 +578,9 @@ code {
 }
 .categoryarch p {
 	text-transform: uppercase;
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	font-weight: 900;
+	margin-bottom: 12px;
 }
 .categoryarch a {
 	color: white;
@@ -873,21 +888,21 @@ code {
 .article {
 	padding-top: 50px;
 }
- .headerarticle {
- 	position: relative;
- 	z-index: 0;
- 	overflow: hidden;
- }
- .titlearticle {
- 	position: absolute;
+.header--article {
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+}
+.title--article {
+	position: absolute;
 	bottom: 120px;
 	width: 100%;
 	z-index: 1;
- }
-.thumbarticle {
+}
+.thumb--article {
 	height: 300px;
 }
-.thumbarticle img {
+.thumb--article img {
 	width: 100%;
 	height: auto;
 }
@@ -911,7 +926,7 @@ code {
 /**
  * SINGLE POST NO THUMBNAIL
  ***********************************/
-.article--nothumb .titlearticle,
+.article--nothumb .title--article,
 .article--nothumb .categoryarticle {
 	position: relative;
     top: auto;
@@ -1038,8 +1053,9 @@ code {
 .contentarticle ol {
 	max-width: 700px;
 	margin: 10px 15px;
-	line-height: 2rem;
-	font-size: 1rem;
+	line-height: 1.8;
+	font-size: 1.6rem;
+	font-weight: 100;
 }
 .contentarticle h1,
 .contentarticle h2 {
@@ -1312,7 +1328,7 @@ blockquote p {
 .footerback p {
 	margin: 0;
 	color: white;
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	line-height: 2;
 }
 .footerback p a {
@@ -1368,8 +1384,10 @@ blockquote p {
 .flexboxer .wrap--flex .wrap--flexed__middlecontent {
 	flex: 1 0 calc(100% - 40px);
 }
+
+
 .flexboxer .wrap--flex .wrap--flexed__middleframe {
-	flex: 1 0 50%;
+	flex: 1 0 100%;
 	padding: 0;
 }
 
@@ -1401,85 +1419,7 @@ blockquote p {
 }
 
 
-/**
- * BOOKINS (single-event.php)
- ***********************************/
-.wrap--emailregistration {
-	
-}
 
-.wrap--emailregistration label {
-	width: 100%;
-	display: block;
-}
-
-.wrap--emailregistration input[type="text"],
-.wrap--emailregistration input[type="password"] {
-width: 100%;
-display: block;
-background: rgba(0,0,0,0.1);
-}
-
-.wrap .em-booking {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-	margin: 0;
-}
-
-/* Booking form */
-.wrap .em-booking-form {
-	flex: 1 0 calc(100% - 40px);
-	display: block;
-    position: static;
-}
-.wrap .em-booking-form-details {
-	padding: 0;
-}
-
-.wrap .em-booking input{
-	background: rgba(0,0,0,0.1);
-}
-
-/* Login if user is not */
-.wrap .em-booking-login {
-    flex: 1 0 calc(100% - 40px);
-    padding: 0;
-    border: 0;
-    margin: 0;
-}
-.wrap .em-booking-login-form{
-
-}
-
-.wrap .em-booking-login-form label{
-	    width: 45%;
-}
-
-.wrap .em-booking-login-form input[type="text"],
-.wrap .em-booking-login-form input[type="password"]{
-	width: 50%;
-}
-.wrap .em-booking-login-form input[type="submit"]{
-    width: 50%;
-    display: block;
-    margin: 0 0 0 calc(45% + 4px);
-}
-
-#em_rememberme,
-#em_rememberme + label {
-	display: none;
-}
-
-.wrap .em-booking-login-form a:last-of-type{
-	text-align: right;
-    width: 50%;
-    display: block;
-    margin: 0 0 0 calc(45% + 4px);
-    font-size: 1rem;
-    line-height: 1;
-    margin-top: -10px;
-}
 
 
 
@@ -1527,30 +1467,325 @@ background: rgba(0,0,0,0.1);
 
 
 
+
+
+
+
 /**
- * FORMS 
- ***********************************/
+ * TABLES
+ *************************************************************************************************/
+table,
+th,
+td {
+	border: 0;
+}
+
+
+
+
+
+/**
+ * FORMS
+ *************************************************************************************************/
 input[type="text"],
 input[type="password"]{
-	background: transparent;
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
 	border: 0;
 	transition: background 500ms ease;
 }
 
+input[type="submit"],
+select {
+	cursor: pointer;
+}
+
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+select:focus,
+select:focus option,
+textarea:focus{
 	outline: 0;
 }
 
 input[type="submit"] {
     border: 0;
     padding: 7px 10px;
+    background-color: rgb(40,180,184);
+	color: white;
+	transition: all 300ms ease;
 }
 
-.wrap .em-booking input[type="submit"]{
-	background-color: rgb(40,180,184);
-	color: white;
+input[type="submit"]:hover {
+    background-color: rgb(34,153,155);
 }
+
+
+
+
+/**
+ * MÓDULOS
+ *************************************************************************************************/
+/**
+ * EVENTS MANAGER 
+ ***********************************/
+.wrap .em-booking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+
+/* Booking form */
+.em-booking .em-booking-form {
+	flex: 1 0 calc(100% - 40px);
+	display: block;
+	position: static;
+	max-width: 100%;
+}
+.em-booking .em-booking-form p{
+    width: 100%;
+}
+
+.em-booking .em-booking-form tr {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin: 0;
+	align-content: stretch;
+}
+.em-booking .em-booking-form th,
+.em-booking .em-booking-form td {
+    padding: 5px 0;
+    flex: 1 1 100px;
+}
+
+.em-booking .em-booking-form th {
+	display: none;
+}
+
+.em-booking .em-booking-form .em-ticket + .em-ticket {
+	margin-top: 10px;
+}
+
+.em-booking .em-booking-form .em-bookings-ticket-table-type {
+	flex: 1 1 200px;
+	font-weight: 700;
+}
+.em-booking .em-booking-form .em-bookings-ticket-table-spaces {
+	flex: 1 1 100px;
+}
+.em-booking .em-booking-form .em-bookings-ticket-table-type .ticket-desc {
+	font-weight: 300;
+}
+
+.em-booking .em-booking-form input,
+.em-booking .em-booking-form textarea,
+.em-booking .em-booking-form select{
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
+}
+
+.em-booking .em-booking-form select {
+	width: 100%;
+	background: rgba(0,0,0,0.1);
+	border: 0;
+	padding: 5px;
+}
+
+.em-booking .em-booking-form option {
+	padding: 5px 0;
+}
+
+.em-booking .em-booking-form .ticket-price,
+.em-booking .em-booking-form .em-tickets-spaces {
+	margin: 10px 0;
+}
+.em-booking .em-booking-form .em-tickets-spaces {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.em-booking .em-booking-form .em-tickets-spaces label,
+.em-booking .em-booking-form .em-tickets-spaces select{
+	flex: 1 1 100px;
+}
+
+
+
+/* Bookings form details */
+.em-booking .em-booking-form-details {
+	padding: 0;
+	width: 100%;
+}
+
+.em-booking .em-booking-form-details p {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+.em-booking .em-booking-form-details label,
+.em-booking .em-booking-form-details input,
+.em-booking .em-booking-form-details select,
+.em-booking .em-booking-form-details textarea {
+	flex: 1 0 100px;
+}
+.em-booking .em-booking-form-details label {
+	line-height: 32px;
+}
+.em-booking .em-booking-form-details input,
+.em-booking .em-booking-form-details select,
+.em-booking .em-booking-form-details textarea {
+	background: rgba(0,0,0,0.1);
+	border: 0;
+	padding: 5px;
+}
+.em-booking .em-booking-form-details .input-field-booking_comment,
+.em-booking .em-booking-form-details .em-booking-buttons {
+	margin-top: 10px;
+}
+
+.em-booking .em-booking-form-details input[type="submit"]{
+    width: 50%;
+    display: block;
+    margin: 0 0 0 50%;
+    background-color: rgb(40,180,184);
+}
+
+
+/* User registration && Booking gateway */
+.em-booking .em-booking-form-details .input-user-field,
+.em-booking .em-booking-form-details .em-booking-gateway {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-booking .em-booking-form-details .input-user-field + .input-user-field,
+.em-booking .em-booking-form .em-booking-form-details .em-booking-gateway {
+	margin-top: 10px;
+}
+
+.em-booking .em-booking-form .em-booking-form-details .em-booking-gateway-form > img {
+	display: none;
+}
+
+/* Login if user is not */
+.em-booking .em-booking-login {
+    flex: 1 0 calc(100% - 40px);
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.em-booking .em-booking-login-form p{
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-booking .em-booking-login-form label{
+	flex: 1 0 50%;
+	line-height: 32px;
+}
+
+.em-booking .em-booking-login-form input[type="text"],
+.em-booking .em-booking-login-form input[type="password"]{
+	flex: 1 0 50%;
+	background: rgba(0,0,0,0.1);
+}
+.em-booking .em-booking-login-form input[type="submit"]{
+    display: block;
+    margin-left: 50%;
+    width: 50%;
+}
+
+.em-booking #em_rememberme,
+.em-booking #em_rememberme + label,
+.em-booking .input-dbem_fax {
+	display: none !important;
+}
+
+.em-booking .em-booking-login-form a:last-of-type{
+	text-align: right;
+    width: 50%;
+    display: block;
+    margin-left: 50%;
+    font-size: 1rem;
+    line-height: 1;
+    margin-top: -10px;
+}
+
+/* My Bookings */
+.em-my-bookings {
+
+}
+
+.em-my-bookings thead {
+	display: none;
+}
+
+.em-my-bookings tr {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-my-bookings th,
+.em-my-bookings td {
+	flex: 1 0 100%;
+}
+
+.em-my-bookings tr td:first-of-type a{
+	font-size: 1.8rem;
+	font-weight: 700;
+	color: black;
+	margin-top: 10px;
+}
+
+.em-my-bookings .em-bookings-cancel {
+	padding: 5px 0;
+	background: rgb(40,180,184);
+	color: white;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin: 10px auto;
+	max-width: 260px;
+}
+
+.em-my-bookings .em-bookings-cancel:hover {
+	background: rgb(34,153,155);
+}
+
+#em-wrapper > p:last-of-type {
+	display: none;
+}
+
+
+/* Bookings messages */
+.em-booking .em-booking-message,
+.em-my-booking .em-booking-message {
+	border: 0;
+	width: 100%;
+	border-radius: 0;
+}
+
+.em-booking .em-booking-message-error,
+.em-my-booking .em-booking-message-error {
+	background-color:#EFA6A6;
+	margin: 0 0 20px;
+}
+
+.em-booking .em-booking-message-error p,
+.em-my-booking .em-booking-message-error p {
+	color: #970808;
+}
+
 
 
 /**
@@ -1615,17 +1850,21 @@ textarea.js-medium-editor {
 
 
 /**
-*
-* MEDIA QUERYS
-*
-*
-***********************************/
+ * MEDIA QUERYS
+ *************************************************************************************************/
 @media only screen and (max-width : 349px) {
 	.showonmobile {
 		display: none !important;
 	}
+	.breaklinemobile {
+		width: 100%;
+		display: block;
+	}
 }
 @media only screen and (min-width : 350px) {
+	.hideonmobile {
+		display: none !important;
+	}
 	.categoryarch, 
 	.contentauthor {
 		display: block;
@@ -1659,13 +1898,24 @@ textarea.js-medium-editor {
 	    text-align: left;
 	    margin-top: 0;
 	}
+	/* FLEXBOXER */
+	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+    	flex: 1 0 50%;
+    }
 }
 @media only screen and (max-width : 549px) {
 	.showontablet {
 		display: none !important;
 	}
+	.breaklinetablet {
+		width: 100%;
+		display: block;
+	}
 }
 @media only screen and (min-width : 550px) {
+	.hideontablet {
+		display: none !important;
+	}
 	/* MENU MIDDLE */
 	.menumiddle {
 		display: block;
@@ -1792,10 +2042,10 @@ textarea.js-medium-editor {
 	    padding: 2%;
 	}
 	/* ARTICLE */
-	.thumbarticle {
+	.thumb--article {
 		height: 500px;
 	}
-	.titlearticle {
+	.title--article {
 		bottom: 100px;
 	}
 	.overflow--blend__hover:hover {
@@ -1818,7 +2068,7 @@ textarea.js-medium-editor {
 		font-size: 2rem;
 		line-height: 2.6rem;
 	}
-	/* Botones redes sociales */
+	/* SOCIAL NETWORKS BUTTONS */
 	.buttons-share {
 		position: absolute;
 		right: 10px;
@@ -1888,6 +2138,29 @@ textarea.js-medium-editor {
 	.articlemasonry a:active {
 	  color: rgb(40,180,183);
 	}
+	/* EVENT BOOKING FORM */
+	.em-booking .em-booking-form .em-ticket + .em-ticket {
+		margin-top: 0;
+	}
+	.em-booking .em-booking-form th {
+		display: initial;
+	}
+	.em-booking .em-booking-form td + td,
+	.em-booking .em-booking-form th + th {
+		margin-left: 10px;
+	}
+	/* MY BOOKINGS PAGE */
+	.em-my-bookings thead {
+		display: block;
+	}
+	.em-my-bookings th,
+	.em-my-bookings td {
+		flex: 1 0 20%;
+	}
+	.em-my-bookings tr td:first-of-type a{
+		font-size: 1.6rem;
+		font-weight: 400;
+	}
 	/* FOOTER */
 	.footerback .divright {
 		float: right;
@@ -1899,6 +2172,9 @@ textarea.js-medium-editor {
 	}
 }
 @media only screen and (min-width : 780px) {
+	.hideondesktop {
+		display: none !important;
+	}
 	.thumbarch img {
 		width: 100%;
 		margin-left: 0;
@@ -1948,7 +2224,7 @@ textarea.js-medium-editor {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.flexboxer .wrap {
+	.flexboxer > .wrap {
 	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
     	box-shadow: 0 1px 3px rgba(0,0,0,.13);
 	}
@@ -1959,6 +2235,10 @@ textarea.js-medium-editor {
 	.wrap .em-booking-login,
 	.flexboxer .wrap--flex .wrap--flexed__middlecontent {
 	    flex: 1 0 calc(50% - 40px);
+	}
+	.wrap .em-booking-login {
+		flex: 1 0 calc(50% - 50px);
+	    margin-left: 10px;
 	}
 	.flexboxer .wrap--flex .wrap--flexed__middleframe {
 	    flex: 1 0 50%;
@@ -2047,7 +2327,7 @@ textarea.js-medium-editor {
 
 
 @media only screen and (min-width : 1200px) {
-	.thumbarticle {
+	.thumb--article {
 		height: 800px;
 	}
 }

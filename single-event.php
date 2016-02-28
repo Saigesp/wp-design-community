@@ -45,26 +45,35 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 	<section class="wrap wrap--content wrap--flex">
 		<div class="wrap wrap--flexed wrap--flexed__middleframe">
 			<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
-				echo '<strong>Fecha:</strong> '.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i');
+				echo '<span class="breaklinetablet"><strong>Fecha:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i').'</span>';
 			}else{
-				echo '<strong>Inicio:</strong> '.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'<br><strong>Fin:</strong>   '.$event_end_date->format('j \d\e M \d\e Y\, H:i\h');
+				echo '<span class="breaklinetablet"><strong>Inicio:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'</span><br><span class="breaklinetablet"><strong>Fin:</strong> </span><span class="breaklinetablet">'.$event_end_date->format('j \d\e M \d\e Y\, H:i\h').'</span>';
 			}
 			if($EM_Event->location->location_id > 0){
-				echo '<br><strong>Localización:</strong> '.$EM_Event->location->location_name;
+				echo '<br><span class="breaklinetablet"><strong>Localización:</strong> </span><span class="breaklinetablet">'.$EM_Event->location->location_name.'</span>';
 			}?>
 		</div>
 		<div class="wrap wrap--flexed wrap--flexed__middleframe">
-			<?php if($EM_Event->output('#_SPACES') > 0){
-				echo '<strong>Espacios disponibles:</strong> '
-				.$EM_Event->output('#_AVAILABLESPACES')
-				. ' / '
-				.$EM_Event->output('#_SPACES');
+			<?php
+			if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet
+				if($EM_Event->output('#_SPACES') > 0){
+					echo '<br class="hideonmobile"><span class="breaklinetablet"><strong>Espacios disponibles:</strong> </span>'
+					. '<span class="breaklinetablet">'
+					.$EM_Event->output('#_AVAILABLESPACES')
+					. ' / '
+					.$EM_Event->output('#_SPACES')
+					. '</span>';
+				}
+				if($EM_Event->output('#_PENDINGSPACES') > 0){
+					echo '<br><span class="breaklinetablet"><strong>En trámite:</strong> </span>'
+					. '<span class="breaklinetablet">'
+					.$EM_Event->output('#_PENDINGSPACES')
+					. '</span>';
+				}
+			}else{ //Event finished
+				echo '<p><strong>Evento finalizado</strong></p>';
 			}
-			if($EM_Event->output('#_PENDINGSPACES') > 0){
-				echo '<br><strong>En trámite:</strong> '
-				.$EM_Event->output('#_PENDINGSPACES');
-			}
-			?>
+				?>
 		</div>
 	</section><!-- end of relevant info -->
 

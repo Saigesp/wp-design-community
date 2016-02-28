@@ -14,25 +14,31 @@ GitHub Branch:
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
-*/
 
-
-/*
 Media Query utilities
 
 	.showonmobile
 	.showontablet
 	.showondesktop
 
+	.hideonmobile
+	.hideontablet
+	.hideondesktop
+
+	.breaklinemobile
+	.breaklinetablet
+
 
 Colors
-turquesa			rgb(40,180,184);
-turquesa hover		rgb(34,153,155);
+
+	turquesa			rgb(40,180,184);
+	turquesa hover		rgb(34,153,155);
 
 
 Messages
-Error background	#EFA6A6;
-Error color			#970808;
+
+	Error background	#EFA6A6;
+	Error color			#970808;
 
 
 */
@@ -92,7 +98,7 @@ input[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}
 button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}
 textarea {overflow: auto;vertical-align: top;}
 table,th,td {border: 1px solid rgba(0, 0, 0, 0.1);}
-table {border-collapse: separate;border-spacing: 0;border-width: 0;margin-bottom: 24px;width: 100%;}
+table {border-collapse: separate;border-spacing: 0;border-width: 0;margin-bottom: 0;width: 100%;}
 caption,th,td {	font-weight: normal;text-align: left;}th {border-width: 0 1px 1px 0;font-weight: bold;}
 td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0, 0, 0, 0.1);border: 0;height: 1px;margin-bottom: 23px;}
 ::selection {background: rgb(40,180,183);color: #fff;text-shadow: none;}
@@ -572,8 +578,9 @@ code {
 }
 .categoryarch p {
 	text-transform: uppercase;
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	font-weight: 900;
+	margin-bottom: 12px;
 }
 .categoryarch a {
 	color: white;
@@ -1046,8 +1053,9 @@ code {
 .contentarticle ol {
 	max-width: 700px;
 	margin: 10px 15px;
-	line-height: 2rem;
-	font-size: 1rem;
+	line-height: 1.8;
+	font-size: 1.6rem;
+	font-weight: 100;
 }
 .contentarticle h1,
 .contentarticle h2 {
@@ -1376,8 +1384,10 @@ blockquote p {
 .flexboxer .wrap--flex .wrap--flexed__middlecontent {
 	flex: 1 0 calc(100% - 40px);
 }
+
+
 .flexboxer .wrap--flex .wrap--flexed__middleframe {
-	flex: 1 0 50%;
+	flex: 1 0 100%;
 	padding: 0;
 }
 
@@ -1708,20 +1718,74 @@ input[type="submit"]:hover {
     margin-top: -10px;
 }
 
+/* My Bookings */
+.em-my-bookings {
+
+}
+
+.em-my-bookings thead {
+	display: none;
+}
+
+.em-my-bookings tr {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+
+.em-my-bookings th,
+.em-my-bookings td {
+	flex: 1 0 100%;
+}
+
+.em-my-bookings tr td:first-of-type a{
+	font-size: 1.8rem;
+	font-weight: 700;
+	color: black;
+	margin-top: 10px;
+}
+
+.em-my-bookings .em-bookings-cancel {
+	padding: 5px 0;
+	background: rgb(40,180,184);
+	color: white;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin: 10px auto;
+	max-width: 260px;
+}
+
+.em-my-bookings .em-bookings-cancel:hover {
+	background: rgb(34,153,155);
+}
+
+#em-wrapper > p:last-of-type {
+	display: none;
+}
+
+
 /* Bookings messages */
-.em-booking .em-booking-message {
+.em-booking .em-booking-message,
+.em-my-booking .em-booking-message {
 	border: 0;
 	width: 100%;
 	border-radius: 0;
 }
 
-.em-booking .em-booking-message-error {
+.em-booking .em-booking-message-error,
+.em-my-booking .em-booking-message-error {
 	background-color:#EFA6A6;
+	margin: 0 0 20px;
 }
 
-.em-booking .em-booking-message-error p {
+.em-booking .em-booking-message-error p,
+.em-my-booking .em-booking-message-error p {
 	color: #970808;
 }
+
+
 
 /**
  * SLIDER (node_modules/flickity)
@@ -1791,8 +1855,15 @@ textarea.js-medium-editor {
 	.showonmobile {
 		display: none !important;
 	}
+	.breaklinemobile {
+		width: 100%;
+		display: block;
+	}
 }
 @media only screen and (min-width : 350px) {
+	.hideonmobile {
+		display: none !important;
+	}
 	.categoryarch, 
 	.contentauthor {
 		display: block;
@@ -1826,13 +1897,24 @@ textarea.js-medium-editor {
 	    text-align: left;
 	    margin-top: 0;
 	}
+	/* FLEXBOXER */
+	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+    	flex: 1 0 50%;
+    }
 }
 @media only screen and (max-width : 549px) {
 	.showontablet {
 		display: none !important;
 	}
+	.breaklinetablet {
+		width: 100%;
+		display: block;
+	}
 }
 @media only screen and (min-width : 550px) {
+	.hideontablet {
+		display: none !important;
+	}
 	/* MENU MIDDLE */
 	.menumiddle {
 		display: block;
@@ -1985,7 +2067,7 @@ textarea.js-medium-editor {
 		font-size: 2rem;
 		line-height: 2.6rem;
 	}
-	/* Botones redes sociales */
+	/* SOCIAL NETWORKS BUTTONS */
 	.buttons-share {
 		position: absolute;
 		right: 10px;
@@ -2055,7 +2137,7 @@ textarea.js-medium-editor {
 	.articlemasonry a:active {
 	  color: rgb(40,180,183);
 	}
-	/* FORULARIO EVENTOS */
+	/* EVENT BOOKING FORM */
 	.em-booking .em-booking-form .em-ticket + .em-ticket {
 		margin-top: 0;
 	}
@@ -2065,6 +2147,18 @@ textarea.js-medium-editor {
 	.em-booking .em-booking-form td + td,
 	.em-booking .em-booking-form th + th {
 		margin-left: 10px;
+	}
+	/* MY BOOKINGS PAGE */
+	.em-my-bookings thead {
+		display: block;
+	}
+	.em-my-bookings th,
+	.em-my-bookings td {
+		flex: 1 0 20%;
+	}
+	.em-my-bookings tr td:first-of-type a{
+		font-size: 1.6rem;
+		font-weight: 400;
 	}
 	/* FOOTER */
 	.footerback .divright {
@@ -2077,6 +2171,9 @@ textarea.js-medium-editor {
 	}
 }
 @media only screen and (min-width : 780px) {
+	.hideondesktop {
+		display: none !important;
+	}
 	.thumbarch img {
 		width: 100%;
 		margin-left: 0;

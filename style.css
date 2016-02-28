@@ -1962,11 +1962,11 @@ input[type="submit"]:hover {
 /* Desplegable */
 .chosen-container .chosen-drop {
 	border: 0;
-	box-shadow: none;
+	/* box-shadow: none; */
 }
 
 /* Multiselect */
-.chosen-container-multi .chosen-choices {
+/*.chosen-container-multi .chosen-choices {
 	border: 0;
 	background: rgba(0,0,0,0.1);
 	padding: 5px;
@@ -1988,9 +1988,9 @@ input[type="submit"]:hover {
 .chosen-container .chosen-results li.highlighted {
 	background-color: rgb(40,180,184);
 }
-
+*/
 /* Select */
-.chosen-container-single {
+/*.chosen-container-single {
 
 }
 .chosen-container-single .chosen-single {
@@ -2006,7 +2006,7 @@ input[type="submit"]:hover {
 .chosen-container-single .chosen-drop {
 	border: 0;
 	border-radius: 0
-}
+}*/
 
 /**
  * MEDIUM EDITOR (node_modules/medium-editor)

@@ -408,8 +408,8 @@ function inject_footer_in_page_edit_event() {
   if (is_page('edit-event')) { ?>
     <script>
       jQuery(document).ready(function($) {
-        if ($(".event-categories select").length > 0) $(".event-categories select").chosen();
-        if ($("#location-country").length) $('#location-country').chosen();  
+        $(".event-categories select").chosen();
+        //$('#location-country').chosen();  
       }); 
     </script>
   <?php }

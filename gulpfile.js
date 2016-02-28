@@ -46,27 +46,14 @@ var gulp = require('gulp'),
     reload = browserSync.reload,
     autoprefixer = require('gulp-autoprefixer'), // Autoprefixing magic
     minifycss = require('gulp-uglifycss'),
-    gulpFilter = require('gulp-filter'),
     uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
-    newer = require('gulp-newer'),
     rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    cmq = require('gulp-combine-media-queries'),
-    runSequence = require('run-sequence'),
-    plugins = require('gulp-load-plugins')({ camelize: true }),
-    ignore = require('gulp-ignore'), // Helps with ignoring files and directories in our run tasks
     rimraf = require('gulp-rimraf'), // Helps with removing files and directories in our run tasks
-    zip = require('gulp-zip'), // Using to zip up our packaged theme into a tasty zip file that can be installed in WordPress!
-    plumber = require('gulp-plumber'), // Helps prevent stream crashing on errors
     inject = require('gulp-inject');
-	cache = require('gulp-cache'),
-    sourcemaps = require('gulp-sourcemaps'),
-    postcss = require('gulp-postcss'),
-    mqpacker = require('css-mqpacker'),
-    csswring = require('csswring'),
-    del = require('del'),
+	//cache = require('gulp-cache'),
+    //sourcemaps = require('gulp-sourcemaps'),
+    //postcss = require('gulp-postcss'),
     es = require('event-stream'),
     realFavicon = require('gulp-real-favicon'),
     fs = require('fs')
@@ -152,7 +139,7 @@ gulp.task('min:jstominimize:dev', function() {
  *  
  ***********************************/
 gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:dev'], function() {
-	var firstStream = gulp.src([dev + 'plugins/**/jquery.min.js'], { read: false });
+	var firstStream = gulp.src([dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
 	var lastStream = gulp.src([dev + 'plugins/**/*.min.js', '!'+ dev + 'plugins/**/jquery.min.js'], { read: false });
     return gulp.src(dev + 'footer.php')
         .pipe(inject( series(firstStream, lastStream), {

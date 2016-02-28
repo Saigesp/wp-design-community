@@ -304,19 +304,91 @@ new_page_title('Edit Event');
 /**
  * PUBLISH BOOKING FORMS FUNCTIONS
  ***********************************/
-function inject_html_in_page_edit_event() {
+function inject_head_in_page_edit_event() {
   if (is_page('edit-event')) { ?>
     <script>
       jQuery(document).ready(function($) {
         if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
-        if ($("#location-country").length) $('#location-country option[value="0"]').text("Obligatorio");     
-        var editor = new MediumEditor('#em-editor-content');
+        if ($("#event-form > .wrap").length)  $("#event-form > .wrap").addClass("flexboxer flexboxer--event flexboxer--event__edit").removeClass("wrap");
+
+        // Hide thumbnail extra info && add classes
+        $('.inside').each(function(){
+            var elemClass = $(this).attr('class').split(/\s+/);
+            elemClass = 'wrap--'+elemClass[1]
+            $(this).prev('h3').andSelf().wrapAll('<div class="wrap wrap--content '+elemClass+'"/>');
+        });
+        $(".wrap--event-form-image").addClass("wrap--frame").removeClass("wrap--content");
+
+        // Add default image && resize
+        $(".wrap--event-form-image")
+        .prepend('<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/default/noimage600x600.png" class="js-thumbnail-upload">')
+        .imagefill()
+        .children('.js-thumbnail-upload').animate({ opacity: 1}, 3000);
+
+        // Trigger upload thumbnail
+        $(".js-thumbnail-upload").click(function() {
+            $("#event-image").trigger('click');
+        });
+        $("#event-image").change(function(){
+          $('.wrap--event-form-image').css("opacity", 0);
+          var $input = $(this);
+          var inputFiles = this.files;
+          if (inputFiles == undefined || inputFiles.length == 0) return;
+          var inputFile = inputFiles[0];
+          var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+          var extension = inputFile.name.split('.').pop().toLowerCase();
+          var isSuccess = fileTypes.indexOf(extension) > -1;
+          if (isSuccess) {
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                  $('.js-thumbnail-upload').attr("src", event.target.result);
+                  $('.wrap--event-form-image')
+                    .imagefill()
+                    .animate({ opacity: 1}, 3000);
+              };
+              reader.readAsDataURL(inputFile);
+
+          } else {
+              alert('Formatos permitidos: jpg, gif, png');
+          }
+          reader.onerror = function(event) {
+              alert("ERROR: " + event.target.error.code);
+          };
+        });
+
+        // Update title in thumbnail
+        $('.event-form-name input').on('keyup', function() {
+          var text = $('.event-form-name input').val();
+          $('.wrap--event-form-image h3').text(text);
+        });
+
+
+           
+        var editor = new MediumEditor('#em-editor-content', {
+            placeholder: {
+                text: 'Información del evento',
+                hideOnClick: true
+            }
+        });
       });
-      
+
     </script>
   <?php }
 }
-add_action( 'wp_head', 'inject_html_in_page_edit_event' );
+
+function inject_footer_in_page_edit_event() {
+  if (is_page('edit-event')) { ?>
+    <script>
+      jQuery(document).ready(function($) {
+        if ($(".event-categories select").length > 0) $(".event-categories select").chosen();
+        if ($("#location-country").length) $('#location-country').chosen();  
+      }); 
+    </script>
+  <?php }
+}
+
+add_action( 'wp_head', 'inject_head_in_page_edit_event' );
+add_action( 'wp_head', 'inject_footer_in_page_edit_event' );
 
 // Create pages to extend theme
 new_page_title('Edit Event');

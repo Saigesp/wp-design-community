@@ -142,13 +142,9 @@ body,
 	position: relative;
 }
 
-
-
  /**
  * TEXT & FONTS
  ***********************************/
-
-
 h1, h2, h3, h4, p, input, textarea
 .subtitletextarticle,
 .flexboxer--author
@@ -166,6 +162,7 @@ h1, h2, h3, h4, p, input, textarea
 a {
 	color: rgb(40,180,184);
 }
+
 a:hover {
 	color: rgb(34,153,155);
 }
@@ -176,6 +173,32 @@ code {
 	border-radius: 2px;
 	border: 1px solid #ccc;
 }
+
+/**
+ * FUNCTIONALS
+ ***********************************/
+.js-showonload {
+	transition: opacity 2s ease;
+}
+.js-thumbnail-upload{
+	transition: opacity 300ms ease;
+}
+.js-showonload-active {
+	opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * MENU HEADER
@@ -1358,17 +1381,25 @@ blockquote p {
 /**
  * FLEXBOXER
  *************************************************************************************************/
+.flexboxer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
 
 .flexboxer .wrap {
     background: #f5f5f5;
+    
 }
 
 .flexboxer .wrap--content {
 	padding: 20px;
+	flex: 1 0 calc(100% - 40px);
 }
 
-.flexboxer .wrap--frame {
-    padding: 0;
+.flexboxer .wrap--frame,
+.flexboxer--event__edit .wrap--event-form-image {
+    flex: 1 0 100%;
 }
 
 .flexboxer .wrap--flex {
@@ -1801,9 +1832,44 @@ input[type="submit"]:hover {
 .em-warning p:last-of-type{
 	margin-bottom: 0 !important;
 }
+
 /**
  * PAGE EDIT EVENT (page-edit-event.php)
  ***********************************/
+.flexboxer--event__edit .wrap {
+	order: 99;
+}
+.flexboxer--event__edit .wrap--event-form-image {
+	order: 1;
+	background-color: rgba(0,0,0,0.1);
+	height: 300px;
+	display: block;
+	transition: background 300ms ease;
+}
+
+.flexboxer--event__edit .wrap--event-form-image:hover {
+	background-color: rgba(0,0,0,0.2);
+}
+.flexboxer--event__edit .wrap--event-form-name {
+	order: 2;
+}
+.flexboxer--event__edit .wrap--event-form-image h3{
+	color: rgba(0,0,0,0.6);
+	margin-bottom: 0;
+	text-align: center;
+}
+.flexboxer--event__edit .wrap--event-form-image > h3,
+.flexboxer--event__edit .wrap--event-form-image > .inside {
+	display: none;
+}
+
+.flexboxer--event__edit .wrap--event-form-image img {
+	 cursor: pointer;
+	 opacity: 0;
+	 transition: opacity 300ms ease;
+}
+
+
 #em-form-with-recurrence p {
 	margin: 10px 0;
 }
@@ -1840,6 +1906,10 @@ input[type="submit"]:hover {
     padding-top: 5px;
 }
 
+
+
+
+
 /**
  * SLIDER (node_modules/flickity)
  ***********************************/
@@ -1847,7 +1917,65 @@ input[type="submit"]:hover {
 	display: none;
 }
 
+/**
+ * CHOSEN (bower_components/chosen)
+ ***********************************/
+.event-categories {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+}
+.event-categories > label {
+	vertical-align: top;
+	flex: 1 0 100px;
+}
+.event-categories .chosen-container {
+ flex: 1 0 100px;
+ display: block;
+}
+/* Desplegable */
+.chosen-container .chosen-drop {
+	
+}
 
+/* Multiselect */
+.chosen-container-multi .chosen-choices {
+	border: 0;
+	background: rgba(0,0,0,0.1);
+	padding: 5px;
+}
+.chosen-container-active .chosen-choices {
+	box-shadow: none;
+}
+.chosen-container-multi .chosen-choices li.search-choice {
+	background: white;
+	border: 0;
+	border-radius: 0;
+	margin: 0 5px 0 0;
+	line-height: 19px;
+}
+.chosen-container-multi .chosen-choices li.search-field {
+	height: 25px
+}
+/* Select */
+.chosen-container-single {
+
+}
+.chosen-container-single .chosen-single {
+	background: rgba(0,0,0,0.1);
+	border: 0;
+	border-radius: 0;
+	padding: 5px;
+	min-height: 35px;
+	box-shadow: none;
+	font-size: 1.6rem;
+}
+.chosen-container-active.chosen-with-drop .chosen-single,
+.chosen-container-single .chosen-drop {
+	border: 0;
+	border-radius: 0
+}
 /**
  * MEDIUM EDITOR (node_modules/medium-editor)
  ***********************************/

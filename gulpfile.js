@@ -24,7 +24,7 @@ var project = 'wp-design-community',
         '!' + dev + 'plugins/**/*.min.js',
         node + '*/src/jquery-ias.js',
         node + '*/js/jquery-imagefill.js',
-        bower + '*/chosen.jquery.css'
+        bower + '*/chosen.jquery.js'
     ],
     css_minimized_files = [ // CSS Archives to copy
         node + 'flickity/*/flickity.min.css',
@@ -143,7 +143,7 @@ gulp.task('min:jstominimize:dev', function() {
  ***********************************/
 gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:dev'], function() {
 	var firstStream = gulp.src([dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
-	var lastStream = gulp.src([dev + 'plugins/**/*.min.js', '!'+ dev + 'plugins/**/jquery.min.js'], { read: false });
+	var lastStream = gulp.src([dev + 'plugins/**/*.min.js', '!'+ dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
     return gulp.src(dev + 'footer.php')
         .pipe(inject( series(firstStream, lastStream), {
                         transform: function(filepath) {
@@ -169,7 +169,7 @@ gulp.task('dist', ['copy:basicfiles:dist']);
 
 
 
-/* Create /wamp && open browser && watch /dev
+/* Open browser && watch /dev
  *  
  ***********************************/
 gulp.task('upserver', function() {
@@ -183,7 +183,7 @@ gulp.task('upserver', function() {
 });
 
 
-/* Create /wamp && open browser && watch /dev && update extrafiles
+/* Open browser && watch /dev && update extrafiles
  *  
  ***********************************/
 gulp.task('server', ['upserver'], function() {
@@ -191,6 +191,10 @@ gulp.task('server', ['upserver'], function() {
     gulp.watch(dev+'*.php', ['notify',browserSync.reload]); 
 });
 
+
+
+
+gulp.task('serve', ['server', 'build']);
 
 
 

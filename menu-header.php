@@ -23,6 +23,11 @@
           <?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?></a> / <span class="current">Edit Profile</span></h3>
       </div>
     <?php } ?>
+    <?php if(is_page('Edit Event')){ ?>
+      <div class="wrap wrap--path showontablet">
+        <h3><span class="current">Crear evento</span></h3>
+      </div>
+    <?php } ?>
     <?php if(is_single()){  ?>
       <div class="wrap wrap--share sharecontainer">
       	<?php the_svg_icon('share');?>

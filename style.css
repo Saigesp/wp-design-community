@@ -177,6 +177,11 @@ code {
 /**
  * FUNCTIONALS
  ***********************************/
+.hide,
+.hidden {
+	display: none !important;
+}
+
 .js-showonload {
 	transition: opacity 2s ease;
 }
@@ -261,7 +266,7 @@ code {
 	display: inline-block;
 	margin: 0;
 	font-weight: 100;
-	font-size: 1.2rem;
+	font-size: 2rem;
 }
 
 .headertop .wrap--path .current {
@@ -920,7 +925,7 @@ code {
 	position: absolute;
 	bottom: 120px;
 	width: 100%;
-	z-index: 1;
+	z-index: 9;
 }
 .thumb--article {
 	height: 300px;
@@ -1842,16 +1847,21 @@ input[type="submit"]:hover {
 .flexboxer--event__edit .wrap--event-form-image {
 	order: 1;
 	background-color: rgba(0,0,0,0.1);
-	height: 300px;
+	height: 340px;
 	display: block;
 	transition: background 300ms ease;
 }
-
-.flexboxer--event__edit .wrap--event-form-image:hover {
-	background-color: rgba(0,0,0,0.2);
-}
 .flexboxer--event__edit .wrap--event-form-name {
 	order: 2;
+}
+.flexboxer--event__edit .wrap--event-form-when {
+	order: 3;
+}
+.flexboxer--event__edit .wrap--event-form-details {
+	order: 4;
+}
+.flexboxer--event__edit .wrap--event-form-where {
+	order: 5;
 }
 .flexboxer--event__edit .wrap--event-form-image h3{
 	color: rgba(0,0,0,0.6);
@@ -1868,7 +1878,9 @@ input[type="submit"]:hover {
 	 opacity: 0;
 	 transition: opacity 300ms ease;
 }
-
+.flexboxer--event__edit .wrap--event-form-image .overflow {
+	cursor: pointer;
+}
 
 #em-form-with-recurrence p {
 	margin: 10px 0;
@@ -1906,8 +1918,21 @@ input[type="submit"]:hover {
     padding-top: 5px;
 }
 
+.flexboxer--event__edit + p.submit {
+	display: block;
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+}
 
+.flexboxer--event__edit + p.submit input {
+	width: 100%;
+	margin-bottom: 10px
+}
 
+.flexboxer--event__edit h3.event-form-details{
+    transition: all 1000ms ease;
+}
 
 
 /**
@@ -1936,7 +1961,8 @@ input[type="submit"]:hover {
 }
 /* Desplegable */
 .chosen-container .chosen-drop {
-	
+	border: 0;
+	box-shadow: none;
 }
 
 /* Multiselect */
@@ -1958,6 +1984,11 @@ input[type="submit"]:hover {
 .chosen-container-multi .chosen-choices li.search-field {
 	height: 25px
 }
+
+.chosen-container .chosen-results li.highlighted {
+	background-color: rgb(40,180,184);
+}
+
 /* Select */
 .chosen-container-single {
 
@@ -1976,6 +2007,7 @@ input[type="submit"]:hover {
 	border: 0;
 	border-radius: 0
 }
+
 /**
  * MEDIUM EDITOR (node_modules/medium-editor)
  ***********************************/
@@ -1985,11 +2017,12 @@ textarea.js-medium-editor,
 }
 
 #wrapper .wp-editor-area {
-	padding: 0;
+	padding: 5px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1.6rem;
 	line-height: 1.8;
 	min-height: 120px;
+	background-color: rgba(0,0,0,0.1);
 }
 
 #wrapper .wp-editor-area p {
@@ -2015,6 +2048,18 @@ textarea.js-medium-editor,
 	font-style: normal;
 }
 
+.medium-editor-toolbar li button {
+	background-color: rgb(40,180,184);
+	border-right: 1;
+}
+
+.medium-editor-toolbar li button:hover {
+	background-color: rgb(34,153,155);
+}
+
+.medium-toolbar-arrow-under:after {
+	border-color: rgb(40,180,184) transparent transparent
+}
 
 /**
  * OVERFLOW
@@ -2022,17 +2067,19 @@ textarea.js-medium-editor,
 .overflow {
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 9;
   position: absolute;
   top: 0;
+  left: 0;
+  transition: all 300ms ease;
 }
 .overflow--blend,
-.overflow--blend__hover {
+.overflow--blend__hover:hover {
   -webkit-mix-blend-mode: color;
   -moz-mix-blend-mode: color;
   -ms-mix-blend-mode: color;
   -o-mix-blend-mode: color;
-  mix-blend-mode: color;
+  /* mix-blend-mode: color; */
 }
 
 /* En versión móvil queremos que la clase
@@ -2041,7 +2088,7 @@ textarea.js-medium-editor,
 *  activable como hover. 
 ****************************/
 .overflow--blue,
-.overflow--blue__hover {
+.overflow--blue__hover:hover {
 	background: #2fb6ce;
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmZiNmNlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjhiNGI3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMmFiNzliIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
 	background: -moz-linear-gradient(-45deg, #2fb6ce 0%, #28b4b7 50%, #2ab79b 99%);
@@ -2053,8 +2100,8 @@ textarea.js-medium-editor,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fb6ce', endColorstr='#2ab79b',GradientType=1 );  	
 }
 .overflow--black,
-.overflow--black__hover {
-	background-color: rgba(0,0,0,.5);
+.overflow--black__hover:hover {
+	background-color: rgba(0,0,0,.3);
 }
 
 

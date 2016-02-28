@@ -10,8 +10,8 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 ?> 
 
 <div class="flexboxer flexboxer--event">
+	<!-- thumbnail -->
 	<?php if(has_post_thumbnail()){ ?>
-		<!-- thumbnail -->
 		<section class="wrap wrap--frame">
 			<header id="header-<?php the_ID(); ?>" class="headerarticle">
 				<figure id="thumbnail" class="thumbarticle">
@@ -30,8 +30,8 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 					<p><?php the_category(', ');?></p>
 				</div>
 			</header>
-		</section><!-- end of thumbnail -->
-	<?php }else{ ?>
+		</section>
+	<?php }else{ ?><!-- end of thumbnail -->
 		<!-- title without thumbnail -->
 		<section class="wrap wrap--content">
 			<h2 class="title title--event"><?php the_title(); ?></h2>
@@ -102,7 +102,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
   <section class="wrap wrap--frame">
   	<?php 
-  	var_dump($EM_Event->bookings->tickets);
+  	// var_dump($EM_Event->bookings->tickets);
   	?>
   </section>
 </div><!-- end of flexboxer -->

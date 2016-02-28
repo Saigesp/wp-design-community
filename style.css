@@ -26,9 +26,13 @@ Media Query utilities
 
 
 Colors
-turquesa: rgb(40,180,184);
-turquesa hover: rgb(34,153,155);
+turquesa			rgb(40,180,184);
+turquesa hover		rgb(34,153,155);
 
+
+Messages
+Error background	#EFA6A6;
+Error color			#970808;
 
 
 */
@@ -1316,7 +1320,7 @@ blockquote p {
 .footerback p {
 	margin: 0;
 	color: white;
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	line-height: 2;
 }
 .footerback p a {
@@ -1636,6 +1640,7 @@ input[type="submit"]:hover {
     width: 50%;
     display: block;
     margin: 0 0 0 50%;
+    background-color: rgb(40,180,184);
 }
 
 
@@ -1703,6 +1708,20 @@ input[type="submit"]:hover {
     margin-top: -10px;
 }
 
+/* Bookings messages */
+.em-booking .em-booking-message {
+	border: 0;
+	width: 100%;
+	border-radius: 0;
+}
+
+.em-booking .em-booking-message-error {
+	background-color:#EFA6A6;
+}
+
+.em-booking .em-booking-message-error p {
+	color: #970808;
+}
 
 /**
  * SLIDER (node_modules/flickity)

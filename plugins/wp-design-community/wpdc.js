@@ -19,6 +19,20 @@ jQuery(document).ready(function($) {
  *  CUSTOM FUNCTIONS
  ***********************************/
 
+(function ($) {
+    $.fn.inlineStyle = function (prop) {
+         var styles = this.attr("style"),
+             value;
+         styles && styles.split(";").forEach(function (e) {
+             var style = e.split(":");
+             if ($.trim(style[0]) === prop) {
+                 value = style[1];           
+             }                    
+         });   
+         return value;
+    };
+}(jQuery));
+
 function imageresize($) {
     // Altura imágenes
     if ($(".js-thumbfull").length > 0) {

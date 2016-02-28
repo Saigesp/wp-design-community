@@ -301,6 +301,35 @@ add_action( 'wp_head', 'inject_html_in_bookings' );
 // Create pages to extend theme
 new_page_title('Edit Event');
 
+/**
+ * PUBLISH BOOKING FORMS FUNCTIONS
+ ***********************************/
+function inject_html_in_page_edit_event() {
+  if (is_page('edit-event')) { ?>
+    <script>
+      jQuery(document).ready(function($) {
+        if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
+        if ($("#location-country").length) $('#location-country option[value="0"]').text("Obligatorio");
+        if ($("#someElem").inlineStyle("width"))
+
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if ($("#em-map").inlineStyle("display") == undefined) alert('style changed!');
+            });    
+        });
+
+        var target = document.getElementById('em-map');
+        observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+        
+      });
+    </script>
+  <?php }
+}
+add_action( 'wp_head', 'inject_html_in_page_edit_event' );
+
+// Create pages to extend theme
+new_page_title('Edit Event');
+
 
 
 

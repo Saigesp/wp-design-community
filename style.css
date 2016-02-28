@@ -1487,8 +1487,10 @@ td {
 /**
  * FORMS
  *************************************************************************************************/
+input,
 input[type="text"],
-input[type="password"]{
+input[type="password"],
+select{
 	background: rgba(0,0,0,0.1);
 	padding: 5px;
 	border: 0;
@@ -1769,24 +1771,73 @@ input[type="submit"]:hover {
 
 /* Bookings messages */
 .em-booking .em-booking-message,
-.em-my-booking .em-booking-message {
+.em-my-booking .em-booking-message,
+.statusnotice {
 	border: 0;
 	width: 100%;
 	border-radius: 0;
 }
 
-.em-booking .em-booking-message-error,
-.em-my-booking .em-booking-message-error {
-	background-color:#EFA6A6;
+.em-warning {
+	border-radius: 0;
 	margin: 0 0 20px;
+	border: 0;
+}
+
+.em-booking .em-booking-message-error,
+.em-my-booking .em-booking-message-error,
+.em-warning-errors {
+	background-color:#EFA6A6;
 }
 
 .em-booking .em-booking-message-error p,
-.em-my-booking .em-booking-message-error p {
+.em-my-booking .em-booking-message-error p,
+.em-warning-errors p {
 	color: #970808;
 }
 
+.em-warning p:first-of-type{
+	margin-top: 0 !important;
+}
 
+.em-warning p:last-of-type{
+	margin-bottom: 0 !important;
+}
+/**
+ * PAGE EDIT EVENT (page-edit-event.php)
+ ***********************************/
+#em-form-with-recurrence p {
+	margin: 10px 0;
+}
+#em-location-data.em-location-data table.em-location-data,
+#em-location-data.em-location-data table.em-location-data tbody,
+#em-location-data.em-location-data table.em-location-data tr,
+#em-location-data.em-location-data table.em-location-data th,
+#em-location-data.em-location-data table.em-location-data td {
+	width: auto;
+    float: none;
+    border: none;
+    display: block;
+}
+
+#em-location-data.em-location-data table.em-location-data td i,
+#em-location-data .em-location-map-container,
+#em-location-data.em-location-data table.em-location-data .em-location-data-region {
+	display: none;
+}
+
+#em-location-data.em-location-data table.em-location-data tr + tr {
+	margin-top: 10px;
+}
+
+#em-location-data.em-location-data table.em-location-data input {
+	width: 100%;
+}
+
+.em-location-data-nolocation {
+	margin: 0 0 25px;
+    padding-top: 5px;
+}
 
 /**
  * SLIDER (node_modules/flickity)
@@ -1933,7 +1984,6 @@ textarea.js-medium-editor {
 	    padding: 10px;
 	    width: auto;
 	}
-
   	.separatorarch {
   		display: block;
   		margin: 20px 1%;
@@ -2049,10 +2099,10 @@ textarea.js-medium-editor {
 		bottom: 100px;
 	}
 	.overflow--blend__hover:hover {
-	  mix-blend-mode: color;
+		mix-blend-mode: color;
 	}
 	.overflow--blue__hover {
-	  background: transparent;
+		background: transparent;
 	}
 	.titletextarticle {
 		font-size: 4vw;
@@ -2160,6 +2210,17 @@ textarea.js-medium-editor {
 	.em-my-bookings tr td:first-of-type a{
 		font-size: 1.6rem;
 		font-weight: 400;
+	}
+	/* EVENT EDIT PAGE */
+	#em-location-data.em-location-data table.em-location-data tr {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+	#em-location-data.em-location-data table.em-location-data th,
+	#em-location-data.em-location-data table.em-location-data td {
+		flex: 1 0 100px;
+		margin: 0;
 	}
 	/* FOOTER */
 	.footerback .divright {
@@ -2273,6 +2334,20 @@ textarea.js-medium-editor {
 	/* BOTONES REDES SOCIALES */
 	.buttons-share__fixed {
 		top: 26px;
+	}
+	/* FORM PAGE EDIT EVENT */
+	#em-location-data {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+	#em-location-data .em-location-data {
+		flex: 1 0 50%;
+	}
+	#em-location-data .em-location-map-container {
+		display: block;
+		flex: 1 0 calc(50% - 10px);
+		margin-left: 10px;
 	}
 }
 

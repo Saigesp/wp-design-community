@@ -888,21 +888,21 @@ code {
 .article {
 	padding-top: 50px;
 }
- .headerarticle {
- 	position: relative;
- 	z-index: 0;
- 	overflow: hidden;
- }
- .titlearticle {
- 	position: absolute;
+.header--article {
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+}
+.title--article {
+	position: absolute;
 	bottom: 120px;
 	width: 100%;
 	z-index: 1;
- }
-.thumbarticle {
+}
+.thumb--article {
 	height: 300px;
 }
-.thumbarticle img {
+.thumb--article img {
 	width: 100%;
 	height: auto;
 }
@@ -926,7 +926,7 @@ code {
 /**
  * SINGLE POST NO THUMBNAIL
  ***********************************/
-.article--nothumb .titlearticle,
+.article--nothumb .title--article,
 .article--nothumb .categoryarticle {
 	position: relative;
     top: auto;
@@ -2041,10 +2041,10 @@ textarea.js-medium-editor {
 	    padding: 2%;
 	}
 	/* ARTICLE */
-	.thumbarticle {
+	.thumb--article {
 		height: 500px;
 	}
-	.titlearticle {
+	.title--article {
 		bottom: 100px;
 	}
 	.overflow--blend__hover:hover {
@@ -2326,7 +2326,7 @@ textarea.js-medium-editor {
 
 
 @media only screen and (min-width : 1200px) {
-	.thumbarticle {
+	.thumb--article {
 		height: 800px;
 	}
 }

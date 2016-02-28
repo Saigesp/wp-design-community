@@ -153,7 +153,7 @@ gulp.task('min:jstominimize:dev', function() {
  ***********************************/
 gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:dev'], function() {
 	var firstStream = gulp.src([dev + 'plugins/**/jquery.min.js'], { read: false });
-	var lastStream = gulp.src([dev + 'plugins/**/*.js', '!'+ dev + 'plugins/**/jquery.min.js'], { read: false });
+	var lastStream = gulp.src([dev + 'plugins/**/*.min.js', '!'+ dev + 'plugins/**/jquery.min.js'], { read: false });
     return gulp.src(dev + 'footer.php')
         .pipe(inject( series(firstStream, lastStream), {
                         transform: function(filepath) {

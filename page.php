@@ -8,12 +8,12 @@
         <!-- thumbnail -->
         <?php if(has_post_thumbnail()){ ?>
           <section class="wrap wrap--frame">
-            <header id="header-<?php the_ID(); ?>" class="headerarticle">
-              <figure id="thumbnail" class="thumbarticle">
+            <header id="header-<?php the_ID(); ?>" class="header header--article">
+              <figure id="thumbnail" class="thumb--article js-thumbfull">
                 <?php the_post_thumbnail('full');  ?>
               </figure>
               <div class="overflow overflow--black"></div>
-              <div id="title" class="titlearticle">
+              <div id="title" class="title title--article">
                 <div class="divtextarticle">
                   <h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
                   <?php if(function_exists('the_subtitle')){?>

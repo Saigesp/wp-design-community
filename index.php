@@ -1,19 +1,19 @@
 <?php get_header(); ?> 
 
   <!-- flexboxer -->
-  <div class="flexboxer flexboxer--index">
+  <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--index">
     <?php if (have_posts()) : ?>
       <?php while (have_posts()) : the_post(); ?>
       
         <!-- thumbnail -->
         <?php if(has_post_thumbnail()){ ?>
           <section class="wrap wrap--frame">
-            <header id="header-<?php the_ID(); ?>" class="headerarticle">
-              <figure id="thumbnail" class="thumbarticle">
+            <header id="header-<?php the_ID(); ?>" class="header header--article">
+              <figure id="thumbnail-<?php the_ID(); ?>" class="thumb thumb--article js-thumbfull">
                 <?php the_post_thumbnail('full');  ?>
               </figure>
               <div class="overflow overflow--black"></div>
-              <div id="title" class="titlearticle">
+              <div id="title-<?php the_ID(); ?>" class="title title--article">
                 <div class="divtextarticle">
                   <h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
                   <?php if(function_exists('the_subtitle')){?>
@@ -30,9 +30,7 @@
 
         <!-- content -->
         <section class="wrap wrap--content">
-          <?php if(!has_post_thumbnail()){ ?>
-            <h2><?php the_title();?></h2>
-          <?php }?>
+          <h2><?php the_title();?></h2>
           <?php the_content();?>
         </section><!-- end of content -->
 

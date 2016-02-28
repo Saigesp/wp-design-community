@@ -26,7 +26,7 @@ get_header();
 							</figure>
 							<div class="overflow overflow--black"></div>
 						<?php }  ?>
-						<div id="title" class="titlearticle">
+						<div id="title" class="title title--article">
 							<div class="divtextarticle">
 								<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
 								<h3 class="subtitletextarticle titlesarticle"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>

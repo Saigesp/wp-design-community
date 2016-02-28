@@ -18,7 +18,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 					<?php the_post_thumbnail('full');  ?>
 				</figure>
 				<div class="overflow overflow--black"></div>
-				<div id="title" class="titlearticle">
+				<div id="title" class="title title--article">
 					<div class="divtextarticle">
 						<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
 						<?php if(function_exists('the_subtitle')){?>

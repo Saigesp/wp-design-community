@@ -1,13 +1,12 @@
-
 /**
-*  DOCUMENT READY
-***********************************/
+ *  DOCUMENT READY
+ ***********************************/
 jQuery(document).ready(function($) {
 
-  imageresize($);
+    imageresize($);
 
 });
-    
+
 
 
 
@@ -17,17 +16,18 @@ jQuery(document).ready(function($) {
 
 
 /**
-*  CUSTOM FUNCTIONS
-***********************************/
+ *  CUSTOM FUNCTIONS
+ ***********************************/
 
 function imageresize($) {
+    // Altura imágenes
+    if ($(".js-thumbfull").length > 0) {
+        $('.js-thumbfull').css("height", $(window).height() - $('#headertop').outerHeight());
+    }
 
-  // Altura imágenes
-  $('.thumbarticle').css( "height", $(window).height() - $('#headertop').outerHeight() );
-
-  // Imagefill
-  $('.thumbmasonry').imagefill(); 
-  $('.thumbarch').imagefill(); 
-  $('.thumbarticle').imagefill(); 
+    // Imagefill
+    if ($(".thumbmasonry").length > 0) $('.thumbmasonry').imagefill();
+    if ($(".thumbarch").length > 0) $('.thumbarch').imagefill();
+    if ($(".js-thumbfull").length > 0) $('.js-thumbfull').imagefill();
 
 }

@@ -19,14 +19,14 @@ get_header();
 		    	</script>
 		    	<?php } ?>
 				<article id="article-<?php the_ID(); ?>" class="article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
-					<header id="header-<?php the_ID(); ?>" class="headerarticle">
+					<header id="header-<?php the_ID(); ?>" class="header header--article">
 						<?php  if ( has_post_thumbnail() ) { ?>
-							<figure id="thumbnail" class="thumbarticle">
+							<figure id="thumbnail" class="thumb--article js-thumbfull">
 								<?php the_post_thumbnail('full');  ?>
 							</figure>
 							<div class="overflow overflow--black"></div>
 						<?php }  ?>
-						<div id="title" class="titlearticle">
+						<div id="title" class="title title--article">
 							<div class="divtextarticle">
 								<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
 								<h3 class="subtitletextarticle titlesarticle"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>

@@ -2107,7 +2107,7 @@ textarea.js-medium-editor {
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
-	.flexboxer .wrap {
+	.flexboxer > .wrap {
 	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
     	box-shadow: 0 1px 3px rgba(0,0,0,.13);
 	}

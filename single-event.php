@@ -35,22 +35,37 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		<!-- title without thumbnail -->
 		<section class="wrap wrap--content">
 			<h2 class="title title--event"><?php the_title(); ?></h2>
-			<?php if(function_exists('the_subtitle')){?>
+			<?php if(function_exists('the_subtitle')){?>. ''.EM_Tickets
 				<h3 class="subtitle subtitle--event"><?php the_subtitle(); ?></h3>
 			<?php } ?>
 		</section><!-- end of title without thumbnail -->
 	<?php } ?>
 
 	<!-- relevant info -->
-	<section class="wrap wrap--content">
-		<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
-			echo '<strong>Fecha:</strong> '.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i');
-		}else{
-			echo '<strong>Inicio:</strong> '.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'<br><strong>Fin:</strong>   '.$event_end_date->format('j \d\e M \d\e Y\, H:i\h');
-		}
-		if($EM_Event->location->location_id > 0){
-			echo '<br><strong>Localización:</strong> '.$EM_Event->location->location_name;
-		} ?>
+	<section class="wrap wrap--content wrap--flex">
+		<div class="wrap wrap--flexed wrap--flexed__middleframe">
+			<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
+				echo '<strong>Fecha:</strong> '.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i');
+			}else{
+				echo '<strong>Inicio:</strong> '.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'<br><strong>Fin:</strong>   '.$event_end_date->format('j \d\e M \d\e Y\, H:i\h');
+			}
+			if($EM_Event->location->location_id > 0){
+				echo '<br><strong>Localización:</strong> '.$EM_Event->location->location_name;
+			}?>
+		</div>
+		<div class="wrap wrap--flexed wrap--flexed__middleframe">
+			<?php if($EM_Event->output('#_SPACES') > 0){
+				echo '<strong>Espacios disponibles:</strong> '
+				.$EM_Event->output('#_AVAILABLESPACES')
+				. ' / '
+				.$EM_Event->output('#_SPACES');
+			}
+			if($EM_Event->output('#_PENDINGSPACES') > 0){
+				echo '<br><strong>En trámite:</strong> '
+				.$EM_Event->output('#_PENDINGSPACES');
+			}
+			?>
+		</div>
 	</section><!-- end of relevant info -->
 
 	<!-- description -->
@@ -87,7 +102,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
   <section class="wrap wrap--frame">
   	<?php 
-  	var_dump($EM_Event);
+  	var_dump($EM_Event->bookings->tickets);
   	?>
   </section>
 </div><!-- end of flexboxer -->

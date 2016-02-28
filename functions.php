@@ -239,6 +239,25 @@ function customizer_css() {
 //add_action( 'wp_head', 'customizer_css' );
 
 
+/**
+ * BOOKING FORMS FUNCTIONS
+ ***********************************/
+function inject_html_in_bookings() {
+  if ('event' == get_post_type()) { ?>
+    <script>
+      jQuery(document).ready(function($) {
+        if ($(".em-ticket").length > 1) {
+          //alert($(".em-ticket").length);
+          $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
+          
+        }
+      });
+    </script>
+  <?php }
+}
+add_action( 'wp_head', 'inject_html_in_bookings' );
+
+
 
 
 /**
@@ -512,7 +531,7 @@ add_action('admin_head','hide_personal_options');
 
 
 /*
-* LOGIN REDIRECT
+* FUNCIONES DE LOGIN
 *********************************************/
 /* redirect nonadmin users after login */
 function soi_login_redirect( $redirect_to, $request, $user  ) {

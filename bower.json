@@ -1,0 +1,25 @@
+{
+  "name": "wpdesigncommunity",
+  "description": "wp-design-community",
+  "main": "gulpfile.js",
+  "authors": [
+    "Santiago Espinosa <saigesp@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "wordpress wp-dc wp-design-community"
+  ],
+  "homepage": "https://github.com/Saigesp/wp-design-community",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chosen": "^1.5.1"
+  }
+}

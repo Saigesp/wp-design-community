@@ -4,7 +4,7 @@ Wordpress theme for communities.
 
 Side project to develop a wordpress theme centered in user communities, to improve little organitzation's workflow. Currently mixing and cleaning old code.
 
-Building with **node**, **gulp** and **[WAMP](#wamp_config)**
+Building with **node**, **gulp**, **bower** and **[WAMP](#wamp_config)**
 
 ## Install
 Clone files to your wordpress theme directory:

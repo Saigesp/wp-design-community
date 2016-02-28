@@ -1523,8 +1523,6 @@ input[type="submit"]:hover {
 }
 
 
-
-
 /**
  * MÓDULOS
  *************************************************************************************************/
@@ -1822,9 +1820,12 @@ input[type="submit"]:hover {
 
 #em-location-data.em-location-data table.em-location-data td i,
 #em-location-data .em-location-map-container,
-#em-location-data.em-location-data table.em-location-data .em-location-data-region {
+#em-location-data.em-location-data table.em-location-data .em-location-data-region,
+#qt_em-editor-content_toolbar,
+#wp-em-editor-content-editor-tools {
 	display: none;
 }
+
 
 #em-location-data.em-location-data table.em-location-data tr + tr {
 	margin-top: 10px;
@@ -1850,10 +1851,41 @@ input[type="submit"]:hover {
 /**
  * MEDIUM EDITOR (node_modules/medium-editor)
  ***********************************/
-textarea.js-medium-editor {
-	display: none;
+textarea.js-medium-editor,
+.medium-editor-hidden {
+	display: none !important;
 }
 
+#wrapper .wp-editor-area {
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.6rem;
+	line-height: 1.8;
+	min-height: 120px;
+}
+
+#wrapper .wp-editor-area p {
+	margin: 10px 0;
+}
+#wrapper .wp-editor-area p:first-of-type {
+	margin-top: 0;
+}
+#wrapper .wp-editor-area p:last-of-type {
+	margin-bottom: 0;
+}
+
+#wrapper .medium-editor-placeholder {
+	padding: 10px;
+	color: black;
+	background-color: rgba(0,0,0,0.1);
+}
+
+.medium-editor-placeholder:after,
+.medium-editor-toolbar-form a {
+	color: black;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+}
 
 
 /**

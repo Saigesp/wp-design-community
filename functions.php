@@ -309,19 +309,10 @@ function inject_html_in_page_edit_event() {
     <script>
       jQuery(document).ready(function($) {
         if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
-        if ($("#location-country").length) $('#location-country option[value="0"]').text("Obligatorio");
-        if ($("#someElem").inlineStyle("width"))
-
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutationRecord) {
-                if ($("#em-map").inlineStyle("display") == undefined) alert('style changed!');
-            });    
-        });
-
-        var target = document.getElementById('em-map');
-        observer.observe(target, { attributes : true, attributeFilter : ['style'] });
-        
+        if ($("#location-country").length) $('#location-country option[value="0"]').text("Obligatorio");     
+        var editor = new MediumEditor('#em-editor-content');
       });
+      
     </script>
   <?php }
 }
@@ -570,6 +561,11 @@ jQuery(document).ready(function($) {
 </script>' . "\n";
 }
 add_action('admin_head','hide_personal_options');
+
+// Ocultar TinyMCE
+if( !is_admin() ){
+  add_filter( 'user_can_richedit' , '__return_false', 50 );
+}
 
 
 

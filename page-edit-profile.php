@@ -6,7 +6,8 @@
 
 <div class="flexboxer flexboxer--author flexboxer--author__edit">
 <?php if(is_user_logged_in()){ ?>
-  <section class="wrap wrap--author">
+
+  <section class="wrap wrap--content wrap--author">
   	<form action="">
 		<figure class="authorimagefoot authorbuble" style="background-color: #666;">
 		<img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')

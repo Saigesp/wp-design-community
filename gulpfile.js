@@ -16,16 +16,19 @@ var project = 'wp-design-community',
     ],
     min_files_css = [ // CSS Archives to minimize
         dev + 'plugins/**/*.css',
-        '!' + dev + 'plugins/**/*.min.css'
+        '!' + dev + 'plugins/**/*.min.css',
+        bower + '*/chosen.css'
     ],
     min_files_js = [ // JS Archives to minimize
         dev + 'plugins/**/*.js',
         '!' + dev + 'plugins/**/*.min.js',
         node + '*/src/jquery-ias.js',
-        node + '*/js/jquery-imagefill.js'
+        node + '*/js/jquery-imagefill.js',
+        bower + '*/chosen.jquery.css'
     ],
     css_minimized_files = [ // CSS Archives to copy
         node + 'flickity/*/flickity.min.css',
+        node + 'medium-editor/dist/*/medium-editor.min.css',
         node + 'medium-editor/dist/css/*/flat.min.css'
     ],
     js_minimized_files = [ // JS Archives to copy

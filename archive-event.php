@@ -8,6 +8,7 @@ $post_per_page = get_option( 'posts_per_page', '10' );
 $args = array (
   'order' => 'DESC',
   'posts_per_page' => -1,
+  'post_type' => 'event'
 );
 $post_count_query = new wp_query( $args );
 $post_count = $post_count_query->found_posts;
@@ -19,6 +20,7 @@ $args = array(
   'order' => 'DESC',
   'posts_per_page' => $post_per_page,
   'offset'    => $offset,
+  'post_type' => 'event'
 );
 $wp_query = new wp_query( $args );
 
@@ -35,31 +37,13 @@ $wp_query = new wp_query( $args );
 
 <!-- navigation -->
 <div class="navigation">
-  <?php /*
-    echo paginate_links( array(
-      'base' => $base,
-      'format' => '&pag=%#%',
-      'prev_text' => __('&laquo; Previous'),
-      'next_text' => __('Next &raquo;'),
-      'total' => $total_pages,
-      'current' => $page,
-      'end_size' => 1,
-      'mid_size' => 5,
-      'add_args' => false,
-  )); */ 
-    $base = get_bloginfo( 'url' ). '%_%';
-    echo paginate_links( array(
-      'base' => $base,
-      'total' => $wp_query->max_num_pages,
-      'format'   => '?pag=%#%',
-      'current'  => $pagec,
-    ));
-    ?>
+  <?php $base = get_bloginfo( 'url' ). '%_%';
+  echo paginate_links( array(
+    'base' => $base,
+    'total' => $wp_query->max_num_pages,
+    'format'   => '?pag=%#%',
+    'current'  => $pagec,
+  )); ?>
 </div><!-- end of navigation -->
 
 <?php get_footer(); ?>
-
-
-
-
-  

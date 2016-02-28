@@ -247,9 +247,16 @@ function inject_html_in_bookings() {
     <script>
       jQuery(document).ready(function($) {
         if ($(".em-ticket").length > 1) {
-          //alert($(".em-ticket").length);
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
-          
+        }
+        if ($(".em-booking-login").length) {
+          $('<h3 style="margin-top:20px;">Datos de contacto</h3>').insertBefore(".em-tickets-spaces + .input-user-field");
+        }
+        if ($(".em-booking-form").length) {
+          $(".em-booking-form").prepend("<h3>Registro</h3>");
+        }
+        if ($(".em-booking-login-form").length) {
+          $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
         }
       });
     </script>

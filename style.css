@@ -1514,7 +1514,7 @@ input[type="submit"]:hover {
 /**
  * EVENTS MANAGER 
  ***********************************/
-.em-booking {
+.wrap .em-booking {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

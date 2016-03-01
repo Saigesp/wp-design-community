@@ -1,7 +1,11 @@
 <?php get_header(); ?> 
 
 <?php 
-  $current_user_id = $current_user->ID;
+	//$user_to_edit = $_GET['id'] == '' ? 'rand' : $_GET['order'];
+	$current_user_id = $current_user->ID;
+
+	if(is_user_logged_in() && current_user_can( 'edit_users' ))
+		$current_user_id = $_GET['id'] > 0 ? $current_user->ID : $_GET['id'];
 ?>
 
 <div class="flexboxer flexboxer--author flexboxer--author__edit">

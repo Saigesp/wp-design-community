@@ -43,7 +43,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 	<!-- relevant info -->
 	<section class="wrap wrap--content wrap--flex">
-		<div class="wrap wrap--flexed wrap--frame__middle">
+		<div class="wrap wrap--frame__middle">
 			<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
 				echo '<span class="breaklinetablet"><strong>Fecha:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i').'</span>';
 			}else{
@@ -53,7 +53,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 				echo '<br><span class="breaklinetablet"><strong>Localización:</strong> </span><span class="breaklinetablet">'.$EM_Event->location->location_name.'</span>';
 			}?>
 		</div>
-		<div class="wrap wrap--flexed wrap--frame__middle">
+		<div class="wrap wrap--frame__middle">
 			<?php
 			if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet
 				if($EM_Event->output('#_SPACES') > 0){
@@ -85,12 +85,12 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 	<!-- localization -->
 	<?php if($EM_Event->location_id > 0){?>
 		<section class="wrap wrap--frame wrap--flex">
-			<div class="wrap wrap--flexed wrap--content__middle">
+			<div class="wrap wrap--content__middle">
 				<h3>Localización</h3>
 				<p><strong><?php echo $EM_Event->output('#_LOCATIONNAME');?></strong><br>
 				<?php echo $EM_Event->output('#_LOCATIONADDRESS').', '.$EM_Event->output('#_LOCATIONTOWN');?></p>
 			</div>
-			<div class="wrap wrap--flexed wrap--frame__middle">
+			<div class="wrap wrap--frame__middle">
 				<?php echo $EM_Event->output('#_LOCATIONMAP');?>
 			</div>
 		</section>

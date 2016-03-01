@@ -1396,6 +1396,10 @@ blockquote p {
     background: #f5f5f5;
 }
 
+.flexboxer > section:last-of-type{
+	margin-bottom: 0;
+}
+
 .flexboxer .wrap--flex {
     display: flex;
     flex-wrap: wrap;
@@ -1412,14 +1416,18 @@ blockquote p {
     flex: 1 0 100%;
 }
 
-.flexboxer .wrap--flex .wrap--content__middle {
+.flexboxer .wrap--content__middle {
 	flex: 1 0 calc(100% - 40px);
 	padding: 20px;
 }
 
-.flexboxer .wrap--flex .wrap--frame__middle {
+.flexboxer .wrap--frame__middle {
 	flex: 1 0 100%;
 	padding: 0;
+}
+
+.flexboxer .wrap--frame__middle > .wrap--frame__middle:first-child {
+	margin-left: 0;
 }
 
 .flexboxer .wrap h2:first-of-type,
@@ -1441,16 +1449,24 @@ blockquote p {
 	margin: 6px 10px 0 0;
 }
 
-.flexboxer > section:last-of-type{
-	margin-bottom: 0;
+.flexboxer .wrap--flex input,
+.flexboxer .wrap--flex select {
+	width: 100%;
 }
 
 
 
 
 
+/* Form structure */
 
+.wrap--form > .wrap--flex + .wrap--flex {
+	margin-top: 10px;
+}
 
+.wrap--form label {
+    line-height: 32px;
+}
 
 
 
@@ -1484,12 +1500,6 @@ blockquote p {
 .flexboxer--author__edit input[type="text"]:hover,
 .flexboxer--author__edit .js-medium-editor:hover {
 	background: rgba(0,0,0,0.1);
-}
-
-.flexboxer--author__edit .button--submit{
-	position: absolute;
-	top: 0;
-	right: 0;
 }
 
 
@@ -2391,6 +2401,11 @@ textarea.js-medium-editor,
 	.articlemasonry a:active {
 	  color: rgb(40,180,183);
 	}
+	/* FLEXBOXER */
+	.flexboxer .wrap--flex .wrap--frame__middle + .wrap--frame__middle{
+	    flex: 1 0  calc(50% - 10px);
+	    margin-left: 10px;
+	}
 	/* EVENT BOOKING FORM */
 	.em-booking .em-booking-form .em-ticket + .em-ticket {
 		margin-top: 0;
@@ -2505,7 +2520,7 @@ textarea.js-medium-editor,
 	    margin-left: 10px;
 	}
 	.flexboxer .wrap--flex .wrap--frame__middle {
-	    flex: 1 0 50%;
+	    flex: 1 0  50%;
 	}
 	.flexboxer .wrap--content {
 	    max-width: 860px;

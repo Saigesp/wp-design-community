@@ -670,10 +670,27 @@ if( !is_admin() ){
 function wpdc_add_custom_user_profile_fields( $user ) {
 ?>
   <h3>Información sobre el socio</h3>
-  
   <table class="form-table">
     <tr>
-      <th><label for="asociation_position">Posición</label></th>
+      <th><label for="dbem_phone">DNI</label></th>
+      <td><input type="text" name="dbem_dnie" value="<?php echo esc_attr(get_the_author_meta('dbem_dnie', $user->ID));?>"/></td>
+    </tr>
+    <?php if (!is_plugin_active('events-manager/events-manager.php')){ ?> 
+    <tr>
+      <th><label for="dbem_address">Dirección</label></th>
+      <td><input type="text" name="dbem_address" value="<?php echo esc_attr(get_the_author_meta('dbem_address', $user->ID));?>"/></td>
+    </tr>
+    <tr>
+      <th><label for="dbem_phone">Teléfono</label></th>
+      <td><input type="text" name="dbem_phone" value="<?php echo esc_attr(get_the_author_meta('dbem_phone', $user->ID));?>"/></td>
+    </tr>
+    <?php } ?>
+  </table>
+
+  <h3>Información organizativa</h3>
+  <table class="form-table">
+    <tr>
+      <th><label for="asociation_position">Rol organizativo</label></th>
       <td>
         <select name="asociation_position">
           <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
@@ -681,6 +698,7 @@ function wpdc_add_custom_user_profile_fields( $user ) {
           <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
           <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
           <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+          <option value="socio" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
         </select>
       </td>
     </tr>
@@ -695,7 +713,7 @@ function wpdc_save_custom_user_profile_fields( $user_id ) {
 
 add_action( 'show_user_profile', 'wpdc_add_custom_user_profile_fields' );
 add_action( 'edit_user_profile', 'wpdc_add_custom_user_profile_fields' );
-add_action( 'personal_options_update', 'wpdc_save_custom_user_profile_fields' );
+//add_action( 'personal_options_update', 'wpdc_save_custom_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'wpdc_save_custom_user_profile_fields' );
 
 

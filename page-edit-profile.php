@@ -14,7 +14,6 @@
 <?php if(is_user_logged_in()){ ?>
 
   <section class="wrap wrap--content wrap--author">
-  	<form action="">
 		<figure class="authorimagefoot authorbuble" style="background-color: #666;">
 		<img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')
 		  echo get_wp_user_avatar_src($current_user_id, 100, 'medium');
@@ -42,23 +41,80 @@
 		  <?php } ?>
 		</p>
     	<textarea class="description js-medium-editor"><?php echo $current_user->description;?></textarea>
-    	<input type="submit" value="Guardar" class="button button--submit">
-    </form>
   </section><!-- end of author -->
+
+  <section class="wrap wrap--content wrap--form wrap--authordata">
+  	<h3>Datos personales</h3>
+  	<div class="wrap wrap--flex">
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="dbem_dnie">DNI</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+				<input type="text" name="dbem_dnie" value="<?php echo esc_attr(get_the_author_meta('dbem_dnie', $user->ID));?>"/>
+  			</div>
+  		</div>
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="dbem_address">Dirección</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+				<input type="text" name="dbem_address" value="<?php echo esc_attr(get_the_author_meta('dbem_address', $user->ID));?>"/>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="wrap wrap--flex">
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="dbem_phone">Teléfono</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+				<input type="text" name="dbem_phone" value="<?php echo esc_attr(get_the_author_meta('dbem_phone', $user->ID));?>"/>
+  			</div>
+  		</div>
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="hola">Hola</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+  				<input type="text" name="hola">
+  			</div>
+  		</div>
+  	</div>
+  </section>
 
   <?php if($other_user){ ?>
   <section class="wrap wrap--content">
   	<h3>Datos del asociado</h3>
   	<div class="wrap wrap--flex">
-  		<div class="wrap wrap--flexed wrap--frame__middle">
-  			<label for="position">Posición</label><input type="text" name="position">
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="position">Rol</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+		        <select name="asociation_position">
+		          <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+		          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+		          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+		          <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+		          <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+		        </select>
+  			</div>
   		</div>
-  		<div class="wrap wrap--flexed wrap--frame__middle">
-  			<label for="hola">Hola</label><input type="text" name="hola">
+  		<div class="wrap wrap--frame__middle wrap--flex">
+  			<div class="wrap wrap--frame__middle">
+  				<label for="hola">Hola</label>
+  			</div>
+  			<div class="wrap wrap--frame__middle">
+  				<input type="text" name="hola">
+  			</div>
   		</div>
   	</div>
   </section>
   <?php } ?>
+  <section class="wrap wrap--frame">
+  	<?php var_dump(get_user_meta($current_user_id));?>
+  </section>
 
   <section class="wrap wrap--frame">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>

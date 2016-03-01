@@ -4,8 +4,10 @@
 	//$user_to_edit = $_GET['id'] == '' ? 'rand' : $_GET['order'];
 	$current_user_id = $current_user->ID;
 
-	if(is_user_logged_in() && current_user_can( 'edit_users' ))
-		$current_user_id = $_GET['id'] > 0 ? $current_user->ID : $_GET['id'];
+	if(is_user_logged_in() && current_user_can( 'edit_users' ) && $_GET['id'] > 0 ) {
+		$current_user_id = $_GET['id'];
+		$other_user = true;
+	}
 ?>
 
 <div class="flexboxer flexboxer--author flexboxer--author__edit">
@@ -43,6 +45,20 @@
     	<input type="submit" value="Guardar" class="button button--submit">
     </form>
   </section><!-- end of author -->
+
+  <?php if($other_user){ ?>
+  <section class="wrap wrap--content">
+  	<h3>Datos del asociado</h3>
+  	<div class="wrap wrap--flex">
+  		<div class="wrap wrap--flexed wrap--frame__middle">
+  			<label for="position">Posición</label><input type="text" name="position">
+  		</div>
+  		<div class="wrap wrap--flexed wrap--frame__middle">
+  			<label for="hola">Hola</label><input type="text" name="hola">
+  		</div>
+  	</div>
+  </section>
+  <?php } ?>
 
   <section class="wrap wrap--frame">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>

@@ -1392,19 +1392,8 @@ blockquote p {
     flex-direction: row;
 }
 
-.flexboxer .wrap {
+.flexboxer > .wrap {
     background: #f5f5f5;
-    
-}
-
-.flexboxer .wrap--content {
-	padding: 20px;
-	flex: 1 0 calc(100% - 40px);
-}
-
-.flexboxer .wrap--frame,
-.flexboxer--event__edit .wrap--event-form-image {
-    flex: 1 0 100%;
 }
 
 .flexboxer .wrap--flex {
@@ -1413,22 +1402,24 @@ blockquote p {
     flex-direction: row;
 }
 
-.flexboxer .wrap--flex .wrap--flexed {
+.flexboxer .wrap--content {
 	padding: 20px;
-}
-
-.flexboxer .wrap--flex .wrap--flexed__middlecontent {
 	flex: 1 0 calc(100% - 40px);
 }
 
-
-.flexboxer .wrap--flex .wrap--flexed__middleframe {
-	flex: 1 0 100%;
+.flexboxer .wrap--frame  {
 	padding: 0;
+    flex: 1 0 100%;
 }
 
-.flexboxer .wrap--flex .em-location-map-container {
-	width: 100% !important;
+.flexboxer .wrap--flex .wrap--content__middle {
+	flex: 1 0 calc(100% - 40px);
+	padding: 20px;
+}
+
+.flexboxer .wrap--flex .wrap--frame__middle {
+	flex: 1 0 100%;
+	padding: 0;
 }
 
 .flexboxer .wrap h2:first-of-type,
@@ -1690,6 +1681,10 @@ input[type="submit"]:hover {
     background-color: rgb(40,180,184);
 }
 
+.flexboxer .wrap--flex .em-location-map-container {
+	width: 100% !important;
+}
+
 
 /* User registration && Booking gateway */
 .em-booking .em-booking-form-details .input-user-field,
@@ -1849,6 +1844,7 @@ input[type="submit"]:hover {
 	background-color: rgba(0,0,0,0.1);
 	height: 340px;
 	display: block;
+	flex: 1 0 100%;
 	transition: background 300ms ease;
 }
 .flexboxer--event__edit .wrap--event-form-name {
@@ -2157,7 +2153,7 @@ textarea.js-medium-editor,
 	    margin-top: 0;
 	}
 	/* FLEXBOXER */
-	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+	.flexboxer .wrap--flex .wrap--frame__middle {
     	flex: 1 0 50%;
     }
 }
@@ -2501,14 +2497,14 @@ textarea.js-medium-editor,
 	}
 	.wrap .em-booking-form,
 	.wrap .em-booking-login,
-	.flexboxer .wrap--flex .wrap--flexed__middlecontent {
+	.flexboxer .wrap--flex .wrap--content__middle {
 	    flex: 1 0 calc(50% - 40px);
 	}
 	.wrap .em-booking-login {
 		flex: 1 0 calc(50% - 50px);
 	    margin-left: 10px;
 	}
-	.flexboxer .wrap--flex .wrap--flexed__middleframe {
+	.flexboxer .wrap--flex .wrap--frame__middle {
 	    flex: 1 0 50%;
 	}
 	.flexboxer .wrap--content {

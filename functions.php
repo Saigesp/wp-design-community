@@ -466,7 +466,7 @@ function my_theme_add_editor_styles() {
     $font_url = str_replace( ',', '%2C', '//fonts.googleapis.com/css?family=Merriweather:400italic,400,900,300,700,700italic|Merriweather+Sans:400,700,800|Open+Sans:400italic,400,300,700,800,600' );
     add_editor_style( $font_url );
 }
-add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
+//add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
 
 
 
@@ -666,6 +666,37 @@ add_action('admin_head','hide_personal_options');
 if( !is_admin() ){
   add_filter( 'user_can_richedit' , '__return_false', 50 );
 }
+
+function wpdc_add_custom_user_profile_fields( $user ) {
+?>
+  <h3>Información sobre el socio</h3>
+  
+  <table class="form-table">
+    <tr>
+      <th><label for="asociation_position">Posición</label></th>
+      <td>
+        <select name="asociation_position">
+          <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+          <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+          <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+<?php }
+
+function wpdc_save_custom_user_profile_fields( $user_id ) {
+  
+  if (!current_user_can('edit_user',$user_id)) return FALSE;
+  update_usermeta( $user_id, 'asociation_position', $_POST['asociation_position'] );
+}
+
+add_action( 'show_user_profile', 'wpdc_add_custom_user_profile_fields' );
+add_action( 'edit_user_profile', 'wpdc_add_custom_user_profile_fields' );
+add_action( 'personal_options_update', 'wpdc_save_custom_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'wpdc_save_custom_user_profile_fields' );
 
 
 

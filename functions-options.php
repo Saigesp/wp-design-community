@@ -3,10 +3,15 @@
 function setup_theme_admin_menus() {
     add_menu_page('WP-DC Options', 'WP-DC Options', 'manage_options', 
         'wpdc_settings', 'theme_wpdc_settings');
-         
+
+    add_submenu_page('wpdc_settings', 
+        'Roles', 'Roles', 'manage_options', 
+        'roles', 'theme_wpdc_settings_roles'); 
+
     add_submenu_page('wpdc_settings', 
         'Twitter', 'Twitter', 'manage_options', 
-        'twitter', 'theme_wpdc_settings_twitter'); 
+        'twitter', 'theme_wpdc_settings_twitter');
+
 }
 
 
@@ -17,9 +22,26 @@ function setup_theme_admin_menus() {
 function theme_wpdc_settings() {
     if (!current_user_can('manage_options')) {
     		wp_die('You do not have sufficient permissions to access this page.');
-		}else{
+		}else{ ?>
+      <div class="wrap">
+          <h2>Configuración general</h2>
+      </div>
+    <?php }
+}
 
-    }
+
+/* OPCIONES DE ROLES
+*
+*****************************************************
+*/
+function theme_wpdc_settings_roles() {
+    if (!current_user_can('manage_options')) {
+        wp_die('You do not have sufficient permissions to access this page.');
+    }else{ ?>
+      <div class="wrap">
+          <h2>Configuración de roles</h2>
+      </div>
+    <?php }
 }
 
 

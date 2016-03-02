@@ -9,7 +9,7 @@
   <div class="wrap wrap--content content content--archive">
     <h2 class="title title--archive" ><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
     <div class="description description--archive">
-      <?php the_excerpt();?>
+      <?php the_excerpt(); ?>
     </div>
   </div>
 </section>

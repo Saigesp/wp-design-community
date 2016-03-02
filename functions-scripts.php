@@ -1,9 +1,43 @@
 <?php 
 
+
+add_action( 'wp_head', 'inject_in_all' );
+add_action( 'wp_head', 'inject_in_bookings' );
+add_action( 'wp_head', 'inject_in_edit_event' );
+
+
+// Create pages to extend theme
+new_page_title('Edit Event');
+
+/**
+ * ALL PAGES
+ ***********************************/
+function inject_in_all() { ?>
+    <script>
+      jQuery(document).ready(function($) {
+        $('#kebab').on("click", function(){
+
+        });
+
+        imageresize($);
+
+        if ($(".js-imagefill").length > 0){
+          var imgLoad = imagesLoaded('.js-imagefill img');
+          imgLoad.on( 'always', function( instance ) {
+            $('.js-imagefill').imagefill();
+          });
+        }
+
+        $(".js-showonload").removeClass("js-showonload-active");
+        
+      });
+    </script>
+<?php }
+
 /**
  * PAGE EVENT
  ***********************************/
-function inject_html_in_bookings() {
+function inject_in_bookings() {
   if ('event' == get_post_type()) { ?>
     <script>
       jQuery(document).ready(function($) {
@@ -23,15 +57,12 @@ function inject_html_in_bookings() {
     </script>
   <?php }
 }
-add_action( 'wp_head', 'inject_html_in_bookings' );
 
-// Create pages to extend theme
-new_page_title('Edit Event');
 
 /**
  * PAGE EDIT EVENT
  ***********************************/
-function inject_head_in_page_edit_event() {
+function inject_in_edit_event() {
   if (is_page('edit-event')) { ?>
     <script>
       jQuery(document).ready(function($) {
@@ -125,16 +156,6 @@ function inject_head_in_page_edit_event() {
           $('p.submit').removeClass('hide');
         });
 
-      });
-
-    </script>
-  <?php }
-}
-
-function inject_footer_in_page_edit_event() {
-  if (is_page('edit-event')) { ?>
-    <script>
-      jQuery(document).ready(function($) {
         $(".event-categories select").chosen();
         $('#location-country').chosen();  
       }); 
@@ -142,6 +163,5 @@ function inject_footer_in_page_edit_event() {
   <?php }
 }
 
-add_action( 'wp_head', 'inject_head_in_page_edit_event' );
-add_action( 'wp_head', 'inject_footer_in_page_edit_event' );
+
 ?>

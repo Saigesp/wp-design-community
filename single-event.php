@@ -35,7 +35,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		<!-- title without thumbnail -->
 		<section class="wrap wrap--content">
 			<h2 class="title title--event"><?php the_title(); ?></h2>
-			<?php if(function_exists('the_subtitle')){?>. ''.EM_Tickets
+			<?php if(function_exists('the_subtitle')){?>
 				<h3 class="subtitle subtitle--event"><?php the_subtitle(); ?></h3>
 			<?php } ?>
 		</section><!-- end of title without thumbnail -->

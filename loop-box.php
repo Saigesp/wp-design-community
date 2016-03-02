@@ -21,12 +21,4 @@
     </header>
   </section><!-- end of thumbnail -->
 
-<?php }else{?>
-
-  <!-- content -->
-  <section class="wrap wrap--content">
-    <h2><?php the_title();?></h2>
-    <?php the_content();?>
-  </section><!-- end of content -->
-
 <?php }?>

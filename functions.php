@@ -75,9 +75,55 @@ function post_id_exists( $id ) {
   return is_string( get_post_status( $id ) );
 }
 
+// Actions when user is validated
+function user_confirmed($user_id) {
+   //user_confirmed_email($user_id);
+   $op_user = get_user_meta($user_id, 'op_user', true );
+   $op_user['validate_date'] = current_time('mysql');
+   update_user_meta($user_id, 'op_user', $op_user );
+   //tweet_confirmed_user( $user_id, 'author' );
+}
 
+// Register last login
+function reg_last_login($login) {
+    global $user_ID;
+    $user = get_userdatabylogin($login);
+    update_usermeta($user->ID, 'last_login', current_time('mysql'));
+}
+// Echo last login
+function the_last_login($user_id) {
+    $last_login = get_user_meta($user_id, 'last_login', true);
+    echo $last_login;
+}
+add_action('wp_login','reg_last_login');
 
+// Random user query
+function wp_user_query_random_enable($query) {
+    if($query->query_vars["orderby"] == 'rand') {
+        $query->query_orderby = 'ORDER by RAND()';
+    }
+}
+add_filter('pre_user_query', 'wp_user_query_random_enable');
 
+// Add theme user meta
+function add_theme_user_meta( $user_id ) {
+  $op_user = array(
+    'karma' => 10,
+    'invitations' => 0,
+    'likes' => array( 0 ),
+    'has_invited' => array( 0 ),
+    'has_validate' => array( 0 ),
+    'validated_by' => array( 0 ),
+    'has_denunced' => array( 0 ),
+    'denunced_by' => array( 0 ),
+    'has_upvote' => array( 0 ),
+    'upvotedby' => array( 0 ),
+  );
+  add_user_meta( $user_id, 'op_user', $op_user );
+  $validate_date = 0;
+  add_user_meta( $user_id, 'validate_date', $validate_date );
+}
+add_action( 'user_register', 'add_theme_user_meta', 10, 1 );
 
 /**
  * REQUIRE WP PLUGINS
@@ -279,6 +325,7 @@ function customizer_css() {
 
 // Create pages to extend theme
 new_page_title('Edit Event');
+new_page_title('Control Users');
 
 
 
@@ -526,6 +573,7 @@ if( !is_admin() ){
   add_filter( 'user_can_richedit' , '__return_false', 50 );
 }
 
+// Add charge in organization
 function wpdc_add_custom_user_profile_fields( $user ) {
 ?>
   <h3>Información sobre el socio</h3>
@@ -565,7 +613,6 @@ function wpdc_add_custom_user_profile_fields( $user ) {
 <?php }
 
 function wpdc_save_custom_user_profile_fields( $user_id ) {
-  
   if (!current_user_can('edit_user',$user_id)) return FALSE;
   update_usermeta( $user_id, 'asociation_position', $_POST['asociation_position'] );
 }
@@ -574,6 +621,8 @@ add_action( 'show_user_profile', 'wpdc_add_custom_user_profile_fields' );
 add_action( 'edit_user_profile', 'wpdc_add_custom_user_profile_fields' );
 //add_action( 'personal_options_update', 'wpdc_save_custom_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'wpdc_save_custom_user_profile_fields' );
+
+
 
 
 
@@ -602,18 +651,6 @@ function my_front_end_login_fail($username){
     }
 }
 add_action('wp_login_failed', 'my_front_end_login_fail'); 
-
-/* register last login */
-add_action('wp_login','reg_last_login');
-function reg_last_login($login) {
-    global $user_ID;
-    $user = get_userdatabylogin($login);
-    update_usermeta($user->ID, 'last_login', current_time('mysql'));
-}
-function the_last_login($user_id) {
-    $last_login = get_user_meta($user_id, 'last_login', true);
-    echo $last_login;
-}
 
 
 /**

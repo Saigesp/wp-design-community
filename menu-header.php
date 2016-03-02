@@ -1,8 +1,5 @@
-<header class="headertop">
-  <div class="wrapper">
-    <?php if (has_nav_menu($menutop)) { ?>
-  	   <?php the_svg_icon('hamburguer')?>
-    <?php } ?>
+<header class="headertop wrap wrap--flex">
+  <div class="wrapper wrap wrap--frame">
     <div class="wrap wrap--logo">
     	<a href="<?php bloginfo('url'); ?>">
         <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>

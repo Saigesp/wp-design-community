@@ -222,6 +222,7 @@ code {
 	right: 0;
 	padding: 0;
 	line-height: 0;
+	transition: background 350ms ease;
 }
 
 .headertop .wrap--icon__topmenu:hover {

@@ -5,9 +5,11 @@
  ***********************************/
 // Add more functions
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+include_once(locate_template('functions-scripts.php'));
 include_once(locate_template('functions-options.php'));
-include_once(locate_template('functions-twitter.php'));
+include_once(locate_template('functions-twitter.php')); // TODO Poner si está activada opción de twitter
 include_once(locate_template('functions-svg.php'));
+
 
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
@@ -273,150 +275,7 @@ function customizer_css() {
 //add_action( 'wp_head', 'customizer_css' );
 
 
-/**
- * BOOKING FORMS FUNCTIONS
- ***********************************/
-function inject_html_in_bookings() {
-  if ('event' == get_post_type()) { ?>
-    <script>
-      jQuery(document).ready(function($) {
-        if ($(".em-ticket").length > 1) {
-          $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
-        }
-        if ($(".em-booking-login").length) {
-          $('<h3 style="margin-top:20px;">Datos de contacto</h3>').insertBefore(".em-tickets-spaces + .input-user-field");
-        }
-        if ($(".em-booking-form").length) {
-          $(".em-booking-form").prepend("<h3>Registro</h3>");
-        }
-        if ($(".em-booking-login-form").length) {
-          $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
-        }
-      });
-    </script>
-  <?php }
-}
-add_action( 'wp_head', 'inject_html_in_bookings' );
 
-// Create pages to extend theme
-new_page_title('Edit Event');
-
-/**
- * PUBLISH BOOKING FORMS FUNCTIONS
- ***********************************/
-function inject_head_in_page_edit_event() {
-  if (is_page('edit-event')) { ?>
-    <script>
-      jQuery(document).ready(function($) {
-        if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
-        if ($("#event-form > .wrap").length)  $("#event-form > .wrap").addClass("flexboxer flexboxer--event flexboxer--event__edit").removeClass("wrap");
-
-        // Hide thumbnail && extra info && add classes
-        $('.inside').each(function(){
-            var elemClass = $(this).attr('class').split(/\s+/);
-            elemClass = 'wrap--'+elemClass[1]
-            $(this).prev('h3').andSelf().wrapAll('<div class="wrap wrap--content hide '+elemClass+'"/>');
-        });
-        $(".wrap--event-form-image").addClass("wrap--frame").removeClass("wrap--content hide");
-        $('.flexboxer--event__edit + p.submit').addClass('hide').children('input').attr("value", "Presentar evento");
-
-        // Add default image && resize
-        $(".wrap--event-form-image")
-        .prepend('<div class="overflow overflow--black__hover js-thumbnail-upload"></div><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/default/noimage600x600.png"><div class="title title--article"><div class="divtextarticle"><h2 class="titletextarticle titlesarticle"></h2></div></div>')
-        .imagefill()
-        .children('img').animate({ opacity: 1}, 3000);
-
-        // Trigger upload thumbnail
-        $(".js-thumbnail-upload").click(function() {
-            $("#event-image").trigger('click');
-        });
-        $("#event-image").change(function(){
-          $('.wrap--event-form-image').css("opacity", 0);
-          var $input = $(this);
-          var inputFiles = this.files;
-          if (inputFiles == undefined || inputFiles.length == 0) return;
-          var inputFile = inputFiles[0];
-          var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];
-          var extension = inputFile.name.split('.').pop().toLowerCase();
-          var isSuccess = fileTypes.indexOf(extension) > -1;
-          if (isSuccess) {
-              var reader = new FileReader();
-              reader.onload = function(event) {
-                  $('.wrap--event-form-image img').attr("src", event.target.result);
-                  $('.wrap--event-form-image')
-                    .imagefill()
-                    .animate({ opacity: 1}, 3000);
-
-                  $('.wrap--event-form-name').removeClass('hide');
-              };
-              reader.readAsDataURL(inputFile);
-
-          } else {
-              alert('Formatos permitidos: jpg, gif, png');
-              $('.wrap--event-form-name').addClass('hide');
-          }
-          reader.onerror = function(event) {
-              alert("ERROR: " + event.target.error.code);
-          };
-        });
-
-        // Update title in thumbnail
-        $('.event-form-name input').on('keyup', function() {
-          var text = $('.event-form-name input').val();
-          if(text != '' && text.length > 0) {
-            $('.wrap--event-form-when').removeClass('hide');
-            $('.wrap--event-form-image .overflow').addClass('overflow--black');
-          } 
-          $('.titletextarticle').text(text);
-        });
-
-        /* Habilite form details */
-        $('.event-form-when .em-date-end').change(function() {
-          $('.wrap--event-form-details').removeClass('hide');
-        });
-        $('.event-form-when .em-date-end').change(function() {
-          $('.wrap--event-form-details').removeClass('hide');
-        });
-
-        // Create medium editor
-        var editor = new MediumEditor('#em-editor-content', {
-            placeholder: {
-                text: 'Información del evento',
-                hideOnClick: true
-            }
-        });
-        editor.subscribe('editableInput', function (event, editable) {
-          var text = $('#em-editor-content').val();
-          if(text != '' && text.length > 15) {
-            $('.wrap--event-form-where').removeClass('hide');
-          } 
-        });
-
-        /* Location && submit */
-        $('#location-name').change(function() {
-          $('.wrap--event-form-bookings').removeClass('hide');
-          $('p.submit').removeClass('hide');
-        });
-
-      });
-
-    </script>
-  <?php }
-}
-
-function inject_footer_in_page_edit_event() {
-  if (is_page('edit-event')) { ?>
-    <script>
-      jQuery(document).ready(function($) {
-        $(".event-categories select").chosen();
-        //$('#location-country').chosen();  
-      }); 
-    </script>
-  <?php }
-}
-
-add_action( 'wp_head', 'inject_head_in_page_edit_event' );
-add_action( 'wp_head', 'inject_footer_in_page_edit_event' );
 
 // Create pages to extend theme
 new_page_title('Edit Event');

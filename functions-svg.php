@@ -7,7 +7,7 @@ function the_svg_icon ($icon){
 		  <path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
 		  <path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
 		</svg>'; break;
-  	case "kebab" : echo '<svg version="1.1" class="kebab" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  	case "kebab" : echo '<svg version="1.1" class="kebab" id="kebab" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
 			<circle cx="50" cy="50" r="9.965"/>
 			<circle cx="50" cy="80" r="9.965"/>
 			<circle cx="50" cy="20" r="9.965"/>

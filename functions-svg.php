@@ -1,13 +1,18 @@
 <?php 
 function the_svg_icon ($icon){
   switch ($icon) {
-  	case "hamburguer" : echo '<svg version="1.1" id="hamburguer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  	case "hamburguer" : echo '<svg version="1.1" class="hamburguer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		   width="124px" height="124px" viewBox="0 0 124 124" style="enable-background:new 0 0 124 124;" xml:space="preserve">
 		  <path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
 		  <path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
 		  <path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
 		</svg>'; break;
-	case 'share' : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  	case "kebab" : echo '<svg version="1.1" class="kebab" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+			<circle cx="50" cy="50" r="9.965"/>
+			<circle cx="50" cy="80" r="9.965"/>
+			<circle cx="50" cy="20" r="9.965"/>
+		</svg>'; break;
+	case 'share' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 525.152 525.152" style="enable-background:new 0 0 525.152 525.152;" xml:space="preserve">
 			<g>
 				<path d="M420.735,371.217c-20.021,0-37.942,7.855-51.596,20.24L181.112,282.094c1.357-6.061,2.407-12.166,2.407-18.468
@@ -19,7 +24,7 @@ function the_svg_icon ($icon){
 					S463.163,371.217,420.735,371.217z"/>
 			</g>
 		</svg>'; break;
-	case "gplus" : echo '<svg version="1.1" id="gplus_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case "gplus" : echo '<svg version="1.1" class="gplus_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="96.828px" height="96.827px" viewBox="0 0 96.828 96.827" style="enable-background:new 0 0 96.828 96.827;"
 		 xml:space="preserve">
 			<path d="M62.617,0H39.525c-10.29,0-17.413,2.256-23.824,7.552c-5.042,4.35-8.051,10.672-8.051,16.912
@@ -37,7 +42,7 @@ function the_svg_icon ($icon){
 				c-0.276,0-0.5,0.224-0.5,0.5v5.304c0,0.275,0.224,0.5,0.5,0.5H76.58V63.73c0,0.275,0.224,0.5,0.5,0.5h5.234
 				c0.275,0,0.5-0.225,0.5-0.5V51.525h12.168c0.276,0,0.5-0.223,0.5-0.5v-5.302C95.482,45.446,95.259,45.223,94.982,45.223z"/>
 		</svg>'; break;
-	case "twitter" : echo '<svg version="1.1" id="twitter_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case "twitter" : echo '<svg version="1.1" class="twitter_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
 			<path d="M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411
 				c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513
@@ -49,7 +54,7 @@ function the_svg_icon ($icon){
 		</svg>'; break;
 	case 'arroba' : echo '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve"><g><path d="M20.111 26.147c-2.336 1.051-4.361 1.401-7.125 1.401c-6.462 0-12.146-4.633-12.146-12.265 c0-7.94 5.762-14.833 14.561-14.833c6.853 0 11.8 4.7 11.8 11.252c0 5.684-3.194 9.265-7.399 9.3 c-1.829 0-3.153-0.934-3.347-2.997h-0.077c-1.208 1.986-2.96 2.997-5.023 2.997c-2.532 0-4.361-1.868-4.361-5.062 c0-4.749 3.504-9.071 9.111-9.071c1.713 0 3.7 0.4 4.6 0.973l-1.169 7.203c-0.388 2.298-0.116 3.3 1 3.4 c1.673 0 3.773-2.102 3.773-6.58c0-5.061-3.27-8.994-9.303-8.994c-5.957 0-11.175 4.673-11.175 12.1 c0 6.5 4.2 10.2 10 10.201c1.986 0 4.089-0.43 5.646-1.245L20.111 26.147z M16.646 10.1 c-0.311-0.078-0.701-0.155-1.207-0.155c-2.571 0-4.595 2.53-4.595 5.529c0 1.5 0.7 2.4 1.9 2.4 c1.441 0 2.959-1.828 3.311-4.087L16.646 10.068z"/></g></svg>';
 		break;
-	case 'facebook' : echo '<svg version="1.1" id="facebook_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case 'facebook' : echo '<svg version="1.1" class="facebook_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="96.124px" height="96.123px" viewBox="0 0 96.124 96.123" style="enable-background:new 0 0 96.124 96.123;"
 		 xml:space="preserve">
 		<path d="M72.089,0.02L59.624,0C45.62,0,36.57,9.285,36.57,23.656v10.907H24.037c-1.083,0-1.96,0.878-1.96,1.961v15.803
@@ -57,7 +62,7 @@ function the_svg_icon ($icon){
 			c1.083,0,1.96-0.877,1.96-1.96l0.006-15.803c0-0.52-0.207-1.018-0.574-1.386c-0.367-0.368-0.867-0.575-1.387-0.575H56.842v-9.246
 			c0-4.444,1.059-6.7,6.848-6.7l8.397-0.003c1.082,0,1.959-0.878,1.959-1.96V1.98C74.046,0.899,73.17,0.022,72.089,0.02z"/>
 		</svg>'; break;
-    case "linkedin" : echo '<svg version="1.1" id="linkedin_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    case "linkedin" : echo '<svg version="1.1" class="linkedin_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 height="18px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 		<path  d="M95,59.727V93H75.71V61.955c0-7.799-2.79-13.121-9.773-13.121c-5.33,0-8.502,3.587-9.897,7.056
 			c-0.509,1.241-0.64,2.967-0.64,4.704V93H36.104c0,0,0.26-52.58,0-58.028h19.295v8.225c-0.039,0.062-0.09,0.128-0.127,0.188h0.127
@@ -65,7 +70,7 @@ function the_svg_icon ($icon){
 			c0,5.57,4.193,10.031,10.663,10.031h0.129c6.729,0,10.914-4.46,10.914-10.031C26.579,11.33,22.521,7,15.919,7z M6.146,93h19.289
 			V34.972H6.146V93z"/>
 		</svg>'; break;
-	case 'meneame' : echo '<svg version="1.1" id="svg6982" inkscape:version="0.43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px"
+	case 'meneame' : echo '<svg version="1.1" class="svg6982" inkscape:version="0.43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px"
 		 viewBox="47.638 170.945 500 500" enable-background="new 47.638 170.945 500 500" xml:space="preserve">
 		<path d="M544.89,251.007c-0.375-7.974-6.19-21.411-7.985-25.386c-8.245-18.251-11.476-18.251-13.211-18.251
 			c-1.272,0-2.449,0.587-3.229,1.61c-1.288,1.69-1.985,4.029,1.615,17.13c5.099,25.087,9.092,60.746-14.64,81.284
@@ -100,7 +105,7 @@ function the_svg_icon ($icon){
 			c0.92-32.678,30.495-47.068,59.098-60.984c6.955-3.384,13.527-6.583,19.614-10.018c19.832-8.921,37.108-22.649,48.663-38.67
 			C544.48,292.05,549.285,271.393,544.89,251.007z"/>
 		</svg>'; break;
-    case 'comment' : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    case 'comment' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="511.625px" height="511.627px" viewBox="0 0 511.625 511.627" enable-background="new 0 0 511.625 511.627"
 		 xml:space="preserve">
 		<path d="M477.757,125.582c-23.014-28.287-54.588-50.892-93.849-67.187c-38.959-16.171-82.058-24.371-128.096-24.371
@@ -119,7 +124,7 @@ function the_svg_icon ($icon){
 			c-18.235,20.578-43.313,37.212-74.543,49.439c-31.542,12.346-65.947,18.605-102.26,18.605c-10.872,0-22.623-0.725-35.025-2.165
 			l-19.797-2.079l-14.91,13.179c-15.432,13.553-32.331,25.219-50.451,34.848C139.044,388.331,141.931,379.712,144.257,370.908z"/>
 		</svg>'; break;
-	case 'email' : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case 'email' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 382.117 382.117" style="enable-background:new 0 0 382.117 382.117;" xml:space="preserve">
 		<path d="M336.764,45.945H45.354C20.346,45.945,0,65.484,0,89.5v203.117c0,24.016,20.346,43.555,45.354,43.555h291.41
 			c25.008,0,45.353-19.539,45.353-43.555V89.5C382.117,65.484,361.772,45.945,336.764,45.945z M336.764,297.72H45.354
@@ -127,7 +132,7 @@ function the_svg_icon ($icon){
 			c3.536,0,6.974-1.257,9.677-3.539l131.803-111.274v176.264C343.664,295.336,340.439,297.72,336.764,297.72z M191.059,192.987
 			L62.87,84.397h256.378L191.059,192.987z"/>
 		</svg>'; break;
-    case "pdf" : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    case "pdf" : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="550.801px" height="550.801px" viewBox="0 0 550.801 550.801" style="enable-background:new 0 0 550.801 550.801;"
 		 xml:space="preserve">
 		<path d="M160.381,282.225c0-14.832-10.299-23.684-28.474-23.684c-7.414,0-12.437,0.715-15.071,1.432V307.6
@@ -148,9 +153,9 @@ function the_svg_icon ($icon){
 			V393.499z M453.601,523.353H97.2V419.302h356.4V523.353z M484.898,262.127h-61.989v36.851h57.913v29.674h-57.913v64.848h-36.593
 			V232.216h98.582V262.127z"/>
 		</svg>'; break;
-	case 'whatsapp' : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case 'whatsapp' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="90px" height="90px" viewBox="0 0 90 90" style="enable-background:new 0 0 90 90;" xml:space="preserve">
-		<path id="WhatsApp" d="M90,43.841c0,24.213-19.779,43.841-44.182,43.841c-7.747,0-15.025-1.98-21.357-5.455L0,90l7.975-23.522
+		<path class="WhatsApp" d="M90,43.841c0,24.213-19.779,43.841-44.182,43.841c-7.747,0-15.025-1.98-21.357-5.455L0,90l7.975-23.522
 			c-4.023-6.606-6.34-14.354-6.34-22.637C1.635,19.628,21.416,0,45.818,0C70.223,0,90,19.628,90,43.841z M45.818,6.982
 			c-20.484,0-37.146,16.535-37.146,36.859c0,8.065,2.629,15.534,7.076,21.61L11.107,79.14l14.275-4.537
 			c5.865,3.851,12.891,6.097,20.437,6.097c20.481,0,37.146-16.533,37.146-36.857S66.301,6.982,45.818,6.982z M68.129,53.938
@@ -162,7 +167,7 @@ function the_svg_icon ($icon){
 			c-0.992,1.076-3.789,3.676-3.789,8.963c0,5.288,3.879,10.397,4.422,11.113c0.541,0.716,7.49,11.92,18.5,16.223
 			C58.2,65.771,58.2,64.336,60.186,64.156c1.984-0.179,6.406-2.599,7.312-5.107C68.398,56.537,68.398,54.386,68.129,53.938z"/>
 		</svg>'; break;
-    case 'search' : echo '<svg version="1.1" id="svgsearch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    case 'search' : echo '<svg version="1.1" class="svgsearch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 250.313 250.313" style="enable-background:new 0 0 250.313 250.313;" xml:space="preserve">
 		<path d="M244.186,214.604l-54.379-54.378c-0.289-0.289-0.628-0.491-0.93-0.76
 			c10.7-16.231,16.945-35.66,16.945-56.554C205.822,46.075,159.747,0,102.911,0S0,46.075,0,102.911
@@ -171,7 +176,7 @@ function the_svg_icon ($icon){
 			c-37.134,0-67.236-30.102-67.236-67.235c0-37.134,30.103-67.236,67.236-67.236c37.132,0,67.235,30.103,67.235,67.236
 			C170.146,140.044,140.043,170.146,102.911,170.146z"/>
 		</svg>'; break;
-		case 'refresh' : echo '<svg version="1.1" id="svgrefresh" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		case 'refresh' : echo '<svg version="1.1" class="svgrefresh" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 width="487.23px" height="487.23px" viewBox="0 0 487.23 487.23" style="enable-background:new 0 0 487.23 487.23;"
 			 xml:space="preserve">
 				<g>
@@ -190,15 +195,15 @@ function the_svg_icon ($icon){
 						C473.197,326.043,471.903,312.157,464.635,301.184z"/>
 				</g>
 			</svg>'; break;
-		case 'eye' : echo '<svg version="1.1" id="eye_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		case 'eye' : echo '<svg version="1.1" class="eye_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 						 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-							<g id="eye">
+							<g class="eye">
 									<path d="M16,4C7.164,4,0,15.844,0,15.844S7.164,28,16,28s16-12.156,16-12.156S24.836,4,16,4z M16,24
 										c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S20.418,24,16,24z"/>
 									<circle cx="16" cy="16.016" r="4"/>
 							</g>
 						</svg>'; break;
-		case 'download' : echo '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		case 'download' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 						width="346.223px" height="346.223px" viewBox="0 0 346.223 346.223" style="enable-background:new 0 0 346.223 346.223;"
 						xml:space="preserve">
 						<g>

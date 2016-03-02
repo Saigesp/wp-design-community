@@ -209,24 +209,36 @@ code {
  * MENU HEADER
  ***********************************/
 .headertop {
-
+	position: relative;
 }
 .headertop .wrapper {
 	padding: 10px;
 	margin: 0;
 }
-#hamburguer {
-	width: 24px;
-	height: 24px;
-	margin-top: 6px;
-	margin-left: 4px;
-	fill: rgb(40,180,183);
+.headertop .wrap--icon__topmenu {
+	background-color: rgb(40,180,183);
 	position: absolute;
-    top: 11px;
-    left: 14px;
+	top: 0;
+	right: 0;
+	padding: 0;
+	line-height: 0;
 }
-#hamburguer:hover {
-	fill: rgb(34,153,155);
+
+.headertop .wrap--icon__topmenu:hover {
+	background-color: rgb(34,153,155);
+}
+
+.headertop .wrap--icon__topmenu .kebab {
+	width: 24px;
+	height: auto;
+	margin: 0;
+	padding: 18px 20px 18px;
+	fill: white;
+	cursor: pointer;
+	line-height: 0;
+}
+.headertop .wrap--icon .kebab:hover {
+	
 }
 .headertop .navtop li {
 	list-style: none;

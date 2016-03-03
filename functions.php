@@ -121,7 +121,9 @@ function add_theme_user_meta( $user_id ) {
   );
   add_user_meta( $user_id, 'op_user', $op_user );
   $validate_date = 0;
+  $last_fee = 0;
   add_user_meta( $user_id, 'validate_date', $validate_date );
+  add_user_meta( $user_id, 'last_fee', $last_fee );
 }
 add_action( 'user_register', 'add_theme_user_meta', 10, 1 );
 

@@ -38,6 +38,7 @@ if (empty($_GET["filter"])){
   $reg = true; 
   $log = true;
   $con = true;
+  $cuo = true; // Cuota
 
 }else{
 
@@ -57,6 +58,7 @@ if (empty($_GET["filter"])){
   $inv = $_GET['inv'] == 1 ? true : false;
   $val = $_GET['val'] == 1 ? true : false;
   $hva = $_GET['hva'] == 1 ? true : false;
+  $cuo = $_GET['cuo'] == 1 ? true : false;
 }
 
 $cont = 0;
@@ -184,7 +186,8 @@ $user_query = new WP_User_Query($args);?>
     <label><input type="checkbox" value="1" name="tit" <?php if($tit) echo 'checked';?>/> Titulación</label>
     <label><input type="checkbox" value="1" name="exp" <?php if($exp) echo 'checked';?>/> Experiencia</label>
     <label><input type="checkbox" value="1" name="ema" <?php if($ema) echo 'checked';?>/> Email</label>
-    <label><input type="checkbox" value="1" name="reg" <?php if($reg) echo 'checked';?>/> Invitado</label>
+    <label><input type="checkbox" value="1" name="reg" <?php if($reg) echo 'checked';?>/> Creado</label>
+    <label><input type="checkbox" value="1" name="cuo" <?php if($cuo) echo 'checked';?>/> Ult. Cuota</label>
     <label><input type="checkbox" value="1" name="con" <?php if($con) echo 'checked';?>/> Confirmado</label>
     <label><input type="checkbox" value="1" name="log" <?php if($log) echo 'checked';?>/> Login</label>
     <label><input type="checkbox" value="1" name="est" <?php if($est) echo 'checked';?>/> Estado</label>
@@ -205,7 +208,7 @@ $user_query = new WP_User_Query($args);?>
     </label>
     <label> 
       <select name="order">
-      	<option value="registered" <?php if($order == 'registered') echo 'selected';?>>Fecha invitación</option>
+      	<option value="registered" <?php if($order == 'registered') echo 'selected';?>>Fecha creación</option>
         <option value="validate_date" <?php if($order == 'validate_date') echo 'selected';?>>Fecha validación</option>
       	<option value="last_login" <?php if($order == 'last_login') echo 'selected';?>>Último acceso</option>
         <option value="last_name" <?php if($order == 'last_name') echo 'selected';?>>Apellido</option>
@@ -227,7 +230,8 @@ $user_query = new WP_User_Query($args);?>
       <?php if($tit == true){ ?><th>Titulación/Centro</th><?php } ?>
       <?php if($exp == true){ ?><th>Experiencia/Región</th><?php } ?>
       <?php if($ema == true){ ?><th title="Email/Web">@/www</th><?php } ?>
-      <?php if($reg == true){ ?><th title="Invitado">Invitado</th><?php } ?>
+      <?php if($reg == true){ ?><th title="Creado">Creado</th><?php } ?>
+      <?php if($cuo == true){ ?><th title="Ult Cuota">Ult Cuota</th><?php } ?>
       <?php if($con == true){ ?><th title="Confirmado">Confirmado</th><?php } ?>
       <?php if($log == true){ ?><th title="Último acceso">Último acceso</th><?php } ?>
       <?php if($est == true){ ?><th title="Estado">E</th><?php } ?>
@@ -239,12 +243,13 @@ $user_query = new WP_User_Query($args);?>
       <?php if($hva == true){ ?><th title="A quien ha validado">HV</th><?php } ?>
       <th></th>
     </tr>
+
   <?php foreach ( $user_query->results as $user ) {	
   
 		$user_id = $user->ID;
-  	if ($user_id == 122) continue;
   	$op_user = get_the_author_meta( 'op_user', $user_id);
-  	$validate_date = get_the_author_meta( 'validate_date', $user_id);
+    $validate_date = get_the_author_meta( 'validate_date', $user_id);
+  	$last_fee = get_the_author_meta( 'last_fee', $user_id);
     if (!empty($op_user)){
       
 		?>
@@ -263,6 +268,8 @@ $user_query = new WP_User_Query($args);?>
       <?php if($ema == true){ ?><td><a href="mailto:<?php echo get_the_author_meta( 'email', $user_id );?>"><?php echo get_the_author_meta( 'email', $user_id );?></a><br><a href="<?php echo get_the_author_meta( 'user_url', $user_id );?>"><?php echo get_the_author_meta( 'user_url', $user_id );?></a></td><?php } ?>
       
       <?php if($reg == true){ ?><td><?php echo get_the_author_meta('user_registered', $user_id);?></td><?php } ?>
+
+      <?php if($cuo == true){ ?><td><?php echo $last_fee;?></td><?php } ?>
       
       <?php if($con == true){ ?><td><?php echo $validate_date;?></td><?php } ?>
       

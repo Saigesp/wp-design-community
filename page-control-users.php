@@ -266,10 +266,6 @@ $user_query = new WP_User_Query($args);?>
   </table>
 </div>
 
-<?php }else{ ?>
-  <div class="profilebox onecolumn">
-    <p class="bold red">Lo sentimos, no tienes permisos para ver esta página</p>
-  </div>
-<?php } ?>
+<?php } else header('Location: '.site_url().'?alert=nologged' ); ?>
 
 <?php get_footer(); ?>

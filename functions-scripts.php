@@ -13,25 +13,28 @@ new_page_title('Edit Event');
  * ALL PAGES
  ***********************************/
 function inject_in_all() { ?>
-    <script>
-      jQuery(document).ready(function($) {
-        $('#kebab').on("click", function(){
+  <script>
 
+    function ToggleMenu(args){
+      jQuery('.js-menu').removeClass("active");
+      alert('hecho');
+    }
+
+    jQuery(document).ready(function($) {
+
+      imageresize($);
+
+      if ($(".js-imagefill").length > 0){
+        var imgLoad = imagesLoaded('.js-imagefill img');
+        imgLoad.on( 'always', function( instance ) {
+          $('.js-imagefill').imagefill();
         });
+      }
 
-        imageresize($);
-
-        if ($(".js-imagefill").length > 0){
-          var imgLoad = imagesLoaded('.js-imagefill img');
-          imgLoad.on( 'always', function( instance ) {
-            $('.js-imagefill').imagefill();
-          });
-        }
-
-        $(".js-showonload").removeClass("js-showonload-active");
-        
-      });
-    </script>
+      $(".js-showonload").removeClass("js-showonload-active");
+      
+    });
+  </script>
 <?php }
 
 /**

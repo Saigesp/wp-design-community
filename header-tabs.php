@@ -33,12 +33,17 @@
       <?php } ?>
     </div>
     <?php if (!has_nav_menu($menutop)) { ?>
-    <div class="wrap wrap--icon wrap--icon__topmenu">
+    <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu()">
       <?php the_svg_icon('kebab');?>
     </div>
     <?php } ?>
   </div>
 </header>
+<?php if (!empty($_GET["alert"])) { ?>
+<div class="wrap wrap--content alert alert--error">
+  <?php if ($_GET["alert"] == 'nologged') ?> <p>Es necesario que inicies sesión para acceder a esa sección</p>
+</div>
+<?php } ?>
 <?php if (has_nav_menu($menutop)) { ?>
   <nav id="navtop" class="navtop">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>

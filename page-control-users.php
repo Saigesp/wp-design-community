@@ -15,33 +15,56 @@
 </style>
 
 <?php
-$filter = $_GET['filter'];
-$order = $_GET['order'] == '' ? 'registered' : $_GET['order'];
-$tip = $_GET['tip'] == 1 ? true : false;
-$tit = $_GET['tit'] == 1 ? true : false;
-$exp = $_GET['exp'] == 1 ? true : false;
-$ema = $_GET['ema'] == 1 ? true : false;
-$reg = $_GET['reg'] == 1 ? true : false;
-$con = $_GET['con'] == 1 ? true : false;
-$log = $_GET['log'] == 1 ? true : false;
-$est = $_GET['est'] == 1 ? true : false;
-$kar = $_GET['kar'] == 1 ? true : false;
-$vfi = $_GET['vfi'] == 1 ? true : false;
-$vpe = $_GET['vpe'] == 1 ? true : false;
-$inv = $_GET['inv'] == 1 ? true : false;
-$val = $_GET['val'] == 1 ? true : false;
-$hva = $_GET['hva'] == 1 ? true : false;
 
-if ($tip == false && $tit == false && $exp == false && $ema == false && $est == false && $kar == false && $vfi == false && $vpe == false && $inv == false && $hin == false && $val == false && $hva == false && $reg == false && $log == false && $con == false){
-  $tip = false; $tit = false; $exp = false; $ema = false; $est = true; $kar = true; $vfi = true; $vpe = true; $inv = true; $hin = true; $val = true; $hva = true; $reg = true;  $log = true; $con = true;
+
+$admins = get_users( array('role' => 'administrator') );
+
+if (empty($_GET["filter"])){
+
+  /* Default options */
+  $tip = false;
+  $tit = false;
+  $exp = false;
+  $ema = false;
+  $est = true;
+  $kar = true;
+  $vfi = true;
+  $vpe = true;
+  $inv = true;
+  $hin = true;
+  $val = true;
+  $hva = true;
+  $reg = true; 
+  $log = true;
+  $con = true;
+
+}else{
+
+  // Get filters
+  $order = $_GET['order'] == '' ? 'registered' : $_GET['order'];
+  $tip = $_GET['tip'] == 1 ? true : false;
+  $tit = $_GET['tit'] == 1 ? true : false;
+  $exp = $_GET['exp'] == 1 ? true : false;
+  $ema = $_GET['ema'] == 1 ? true : false;
+  $reg = $_GET['reg'] == 1 ? true : false;
+  $con = $_GET['con'] == 1 ? true : false;
+  $log = $_GET['log'] == 1 ? true : false;
+  $est = $_GET['est'] == 1 ? true : false;
+  $kar = $_GET['kar'] == 1 ? true : false;
+  $vfi = $_GET['vfi'] == 1 ? true : false;
+  $vpe = $_GET['vpe'] == 1 ? true : false;
+  $inv = $_GET['inv'] == 1 ? true : false;
+  $val = $_GET['val'] == 1 ? true : false;
+  $hva = $_GET['hva'] == 1 ? true : false;
 }
 
 $cont = 0;
 $original_query = $wp_query;
-if ($order != 'registered' && $order != 'login'){  
+
+if ($order != 'registered' && $order != 'login'){ //
   if ($filter == 'all' || $filter == ''){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'orderby' => 'meta_value',
       'order' => 'DESC',
       'meta_key' => $order,
@@ -50,7 +73,7 @@ if ($order != 'registered' && $order != 'login'){
   }
   if ($filter == 'nc'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'subscriber',
       'orderby' => 'meta_value',
       'meta_key' => $order,
@@ -60,7 +83,7 @@ if ($order != 'registered' && $order != 'login'){
   }
   if ($filter == 'p'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'subscriber',
       'orderby' => 'meta_value',
       'order' => 'DESC',
@@ -78,18 +101,17 @@ if ($order != 'registered' && $order != 'login'){
   }
   if ($filter == 'c'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'author',
       'orderby' => 'meta_value',
       'order' => 'DESC',
       'meta_key' => $order,
       'number' => 9999,
-  
     );
   }
   if ($filter == 's'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'bloqued',
       'orderby' => 'meta_value',
       'order' => 'DESC',
@@ -101,7 +123,7 @@ if ($order != 'registered' && $order != 'login'){
 }else{
 if ($filter == 'all' || $filter == ''){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'orderby' => $order,
       'order' => 'DESC',
       'number' => 9999,
@@ -109,7 +131,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'nc'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'subscriber',
       'orderby' => $order,
       'order' => 'DESC',
@@ -118,7 +140,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'p'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'subscriber',
       'orderby' => $order,
       'order' => 'DESC',
@@ -135,7 +157,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'c'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'author',
       'orderby' => $order,
       'order' => 'DESC',
@@ -144,7 +166,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 's'){
       $args = array( 
-      'exclude' => array( 1 ),
+      //'exclude' => $admins,
       'role' => 'bloqued',
       'orderby' => $order,
       'order' => 'DESC',
@@ -222,6 +244,7 @@ $user_query = new WP_User_Query($args);?>
   	if ($user_id == 122) continue;
   	$op_user = get_the_author_meta( 'op_user', $user_id);
   	$validate_date = get_the_author_meta( 'validate_date', $user_id);
+    if (!empty($op_user)){
       
 		?>
     <tr <?php if($cont == 0) echo 'style="background-color:#eee"';?> >
@@ -262,7 +285,7 @@ $user_query = new WP_User_Query($args);?>
       
     </tr>
     <?php if ($cont == 0) $cont = 1; else $cont = 0;?>
-  <?php } ?>
+  <?php }} ?>
   </table>
 </div>
 

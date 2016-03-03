@@ -16,8 +16,9 @@
 
 <?php
 
-
+$exclude_list = array();
 $admins = get_users( array('role' => 'administrator') );
+foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
 
 if (empty($_GET["filter"])){
 
@@ -64,7 +65,7 @@ $original_query = $wp_query;
 if ($order != 'registered' && $order != 'login'){ //
   if ($filter == 'all' || $filter == ''){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'orderby' => 'meta_value',
       'order' => 'DESC',
       'meta_key' => $order,
@@ -73,7 +74,7 @@ if ($order != 'registered' && $order != 'login'){ //
   }
   if ($filter == 'nc'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'subscriber',
       'orderby' => 'meta_value',
       'meta_key' => $order,
@@ -83,7 +84,7 @@ if ($order != 'registered' && $order != 'login'){ //
   }
   if ($filter == 'p'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'subscriber',
       'orderby' => 'meta_value',
       'order' => 'DESC',
@@ -101,7 +102,7 @@ if ($order != 'registered' && $order != 'login'){ //
   }
   if ($filter == 'c'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'author',
       'orderby' => 'meta_value',
       'order' => 'DESC',
@@ -111,7 +112,7 @@ if ($order != 'registered' && $order != 'login'){ //
   }
   if ($filter == 's'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'bloqued',
       'orderby' => 'meta_value',
       'order' => 'DESC',
@@ -123,7 +124,7 @@ if ($order != 'registered' && $order != 'login'){ //
 }else{
 if ($filter == 'all' || $filter == ''){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'orderby' => $order,
       'order' => 'DESC',
       'number' => 9999,
@@ -131,7 +132,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'nc'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'subscriber',
       'orderby' => $order,
       'order' => 'DESC',
@@ -140,7 +141,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'p'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'subscriber',
       'orderby' => $order,
       'order' => 'DESC',
@@ -157,7 +158,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 'c'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'author',
       'orderby' => $order,
       'order' => 'DESC',
@@ -166,7 +167,7 @@ if ($filter == 'all' || $filter == ''){
   }
   if ($filter == 's'){
       $args = array( 
-      //'exclude' => $admins,
+      'exclude' => $exclude_list,
       'role' => 'bloqued',
       'orderby' => $order,
       'order' => 'DESC',

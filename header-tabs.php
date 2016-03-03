@@ -32,7 +32,7 @@
         </div>
       <?php } ?>
     </div>
-    <?php if (!has_nav_menu($menutop)) { ?>
+    <?php if (has_nav_menu('menutop')) { ?>
     <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu()">
       <?php the_svg_icon('kebab');?>
     </div>
@@ -42,7 +42,7 @@
 
 <?php include(locate_template('alerts.php')); ?>
 
-<?php if (has_nav_menu($menutop)) { ?>
+<?php if (has_nav_menu('menutop')) { ?>
   <nav id="navtop" class="navtop">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
   </nav>

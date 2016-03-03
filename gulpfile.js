@@ -187,7 +187,7 @@ gulp.task('upserver', function() {
  *  
  ***********************************/
 gulp.task('server', ['upserver'], function() {
-    gulp.watch(dev+'style.css', ['notify',browserSync.reload]); 
+    //gulp.watch(dev+'style.css', ['notify',browserSync.reload]); 
     gulp.watch(dev+'*.php', ['notify',browserSync.reload]); 
 });
 

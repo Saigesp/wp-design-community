@@ -18,6 +18,7 @@ function inject_in_all() { ?>
     function ToggleMenu(args){
       jQuery('.js-menu').removeClass("active");
       alert('hecho');
+      //TODO
     }
 
     jQuery(document).ready(function($) {
@@ -32,6 +33,11 @@ function inject_in_all() { ?>
       }
 
       $(".js-showonload").removeClass("js-showonload-active");
+
+      $("#close").on("click", function(){
+        $(".alert").removeClass('alert--error').addClass('hide');
+        //$("")
+      })
       
     });
   </script>

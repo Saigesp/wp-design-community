@@ -1,18 +1,23 @@
 <?php 
-function the_svg_icon ($icon){
+function the_svg_icon ($icon, $class = ''){
+  if($class != '') {
+    $class = 'icon icon--'.$icon.' '.$class;
+  }else{
+	$class = 'icon icon--'.$icon;
+  }
   switch ($icon) {
-  	case "hamburguer" : echo '<svg version="1.1" class="hamburguer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  	case "hamburguer" : echo '<svg version="1.1" id="hamburguer" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		   width="124px" height="124px" viewBox="0 0 124 124" style="enable-background:new 0 0 124 124;" xml:space="preserve">
 		  <path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
 		  <path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
 		  <path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
 		</svg>'; break;
-  	case "kebab" : echo '<svg version="1.1" class="kebab" id="kebab" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  	case "kebab" : echo '<svg version="1.1" id="kebab" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
 			<circle cx="50" cy="50" r="9.965"/>
 			<circle cx="50" cy="80" r="9.965"/>
 			<circle cx="50" cy="20" r="9.965"/>
 		</svg>'; break;
-	case 'share' : echo '<svg version="1.1" class="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	case 'share' : echo '<svg version="1.1" id="share" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 525.152 525.152" style="enable-background:new 0 0 525.152 525.152;" xml:space="preserve">
 			<g>
 				<path d="M420.735,371.217c-20.021,0-37.942,7.855-51.596,20.24L181.112,282.094c1.357-6.061,2.407-12.166,2.407-18.468
@@ -24,6 +29,13 @@ function the_svg_icon ($icon){
 					S463.163,371.217,420.735,371.217z"/>
 			</g>
 		</svg>'; break;
+	case 'close' : echo '<svg version="1.1" id="close" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+				<path d="M79.851,65.758L64.09,49.997l14.163-14.164c3.892-3.892,3.892-10.201,0-14.092c-3.892-3.892-10.2-3.892-14.092,0
+					L49.997,35.905L35.833,21.741c-3.892-3.892-10.201-3.892-14.092,0c-3.892,3.892-3.892,10.201,0,14.092l14.164,14.164L20.144,65.758
+					l0.188,0.188c-2.401,3.846-1.939,8.971,1.403,12.314c3.344,3.343,8.469,3.805,12.314,1.403l0.188,0.188L49.997,64.09l15.761,15.761
+					l0.188-0.188c3.846,2.401,8.971,1.939,12.314-1.403c3.343-3.344,3.805-8.469,1.403-12.314L79.851,65.758z"/>
+			</svg>'; break;
 	case "gplus" : echo '<svg version="1.1" class="gplus_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="96.828px" height="96.827px" viewBox="0 0 96.828 96.827" style="enable-background:new 0 0 96.828 96.827;"
 		 xml:space="preserve">

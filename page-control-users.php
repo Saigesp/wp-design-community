@@ -266,6 +266,6 @@ $user_query = new WP_User_Query($args);?>
   </table>
 </div>
 
-<?php } else header('Location: '.site_url().'?alert=nologged' ); ?>
+<?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
 
 <?php get_footer(); ?>

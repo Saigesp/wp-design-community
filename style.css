@@ -192,7 +192,17 @@ code {
 	opacity: 0;
 }
 
+.animecubic350 {
+    transition: all 350ms cubic-bezier(1, -0.5, 0.5, 1);
+}
 
+.fadein100 {
+    -webkit-animation: fadeIn100 0.7s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-transition: all 500ms ease-out;
+    pointer-events: all !important;
+}
 
 
 
@@ -226,21 +236,19 @@ code {
 	transition: background 350ms ease;
 }
 
-.headertop .wrap--icon__topmenu:hover {
+.headertop .wrap--icon__topmenu:hover,
+.headertop .wrap--icon__topmenu:active {
 	background-color: rgb(34,153,155);
 }
 
-.headertop .wrap--icon__topmenu .kebab {
+.headertop .icon--kebab {
 	width: 24px;
 	height: auto;
 	margin: 0;
-	padding: 18px 20px 18px;
+	padding: 18px;
 	fill: white;
 	cursor: pointer;
 	line-height: 0;
-}
-.headertop .wrap--icon .kebab:hover {
-	
 }
 .headertop .navtop li {
 	list-style: none;
@@ -2131,12 +2139,19 @@ textarea.js-medium-editor,
  ***********************************/
 .alert {
 	padding: 20px 10px;
+	position: relative;
+	min-height: 20px;
 }
 .alert p {
     color: white;
     text-align: center;
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+}
+
+.alert p a {
+    color: white;
+    text-decoration: underline;
 }
 
 .alert--warning { background-color: #FFBD13;}
@@ -2147,14 +2162,26 @@ textarea.js-medium-editor,
 
 .alert--info { background-color: #0099FF;}
 
-.alert .icon--close {
-    float: right;
-    width: 20px;
-    height: auto;
-    cursor: pointer;
+.alert .wrap--icon__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 0;
+    /* cursor: pointer; */
 }
 
+.alert .wrap--icon__close:hover{
+	background: rgba(0,0,0,0.1);
+}
 
+.alert .icon--close {
+	line-height: 0;
+	width: 30px;
+	height: auto;
+	fill: rgba(0,0,0,0.3);
+	padding: 15px;
+	cursor: pointer;
+}
 
 
 /**
@@ -2487,6 +2514,11 @@ textarea.js-medium-editor,
 	/* FOOTER */
 	.footerback .divright {
 		float: right;
+	}
+	/* Alert */
+	.alert {
+		max-width: 880px;
+		margin: 0 auto;
 	}
 }
 @media only screen and (max-width : 779px) {

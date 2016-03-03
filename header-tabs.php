@@ -39,11 +39,9 @@
     <?php } ?>
   </div>
 </header>
-<?php if (!empty($_GET["alert"])) { ?>
-<div class="wrap wrap--content alert alert--error">
-  <?php if ($_GET["alert"] == 'nologged') ?> <p>Es necesario que inicies sesión para acceder a esa sección</p>
-</div>
-<?php } ?>
+
+<?php include(locate_template('alerts.php')); ?>
+
 <?php if (has_nav_menu($menutop)) { ?>
   <nav id="navtop" class="navtop">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>

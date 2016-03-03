@@ -7,7 +7,7 @@ echo '<div class="js-showonload js-showonload-active">';
 
 if(is_user_role('author') || is_user_role('editor') || is_user_role('administrator'))
 	em_event_form();
-else header('Location: '.site_url().'?alert=nologged' );
+else header('Location: '.site_url().'?action=nopermission' );
 
 echo '</div>';
 

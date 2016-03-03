@@ -133,13 +133,8 @@
     <h3 class="more more--section">Add a section</h3>
   </section>
 
-<?php }else{ ?>
+<?php }else header('Location: '.site_url().'?action=nologged' ); ?>
 
-  <section class="wrap wrap--message wrap--message__mustlogin">
-	<p class="description">You must be logged in.</p>
-  </section>
-
-<?php } ?>
 </div><!-- end of flexboxer -->
 
 <?php get_footer(); ?>

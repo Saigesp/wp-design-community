@@ -17,6 +17,14 @@ function the_svg_icon ($icon, $class = ''){
 			<circle cx="50" cy="80" r="9.965"/>
 			<circle cx="50" cy="20" r="9.965"/>
 		</svg>'; break;
+	case "doner" : echo '<svg version="1.1" id="doner" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+			<circle cx="50" cy="80" r="9.965"/>
+			<path d="M82.296,20.018c0,5.513-4.468,9.982-9.982,9.982H27.687c-5.513,0-9.982-4.469-9.982-9.982l0,0
+				c0-5.513,4.469-9.982,9.982-9.982h44.627C77.828,10.035,82.296,14.504,82.296,20.018L82.296,20.018z"/>
+			<path d="M71.473,50c0,5.514-4.468,9.982-9.982,9.982H38.51c-5.513,0-9.982-4.469-9.982-9.982l0,0c0-5.513,4.469-9.982,9.982-9.982
+				h22.98C67.005,40.018,71.473,44.487,71.473,50L71.473,50z"/>
+			</svg>'; break;
 	case 'share' : echo '<svg version="1.1" id="share" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 viewBox="0 0 525.152 525.152" style="enable-background:new 0 0 525.152 525.152;" xml:space="preserve">
 			<g>

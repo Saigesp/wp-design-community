@@ -32,6 +32,9 @@
         </div>
       <?php } ?>
     </div>
+    <div class="wrap wrap--icon wrap--icon__usermenu" onclick="ToggleMenu('menuuser')">
+      <?php the_svg_icon('doner');?>
+    </div>
     <?php if (has_nav_menu('menutop')) { ?>
     <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu('menutop')">
       <?php the_svg_icon('kebab');?>
@@ -48,3 +51,16 @@
    	<?php  wp_nav_menu( array( 'theme_location' => 'menuadmin', 'container' => false ) ); ?>
   </nav>
 <?php } ?>
+
+
+<nav id="menuuser" class="wrap wrap--menu wrap--menu__user js-menu animecubic350">
+<?php if(is_user_logged_in()){
+  $args = array(
+    'label_username' => __( 'Usuario' ),
+    'label_password' => __( 'Contraseña' ),
+    'label_remember' => __( 'Recuerdame' ),
+    'label_log_in'   => __( 'Iniciar sesión' ),
+  );
+  wp_login_form( $args ); 
+}?> 
+</nav>

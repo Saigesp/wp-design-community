@@ -48,13 +48,13 @@
 <?php if (has_nav_menu('menutop')) { ?>
   <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu js-fullheight animecubic350">
     <?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
-   	<?php  wp_nav_menu( array( 'theme_location' => 'menuadmin', 'container' => false ) ); ?>
+   	
   </nav>
 <?php } ?>
 
 
 <nav id="menuuser" class="wrap wrap--menu wrap--menu__user js-menu animecubic350">
-<?php if(is_user_logged_in()){
+<?php if(!is_user_logged_in()){
   $args = array(
     'label_username' => __( 'Usuario' ),
     'label_password' => __( 'Contraseña' ),
@@ -62,5 +62,18 @@
     'label_log_in'   => __( 'Iniciar sesión' ),
   );
   wp_login_form( $args ); 
-}?> 
+}else{ ?> 
+<ul id="menu-admin-menu-base" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+  <li class="menu-item menu-item-type-custom menu-item-object-custom">
+    <a href="">Perfil</a>
+  </li>
+  <?php if(!get_page_by_title('Edit profile') == NULL) { ?>
+    <li class="menu-item menu-item-type-custom menu-item-object-custom">
+      <a href="">Editar Perfil</a>
+    </li>
+  <?php } ?>
+</ul>
+<?php if (has_nav_menu('menuadmin')) wp_nav_menu(array('theme_location' => 'menuadmin','container'=> false ));?>
+
+<?php }?> 
 </nav>

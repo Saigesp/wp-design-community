@@ -14,9 +14,12 @@ function inject_in_all() { ?>
   <script>
 
     function ToggleMenu(args){
-      jQuery('.js-menu').removeClass("active");
-      alert('hecho');
-      //TODO
+      if(!jQuery('#'+args).hasClass('active')){
+        jQuery('.js-menu').removeClass("active");
+        jQuery('#'+args).addClass("active");
+      }else{
+        jQuery('.js-menu').removeClass("active");
+      }
     }
 
     jQuery(document).ready(function($) {

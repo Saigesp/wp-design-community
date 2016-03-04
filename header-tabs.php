@@ -33,7 +33,7 @@
       <?php } ?>
     </div>
     <?php if (has_nav_menu('menutop')) { ?>
-    <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu()">
+    <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu('menutop')">
       <?php the_svg_icon('kebab');?>
     </div>
     <?php } ?>
@@ -43,7 +43,7 @@
 <?php include(locate_template('alerts.php')); ?>
 
 <?php if (has_nav_menu('menutop')) { ?>
-  <nav id="navtop" class="navtop hide">
+  <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
   </nav>
 <?php } ?>

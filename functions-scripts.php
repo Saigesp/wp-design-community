@@ -2,6 +2,7 @@
 
 
 add_action( 'wp_head', 'inject_in_all' );
+add_action( 'wp_head', 'inject_in_control_users' );
 add_action( 'wp_head', 'inject_in_bookings' );
 add_action( 'wp_head', 'inject_in_edit_event' );
 
@@ -42,6 +43,20 @@ function inject_in_all() { ?>
     });
   </script>
 <?php }
+
+/**
+ * PAGE CONTROL USERS
+ ***********************************/
+function inject_in_control_users() {
+  if (is_page('control-users')) { ?>
+    <script>
+      jQuery(document).ready(function($) {
+          $('#user-labels').chosen();
+      });
+    </script>
+  <?php }
+}
+
 
 /**
  * PAGE EVENT

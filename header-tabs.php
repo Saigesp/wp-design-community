@@ -43,7 +43,7 @@
 <?php include(locate_template('alerts.php')); ?>
 
 <?php if (has_nav_menu('menutop')) { ?>
-  <nav id="navtop" class="navtop">
+  <nav id="navtop" class="navtop hide">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
   </nav>
 <?php } ?>

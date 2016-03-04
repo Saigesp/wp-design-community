@@ -23,45 +23,54 @@ foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
 if (empty($_GET["filter"])){
 
   /* Default options */
-  $tip = false;
-  $tit = false;
-  $exp = false;
-  $ema = false;
-  $est = true;
-  $kar = true;
-  $vfi = true;
-  $vpe = true;
-  $inv = true;
-  $hin = true;
-  $val = true;
-  $hva = true;
-  $reg = true; 
-  $log = true;
-  $con = true;
-  $cuo = true; // Cuota
+  $tip = true; // Type
+  $tit = false; // Studies
+  $exp = false; // Experience
+  $ema = false; // Email
+  $est = true;  // Admission state
+  $kar = false; // Karma
+
+  // Profile views
+  $vfi = false; // Profile views in search results
+  $vpe = false;  // Profile views
+
+  //Invitations
+  $inv = false;  // Invitations left
+  $hin = false;  // Has invited
+  $val = false;  // Validated by
+  $hva = false;  // Has validate
+
+  // Dates
+  $reg = true;  // Register
+  $log = true;  // Last login 
+  $con = true;  // Confirmed
+  $cuo = false; // Last Fee
 
 }else{
 
   // Get filters
   $order = $_GET['order'] == '' ? 'registered' : $_GET['order'];
-  $tip = $_GET['tip'] == 1 ? true : false;
-  $tit = $_GET['tit'] == 1 ? true : false;
-  $exp = $_GET['exp'] == 1 ? true : false;
-  $ema = $_GET['ema'] == 1 ? true : false;
-  $reg = $_GET['reg'] == 1 ? true : false;
-  $con = $_GET['con'] == 1 ? true : false;
-  $log = $_GET['log'] == 1 ? true : false;
-  $est = $_GET['est'] == 1 ? true : false;
-  $kar = $_GET['kar'] == 1 ? true : false;
-  $vfi = $_GET['vfi'] == 1 ? true : false;
-  $vpe = $_GET['vpe'] == 1 ? true : false;
-  $inv = $_GET['inv'] == 1 ? true : false;
-  $val = $_GET['val'] == 1 ? true : false;
-  $hva = $_GET['hva'] == 1 ? true : false;
-  $cuo = $_GET['cuo'] == 1 ? true : false;
+
+  // Get options
+  $user_labels = $_GET['labels'];
+  $tip = in_array("tip", $user_labels) ? true : false;
+  $tit = in_array("tit", $user_labels) ? true : false;
+  $exp = in_array("exp", $user_labels) ? true : false;
+  $ema = in_array("ema", $user_labels) ? true : false;
+  $reg = in_array("reg", $user_labels) ? true : false;
+  $con = in_array("con", $user_labels) ? true : false;
+  $log = in_array("log", $user_labels) ? true : false;
+  $est = in_array("est", $user_labels) ? true : false;
+  $kar = in_array("kar", $user_labels) ? true : false;
+  $vfi = in_array("vfi", $user_labels) ? true : false;
+  $vpe = in_array("vpe", $user_labels) ? true : false;
+  $inv = in_array("inv", $user_labels) ? true : false;
+  $val = in_array("val", $user_labels) ? true : false;
+  $hva = in_array("hva", $user_labels) ? true : false;
+  $cuo = in_array("cuo", $user_labels) ? true : false;
+  
 }
 
-$cont = 0;
 $original_query = $wp_query;
 
 if ($order != 'registered' && $order != 'login'){ //
@@ -182,21 +191,24 @@ if ($filter == 'all' || $filter == ''){
 $user_query = new WP_User_Query($args);?>
 <div id="usercontroloption">
   <form>
-    <label><input type="checkbox" value="1" name="tip" <?php if($tip) echo 'checked';?>/> Tipo</label>
-    <label><input type="checkbox" value="1" name="tit" <?php if($tit) echo 'checked';?>/> Titulación</label>
-    <label><input type="checkbox" value="1" name="exp" <?php if($exp) echo 'checked';?>/> Experiencia</label>
-    <label><input type="checkbox" value="1" name="ema" <?php if($ema) echo 'checked';?>/> Email</label>
-    <label><input type="checkbox" value="1" name="reg" <?php if($reg) echo 'checked';?>/> Creado</label>
-    <label><input type="checkbox" value="1" name="cuo" <?php if($cuo) echo 'checked';?>/> Ult. Cuota</label>
-    <label><input type="checkbox" value="1" name="con" <?php if($con) echo 'checked';?>/> Confirmado</label>
-    <label><input type="checkbox" value="1" name="log" <?php if($log) echo 'checked';?>/> Login</label>
-    <label><input type="checkbox" value="1" name="est" <?php if($est) echo 'checked';?>/> Estado</label>
-    <label><input type="checkbox" value="1" name="kar" <?php if($kar) echo 'checked';?>/> Karma</label>
-    <label><input type="checkbox" value="1" name="vfi" <?php if($vfi) echo 'checked';?>/> Vis. Ficha</label>
-    <label><input type="checkbox" value="1" name="vpe" <?php if($vpe) echo 'checked';?>/> Vis. Perfil</label>
-    <label><input type="checkbox" value="1" name="inv" <?php if($inv) echo 'checked';?>/> Invitaciones</label>
-    <label><input type="checkbox" value="1" name="val" <?php if($val) echo 'checked';?>/> Validado por</label>
-    <label><input type="checkbox" value="1" name="hva" <?php if($hva) echo 'checked';?>/> Ha validado</label><br>
+    <select name="labels[]" id="user-labels" multiple="multiple">
+      <option value="tip" <?php if($tip) echo 'selected';?> >Tipo</option>
+      <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
+      <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
+      <option value="ema" <?php if($ema) echo 'selected';?> >Email</option>
+      <option value="reg" <?php if($reg) echo 'selected';?> >Creado</option>
+      <option value="cuo" <?php if($cuo) echo 'selected';?> >Ult. Cuota</option>
+      <option value="con" <?php if($con) echo 'selected';?> >Confirmado</option>
+      <option value="log" <?php if($log) echo 'selected';?> >Login</option>
+      <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
+      <option value="kar" <?php if($kar) echo 'selected';?> >Karma</option>
+      <option value="vfi" <?php if($vfi) echo 'selected';?> >Vis. Ficha</option>
+      <option value="vpe" <?php if($vpe) echo 'selected';?> >Vis. Perfil</option>
+      <option value="inv" <?php if($inv) echo 'selected';?> >Invitaciones</option>
+      <option value="val" <?php if($val) echo 'selected';?> >Validado por</option>
+      <option value="hva" <?php if($hva) echo 'selected';?> >Ha validado</option>
+    </select>
+    <br>
     <label> 
       <select name="filter">
       	<option value="all" <?php if($filter == 'all') echo 'selected';?>>Todos los usuarios</option>
@@ -253,7 +265,7 @@ $user_query = new WP_User_Query($args);?>
     if (!empty($op_user)){
       
 		?>
-    <tr <?php if($cont == 0) echo 'style="background-color:#eee"';?> >
+    <tr>
       
       <td><?php echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><a href="'.get_author_posts_url($user_id).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $user_id),array(28, 28) ).'</a></div>'; ?></td>
       
@@ -292,7 +304,6 @@ $user_query = new WP_User_Query($args);?>
       <td><a href="http://xn--diseadoresindustriales-nec.es/wp-admin/user-edit.php?user_id=<?php echo $user_id;?>"><?php the_svg_icon('edit')?></a></td>
       
     </tr>
-    <?php if ($cont == 0) $cont = 1; else $cont = 0;?>
   <?php }} ?>
   </table>
 </div>

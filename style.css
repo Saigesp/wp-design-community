@@ -1438,12 +1438,14 @@ blockquote p {
     flex: 1 0 100%;
 }
 
-.flexboxer .wrap--content__middle {
+.flexboxer .wrap--content__middle, 
+.flexboxer .wrap--content__full {
 	flex: 1 0 calc(100% - 40px);
 	padding: 20px;
 }
 
-.flexboxer .wrap--frame__middle {
+.flexboxer .wrap--frame__middle, 
+.flexboxer .wrap--frame__full {
 	flex: 1 0 100%;
 	padding: 0;
 }
@@ -1962,6 +1964,46 @@ input[type="submit"]:hover {
     transition: all 1000ms ease;
 }
 
+/**
+ * PAGE CONTROL USERS (page-control-users.php)
+ ***********************************/
+.flexboxer--controlusers .chosen-container-multi {
+	width: 100% !important;
+}
+
+.wrap--filterusers input[type="submit"] {
+	padding: 4px 10px 5px;
+}
+
+.wrap--filterusers > .wrap{
+	margin: 0 auto;
+}
+
+.wrap--filterusers > .wrap--content,
+.wrap--filterusers > .wrap > .wrap--content {
+	flex: 1 0 calc(100% - 10px);
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.wrap--filterusers > .wrap--content > .wrap--content {
+	padding: 0;
+	margin: 3px 0;
+}
+
+.wrap--filterusers > .wrap--content > .wrap--content + .wrap--content {
+	margin-top: 5px;
+}
+
+.wrap--filterusers .wrap--filters {
+	padding-top: 0;
+}
+
+.wrap--filterusers .submit {
+	margin: 0 5px 5px;
+	width: calc(100% - 10px);
+}
+
 
 /**
  * SLIDER (node_modules/flickity)
@@ -1997,7 +2039,7 @@ input[type="submit"]:hover {
 .chosen-container-multi .chosen-choices {
 	border: 0;
 	background: rgba(0,0,0,0.1);
-	padding: 5px;
+	padding: 5px 5px 0;
 }
 .chosen-container-active .chosen-choices {
 	box-shadow: none;
@@ -2006,7 +2048,7 @@ input[type="submit"]:hover {
 	background: white;
 	border: 0;
 	border-radius: 0;
-	margin: 0 5px 0 0;
+	margin: 0 5px 5px 0;
 	line-height: 19px;
 }
 .chosen-container-multi .chosen-choices li.search-field {
@@ -2237,6 +2279,11 @@ textarea.js-medium-editor,
 	.flexboxer .wrap--flex .wrap--frame__middle {
     	flex: 1 0 50%;
     }
+    /* PAGE CONTROL USERS */
+   .wrap--filterusers .submit {
+		margin: 0 5px 5px calc(100% - 105px);
+		width: 100px;
+	}
 }
 @media only screen and (max-width : 549px) {
 	.showontablet {
@@ -2605,6 +2652,25 @@ textarea.js-medium-editor,
 	.flexboxer .wrap--frame {
 	    max-width: 900px;
 	    margin: 10px auto;
+	}
+	.wrap--filterusers .wrap--content {
+	    margin-bottom: 0;
+	    margin-top: 0;
+	    max-width: 890px;
+	}
+	.wrap--filterusers > .wrap--content > .wrap--content {
+		padding: 0;
+		margin: 3px;
+	}
+
+	.wrap--filterusers > .wrap--content > .wrap--content + .wrap--content {
+		margin-top: 3px;
+	}
+	.wrap--filterusers > .wrap--content > .wrap--content:first-child {
+		margin-left: 0;
+	}
+	.wrap--filterusers > .wrap--content > .wrap--content:last-child {
+		margin-right: 0;
 	}
 	.wrap .em-booking-login p {
 		margin-top: 0 !important;

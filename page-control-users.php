@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 
-<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+<div class="flexboxer flexboxer--controlusers">
 
+<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 
 <style>
   #usercontrolmain {margin: 10px;}
@@ -23,28 +24,10 @@ foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
 if (empty($_GET["filter"])){
 
   /* Default options */
+
+  $nam = true; // Name
   $tip = true; // Type
-  $tit = false; // Studies
-  $exp = false; // Experience
-  $ema = false; // Email
-  $est = true;  // Admission state
-  $kar = false; // Karma
 
-  // Profile views
-  $vfi = false; // Profile views in search results
-  $vpe = false;  // Profile views
-
-  //Invitations
-  $inv = false;  // Invitations left
-  $hin = false;  // Has invited
-  $val = false;  // Validated by
-  $hva = false;  // Has validate
-
-  // Dates
-  $reg = true;  // Register
-  $log = true;  // Last login 
-  $con = true;  // Confirmed
-  $cuo = false; // Last Fee
 
 }else{
 
@@ -53,6 +36,8 @@ if (empty($_GET["filter"])){
 
   // Get options
   $user_labels = $_GET['labels'];
+  $nam = in_array("nam", $user_labels) ? true : false;
+  $pho = in_array("pho", $user_labels) ? true : false;
   $tip = in_array("tip", $user_labels) ? true : false;
   $tit = in_array("tit", $user_labels) ? true : false;
   $exp = in_array("exp", $user_labels) ? true : false;
@@ -188,28 +173,46 @@ if ($filter == 'all' || $filter == ''){
 }
 
 
-$user_query = new WP_User_Query($args);?>
-<div id="usercontroloption">
-  <form>
-    <select name="labels[]" id="user-labels" multiple="multiple">
-      <option value="tip" <?php if($tip) echo 'selected';?> >Tipo</option>
-      <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
-      <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
-      <option value="ema" <?php if($ema) echo 'selected';?> >Email</option>
-      <option value="reg" <?php if($reg) echo 'selected';?> >Creado</option>
-      <option value="cuo" <?php if($cuo) echo 'selected';?> >Ult. Cuota</option>
-      <option value="con" <?php if($con) echo 'selected';?> >Confirmado</option>
-      <option value="log" <?php if($log) echo 'selected';?> >Login</option>
-      <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
-      <option value="kar" <?php if($kar) echo 'selected';?> >Karma</option>
-      <option value="vfi" <?php if($vfi) echo 'selected';?> >Vis. Ficha</option>
-      <option value="vpe" <?php if($vpe) echo 'selected';?> >Vis. Perfil</option>
-      <option value="inv" <?php if($inv) echo 'selected';?> >Invitaciones</option>
-      <option value="val" <?php if($val) echo 'selected';?> >Validado por</option>
-      <option value="hva" <?php if($hva) echo 'selected';?> >Ha validado</option>
-    </select>
-    <br>
-    <label> 
+$user_query = new WP_User_Query($args);
+?>
+<form class="wrap wrap--frame wrap--filterusers">
+
+  <div class="wrap wrap--flex wrap--options" id="usercontroloption">
+    <div class="wrap wrap--content wrap--content__full">
+      <select name="labels[]" id="user-labels" multiple="multiple">
+        <optgroup label="Datos personales">
+          <option value="nam" <?php if($nam) echo 'selected';?> >Nombre</option>
+          <option value="pho" <?php if($pho) echo 'selected';?> >Foto</option>
+          <option value="ema" <?php if($ema) echo 'selected';?> >Email y web</option>     
+          <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
+          <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
+        </optgroup>
+        <optgroup label="Datos de usuario">
+          <option value="tip" <?php if($tip) echo 'selected';?> >Tipo de usuario</option>
+          <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
+          <option value="reg" <?php if($reg) echo 'selected';?> >Fecha de creación</option>
+          <option value="log" <?php if($log) echo 'selected';?> >Último login</option>
+          <option value="inv" <?php if($inv) echo 'selected';?> >Invitaciones restantes</option>
+          <option value="val" <?php if($val) echo 'selected';?> >Validado por</option>
+          <option value="hva" <?php if($hva) echo 'selected';?> >Ha validado a</option>
+        </optgroup>
+        <optgroup label="Datos de asociado">
+          <option value="con" <?php if($con) echo 'selected';?> >Fecha de asociación</option>
+          <option value="cuo" <?php if($cuo) echo 'selected';?> >Última cuota</option>
+        </optgroup>
+        <optgroup label="Visualizaciones">
+          <option value="vfi" <?php if($vfi) echo 'selected';?> >Aparición en resultados</option>
+          <option value="vpe" <?php if($vpe) echo 'selected';?> >Vistas de perfil</option>
+        </optgroup>
+        <optgroup label="Otros">
+        <option value="kar" <?php if($kar) echo 'selected';?> >Karma</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="wrap wrap--content wrap--flex wrap--filters">
+    <div class="wrap wrap--content wrap--content__middle">
       <select name="filter">
       	<option value="all" <?php if($filter == 'all') echo 'selected';?>>Todos los usuarios</option>
         <option value="s" <?php if($filter == 's') echo 'selected';?>>Suspendidos</option>
@@ -217,27 +220,27 @@ $user_query = new WP_User_Query($args);?>
       	<option value="p" <?php if($filter == 'p') echo 'selected';?>>Pendientes de validar</option>
         <option value="c" <?php if($filter == 'c') echo 'selected';?>>Validados</option>
       </select>
-    </label>
-    <label> 
+    </div>
+    <div class="wrap wrap--content wrap--content__middle">
       <select name="order">
       	<option value="registered" <?php if($order == 'registered') echo 'selected';?>>Fecha creación</option>
         <option value="validate_date" <?php if($order == 'validate_date') echo 'selected';?>>Fecha validación</option>
       	<option value="last_login" <?php if($order == 'last_login') echo 'selected';?>>Último acceso</option>
         <option value="last_name" <?php if($order == 'last_name') echo 'selected';?>>Apellido</option>
         <option value="login" <?php if($order == 'login') echo 'selected';?>>Email</option>
-        <!--<option value="user_search" <?php if($order == 'user_search') echo 'selected';?>>Vis. Ficha</option>
-        <option value="user_vis" <?php if($order == 'user_vis') echo 'selected';?>>Vis. Perfil</option> -->
       </select>
-    </label>
-    <input type="submit" value="Mostrar" class="submit button"/>
-  </form>
-</div>
+    </div>
+  </div>
 
+  <input type="submit" value="Mostrar" class="submit button"/>
+
+</form>
+<?php if($user_query->total_users > 0){ ?>
 <div id="usercontrolmain">
   <table>
     <tr>
-      <th>Foto</th>
-      <th>Nombre/Pseudo</th>
+      <?php if($pho == true){ ?><th>Foto</th><?php } ?>
+      <?php if($nam == true){ ?><th>Nombre</th><?php } ?>
       <?php if($tip == true){ ?><th>Tipo</th><?php } ?>
       <?php if($tit == true){ ?><th>Titulación/Centro</th><?php } ?>
       <?php if($exp == true){ ?><th>Experiencia/Región</th><?php } ?>
@@ -267,9 +270,9 @@ $user_query = new WP_User_Query($args);?>
 		?>
     <tr>
       
-      <td><?php echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><a href="'.get_author_posts_url($user_id).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $user_id),array(28, 28) ).'</a></div>'; ?></td>
+      <?php if($pho == true){ ?><td><?php echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><a href="'.get_author_posts_url($user_id).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $user_id),array(28, 28) ).'</a></div>'; ?></td><?php } ?>
       
-      <td><?php if(get_the_author_meta( 'type', $user_id) != 'estudio'){ echo get_the_author_meta('first_name',$user_id ).' ';} echo get_the_author_meta('last_name',$user_id );?><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td>
+      <?php if($nam == true){ ?><td><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
       
       <?php if($tip == true){ ?><td><?php echo get_the_author_meta( 'type', $user_id);?></td><?php } ?>
       
@@ -308,6 +311,8 @@ $user_query = new WP_User_Query($args);?>
   </table>
 </div>
 
-<?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
+<?php }} else header('Location: '.site_url().'?action=nopermission' ); ?>
+
+</div>
 
 <?php get_footer(); ?>

@@ -43,7 +43,7 @@
 <?php include(locate_template('alerts.php')); ?>
 
 <?php if (has_nav_menu('menutop')) { ?>
-  <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu">
+  <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu js-thumbfull animecubic350">
    	<?php  wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
   </nav>
 <?php } ?>

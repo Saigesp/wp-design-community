@@ -40,10 +40,11 @@ function inject_in_all() { ?>
         //$("")
       })
 
-    <?php if (is_page('control-users')) { ?>
-        $('#user-labels').chosen();
-    <?php } ?>
+
     <?php if ('event' == get_post_type()) { ?>
+
+
+
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
         }
@@ -56,8 +57,22 @@ function inject_in_all() { ?>
         if ($(".em-booking-login-form").length) {
           $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
         }
+
+
+
     <?php } ?>
-    <?php if (is_page('edit-event')) { ?>
+    <?php if (is_page('control-users')) { ?>
+
+
+
+        $('#user-labels').chosen();
+
+
+
+    <?php } else if (is_page('edit-event')) { ?>
+
+
+
         if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
         if ($("#event-form > .wrap").length)  $("#event-form > .wrap").addClass("flexboxer flexboxer--event flexboxer--event__edit").removeClass("wrap");
 
@@ -150,6 +165,8 @@ function inject_in_all() { ?>
 
         $(".event-categories select").chosen();
         $('#location-country').chosen(); 
+
+
 
     <?php } ?>
     });

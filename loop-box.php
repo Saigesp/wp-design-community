@@ -3,7 +3,7 @@
   <!-- thumbnail -->
   <section class="wrap wrap--frame">
     <header id="header-<?php the_ID(); ?>" class="header header--article">
-      <figure id="thumbnail" class="thumb thumb--article js-thumbfull">
+      <figure id="thumbnail" class="thumb thumb--article js-fullheight js-fullheight-thumb">
         <?php the_post_thumbnail('full');  ?>
       </figure>
       <div class="overflow overflow--black"></div>

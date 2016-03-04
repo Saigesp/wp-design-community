@@ -22,9 +22,14 @@ function inject_in_all() { ?>
       }
     }
 
+    function imageresize() {
+        if (jQuery('.js-fullheight').length > 0) jQuery('.js-fullheight').css("height", jQuery(window).height() - jQuery('#headertop').outerHeight());
+        if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();
+    }
+
     jQuery(document).ready(function($) {
 
-      imageresize($);
+      imageresize();
 
       if ($(".js-imagefill").length > 0){
         var imgLoad = imagesLoaded('.js-imagefill img');

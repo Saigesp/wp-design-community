@@ -131,6 +131,7 @@ body {
 	min-height:100%;
 	position:relative;
 	padding-bottom: 76px;
+	padding-top: 60px;
 }
 
 body,
@@ -228,7 +229,11 @@ code {
  * HEADER TABS
  ***********************************/
 .headertop {
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	width: 100%;
 	height: 60px;
 	background-color: rgb(40,180,183);
 }
@@ -290,6 +295,10 @@ code {
     max-height: 40px;
 }
 
+.headertop .wrap--pagetitle {
+	display: inline-block;
+}
+
 .headertop .wrap--path {
 	margin: 11px 10px 6px;
 }
@@ -320,12 +329,13 @@ code {
  * MENUS TOP
  ***********************************/
 .wrap--menu__top {
-	position: absolute;
+	position: fixed;
 	top: 60px;
 	left: 100%;
 	z-index: 999;
 	width: 220px;
-	background-color: rgb(40,180,184);
+	padding-right: 50px;
+	background-color: rgb(34,153,155);
 	color: white;
 	height: 400px;
 }
@@ -336,14 +346,27 @@ code {
 
 .wrap--menu__top a {
 	color: white;
+	line-height: 30px;
+	display: block;
+	padding: 10px 15px;
+}
+
+.wrap--menu__top a:hover{
+	background: rgba(0,0,0,0.1);
 }
 
 .wrap--menu__top .menu {
 	list-style: none;
+	margin: 0;
+}
+
+.wrap--menu__top .menu + .menu {
+	border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 .wrap--menu__top .menu .menu-item {
 	list-style: none;
+	
 }
 
 .wrap--menu__top .submenu {

@@ -19,7 +19,8 @@ add_theme_support( 'post-thumbnails' );
 
 // Active menus
 register_nav_menus( array(
-	'menutop' => 'Top Menu',
+  'menutop' => 'Top Menu',
+	'menuadmin' => 'Admin Menu',
   'menumiddle' => 'Menu medio',
 	'menufooter' => 'Menu inferior',
 ) );

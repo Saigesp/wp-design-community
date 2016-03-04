@@ -2,9 +2,6 @@
 
 
 add_action( 'wp_head', 'inject_in_all' );
-add_action( 'wp_head', 'inject_in_control_users' );
-add_action( 'wp_head', 'inject_in_bookings' );
-add_action( 'wp_head', 'inject_in_edit_event' );
 
 
 // Create pages to extend theme
@@ -39,32 +36,11 @@ function inject_in_all() { ?>
         $(".alert").removeClass('alert--error').addClass('hide');
         //$("")
       })
-      
-    });
-  </script>
-<?php }
 
-/**
- * PAGE CONTROL USERS
- ***********************************/
-function inject_in_control_users() {
-  if (is_page('control-users')) { ?>
-    <script>
-      jQuery(document).ready(function($) {
-          $('#user-labels').chosen();
-      });
-    </script>
-  <?php }
-}
-
-
-/**
- * PAGE EVENT
- ***********************************/
-function inject_in_bookings() {
-  if ('event' == get_post_type()) { ?>
-    <script>
-      jQuery(document).ready(function($) {
+    <?php if (is_page('control-users')) { ?>
+        $('#user-labels').chosen();
+    <?php } ?>
+    <?php if ('event' == get_post_type()) { ?>
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
         }
@@ -77,19 +53,8 @@ function inject_in_bookings() {
         if ($(".em-booking-login-form").length) {
           $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
         }
-      });
-    </script>
-  <?php }
-}
-
-
-/**
- * PAGE EDIT EVENT
- ***********************************/
-function inject_in_edit_event() {
-  if (is_page('edit-event')) { ?>
-    <script>
-      jQuery(document).ready(function($) {
+    <?php } ?>
+    <?php if (is_page('edit-event')) { ?>
         if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");
         if ($("#event-form > .wrap").length)  $("#event-form > .wrap").addClass("flexboxer flexboxer--event flexboxer--event__edit").removeClass("wrap");
 
@@ -181,11 +146,9 @@ function inject_in_edit_event() {
         });
 
         $(".event-categories select").chosen();
-        $('#location-country').chosen();  
-      }); 
-    </script>
-  <?php }
-}
+        $('#location-country').chosen(); 
 
-
-?>
+    <?php } ?>
+    });
+  </script>
+<?php } ?>

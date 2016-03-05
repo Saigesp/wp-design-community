@@ -58,7 +58,7 @@ get_header();
 								<div class="contentauthorarticlefoot">
 									<hr class="separatorauthor separatorauthorup">
 									<?php if (function_exists('get_wp_user_avatar_src')){ ?>
-									<figure class="wrap wrap--photo wrap--photo__author authorimagefoot authorbuble" style="background-color: #666;">
+									<figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
 										<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
 									</figure>
 									<?php } ?>

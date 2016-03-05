@@ -214,7 +214,7 @@ code {
  * USER PROFILES PHOTOS
  ***********************************/
 .wrap--photo {
-
+	background-color: rgba(0,0,0,0.3)
 }
 .wrap--photo__author {
 	height: 50px;
@@ -222,7 +222,13 @@ code {
 	border-radius: 50px;
 	overflow: hidden;
 }
-
+.wrap--photo__block {
+	margin-right: 15px;
+	height: 70px;
+	width: 70px;
+	display: block;
+    margin: 0 auto;
+}
 
 
 
@@ -416,16 +422,14 @@ code {
 	box-shadow: 0 1px 3px rgba(0,0,0,.33);
 }
 
-.wrap--menu__user > form {
-	padding: 20px 10px 10px;	
-}
+
 
 .wrap--menu__user.active {
 	top: 0;
 }
-
-.wrap--menu__user form {
-	
+/* When user is not logged */
+.wrap--menu__user > form {
+	padding: 20px 10px 10px;	
 }
 
 .wrap--menu__user p {
@@ -461,6 +465,7 @@ code {
 	vertical-align: middle;
 }
 
+/* When user is logged */
 .wrap--menu__user > ul > li > a {
 	line-height: 30px;
 	display: block;
@@ -471,7 +476,9 @@ code {
 	background: rgba(0,0,0,0.1);
 }
 
-
+.wrap--menu__user .menu-item-admin {
+	background: rgba(0,0,0,0.1);	
+}
 
 
 /**
@@ -958,14 +965,7 @@ code {
 	display: block;
 	margin: 0 auto 5px;
 }
-.authorimagefoot {
-	display: inline-block;
-	margin-right: 15px;
-	height: 70px;
-	width: 70px;
-	display: block;
-    margin: 0 auto;
-}
+
 .wrap--photo__author img {
 	width: 100%;
 	height: auto;
@@ -2238,11 +2238,11 @@ textarea.js-medium-editor,
 		display: inline-block;
 		margin: 0 20px 0 0;
 	}
-	.authorimagefoot {
+	.wrap--photo__block {
 		display: inline-block;
 		margin-right: 15px;
 	}
-	.wrap--author .authorimagefoot {
+	.wrap--author .wrap--photo__block {
 	    margin: 0 10px 0 0;
 	}
 	.authorarticlefoot {
@@ -2585,7 +2585,8 @@ textarea.js-medium-editor,
 	.article--nothumb .wrap--category p {
 		text-align: center;
 	}
-	.masonrysizer, .thumnbsizer {
+	.masonrysizer,
+	.thumnbsizer {
 		height: 180px; 
 	}
 	.masonrysizer2, .thumnbsizer2 {

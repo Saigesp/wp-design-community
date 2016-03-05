@@ -14,7 +14,7 @@
 <?php if(is_user_logged_in()){ ?>
 
   <section class="wrap wrap--content wrap--author">
-		<figure class="authorimagefoot authorbuble" style="background-color: #666;">
+		<figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
 		<img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')
 		  echo get_wp_user_avatar_src($current_user_id, 100, 'medium');
 		  else echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>

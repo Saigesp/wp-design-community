@@ -46,6 +46,14 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 	<?php } ?>
 
+	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+
+		<section class="wrap wrap--content wrap--content__toframe wrap--transparent">
+			<p onclick="ToggleMenu('bookingmanager')">Gestionar reservas</p>
+		</section>
+
+	<?php } ?>
+
 	<!-- relevant info -->
 	<section class="wrap wrap--content">
 		<h3>Detalles</h3>
@@ -85,15 +93,6 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		</div>
 	</section><!-- end of relevant info -->
 
-	<!-- admin info -->
-	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-	<section id="bookingmanager" class="wrap wrap--content wrap--collapse js-section">
-		<h3 onclick="ToggleSection('bookingmanager')">Gestionar reservas</h3>
-		<?php include(locate_template('loop-booking.php')); ?>
-	</section>
-	<?php } ?><!-- end of admin info -->
-
-
 	<!-- description -->
 	<section class="wrap wrap--content">
 		<h3><?php the_title(); ?></h3>
@@ -127,6 +126,17 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		</section>
 	<?php } ?>	
 
+
+
 </div><!-- end of flexboxer -->
+
+
+
+<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+	<div id="bookingmanager" class="wrap wrap--modal js-menu">
+	    <h3 class="title title--modal">Gestionar reservas</h3>
+	    <?php include(locate_template('loop-booking.php')); ?>
+	</div><!-- end of modal -->
+<?php } ?><!-- end of admin info -->
 
 <?php get_footer(); ?>

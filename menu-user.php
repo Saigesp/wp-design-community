@@ -38,7 +38,11 @@
     <ul id="menu-admin-menu-base" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
 
       <li class="menu-item menu-item-type-custom menu-item-object-custom">
-        <a href="<?php echo get_bloginfo('url');?>/configuration">Configuración general</a>
+        <a href="<?php echo get_bloginfo('url');?>/configuration">Configuración de la página</a>
+      </li>
+
+      <li class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="<?php echo get_bloginfo('url');?>/configuration-presidence">Presidencia</a>
       </li>
 
       <li class="menu-item menu-item-type-custom menu-item-object-custom">

@@ -9,23 +9,30 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 ?> 
 
-<div class="flexboxer flexboxer--event">
+<div class="flexboxer flexboxer--event article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
 	<!-- thumbnail -->
 	<?php if(has_post_thumbnail()){ ?>
-		<section class="wrap wrap--frame">
+		<section class="wrap wrap--frame ">
 			<header id="header-<?php the_ID(); ?>" class="header header--article">
-				<figure id="thumbnail" class="thumb thumb--article js-imagefill">
-					<?php the_post_thumbnail('full');  ?>
-				</figure>
-				<div class="overflow overflow--black"></div>
-				<div id="title" class="title title--article">
-					<div class="divtextarticle">
-						<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-						<?php if(function_exists('the_subtitle')){?>
-							<h3 class="subtitletextarticle titlesarticle"><?php the_subtitle(); ?></h3>
-						<?php } ?>
+				<?php  if ( has_post_thumbnail() ) { ?>
+					<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
+						<?php the_post_thumbnail('full');  ?>
+					</figure>
+					<div class="overflow overflow--black"></div>
+					<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
+						<div class="wrap wrap--position">
+							<h2 class="title title--article" ><?php the_title(); ?></h2>
+							<?php if(function_exists('the_subtitle')){?>
+								<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
+							<?php } ?>
+						</div>
 					</div>
-				</div>
+				<?php }else{  ?>
+					<h2 class="title title--article" ><?php the_title(); ?></h2>
+					<?php if(function_exists('the_subtitle')){?>
+						<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
+					<?php } ?>
+				<?php } ?>
 				<div class="categoryarticle">
 					<p><?php the_category(', ');?></p>
 				</div>

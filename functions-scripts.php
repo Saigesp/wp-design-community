@@ -90,6 +90,14 @@ function inject_in_all() { ?>
             }
         });
 
+
+    /**
+     * PAGE CONFIGURATION PRESIDENCE
+     ***********************************/
+    <?php } else if (is_page('configuration-presidence')) { ?>
+
+        $('.select-user').chosen(); 
+
     /**
      * PAGE EDIT EVENT
      ***********************************/

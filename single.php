@@ -16,7 +16,9 @@ get_header();
 						<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
 							<div class="wrap wrap--position">
 								<h2 class="title title--article" ><?php the_title(); ?></h2>
-								<h3 class="title title--article__sub"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>
+								<?php if(function_exists('the_subtitle')){?>
+									<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="wrap wrap--category">

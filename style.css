@@ -1404,6 +1404,10 @@ blockquote p {
 	margin-left: 0;
 }
 
+.flexboxer .wrap--frame__decim  {
+    flex: 1 1 10%;
+}
+
 .flexboxer .wrap h2:first-of-type,
 .flexboxer .wrap h3:first-of-type,
 .flexboxer .wrap h4:first-of-type,

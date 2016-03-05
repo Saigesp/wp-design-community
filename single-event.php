@@ -49,43 +49,56 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 	<?php } ?>
 
 	<!-- relevant info -->
-	<section class="wrap wrap--content wrap--flex">
-		<div class="wrap wrap--frame__middle">
-			<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
-				echo '<span class="breaklinetablet"><strong>Fecha:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i').'</span>';
-			}else{
-				echo '<span class="breaklinetablet"><strong>Inicio:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'</span><br><span class="breaklinetablet"><strong>Fin:</strong> </span><span class="breaklinetablet">'.$event_end_date->format('j \d\e M \d\e Y\, H:i\h').'</span>';
-			}
-			if($EM_Event->location->location_id > 0){
-				echo '<br><span class="breaklinetablet"><strong>Localización:</strong> </span><span class="breaklinetablet">'.$EM_Event->location->location_name.'</span>';
-			}?>
-		</div>
-		<div class="wrap wrap--frame__middle">
-			<?php
-			if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet
-				if($EM_Event->output('#_SPACES') > 0){
-					echo '<br class="hideonmobile"><span class="breaklinetablet"><strong>Espacios disponibles:</strong> </span>'
-					. '<span class="breaklinetablet">'
-					.$EM_Event->output('#_AVAILABLESPACES')
-					. ' / '
-					.$EM_Event->output('#_SPACES')
-					. '</span>';
+	<section class="wrap wrap--content">
+		<h3>Detalles</h3>
+		<div class="wrap wrap--frame wrap--flex">
+			<div class="wrap wrap--frame__middle">
+				<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
+					echo '<span class="breaklinetablet"><strong>Fecha:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i').'</span>';
+				}else{
+					echo '<span class="breaklinetablet"><strong>Inicio:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'</span><br><span class="breaklinetablet"><strong>Fin:</strong> </span><span class="breaklinetablet">'.$event_end_date->format('j \d\e M \d\e Y\, H:i\h').'</span>';
 				}
-				if($EM_Event->output('#_PENDINGSPACES') > 0){
-					echo '<br><span class="breaklinetablet"><strong>En trámite:</strong> </span>'
-					. '<span class="breaklinetablet">'
-					.$EM_Event->output('#_PENDINGSPACES')
-					. '</span>';
+				if($EM_Event->location->location_id > 0){
+					echo '<br><span class="breaklinetablet"><strong>Localización:</strong> </span><span class="breaklinetablet">'.$EM_Event->location->location_name.'</span>';
+				}?>
+			</div>
+			<div class="wrap wrap--frame__middle">
+				<?php
+				if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet
+					if($EM_Event->output('#_SPACES') > 0){
+						echo '<br class="hideonmobile"><span class="breaklinetablet"><strong>Espacios disponibles:</strong> </span>'
+						. '<span class="breaklinetablet">'
+						.$EM_Event->output('#_AVAILABLESPACES')
+						. ' / '
+						.$EM_Event->output('#_SPACES')
+						. '</span>';
+					}
+					if($EM_Event->output('#_PENDINGSPACES') > 0){
+						echo '<br><span class="breaklinetablet"><strong>En trámite:</strong> </span>'
+						. '<span class="breaklinetablet">'
+						.$EM_Event->output('#_PENDINGSPACES')
+						. '</span>';
+					}
+				}else{ //Event finished
+					echo '<p><strong>Evento finalizado</strong></p>';
 				}
-			}else{ //Event finished
-				echo '<p><strong>Evento finalizado</strong></p>';
-			}
-				?>
+					?>
+			</div>
 		</div>
 	</section><!-- end of relevant info -->
 
+	<!-- admin info -->
+	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+	<section class="wrap wrap--content">
+		<h3>Gestionar reservas</h3>
+		<?php include(locate_template('loop-booking.php')); ?>
+	</section>
+	<?php } ?><!-- end of admin info -->
+
+
 	<!-- description -->
 	<section class="wrap wrap--content">
+		<h3><?php the_title(); ?></h3>
 		<?php echo $EM_Event->output('#_EVENTNOTES');?>
 	</section><!-- end of description -->
 
@@ -116,11 +129,6 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		</section>
 	<?php } ?>	
 
-  <section class="wrap wrap--frame">
-  	<?php 
-  	// var_dump($EM_Event->bookings->tickets);
-  	?>
-  </section>
 </div><!-- end of flexboxer -->
 
 <?php get_footer(); ?>

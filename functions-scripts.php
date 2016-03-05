@@ -1,15 +1,7 @@
 <?php 
 
-
 add_action( 'wp_head', 'inject_in_all' );
 
-
-// Create pages to extend theme
-new_page_title('Edit Event');
-
-/**
- * ALL PAGES
- ***********************************/
 function inject_in_all() { ?>
   <script>
 
@@ -29,6 +21,10 @@ function inject_in_all() { ?>
         if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();
     }
 
+
+    /**
+     * ALL PAGES
+     ***********************************/
     jQuery(document).ready(function($) {
 
       imageresize();
@@ -47,7 +43,9 @@ function inject_in_all() { ?>
         //$("")
       })
 
-
+    /**
+     * SIGLE EVENT
+     ***********************************/
     <?php if ('event' == get_post_type()) { ?>
 
 
@@ -66,7 +64,9 @@ function inject_in_all() { ?>
         }
 
 
-
+    /**
+     * PAGE CONTROL USERS
+     ***********************************/
     <?php } ?>
     <?php if (is_page('control-users')) { ?>
 
@@ -75,9 +75,25 @@ function inject_in_all() { ?>
         $('#user-labels').chosen();
 
 
+    /**
+     * PAGE CONFIGURATION
+     ***********************************/
+    <?php } else if (is_page('configuration')) { ?>
 
+        $('#automatic-twitter').change(function() {
+            if($(this).is(":checked")) {
+              //var returnVal = confirm("Are you sure?");
+              //$(this).attr("checked", returnVal);
+              $('.wrap--twitteroptions').removeClass('hide');
+            }else{
+              $('.wrap--twitteroptions').addClass('hide');
+            }
+        });
+
+    /**
+     * PAGE EDIT EVENT
+     ***********************************/
     <?php } else if (is_page('edit-event')) { ?>
-
 
 
         if ($("#em-location-data i").length) $("#em-location-data i").prev().attr("placeholder", "Obligatorio");

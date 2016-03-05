@@ -24,6 +24,12 @@ register_nav_menus( array(
 	'menufooter' => 'Menu inferior',
 ) );
 
+// Create pages to extend theme
+new_page_title('Edit Event');
+new_page_title('Edit Profile');
+new_page_title('Control Users');
+new_page_title('Configuration');
+
 // Create pages
 function new_page_title($post_title){
   if(get_page_by_title($post_title) == NULL){
@@ -325,10 +331,6 @@ function customizer_css() {
 
 
 
-// Create pages to extend theme
-new_page_title('Edit Event');
-new_page_title('Control Users');
-
 
 
 
@@ -379,13 +381,6 @@ function my_theme_add_editor_styles() {
 
 
 
-
-
-/**
- * FUNCIONES DE PERFILES
- ***********************************/
-
-new_page_title('Edit Profile');
 
 
 

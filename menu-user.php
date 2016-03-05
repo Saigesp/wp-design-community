@@ -18,7 +18,7 @@
 
     <?php if(!get_page_by_title('Edit profile') == NULL) { ?>
       <li class="menu-item menu-item-type-custom menu-item-object-custom">
-        <a href="../edit-profile">Editar Perfil</a>
+        <a href="<?php echo get_bloginfo('url');?>/edit-profile">Editar Perfil</a>
       </li>
     <?php } ?>
 
@@ -36,9 +36,21 @@
 <?php if(is_user_role('administrator')) { ?>
   <nav id="menuadmin" class="wrap wrap--menu wrap--menu__user js-menu animecubic350">
     <ul id="menu-admin-menu-base" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-      
+
       <li class="menu-item menu-item-type-custom menu-item-object-custom">
-        <a href="../control-users">Control de usuarios</a>
+        <a href="<?php echo get_bloginfo('url');?>/configuration">Configuración general</a>
+      </li>
+
+      <li class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="<?php echo get_bloginfo('url');?>/">Tesorería</a>
+      </li>
+
+      <li class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="<?php echo get_bloginfo('url');?>/">Secretaría</a>
+      </li>
+
+      <li class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="<?php echo get_bloginfo('url');?>/control-users">Control de usuarios</a>
       </li>
 
     </ul>

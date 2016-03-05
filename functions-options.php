@@ -56,20 +56,18 @@ function theme_wpdc_settings_twitter() {
 		}else{
       
     	if (isset($_POST["update_settings"])) {
+          $automate_twitter = esc_attr($_POST["automate_twitter"]); update_option("automate_twitter", $automate_twitter);
           $consumer_key = esc_attr($_POST["consumer_key"]);	update_option("consumer_key", $consumer_key);
         	$consumer_secret = esc_attr($_POST["consumer_secret"]);	update_option("consumer_secret", $consumer_secret);
         	$access_token = esc_attr($_POST["access_token"]);	update_option("access_token", $access_token);
         	$access_token_secret = esc_attr($_POST["access_token_secret"]);	update_option("access_token_secret", $access_token_secret);
         	if (!isset($_POST["tweet_prueba"])) echo '<div id="message" class="updated">Configuración guardada</div>';
 			} else {
+          $automate_twitter = get_option("automate_twitter");
       		$consumer_key = get_option("consumer_key");
         	$consumer_secret = get_option("consumer_secret");
         	$access_token = get_option("access_token"); 
         	$access_token_secret = get_option("access_token_secret"); 
-      }
-      if (isset($_POST["tweet_prueba"])) {
-        	$respuesta = sendTweet("Tweet de prueba desde diseñadoresindustriales.es");
-        echo '<div id="message" class="updated">Tweet enviado! Comprueba tu perfil de twitter.</div>';
       }
       if (isset($_POST["update_settings_twitter"])) {
         	$tweet_new_user = esc_attr($_POST["tweet_new_user"]);	update_option("tweet_new_user", $tweet_new_user);
@@ -81,7 +79,11 @@ function theme_wpdc_settings_twitter() {
         	$follow_new_user = get_option("follow_new_user");
         	$tweet_new_publication = get_option("tweet_new_publication");
       }
-       ?>
+      if (isset($_POST["tweet_prueba"])) {
+          $respuesta = sendTweet("Tweet de prueba desde diseñadoresindustriales.es");
+        echo '<div id="message" class="updated">Tweet enviado! Comprueba tu perfil de twitter.</div>';
+      }
+      ?>
 
     <div class="wrap">
         <h2>Configuración general de twitter</h2>
@@ -89,6 +91,10 @@ function theme_wpdc_settings_twitter() {
       	<p>Puedes obtener las credenciales de twitter aquí: <a href="https://apps.twitter.com/">apps.twitter.com</a></p>
         <form method="POST" action="">
             <table class="form-table">
+              <tr valign="top">
+                  <th scope="row"><label for="automate_twitter">Activar automatización</label></th>
+                  <td><input type="checkbox" name="automate_twitter" value="true" <?php if($automate_twitter == true) echo 'checked';?>/></td>
+              </tr>
                 <tr valign="top">
                     <th scope="row"><label for="consumer_key">Consumer key:</label></th>
                     <td><input type="text" name="consumer_key" size="50" value="<?php echo $consumer_key;?>"/></td>

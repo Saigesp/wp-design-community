@@ -163,6 +163,7 @@ h1, h2, h3, h4, p, input, textarea
 
 a {
 	color: rgb(40,180,184);
+	cursor: pointer;
 }
 
 a:hover {

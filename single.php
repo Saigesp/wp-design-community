@@ -21,7 +21,7 @@ get_header();
 				<article id="article-<?php the_ID(); ?>" class="article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
 					<header id="header-<?php the_ID(); ?>" class="header header--article">
 						<?php  if ( has_post_thumbnail() ) { ?>
-							<figure id="thumbnail" class="thumb--article js-thumbfull">
+							<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
 								<?php the_post_thumbnail('full');  ?>
 							</figure>
 							<div class="overflow overflow--black"></div>

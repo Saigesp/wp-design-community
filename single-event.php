@@ -10,35 +10,32 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 ?> 
 
 <div class="flexboxer flexboxer--event article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
-	<!-- thumbnail -->
+	
 	<?php if(has_post_thumbnail()){ ?>
+
+		<!-- thumbnail -->
 		<section class="wrap wrap--frame ">
 			<header id="header-<?php the_ID(); ?>" class="header header--article">
-				<?php  if ( has_post_thumbnail() ) { ?>
-					<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
-						<?php the_post_thumbnail('full');  ?>
-					</figure>
-					<div class="overflow overflow--black"></div>
-					<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
-						<div class="wrap wrap--position">
-							<h2 class="title title--article" ><?php the_title(); ?></h2>
-							<?php if(function_exists('the_subtitle')){?>
-								<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
-							<?php } ?>
-						</div>
+				<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
+					<?php the_post_thumbnail('full');  ?>
+				</figure>
+				<div class="overflow overflow--black"></div>
+				<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
+					<div class="wrap wrap--position">
+						<h2 class="title title--article" ><?php the_title(); ?></h2>
+						<?php if(function_exists('the_subtitle')){?>
+							<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
+						<?php } ?>
 					</div>
-				<?php }else{  ?>
-					<h2 class="title title--article" ><?php the_title(); ?></h2>
-					<?php if(function_exists('the_subtitle')){?>
-						<h3 class="title title--article__sub"><?php the_subtitle(); ?></h3>
-					<?php } ?>
-				<?php } ?>
+				</div>
 				<div class="categoryarticle">
 					<p><?php the_category(', ');?></p>
 				</div>
 			</header>
-		</section>
-	<?php }else{ ?><!-- end of thumbnail -->
+		</section><!-- end of thumbnail -->
+
+	<?php } else{ ?>
+
 		<!-- title without thumbnail -->
 		<section class="wrap wrap--content">
 			<h2 class="title title--event"><?php the_title(); ?></h2>
@@ -46,6 +43,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 				<h3 class="subtitle subtitle--event"><?php the_subtitle(); ?></h3>
 			<?php } ?>
 		</section><!-- end of title without thumbnail -->
+
 	<?php } ?>
 
 	<!-- relevant info -->
@@ -89,8 +87,8 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 	<!-- admin info -->
 	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-	<section class="wrap wrap--content">
-		<h3>Gestionar reservas</h3>
+	<section id="bookingmanager" class="wrap wrap--content wrap--collapse js-section">
+		<h3 onclick="ToggleSection('bookingmanager')">Gestionar reservas</h3>
 		<?php include(locate_template('loop-booking.php')); ?>
 	</section>
 	<?php } ?><!-- end of admin info -->

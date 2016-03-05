@@ -1366,6 +1366,47 @@ blockquote p {
 
 .flexboxer > .wrap {
     background: #f5f5f5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flexboxer > .wrap--collapse {
+	height: 22px;
+	overflow: hidden;
+	position: relative;
+}
+
+.flexboxer > .wrap--collapse > h3 {
+	cursor: pointer;
+	margin-top: -3px !important;
+	margin-bottom: 30px;
+}
+
+.flexboxer > .wrap--collapse > h3:after{
+    content:"";
+    position: absolute;
+    top:28px;
+    right: 22px;
+    width:0;
+    height:0;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-top:6px solid black;
+    transition: background 350ms ease;
+}
+
+.flexboxer > .wrap--collapse > h3:hover:after{
+	border-top:6px solid rgba(0,0,0,0.5);
+}
+
+.flexboxer > .wrap--collapse.active {
+	height: auto;
+}
+
+.flexboxer > .wrap--collapse.active > h3:after {
+    border-top:6px solid transparent;
+    border-bottom:6px solid transparent;
+    border-left:6px solid black;
 }
 
 .flexboxer > section:last-of-type{

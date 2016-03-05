@@ -16,6 +16,15 @@ function inject_in_all() { ?>
       }
     }
 
+    function ToggleSection(args){
+      if(jQuery('#'+args).hasClass('active') || args == 'close'){
+        jQuery('.js-section').removeClass("active");
+      }else{
+        jQuery('.js-section').removeClass("active");
+        jQuery('#'+args).addClass("active");
+      }
+    }
+
     function imageresize() {
         if (jQuery('.js-fullheight').length > 0) jQuery('.js-fullheight').css("height", jQuery(window).height() - jQuery('#headertop').outerHeight());
         if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();

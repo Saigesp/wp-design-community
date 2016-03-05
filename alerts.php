@@ -9,6 +9,11 @@ if (!empty($_GET["action"])) {
   							$msg .= 'Es necesario que <a href="">inicies sesión</a> para acceder al contenido';
   							break;
 
+    case "wronglogin" :   $msg .= 'error'; 
+                $msg .= '"><p>';
+                $msg .= 'Usuario o contraseña incorrectos';
+                break;
+
   	case "nopermission":	$msg .= 'error'; 
   							$msg .= '"><p>';
   							$msg .= 'No tienes suficientes permisos para eso';

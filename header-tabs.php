@@ -43,7 +43,7 @@
   </div>
 </header>
 
-<?php include(locate_template('alerts.php')); ?>
+
 
 <?php if (has_nav_menu('menutop')) { ?>
   <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu js-fullheight animecubic350">
@@ -77,3 +77,5 @@
 
 <?php }?> 
 </nav>
+
+<div id="overlaybody" class="overlay overlay--body" onclick="ToggleMenu('close')"></div>

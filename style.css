@@ -2289,6 +2289,30 @@ textarea.js-medium-editor,
   /* mix-blend-mode: color; */
 }
 
+/* OVERLAY
+ *
+ ***********************************/
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    -webkit-transition: all 350ms ease;
+    -o-transition: all 350ms ease;
+    transition: all 350ms ease;
+    pointer-events: none !important;
+}
+
+.overlay.active {
+    background: rgba(10, 10, 10, 0.5);
+    pointer-events: all !important;
+}
+
+.overlay--body {
+    top: 45px;
+}
+
 /* En versión móvil queremos que la clase
 *  .overflow--blue sea negra y siempre visible.
 *  Será azul en resoluciones mayores, y solo

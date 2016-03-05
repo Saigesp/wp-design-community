@@ -649,7 +649,7 @@ add_action('wp_logout','go_home');
 function my_front_end_login_fail($username){
     $referrer = $_SERVER['HTTP_REFERER'];
     if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
-        wp_redirect('http://xn--diseadoresindustriales-nec.es/iniciar-sesion/'); 
+        wp_redirect(get_bloginfo('url').'?action=wronglogin'); 
     exit;
     }
 }

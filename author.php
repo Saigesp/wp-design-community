@@ -30,9 +30,9 @@
 <div class="flexboxer flexboxer--author">
   <section class="wrap wrap--content">
       <figure class="authorimagefoot authorbuble" style="background-color: #666;">
-        <img src="<?php if(function_exists('get_wp_user_avatar_src'))
+        <img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($term_slug, 100, 'medium') != '')
           echo get_wp_user_avatar_src($term_slug, 100, 'medium');
-          else echo get_stylesheet_directory_uri().'/img/nophoto.png'; ?>"/>
+          else echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
       </figure>
     <p class="authorarticlefoot">
       <a href="<?php echo get_author_posts_url( $term_slug ); ?>">

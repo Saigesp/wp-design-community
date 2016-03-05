@@ -14,11 +14,13 @@ function inject_in_all() { ?>
   <script>
 
     function ToggleMenu(args){
-      if(!jQuery('#'+args).hasClass('active')){
+      if(jQuery('#'+args).hasClass('active') || args == 'close'){
         jQuery('.js-menu').removeClass("active");
-        jQuery('#'+args).addClass("active");
+        jQuery('#overlaybody').removeClass("active");
       }else{
         jQuery('.js-menu').removeClass("active");
+        jQuery('#overlaybody').addClass("active");
+        jQuery('#'+args).addClass("active");
       }
     }
 

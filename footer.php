@@ -1,5 +1,5 @@
-<footer id="footerpage" class="footerback">
-	<div id="colophon" class="wraparch wrapfoot">
+<footer id="footerpage" class="footer">
+	<div id="colophon" class="wrap wrap--footer">
     	<div class="divleft">
     		<p><?php bloginfo('sitename'); ?></p>
     	</div>

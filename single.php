@@ -1,23 +1,10 @@
 <?php
 get_header();
 ?>
-<div id="divwraparticle" class="wraparticle">
+<div id="divwraparticle" class="wrap wrap--article">
 	<?php if (have_posts()) : ?>
 		<div id="articlemain">
 			<?php while (have_posts()) : the_post(); ?>
-				<?php if(is_plugin_active('disqus-comment-system/disqus.php')){?>
-				<script type="text/javascript">
-		          var disqus_shortname = 'talkcodeblog';
-		          var disqus_identifier = '<?php the_ID();?>';
-		          var disqus_title = '<?php the_title();?>';
-		          var disqus_url = '<?php the_permalink();?>';
-		          (function() {
-		              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-		              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		          })();
-		    	</script>
-		    	<?php } ?>
 				<article id="article-<?php the_ID(); ?>" class="article <?php if(!has_post_thumbnail()) echo 'article--nothumb'; ?>">
 					<header id="header-<?php the_ID(); ?>" class="header header--article">
 						<?php  if ( has_post_thumbnail() ) { ?>
@@ -26,31 +13,31 @@ get_header();
 							</figure>
 							<div class="overflow overflow--black"></div>
 						<?php }  ?>
-						<div id="title" class="title title--article">
-							<div class="divtextarticle">
-								<h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-								<h3 class="subtitletextarticle titlesarticle"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>
+						<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
+							<div class="wrap wrap--position">
+								<h2 class="title title--article" ><?php the_title(); ?></h2>
+								<h3 class="title title--article__sub"><?php if(function_exists('the_subtitle')) the_subtitle(); ?></h3>
 							</div>
 						</div>
-						<div class="categoryarticle">
+						<div class="wrap wrap--category">
               				<p><?php the_category(', ');?></p>
             			</div>
 					</header>
 					<section>
-					  <?php include(locate_template( 'buttons-share.php')); ?>
-						<div class="contentauthorarticle">
-							<?php if(function_exists('get_wp_user_avatar_src')){?>
-								<figure class="authorimage authorbuble" style="background-color: #666;">
-									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
-										<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
-									</a>
-								</figure>
-							<?php } ?>
-							<p class="authorarticle"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
-							<p class="datearticle"><?php the_date();?></p>
-							<p class="datearch viewarch"><?php if(function_exists('wpp_get_views')){ the_svg_icon('eye'); echo wpp_get_views(get_the_ID(),'all');}?></p>
-						</div>
-						<div id="content-<?php the_ID(); ?>" class="contentarticle">
+					  <?php /*include(locate_template( 'buttons-share.php'));*/ ?>
+					<div class="wrap wrap--author">
+						<?php if(function_exists('get_wp_user_avatar_src')){?>
+							<figure class="wrap wrap--photo wrap--photo__author" style="background-color: rgba(0,0,0,0.3);">
+								<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
+									<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
+								</a>
+							</figure>
+						<?php } ?>
+						<p class="author"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
+						<p class="date"><?php the_date();?></p>
+						<?php if(function_exists('wpp_get_views')){ ?><p class="views"><?php the_svg_icon('eye'); echo wpp_get_views(get_the_ID(),'all');?></p><?php } ?>
+					</div>
+						<div id="content-<?php the_ID(); ?>" class="content">
 							<?php the_content(); ?>
 						</div>
 						<div class="backcontainer">
@@ -71,7 +58,7 @@ get_header();
 								<div class="contentauthorarticlefoot">
 									<hr class="separatorauthor separatorauthorup">
 									<?php if (function_exists('get_wp_user_avatar_src')){ ?>
-									<figure class="authorimagefoot authorbuble" style="background-color: #666;">
+									<figure class="wrap wrap--photo wrap--photo__author authorimagefoot authorbuble" style="background-color: #666;">
 										<img src="<?php echo get_wp_user_avatar_src(get_the_author_meta('ID'), 100, 'medium'); ?>"/>
 									</figure>
 									<?php } ?>
@@ -106,57 +93,6 @@ get_header();
 									<?php comments_template(); ?>
 								</div>
 							</footer>
-						</div>
-						<div class="relatedarticles">
-							<?php
-					          $orig_post = $post;
-					          global $post;
-					          $tags = wp_get_post_tags($post->ID);
-					          if ($tags) {
-					              $tag_ids = array();
-					            foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
-					              $args=array(
-					                  'tag__in' => $tag_ids,
-					                  'post__not_in' => array($post->ID),
-					                  'posts_per_page'=>10, // Number of related posts to display.
-					                  'caller_get_posts'=>1
-					              );
-					              $wp_query = new wp_query( $args );
-								  if (have_posts()) : ?>
-									<div class="relatedtitle">
-										<h3>Artículos relacionados</h3>
-									</div>
-									<?php
-									while (have_posts()) : the_post(); 
-										include(locate_template('loop-archive.php'));
-									endwhile;
-								  else : 
-
-									$args=array(
-					                  'order' => 'DESC',
-					                  'post__not_in' => array($post->ID),
-					                  'posts_per_page'=>10, // Number of related posts to display.
-					                  'caller_get_posts'=>1
-					              );
-					              $wp_query = new wp_query( $args );
-								  if (have_posts()) : ?>
-									<div class="relatedtitle">
-										<h3>Últimos artículos</h3>
-									</div>
-									<?php
-									while (have_posts()) : the_post(); 
-										include(locate_template('loop-archive.php'));
-									endwhile;
-									else : 
-								  endif; 
-
-								  endif; 
-							  }else{
-					              
-							  }
-							  $post = $orig_post;
-							  wp_reset_query();
-							  ?>
 						</div>
 					</section>
 				</article>

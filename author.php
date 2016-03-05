@@ -72,24 +72,4 @@
   </section>
 </div><!-- end of flexboxer -->
 
-<!-- <div id="divwrap" class="wraparch index iascontainer customtax"> -->
-  <?php /* if (have_posts()) : ?>
-    <?php while (have_posts()) : the_post(); ?>
-      <?php include( locate_template(  'loop-archive.php' )); ?>
-    <?php endwhile; ?>
-  <?php else : ?>
-  <?php endif; */ ?>
-
-  <!-- <div class="navigation"> -->
-    <?php /*
-    $base = get_bloginfo( 'url' ). '%_%';
-    echo paginate_links( array(
-      'base' => $base,
-      'total' => $wp_query->max_num_pages,
-      'format'   => '?pag=%#%',
-      'current'  => $pagec,
-    ) );
-    */ ?>
-  <!-- </div> -->
-<!-- </div> -->
 <?php get_footer(); ?>

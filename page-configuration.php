@@ -36,8 +36,8 @@
 		<h3>Configuración general</h3>
 	</section>
 
-	<section class="wrap wrap--content">
-		<h3>Configuración de Twitter</h3>
+	<section id="twitterconfiguration" class="wrap wrap--content wrap--collapse js-section">
+		<h3 onclick="ToggleSection('twitterconfiguration')">Configuración de Twitter</h3>
 		<div class="wrap wrap--frame">
 			<input type="checkbox" name="automate_twitter" id="automatic-twitter" value="true" <?php if($automate_twitter == true) echo 'checked';?> / >
 		  	<label for="automate_twitter"> Habilitar configuración automática de twitter</label>

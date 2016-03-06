@@ -37,10 +37,10 @@ Colors
 
 Messages
 
-	Error background	#EFA6A6;
-	Error color			#970808;
-
-
+	Warning 	{ background-color: #FFBD13;}
+	Error 		{ background-color: #F34A65;}
+	Success 	{ background-color: #66CC66;}
+	Info 		{ background-color: #0099FF;}
 */
 
 
@@ -1454,7 +1454,6 @@ blockquote p {
 
 .flexboxer .wrap--transparent p a {
 	cursor: pointer;
-	font-weight: 700;
 }
 
 .flexboxer .wrap--transparent p a:hover {
@@ -1889,13 +1888,13 @@ input[type="submit"]:hover {
 .em-booking .em-booking-message-error,
 .em-my-booking .em-booking-message-error,
 .em-warning-errors {
-	background-color:#EFA6A6;
+	background-color:#F34A65;
 }
 
 .em-booking .em-booking-message-error p,
 .em-my-booking .em-booking-message-error p,
 .em-warning-errors p {
-	color: #970808;
+	color: white;
 }
 
 .em-warning p:first-of-type{

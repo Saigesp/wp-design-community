@@ -54,30 +54,31 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 			<div class="wrap wrap--frame wrap--frame__middle">
 				<?php if($EM_Event->event_private == 1) echo '<p>Evento privado</p>';?>
 				<?php
-				echo '<p>';
+				echo '<p>Estado: ';
 				if(get_post_status() == 'publish'){
-					echo 'Evento publicado';
+					echo 'Publicado';
 				}elseif(get_post_status() == 'pending'){
-					echo 'Evento pendiente de revisión';
+					echo 'Pendiente de revisión';
 				}elseif(get_post_status() == 'draft'){
 					echo 'Borrador';
 				}elseif(get_post_status() == 'future'){
-					echo 'Evento programado';
+					echo 'Programado';
 				}elseif(get_post_status() == 'trash'){
-					echo 'Evento borrado (en papelera)';
+					echo 'Borrado (papelera)';
 				}
 				echo '</p>';
 				?>
 				<p>Autor: <?php echo get_the_author_meta( 'first_name', $EM_Event->event_owner ).' '.get_the_author_meta( 'last_name', $EM_Event->event_owner );?></p>
+				<p>Fecha de publicación: <?php echo get_the_date('j \d\e M \d\e Y\, H:i\h'); ?></p>
 			</div>
 			<div class="wrap wrap--frame wrap--frame__middle">
 				<p class="right"><a href="">Editar evento</a></p>
 				<p class="right">
 					<?php
 					if(get_post_status() == 'publish'){
-						echo '<a href="">Despublicar</a>';
+						echo '<a href="" class="color-error">Despublicar</a>';
 					}elseif(get_post_status() == 'pending' || get_post_status() == 'draft'){
-						echo '<a href="">Publicar</a>';
+						echo '<a href="" class="color-success">Publicar</a>';
 					}elseif(get_post_status() == 'future'){
 						echo '<a href="">Reprogramar</a>';
 					}elseif(get_post_status() == 'trash'){

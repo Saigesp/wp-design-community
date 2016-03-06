@@ -49,7 +49,9 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 
 		<section class="wrap wrap--content wrap--content__toframe wrap--transparent">
-			<p onclick="ToggleMenu('bookingmanager')">Gestionar reservas</p>
+			<p><a href="">Editar evento</a></p>
+			<p><a onclick="ToggleMenu('bookingmanager')">Gestionar reservas</a></p>
+			<p><a href="">Pausar reservas</a></p>
 		</section>
 
 	<?php } ?>
@@ -128,15 +130,17 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 
 
-</div><!-- end of flexboxer -->
-
 
 
 <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 	<div id="bookingmanager" class="wrap wrap--modal js-menu">
-	    <h3 class="title title--modal">Gestionar reservas</h3>
+	    <h3>Gestión de reservas</h3>
 	    <?php include(locate_template('loop-booking.php')); ?>
 	</div><!-- end of modal -->
-<?php } ?><!-- end of admin info -->
+<?php } ?>
+
+
+
+</div><!-- end of flexboxer -->
 
 <?php get_footer(); ?>

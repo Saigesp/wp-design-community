@@ -1,4 +1,5 @@
 <div class="wrap wrap--frame">
+
 	<div class="wrap wrap--flex">
 		<div class="wrap wrap--frame wrap--frame__decim">
 			<strong>Nombre</strong>
@@ -14,6 +15,8 @@
 		</div>
 
 	</div>
+
+	<form action="" id="bookingmanager-form">
 	
 
 	<?php foreach ($EM_Event->bookings->bookings as $booking) {
@@ -42,8 +45,8 @@
 			<div class="wrap wrap--frame wrap--frame__decim">
 				<?php echo round($booking_price, 2).' €'; ?>
 			</div>
-			<div class="wrap wrap--frame wrap--frame__decim">
-				<?php if(false){ ?>
+			<div class="wrap wrap--frame wrap--frame__decim wrap--frame__status">
+				<?php if(true){ ?>
 				<select name="booking_status">
 					<?php foreach($booking->status_array as $status => $status_name): ?>
 						<option value="<?php echo esc_attr($status); ?>" <?php if($status == $EM_Booking->booking_status){ echo 'selected="selected"'; } ?>><?php echo esc_html($status_name); ?></option>
@@ -71,13 +74,13 @@
 		</div>
 
 
-<?php //var_dump($booking);?>
-
-
 	<?php } ?>
 
+	<div class="wrap wrap--flex wrap--submit hide">
+		<input type="submit" class="submit" value="Guardar">
+	</div>
 
-
+	</form>
 
 
 </div>

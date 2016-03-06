@@ -1,4 +1,4 @@
-<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame">
+<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame js-showonload js-showonload-active">
   <?php if(has_post_thumbnail()){?>
     <figure class="thumb thumb--archive js-imagefill" style="height: 300px;">
       <a href="<?php the_permalink() ?>">

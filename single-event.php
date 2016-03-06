@@ -5,6 +5,7 @@ global $EM_Event;
 /* Date */
 $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->event_start_time);
 $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_end_time);
+$booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event_rsvp_time);
 /* Booking */
 
 ?> 
@@ -48,11 +49,45 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 
 	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 
-		<section class="wrap wrap--content wrap--content__toframe wrap--transparent">
-			<p><a href="">Editar evento</a></p>
-			<p><a onclick="ToggleMenu('bookingmanager')">Gestionar reservas</a></p>
-			<p><a href="">Pausar reservas</a></p>
-		</section>
+		<!-- admin options -->
+		<section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">
+			<div class="wrap wrap--frame wrap--frame__middle">
+				<?php if($EM_Event->event_private == 1) echo '<p>Evento privado</p>';?>
+				<?php
+				echo '<p>';
+				if(get_post_status() == 'publish'){
+					echo 'Evento publicado';
+				}elseif(get_post_status() == 'pending'){
+					echo 'Evento pendiente de revisión';
+				}elseif(get_post_status() == 'draft'){
+					echo 'Borrador';
+				}elseif(get_post_status() == 'future'){
+					echo 'Evento programado';
+				}elseif(get_post_status() == 'trash'){
+					echo 'Evento borrado (en papelera)';
+				}
+				echo '</p>';
+				?>
+				<p>Autor: <?php echo get_the_author_meta( 'first_name', $EM_Event->event_owner ).' '.get_the_author_meta( 'last_name', $EM_Event->event_owner );?></p>
+			</div>
+			<div class="wrap wrap--frame wrap--frame__middle">
+				<p class="right"><a href="">Editar evento</a></p>
+				<p class="right">
+					<?php
+					if(get_post_status() == 'publish'){
+						echo '<a href="">Despublicar</a>';
+					}elseif(get_post_status() == 'pending' || get_post_status() == 'draft'){
+						echo '<a href="">Publicar</a>';
+					}elseif(get_post_status() == 'future'){
+						echo '<a href="">Reprogramar</a>';
+					}elseif(get_post_status() == 'trash'){
+						echo '<a href="">Restaurar</a>';
+					}
+					?>
+				</p>
+				<p class="right"><a onclick="ToggleMenu('bookingmanager')">Gestionar reservas</a></p>
+			</div>
+		</section><!-- end of admin options -->
 
 	<?php } ?>
 
@@ -61,7 +96,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 		<h3>Detalles</h3>
 		<div class="wrap wrap--frame wrap--flex">
 			<div class="wrap wrap--frame__middle">
-				<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){
+				<?php if($EM_Event->event_start_date == $EM_Event->event_end_date){ // If event is the same day
 					echo '<span class="breaklinetablet"><strong>Fecha:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y').', de '.$event_start_date->format('H:i').' a '.$event_end_date->format('H:i').'</span>';
 				}else{
 					echo '<span class="breaklinetablet"><strong>Inicio:</strong> </span><span class="breaklinetablet">'.$event_start_date->format('j \d\e M \d\e Y\, H:i\h').'</span><br><span class="breaklinetablet"><strong>Fin:</strong> </span><span class="breaklinetablet">'.$event_end_date->format('j \d\e M \d\e Y\, H:i\h').'</span>';
@@ -74,7 +109,7 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 				<?php
 				if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet
 					if($EM_Event->output('#_SPACES') > 0){
-						echo '<br class="hideonmobile"><span class="breaklinetablet"><strong>Espacios disponibles:</strong> </span>'
+						echo '<br class="hideontablet"><span class="breaklinetablet"><strong>Espacios disponibles:</strong> </span>'
 						. '<span class="breaklinetablet">'
 						.$EM_Event->output('#_AVAILABLESPACES')
 						. ' / '
@@ -87,6 +122,14 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 						.$EM_Event->output('#_PENDINGSPACES')
 						. '</span>';
 					}
+					if(strtotime('now') < strtotime($EM_Event->event_rsvp_date.' '.$EM_Event->event_rsvp_time) ){ // If limit booking date isn't past
+						echo '<br><span class="breaklinetablet"><strong>Límite de reserva:</strong> </span>'
+						. '<span class="breaklinetablet">'
+						.$booking_end_date->format('j \d\e M \d\e Y\, H:i\h')
+						. '</span>';
+					}else{
+						echo '<br><span class="breaklinetablet"><strong>Reservas cerradas</strong></span>';
+					}
 				}else{ //Event finished
 					echo '<p><strong>Evento finalizado</strong></p>';
 				}
@@ -94,6 +137,13 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 			</div>
 		</div>
 	</section><!-- end of relevant info -->
+
+	<!-- var_dump -->
+	<section class="wrap wrap--content">
+		<h3>VAR DUMP</h3>
+		<?php var_dump($EM_Event);?>
+	</section><!-- end of var_dump -->
+
 
 	<!-- description -->
 	<section class="wrap wrap--content">
@@ -135,7 +185,11 @@ $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_en
 <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 	<div id="bookingmanager" class="wrap wrap--modal js-menu">
 	    <h3>Gestión de reservas</h3>
+
 	    <?php include(locate_template('loop-booking.php')); ?>
+	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleMenu('close')">
+	    	<?php the_svg_icon('close', 'js-close-alert'); ?>
+	    </div>
 	</div><!-- end of modal -->
 <?php } ?>
 

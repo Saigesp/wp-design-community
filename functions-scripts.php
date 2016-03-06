@@ -72,6 +72,16 @@ function inject_in_all() { ?>
           $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
         }
 
+        <?php if(true){ ?>
+
+        if ($("#bookingmanager-form select").length > 0) {
+          $("#bookingmanager-form select").change(function() {
+            $("#bookingmanager-form .wrap--submit").removeClass('hide');
+          });
+        }
+
+        <?php } ?>
+
 
     /**
      * PAGE CONTROL USERS

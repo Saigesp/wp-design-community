@@ -181,6 +181,12 @@ code {
 	text-align: right;
 }
 
+.color-warning	 	{ color: #FFBD13 !important;}
+.color-error 		{ color: #F34A65 !important;}
+.color-success	 	{ color: #66CC66 !important;}
+.color-info 		{ color: #0099FF !important;}
+
+
 /**
  * FUNCTIONALS
  ***********************************/
@@ -1440,6 +1446,16 @@ blockquote p {
 }
 
 
+/* Hidden */
+.flexboxer > .wrap--hidden {
+	display: none !important;
+	position: relative;
+}
+
+.flexboxer > .wrap--hidden.active {
+	display: block !important;
+}
+
 
 /* Transparent */
 .flexboxer .wrap--transparent {
@@ -1454,11 +1470,13 @@ blockquote p {
 
 .flexboxer .wrap--transparent p a {
 	cursor: pointer;
+	color: black;
 }
 
 .flexboxer .wrap--transparent p a:hover {
 	opacity: 0.8;
 }
+
 
 /* Collapsable */
 .flexboxer > .wrap--collapse {
@@ -1517,6 +1535,23 @@ blockquote p {
     line-height: 32px;
 }
 
+/* Icon close */
+.wrap .wrap--icon__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 0;
+    /* cursor: pointer; */
+}
+
+.wrap .icon--close {
+	line-height: 0;
+	width: 30px;
+	height: auto;
+	fill: rgba(0,0,0,0.3);
+	padding: 15px;
+	cursor: pointer;
+}
 
 
 /**
@@ -2267,22 +2302,7 @@ textarea.js-medium-editor,
     pointer-events: all !important;
 }
 
-.wrap--modal .wrap--icon__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    line-height: 0;
-    /* cursor: pointer; */
-}
 
-.wrap--modal .icon--close {
-	line-height: 0;
-	width: 30px;
-	height: auto;
-	fill: rgba(0,0,0,0.3);
-	padding: 15px;
-	cursor: pointer;
-}
 
 .wrap--modal > h3:first-of-type {
 	margin-top: 0;

@@ -6,7 +6,6 @@ global $EM_Event;
 $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->event_start_time);
 $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_end_time);
 $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event_rsvp_time);
-/* Booking */
 
 ?> 
 
@@ -76,21 +75,34 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 				<p class="right">
 					<?php
 					if(get_post_status() == 'publish'){
-						echo '<a href="" class="color-error">Despublicar</a>';
+						echo '<strong><a href="" class="color-error">Despublicar</a></strong>';
 					}elseif(get_post_status() == 'pending' || get_post_status() == 'draft'){
-						echo '<a href="" class="color-success">Publicar</a>';
+						echo '<strong><a href="" class="color-success">Publicar</a></strong>';
 					}elseif(get_post_status() == 'future'){
-						echo '<a href="">Reprogramar</a>';
+						echo '<strong><a href="">Reprogramar</a></strong>';
 					}elseif(get_post_status() == 'trash'){
-						echo '<a href="">Restaurar</a>';
+						echo '<strong><a href="">Restaurar</a></strong>';
 					}
 					?>
 				</p>
-				<p class="right"><a onclick="ToggleMenu('bookingmanager')">Gestionar reservas</a></p>
+				<p class="right"><a onclick="ToggleSection('bookingmanager')">Gestionar reservas</a></p>
 			</div>
 		</section><!-- end of admin options -->
 
 	<?php } ?>
+	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+
+	<!-- booking management -->
+	<section id="bookingmanager" class="wrap wrap--content wrap--hidden js-section">
+	    <h3>Gestión de reservas</h3>
+	    <?php include(locate_template('loop-booking.php')); ?>
+	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
+	    	<?php the_svg_icon('close', 'js-close-alert'); ?>
+	    </div>
+	</section><!-- end of booking management -->
+
+<?php } ?>
+
 
 	<!-- relevant info -->
 	<section class="wrap wrap--content">
@@ -139,13 +151,6 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 		</div>
 	</section><!-- end of relevant info -->
 
-	<!-- var_dump -->
-	<section class="wrap wrap--content">
-		<h3>VAR DUMP</h3>
-		<?php var_dump($EM_Event);?>
-	</section><!-- end of var_dump -->
-
-
 	<!-- description -->
 	<section class="wrap wrap--content">
 		<h3><?php the_title(); ?></h3>
@@ -168,33 +173,22 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 
 	<!-- booking -->
 	<?php if(strtotime('now') < strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time)){ // If event hasn't finished yet ?>
+
+		<!-- active bookings form -->
 		<section class="wrap wrap--content">
 			<?php if($EM_Event->event_rsvp == 1){ // If registration is enabled ?>
 					<?php echo $EM_Event->output('#_BOOKINGFORM');?>
 			<?php }else echo '<p>Registro no disponible</p>'; ?>
-		</section>
+		</section><!-- end of active bookings -->
+
 	<?php }else{ ?>
+
+		<!-- event finished -->
 		<section class="wrap wrap--content">
 			<p>Evento finalizado</p>
-		</section>
-	<?php } ?>	
+		</section><!-- end of event finished -->
 
-
-
-
-
-<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-	<div id="bookingmanager" class="wrap wrap--modal js-menu">
-	    <h3>Gestión de reservas</h3>
-
-	    <?php include(locate_template('loop-booking.php')); ?>
-	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleMenu('close')">
-	    	<?php the_svg_icon('close', 'js-close-alert'); ?>
-	    </div>
-	</div><!-- end of modal -->
-<?php } ?>
-
-
+	<?php } ?><!-- end of bookings form -->
 
 </div><!-- end of flexboxer -->
 

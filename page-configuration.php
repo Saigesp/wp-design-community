@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 
 <?php if (isset($_POST["update_settings"])) {
 		$automate_twitter = esc_attr($_POST["automate_twitter"]); update_option("automate_twitter", $automate_twitter);
@@ -133,5 +134,5 @@
 </form>
 
 
-
+<?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
 <?php get_footer(); ?>

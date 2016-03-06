@@ -8,6 +8,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 include_once(locate_template('functions-scripts.php'));
 include_once(locate_template('functions-options.php'));
 include_once(locate_template('functions-twitter.php')); // TODO Poner si está activada opción de twitter
+include_once(locate_template('functions-fees.php'));
 include_once(locate_template('functions-svg.php'));
 
 
@@ -133,6 +134,21 @@ function add_theme_user_meta( $user_id ) {
   add_user_meta( $user_id, 'last_fee', $last_fee );
 }
 add_action( 'user_register', 'add_theme_user_meta', 10, 1 );
+
+//Unregist post type
+if ( !function_exists( 'unregister_post_type' ) ) {
+  function unregister_post_type( $post_type ) {
+    if(post_type_exists($post_type)){
+      global $wp_post_types;
+        if ( isset( $wp_post_types[ $post_type ] ) ) {
+            unset( $wp_post_types[ $post_type ] );
+            flush_rewrite_rules();
+            return true;
+        }
+        return false;
+    }
+  }
+}
 
 /**
  * REQUIRE WP PLUGINS

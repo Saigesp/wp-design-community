@@ -1485,10 +1485,14 @@ blockquote p {
 	position: relative;
 }
 
-.flexboxer > .wrap--collapse > h3 {
+.flexboxer > .wrap--collapse > h3:first-of-type {
 	cursor: pointer;
 	margin-top: -3px !important;
 	margin-bottom: 30px;
+}
+
+.flexboxer > .wrap--collapse.active > h3:first-of-type {
+	margin-bottom: 12px;
 }
 
 .flexboxer > .wrap--collapse > h3:after{
@@ -1522,6 +1526,11 @@ blockquote p {
 
 .flexboxer > .wrap--collapse.active > h3:hover:after{
 	border-left:6px solid rgba(0,0,0,0.5);
+}
+
+/* Full width */
+.flexboxer .wrap--content__fullwidth {
+
 }
 
 
@@ -2833,6 +2842,10 @@ textarea.js-medium-editor,
 	.flexboxer .wrap--content__toframe p{
 		font-size: 1.2rem;
 		margin: 0;
+	}
+	.flexboxer .wrap--content__fullwidth {
+		width: 100%;
+		max-width: calc(100% - 60px);
 	}
 	.wrap--filterusers .wrap--content {
 	    margin-bottom: 0;

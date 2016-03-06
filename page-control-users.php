@@ -236,7 +236,7 @@ $user_query = new WP_User_Query($args);
 
 </form>
 <?php if($user_query->total_users > 0){ ?>
-<div id="usercontrolmain">
+<div id="usercontrolmain" class="wrap wrap--content wrap--content__fullwidth">
   <table>
     <tr>
       <?php if($pho == true){ ?><th>Foto</th><?php } ?>

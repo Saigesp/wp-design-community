@@ -360,6 +360,7 @@ function excerpt_count_js(){
     if ('page' != get_post_type()) {
         echo '<script>
             jQuery(document).ready(function(){
+              if(jQuery("#postexcerpt .handlediv").length > 0){
                 jQuery("#postexcerpt .handlediv").after("<div style=\"position:absolute;top:12px;right:34px;color:#666;\"><small>Excerpt length: </small><span id=\"excerpt_counter\"></span><span style=\"font-weight:bold; padding-left:7px;\">/ '.$limite.'</span><small><span style=\"font-weight:bold; padding-left:7px;\">character(s).</span></small></div>");
                 jQuery("span#excerpt_counter").text(jQuery("#excerpt").val().length);
                 jQuery("#excerpt").keyup( function() {
@@ -368,6 +369,7 @@ function excerpt_count_js(){
                     }
                     jQuery("span#excerpt_counter").text(jQuery("#excerpt").val().length);
                 });
+              }
             });
         </script>';
     }
@@ -384,7 +386,7 @@ add_filter( 'mce_buttons_2', 'my_mce_buttons_2' );
 
 // Add styles on WYSIWYG
 function wpdcom_editor_styles() {
-    add_editor_style( get_stylesheet_directory_uri().'/css/custom-editor-style.css' );
+   // add_editor_style( get_stylesheet_directory_uri().'/css/custom-editor-style.css' );
 }
 add_action( 'admin_init', 'wpdcom_editor_styles' );
 

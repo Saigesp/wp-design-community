@@ -1,45 +1,82 @@
 <?php get_header(); ?> 
-<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+<?php if(is_user_role('administrator') || is_user_role('editor') || is_user_role('author')) { ?>
+
+<?php
+
+$exclude_list = array();
+$admins = get_users( array('role' => 'administrator') );
+foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
+
+$args = array( 
+  'exclude' => $exclude_list, // Exclude admins
+  'role' => 'author', // Partners
+  'order' => 'DESC',
+  'number' => 9999,
+);
+$user_query = new WP_User_Query($args);
+
+
+?>
+
+
   <!-- flexboxer -->
   <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--fee">
     <?php if (have_posts()) : ?>
-      <?php while (have_posts()) : the_post(); ?>
-      
-        <!-- thumbnail -->
-        <?php if(has_post_thumbnail()){ ?>
-          <section class="wrap wrap--frame">
-            <header id="header-<?php the_ID(); ?>" class="header header--article">
-              <figure id="thumbnail-<?php the_ID(); ?>" class="thumb thumb--article js-fullheight js-fullheight-thumb">
-                <?php the_post_thumbnail('full');  ?>
-              </figure>
-              <div class="overflow overflow--black"></div>
-              <div id="title-<?php the_ID(); ?>" class="title title--article">
-                <div class="divtextarticle">
-                  <h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-                  <?php if(function_exists('the_subtitle')){?>
-                    <h3 class="subtitletextarticle titlesarticle"><?php the_subtitle(); ?></h3>
-                  <?php } ?>
-                </div>
-              </div>
-              <div class="categoryarticle">
-                <p><?php the_category(', ');?></p>
-              </div>
-            </header>
-          </section>
-        <?php }?><!-- end of thumbnail -->
+      <?php while (have_posts()) : the_post(); ?> 
 
-        <!-- content -->
-        <section class="wrap wrap--content">
-          <h2>Cuota <?php the_title();?></h2>
-          <?php the_content();?>
-        </section><!-- end of content -->
+
+        <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+          <?php if($user_query->total_users > 0){ ?>
+
+            <!-- list of users -->
+            <section class="wrap wrap--content wrap--content__fullwidth">
+              <h2>Cuota <?php the_title();?></h2>
+              <?php the_content();?>
+              <table>
+                <tr>
+                  <th>Nombre</th>
+                </tr>
+                <?php foreach ( $user_query->results as $user ) { 
+                  $user_id = $user->ID;
+                  ?>
+                  <tr>
+                    <td><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?></td>
+                  </tr>
+                <?php } ?>
+              </table>
+            </section><!-- end of list of users -->
+
+          <?php }else{ // No authors in list ?>
+
+            <!-- message no authors -->
+            <section class="wrap wrap--content">
+              <p>No hay usuarios <em>authors</em></p>
+            </section><!-- end of message no authors -->
+
+          <?php } ?>
+        <?php }else{ // If is author ?>
+
+          <section class="wrap wrap--content">
+            <h2>Cuota <?php the_title();?></h2>
+            <?php the_content();?>
+          </section>
+
+          <section class="wrap wrap--frame">
+            <p class="submit">
+              <input type="hidden" name="pay_fee" value="true" />
+              <input type="submit" class="button button-primary" value="Pagar cuota">
+            </p>
+          </section>
+
+
+        <?php } ?>
 
       <?php endwhile; ?>
     <?php else : ?>
 
       <!-- noinfo -->
       <section class="wrap wrap--content">
-        <h2>Es</h2>
+        <h2>No se ha encontrado la información</h2>
       </section><!-- end of noinfo -->
 
     <?php endif; ?>

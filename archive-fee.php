@@ -1,5 +1,5 @@
 <?php get_header(); ?> 
-<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+<?php if(is_user_role('administrator') || is_user_role('editor') || is_user_role('author')) { ?>
   <!-- flexboxer -->
   <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--fees">
     <?php if (have_posts()) : ?>

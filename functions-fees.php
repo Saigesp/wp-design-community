@@ -8,7 +8,8 @@ if (post_type_exists('fees')) {
 	//unregister_post_type( 'fees' );
 }
 
-
+new_page_title('Edit Fee');
+new_page_title('Pay Fee');
 
 /**
  * CREATING A FUNCTION TO CREATE FEES CPT
@@ -37,8 +38,8 @@ function fees_post_type() {
 		'label'               => __( 'fee', 'wp-design-community' ),
 		'description'         => __( 'Fees', 'wp-design-community' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'author', ),
-		'hierarchical'        => false,
+		'supports'            => array( 'title', 'editor', 'author', ),
+		'hierarchical'        => true,
 		'public'              => true,
 		'show_ui'             => true,
 		'show_in_menu'        => true,

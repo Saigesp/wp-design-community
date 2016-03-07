@@ -33,8 +33,9 @@
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">
   
-	<section class="wrap wrap--content">
-		<h3>Configuración general</h3>
+	<section id="generalconfiguration" class="wrap wrap--content wrap--collapse js-section">
+		<h3 onclick="ToggleSection('generalconfiguration')">Configuración general</h3>
+        <p>a</p>
 	</section>
 
 	<section id="twitterconfiguration" class="wrap wrap--content wrap--collapse js-section">

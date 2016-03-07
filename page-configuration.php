@@ -123,7 +123,7 @@
 			<?php }?>			
 		</div>
 	</section>
-	<section class="wrap wrap--frame">
+	<section class="wrap wrap--frame wrap--submit">
 		<p class="submit">
 			<input type="hidden" name="update_settings" value="Y" />
 			<input type="submit" class="button button-primary" value="Guardar cambios">

@@ -45,7 +45,7 @@
         </div>
       </section>
 
-      <section class="wrap wrap--frame">
+      <section class="wrap wrap--frame wrap--submit">
         <p class="submit">
           <input type="hidden" name="pay_fee" value="true" />
           <input type="submit" class="button button-primary" value="Crear cuota">

@@ -1544,6 +1544,17 @@ blockquote p {
     line-height: 32px;
 }
 
+/* Form input */
+.flexboxer > .wrap--submit {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.wrap--submit .submit {
+    text-align: right;
+    margin: 0;
+}
+
 /* Icon close */
 .wrap .wrap--icon__close {
     position: absolute;

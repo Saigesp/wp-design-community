@@ -38,11 +38,4 @@ jQuery(document).ready(function($) {
 </script>
 
 </body>
-
-
-
-
-
-
-
 </html> <!-- The End. what a ride! -->

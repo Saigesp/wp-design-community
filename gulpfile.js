@@ -24,6 +24,7 @@ var project = 'wp-design-community',
         '!' + dev + 'plugins/**/*.min.js',
         node + '*/src/jquery-ias.js',
         node + '*/js/jquery-imagefill.js',
+        node + '*/lib/jquery.printThis.js',
         bower + '*/chosen.jquery.js'
     ],
     css_minimized_files = [ // CSS Archives to copy

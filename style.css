@@ -195,6 +195,10 @@ code {
 	display: none !important;
 }
 
+.untouchable {
+	pointer-events: none !important;
+}
+
 .js-showonload {
 	transition: opacity 2s ease;
 }
@@ -1037,7 +1041,7 @@ code {
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	z-index: 1;
+	z-index: 9;
 }
 .article .wrap--category p {
 	text-transform: uppercase;
@@ -1442,7 +1446,7 @@ blockquote p {
 
 .flexboxer .wrap--flex input,
 .flexboxer .wrap--flex select {
-	width: 100%;
+	/* width: 100%; */
 }
 
 
@@ -1561,18 +1565,30 @@ blockquote p {
     top: 0;
     right: 0;
     line-height: 0;
-    /* cursor: pointer; */
 }
 
-.wrap .icon--close {
+.wrap .icon--close,
+.wrap .icon--pdf {
 	line-height: 0;
 	width: 30px;
 	height: auto;
 	fill: rgba(0,0,0,0.3);
 	padding: 15px;
 	cursor: pointer;
+	transition: all 300ms ease;
 }
 
+.wrap .icon--close:hover,
+.wrap .icon--pdf:hover {
+	fill: rgba(0,0,0,0.8);
+}
+
+.wrap .wrap--icon__pdf {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    line-height: 0;
+}
 
 /**
  * PAGE EDIT PROFILE (page-edit-profile.php)
@@ -1664,6 +1680,7 @@ textarea:focus{
 	outline: 0;
 }
 
+a.button,
 input[type="submit"] {
     border: 0;
     padding: 7px 10px;
@@ -1672,10 +1689,14 @@ input[type="submit"] {
 	transition: all 300ms ease;
 }
 
+a.button:hover,
 input[type="submit"]:hover {
     background-color: rgb(34,153,155);
 }
 
+a.button-secondary {
+	background-color: rgba(0,0,0,0.2);
+}
 
 /**
  * MÓDULOS
@@ -2055,6 +2076,21 @@ input[type="submit"]:hover {
 
 .flexboxer--event__edit h3.event-form-details{
     transition: all 1000ms ease;
+}
+
+/**
+ * MANAGE BOOKINGS in PAGE EDIT EVENT (page-edit-event.php)
+ ***********************************/
+.booking_status {
+
+}
+
+.booking_status--1 { background: darkseagreen; }
+.booking_status--2, .booking_status--3 { background: darksalmon; }
+.booking_status--0, .booking_status--4, .booking_status--5 { }
+
+#bookingmanager-form .wrap--submit .submit {
+	width: 100%;
 }
 
 /**
@@ -2975,6 +3011,7 @@ textarea.js-medium-editor,
 @media only screen and (min-width : 1200px) {
 	.thumb--article {
 		height: 800px;
+		max-height: 500px;
 	}
 	.wrap--modal {
 		left: 25%;

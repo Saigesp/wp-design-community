@@ -3,7 +3,7 @@
 add_action( 'wp_head', 'inject_in_all' );
 
 function inject_in_all() { ?>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script>
 
     function ToggleMenu(args){
@@ -32,6 +32,7 @@ function inject_in_all() { ?>
     }
 
 
+
     /**
      * ALL PAGES
      ***********************************/
@@ -58,8 +59,6 @@ function inject_in_all() { ?>
      ***********************************/
     <?php if ('event' == get_post_type()) { ?>
 
-
-
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
         }
@@ -77,8 +76,20 @@ function inject_in_all() { ?>
 
         if ($("#bookingmanager-form select").length > 0) {
           $("#bookingmanager-form select").change(function() {
-            $("#bookingmanager-form .wrap--submit").removeClass('hide');
+            $(this).attr("class", "").addClass("booking_status--"+this.value);
+            $("#bookingmanager-form .button-primary").removeClass('hide');
           });
+        }
+
+
+        if ($("#pdf_icon").length > 0) {
+          $("#pdf_icon").on("click", function(){
+            $('#bookingmanager-form-list').printThis({
+              title: 'Lista de reservas de <?php the_title(); ?>, <?php bloginfo("name"); ?>, @<?php echo get_userdata(get_current_user_id())->user_login;?>',
+              exclude: ['.do_not_print', '.print_exclude' ],
+              styles: ['http://www.saigesp.es/wp-content/themes/gridly/style.css']
+            });
+          })
         }
 
         <?php } ?>

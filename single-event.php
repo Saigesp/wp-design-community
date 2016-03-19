@@ -19,7 +19,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 				<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
 					<?php the_post_thumbnail('full');  ?>
 				</figure>
-				<div class="overflow overflow--black"></div>
+				<div class="overflow overflow--black untouchable"></div>
 				<div id="title-<?php the_ID(); ?>" class="wrap wrap--title wrap--title__article">
 					<div class="wrap wrap--position">
 						<h2 class="title title--article" ><?php the_title(); ?></h2>
@@ -28,7 +28,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 						<?php } ?>
 					</div>
 				</div>
-				<div class="categoryarticle">
+				<div class="wrap wrap--category">
 					<p><?php the_category(', ');?></p>
 				</div>
 			</header>
@@ -98,6 +98,9 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	    <?php include(locate_template('loop-booking.php')); ?>
 	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
 	    	<?php the_svg_icon('close', 'js-close-alert'); ?>
+	    </div>
+	    <div class="wrap wrap--icon wrap--icon__pdf" onclick="">
+	    	<?php the_svg_icon('pdf'); ?>
 	    </div>
 	</section><!-- end of booking management -->
 

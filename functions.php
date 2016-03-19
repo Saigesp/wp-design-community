@@ -33,6 +33,7 @@ new_page_title('Configuration');
 new_page_title('Configuration presidence');
 new_page_title('Configuration treasury');
 
+
 // Create pages
 function new_page_title($post_title){
   if(get_page_by_title($post_title) == NULL){

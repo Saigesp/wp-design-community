@@ -7,10 +7,10 @@
 <style>
   #usercontrolmain {margin: 10px;}
   #usercontrolmain table {width: 100%; text-align: left;}
-  #usercontrolmain table a {color: #3D4352}
   #usercontrolmain table a svg {fill: #ccc}
   #usercontrolmain table a svg:hover {fill: #F46553}
   #usercontrolmain tr {height: 30px;}
+  #usercontrolmain tr:nth-child(even) {background: rgba(130,130,130,0.1);}
   #usercontrolmain th, #usercontrolmain td {padding-right: 10px; vertical-align: middle;}
   #usercontrolmain th {font-weight: 600;}
 </style>
@@ -42,6 +42,7 @@ if (empty($_GET["filter"])){
   $tit = in_array("tit", $user_labels) ? true : false;
   $exp = in_array("exp", $user_labels) ? true : false;
   $ema = in_array("ema", $user_labels) ? true : false;
+  $web = in_array("web", $user_labels) ? true : false;
   $reg = in_array("reg", $user_labels) ? true : false;
   $con = in_array("con", $user_labels) ? true : false;
   $log = in_array("log", $user_labels) ? true : false;
@@ -183,7 +184,8 @@ $user_query = new WP_User_Query($args);
         <optgroup label="Datos personales">
           <option value="nam" <?php if($nam) echo 'selected';?> >Nombre</option>
           <option value="pho" <?php if($pho) echo 'selected';?> >Foto</option>
-          <option value="ema" <?php if($ema) echo 'selected';?> >Email y web</option>     
+          <option value="ema" <?php if($ema) echo 'selected';?> >Email</option>     
+          <option value="web" <?php if($web) echo 'selected';?> >Web</option>
           <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
           <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
         </optgroup>
@@ -235,16 +237,20 @@ $user_query = new WP_User_Query($args);
   <input type="submit" value="Mostrar" class="submit button"/>
 
 </form>
-<?php if($user_query->total_users > 0){ ?>
+<?php if($user_query->total_users > 0){ 
+  $cont = 0; ?>
+
 <div id="usercontrolmain" class="wrap wrap--content wrap--content__fullwidth">
   <table>
     <tr>
+      <th>#</th>
       <?php if($pho == true){ ?><th>Foto</th><?php } ?>
       <?php if($nam == true){ ?><th>Nombre</th><?php } ?>
       <?php if($tip == true){ ?><th>Tipo</th><?php } ?>
       <?php if($tit == true){ ?><th>Titulación/Centro</th><?php } ?>
       <?php if($exp == true){ ?><th>Experiencia/Región</th><?php } ?>
-      <?php if($ema == true){ ?><th title="Email/Web">@/www</th><?php } ?>
+      <?php if($ema == true){ ?><th title="Email">Email</th><?php } ?>
+      <?php if($web == true){ ?><th title="Web">Web</th><?php } ?>
       <?php if($reg == true){ ?><th title="Creado">Creado</th><?php } ?>
       <?php if($cuo == true){ ?><th title="Ult Cuota">Ult Cuota</th><?php } ?>
       <?php if($con == true){ ?><th title="Confirmado">Confirmado</th><?php } ?>
@@ -260,15 +266,17 @@ $user_query = new WP_User_Query($args);
     </tr>
 
   <?php foreach ( $user_query->results as $user ) {	
-  
+    $cont++;
 		$user_id = $user->ID;
   	$op_user = get_the_author_meta( 'op_user', $user_id);
     $validate_date = get_the_author_meta( 'validate_date', $user_id);
   	$last_fee = get_the_author_meta( 'last_fee', $user_id);
-    if (!empty($op_user)){
+    if (true){
       
 		?>
     <tr>
+
+      <td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo $cont;?></a></td>
       
       <?php if($pho == true){ ?><td><?php echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><a href="'.get_author_posts_url($user_id).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $user_id),array(28, 28) ).'</a></div>'; ?></td><?php } ?>
       
@@ -280,7 +288,9 @@ $user_query = new WP_User_Query($args);
       
       <?php if($exp == true){ ?><td><?php $especial = get_the_author_meta('especialidad', $user_id ); if($especial != ''){ foreach ($especial as $esp) { echo $esp.', ';}}?><br><?php if(get_the_author_meta('region', $user_id)!='') the_region_name(get_the_author_meta('region', $user_id));?></td><?php } ?>
       
-      <?php if($ema == true){ ?><td><a href="mailto:<?php echo get_the_author_meta( 'email', $user_id );?>"><?php echo get_the_author_meta( 'email', $user_id );?></a><br><a href="<?php echo get_the_author_meta( 'user_url', $user_id );?>"><?php echo get_the_author_meta( 'user_url', $user_id );?></a></td><?php } ?>
+      <?php if($ema == true){ ?><td><?php echo get_the_author_meta( 'email', $user_id );?></td><?php } ?>
+      
+      <?php if($web == true){ ?><td><a href="<?php echo get_the_author_meta( 'user_url', $user_id );?>"><?php echo get_the_author_meta( 'user_url', $user_id );?></a></td><?php } ?>
       
       <?php if($reg == true){ ?><td><?php echo get_the_author_meta('user_registered', $user_id);?></td><?php } ?>
 

@@ -31,6 +31,7 @@ new_page_title('Edit Profile');
 new_page_title('Control Users');
 new_page_title('Configuration');
 new_page_title('Configuration presidence');
+new_page_title('Configuration treasury');
 
 // Create pages
 function new_page_title($post_title){

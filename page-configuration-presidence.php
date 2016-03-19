@@ -21,6 +21,7 @@ $users = get_users( 'orderby=nicename' );
   
 	<section class="wrap wrap--content">
 		<h3>Equipo de gobierno</h3>
+        <p>Los miembros de la Junta Directiva deben ser socios.</p>
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                 <div class="wrap wrap--frame__middle">

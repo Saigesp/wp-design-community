@@ -3,6 +3,7 @@
 add_action( 'wp_head', 'inject_in_all' );
 
 function inject_in_all() { ?>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script>
 
     function ToggleMenu(args){

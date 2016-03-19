@@ -425,7 +425,7 @@ code {
 .wrap--menu__user {
 	position:fixed;
 	width: 100%;
-	top: -260px;
+	top: -410px;
 	right: 0;
 	z-index: 99;
 	background: #f5f5f5;

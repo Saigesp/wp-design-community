@@ -240,7 +240,7 @@ $user_query = new WP_User_Query($args);
 <?php if($user_query->total_users > 0){ 
   $cont = 0; ?>
 
-<div id="usercontrolmain" class="wrap wrap--content wrap--content__fullwidth">
+<div id="usercontrolmain" class="wrap wrap--content wrap--content__fullwidth wrap--userlist">
   <table>
     <tr>
       <th>#</th>
@@ -271,14 +271,20 @@ $user_query = new WP_User_Query($args);
   	$op_user = get_the_author_meta( 'op_user', $user_id);
     $validate_date = get_the_author_meta( 'validate_date', $user_id);
   	$last_fee = get_the_author_meta( 'last_fee', $user_id);
-    if (true){
-      
-		?>
+
+    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+      $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+    elseif ($user->userphoto_image_file != '')
+      $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+    else
+      $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+    if (true){ ?>
     <tr>
 
       <td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo $cont;?></a></td>
       
-      <?php if($pho == true){ ?><td><?php echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><a href="'.get_author_posts_url($user_id).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $user_id),array(28, 28) ).'</a></div>'; ?></td><?php } ?>
+      <?php if($pho == true){ ?><td><?php echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><img src="'.$user_photo.'"></div>'; ?></td><?php } ?>
       
       <?php if($nam == true){ ?><td><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
       

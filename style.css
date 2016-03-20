@@ -1446,7 +1446,7 @@ blockquote p {
 
 .flexboxer .wrap--flex input,
 .flexboxer .wrap--flex select {
-	/* width: 100%; */
+	width: 100%;
 }
 
 
@@ -2133,6 +2133,25 @@ a.button-secondary {
 	width: calc(100% - 10px);
 }
 
+.wrap--userlist .wrap--photo {
+	width: 100px;
+    height: auto;
+    max-height: 100px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.wrap--userlist .wrap--photo.wrap--photo__mini {
+	width: 30px;
+	height: 30px;
+    border-radius: 20px;
+    margin: 3px 0;
+}
+
+.wrap--userlist .wrap--photo img {
+	width: 100%;
+	height: auto;
+}
 
 /**
  * SLIDER (node_modules/flickity)

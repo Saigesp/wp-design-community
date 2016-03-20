@@ -630,12 +630,12 @@ function wpdc_add_custom_user_profile_fields( $user ) {
       <th><label for="asociation_position">Rol organizativo</label></th>
       <td>
         <select name="asociation_position">
-          <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
-          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
-          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
-          <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
-          <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
-          <option value="socio" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
+          <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+          <option value="secretario" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+          <option value="vocal" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+          <option value="socio" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
         </select>
       </td>
     </tr>
@@ -644,7 +644,7 @@ function wpdc_add_custom_user_profile_fields( $user ) {
 
 function wpdc_save_custom_user_profile_fields( $user_id ) {
   if (!current_user_can('edit_user',$user_id)) return FALSE;
-  update_usermeta( $user_id, 'asociation_position', $_POST['asociation_position'] );
+  update_usermeta( $user->ID, 'asociation_position', $_POST['asociation_position'] );
 }
 
 add_action( 'show_user_profile', 'wpdc_add_custom_user_profile_fields' );

@@ -28,26 +28,33 @@
   $wp_query = new wp_query( $args );
 ?>
 <div class="flexboxer flexboxer--author">
+
   <section class="wrap wrap--content">
     <?php //var_dump($user_info);?>
       <figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
         <img src="<?php
         if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_info->ID, 100, 'medium') != '')
           echo get_wp_user_avatar_src($user_info->ID, 100, 'medium');
-        elseif (true) {
+        elseif ($user_info->userphoto_image_file != '') {
             echo get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user_info->userphoto_image_file;
         } else
           echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
       </figure>
       <?php
       $user_meta = get_user_meta($user_info->ID);
-      //var_dump($user_meta);?>
+      ?>
     <p class="authorarticlefoot">
-      <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
-        <?php echo get_the_author_meta('first_name', $term_slug) . ' '. get_the_author_meta('last_name', $term_slug); ?>
+      <a href="<?php echo get_author_posts_url( $user_info->ID ); ?>">
+        <?php echo get_the_author_meta('first_name', $user_info->ID) . ' '. get_the_author_meta('last_name', $term_slug); ?>
       </a>
       <br>
-      <?php echo get_user_meta($term_slug,position,true);?>
+      <?php if ($user_meta['asociation_position'][0] == 'presidente') echo 'Presidente de AEDI';
+        elseif ($user_meta['asociation_position'][0] == 'vicepresidente') echo 'Vicepresidente de AEDI';
+        elseif ($user_meta['asociation_position'][0] == 'tesorero') echo 'Tesorero de AEDI';
+        elseif ($user_meta['asociation_position'][0] == 'secretario') echo 'Secretario de AEDI';
+        elseif ($user_meta['asociation_position'][0] == 'vocal') echo 'Vocal de AEDI';
+        elseif ($user_meta['asociation_position'][0] == 'socio') echo 'Socio de AEDI';
+      else echo '';?>
       <br>
       <?php if(get_user_meta($term_slug,twitter,true) != '') { ?>
       <a href="<?php echo 'https://twitter.com/'.get_user_meta($term_slug,twitter,true);?>">
@@ -67,6 +74,7 @@
     </p>
     <p class="description"><?php echo $user_info->description;?></p>
   </section><!-- end of author -->
+
   <section class="wrap wrap--frame">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>
       <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>

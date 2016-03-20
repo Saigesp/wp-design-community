@@ -2,11 +2,13 @@
 
 <?php 
 	//$user_to_edit = $_GET['id'] == '' ? 'rand' : $_GET['order'];
-	$current_user_id = $current_user->ID;
+	$user = $current_user;
 
 	if(is_user_logged_in() && current_user_can( 'edit_users' ) && $_GET['id'] > 0 ) {
-		$current_user_id = $_GET['id'];
-		$other_user = true;
+		$user_id    = $_GET['id'];
+    $user       = get_userdata($user_id);
+    $user_meta  = get_user_meta($user_id);
+    $other_user = true;
 	}
 ?>
 
@@ -16,35 +18,35 @@
   <section class="wrap wrap--content wrap--author">
 		<figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
 		<img src="<?php
-    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')
-		  echo get_wp_user_avatar_src($current_user_id, 100, 'medium');
-		elseif (userphoto_exists($current_user_id)) 
-      userphoto($current_user_id);
-    else
-      echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
+        if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user->ID, 100, 'medium') != '')
+          echo get_wp_user_avatar_src($user->ID, 100, 'medium');
+        elseif ($user->userphoto_image_file != '') 
+            echo get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+        else
+          echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
 		</figure>
 		<p class="authorarticlefoot">
-		    <input type="text" value="<?php echo get_user_meta($current_user_id,'first_name', 1);?>" placeholder="Nombre"> <input type="text" value="<?php echo get_user_meta($current_user_id,'last_name', 1); ?>" placeholder="Apellidos">
+		    <input type="text" value="<?php echo get_user_meta($user->ID,'first_name', 1);?>" placeholder="Nombre"> <input type="text" value="<?php echo get_user_meta($user->ID,'last_name', 1); ?>" placeholder="Apellidos">
 		  <br>
-		  <input type="text" value="<?php echo get_user_meta($current_user_id,position,true);?>" placeholder="Posición"> 
+		  <input type="text" value="<?php echo get_user_meta($user->ID,position,true);?>" placeholder="Posición"> 
 		  <br>
-		  <?php if(get_user_meta($current_user_id,twitter,true) != '') { ?>
+		  <?php if(get_user_meta($user->ID,twitter,true) != '') { ?>
 		  <a href="<?php echo 'https://twitter.com/'.get_user_meta($current_user_id,twitter,true);?>">
 		    <?php the_svg_icon('twitter');?>
 		  </a>
 		  <?php } ?>
-		  <?php if(get_user_meta($current_user_id,googleplus,true) != '') { ?>
+		  <?php if(get_user_meta($user->ID,googleplus,true) != '') { ?>
 		  <a rel="author" href="<?php echo get_user_meta($current_user_id,googleplus,true);?>">
 		    <?php the_svg_icon('gplus');?>
 		  </a>
 		  <?php } ?>
-		  <?php if(get_user_meta($current_user_id,linkedin,true) != '') { ?>
+		  <?php if(get_user_meta($user->ID,linkedin,true) != '') { ?>
 		  <a href="<?php echo get_user_meta($current_user_id,linkedin,true);?>">
 		    <?php the_svg_icon('linkedin');?>
 		  </a>
 		  <?php } ?>
 		</p>
-    	<textarea class="description js-medium-editor"><?php echo $current_user->description;?></textarea>
+    	<textarea class="description js-medium-editor"><?php echo $user->description;?></textarea>
   </section><!-- end of author -->
 
   <section class="wrap wrap--content wrap--form wrap--authordata">
@@ -55,7 +57,7 @@
   				<label for="dbem_dnie">DNI</label>
   			</div>
   			<div class="wrap wrap--frame__middle">
-				<input type="text" name="dbem_dnie" value="<?php echo esc_attr(get_the_author_meta('dbem_dnie', $user->ID));?>"/>
+				<input type="text" name="dbem_dnie" value="<?php echo esc_attr(get_the_author_meta('dni', $user->ID));?>"/>
   			</div>
   		</div>
   		<div class="wrap wrap--frame__middle wrap--flex">
@@ -78,10 +80,10 @@
   		</div>
   		<div class="wrap wrap--frame__middle wrap--flex">
   			<div class="wrap wrap--frame__middle">
-  				<label for="hola">Hola</label>
+  				<label for="hola">Email</label>
   			</div>
   			<div class="wrap wrap--frame__middle">
-  				<input type="text" name="hola">
+  				<input type="text" name="email" value="<?php echo esc_attr(get_the_author_meta('email', $user->ID));?>">
   			</div>
   		</div>
   	</div>
@@ -97,11 +99,11 @@
   			</div>
   			<div class="wrap wrap--frame__middle">
 		        <select name="asociation_position">
-		          <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
-		          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
-		          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
-		          <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
-		          <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $current_user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+		          <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+		          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+		          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+		          <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+		          <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
 		        </select>
   			</div>
   		</div>
@@ -117,7 +119,7 @@
   </section>
   <?php } ?>
   <section class="wrap wrap--frame">
-  	<?php var_dump(get_user_meta($current_user_id));?>
+  	<?php var_dump(get_user_meta($user->ID));?>
   </section>
 
   <section class="wrap wrap--frame">

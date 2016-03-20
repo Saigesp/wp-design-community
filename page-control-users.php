@@ -39,6 +39,7 @@ if (empty($_GET["filter"])){
   $nam = in_array("nam", $user_labels) ? true : false;
   $pho = in_array("pho", $user_labels) ? true : false;
   $tip = in_array("tip", $user_labels) ? true : false;
+  $pos = in_array("pos", $user_labels) ? true : false;
   $tit = in_array("tit", $user_labels) ? true : false;
   $exp = in_array("exp", $user_labels) ? true : false;
   $ema = in_array("ema", $user_labels) ? true : false;
@@ -191,6 +192,7 @@ $user_query = new WP_User_Query($args);
         </optgroup>
         <optgroup label="Datos de usuario">
           <option value="tip" <?php if($tip) echo 'selected';?> >Tipo de usuario</option>
+          <option value="pos" <?php if($pos) echo 'selected';?> >Posición en asociación</option>
           <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
           <option value="reg" <?php if($reg) echo 'selected';?> >Fecha de creación</option>
           <option value="log" <?php if($log) echo 'selected';?> >Último login</option>
@@ -247,6 +249,7 @@ $user_query = new WP_User_Query($args);
       <?php if($pho == true){ ?><th>Foto</th><?php } ?>
       <?php if($nam == true){ ?><th>Nombre</th><?php } ?>
       <?php if($tip == true){ ?><th>Tipo</th><?php } ?>
+      <?php if($pos == true){ ?><th>Posición</th><?php } ?>
       <?php if($tit == true){ ?><th>Titulación/Centro</th><?php } ?>
       <?php if($exp == true){ ?><th>Experiencia/Región</th><?php } ?>
       <?php if($ema == true){ ?><th title="Email">Email</th><?php } ?>
@@ -271,6 +274,7 @@ $user_query = new WP_User_Query($args);
   	$op_user = get_the_author_meta( 'op_user', $user_id);
     $validate_date = get_the_author_meta( 'validate_date', $user_id);
   	$last_fee = get_the_author_meta( 'last_fee', $user_id);
+    $user_meta = get_user_meta($user_id);
 
     if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
       $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
@@ -282,13 +286,15 @@ $user_query = new WP_User_Query($args);
     if (true){ ?>
     <tr>
 
-      <td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo $cont;?></a></td>
+      <td><a href="<?php echo get_bloginfo('url').'/edit-profile/?id='.$user_id;?>"><?php echo $cont;?></a></td>
       
       <?php if($pho == true){ ?><td><?php echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><img src="'.$user_photo.'"></div>'; ?></td><?php } ?>
       
-      <?php if($nam == true){ ?><td><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
+      <?php if($nam == true){ ?><td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?></a><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
       
       <?php if($tip == true){ ?><td><?php echo get_the_author_meta( 'type', $user_id);?></td><?php } ?>
+
+      <?php if($pos == true){ ?><td><?php echo $user_meta['asociation_position'][0];?></td><?php } ?>
       
       <?php if($tit == true){ ?><td><?php echo get_the_author_meta( 'titulacion', $user_id );?><br><?php echo get_the_author_meta( 'centro_de_estudios', $user_id );?></td><?php } ?>
       

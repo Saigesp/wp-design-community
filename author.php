@@ -3,8 +3,9 @@
 <?php 
   $pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
   $post_per_page = get_option( 'posts_per_page', '10' );
-  $term_slug = get_query_var( 'author' );
-  $user_info = get_userdata($term_slug);
+  $term_slug  = get_query_var( 'author' );
+  $user_info  = get_userdata($term_slug);
+  $user_meta  = get_user_meta($term_slug);
 ?>
 
 <?php
@@ -40,9 +41,6 @@
         } else
           echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
       </figure>
-      <?php
-      $user_meta = get_user_meta($user_info->ID);
-      ?>
     <p class="authorarticlefoot">
       <a href="<?php echo get_author_posts_url( $user_info->ID ); ?>">
         <?php echo get_the_author_meta('first_name', $user_info->ID) . ' '. get_the_author_meta('last_name', $term_slug); ?>
@@ -74,6 +72,11 @@
     </p>
     <p class="description"><?php echo $user_info->description;?></p>
   </section><!-- end of author -->
+
+  <section class="wrap wrap--content">
+    <?php var_dump($user_info);?>
+    <?php var_dump($user_meta);?>
+  </section>
 
   <section class="wrap wrap--frame">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>

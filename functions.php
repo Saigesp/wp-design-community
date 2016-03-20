@@ -128,7 +128,10 @@ function wp_user_query_random_enable($query) {
 add_filter('pre_user_query', 'wp_user_query_random_enable');
 
 // Add theme user meta
-function add_theme_user_meta( $user_id ) {
+function add_op_user_meta($user_id) {
+  $user_meta = get_user_meta($user_id);
+  $validate_date = 0;
+  $last_fee = 0;
   $op_user = array(
     'karma' => 10,
     'invitations' => 0,
@@ -141,13 +144,21 @@ function add_theme_user_meta( $user_id ) {
     'has_upvote' => array( 0 ),
     'upvotedby' => array( 0 ),
   );
-  add_user_meta( $user_id, 'op_user', $op_user );
-  $validate_date = 0;
-  $last_fee = 0;
-  add_user_meta( $user_id, 'validate_date', $validate_date );
-  add_user_meta( $user_id, 'last_fee', $last_fee );
+  update_user_meta( $user_id, 'op_user', $op_user );
+  update_user_meta( $user_id, 'validate_date', $validate_date );
+  update_user_meta( $user_id, 'last_fee', $last_fee );
 }
-add_action( 'user_register', 'add_theme_user_meta', 10, 1 );
+add_action( 'user_register', 'add_op_user_meta', 10, 1 );
+
+function update_op_user_meta($user_id, $field, $input){
+  $op_user = get_user_meta($user_id, 'op_user', true );
+  if(isset($op_user)){
+    foreach ($op_user as $key => $value) {
+      if($key == $field) $value = $input;
+    }
+    update_user_meta($user_id, 'op_user', $op_user ); 
+  } 
+}
 
 //Unregist post type
 if ( !function_exists( 'unregister_post_type' ) ) {

@@ -246,6 +246,7 @@ $user_query = new WP_User_Query($args);
   <table>
     <tr>
       <th>#</th>
+      <th>ID</th>
       <?php if($pho == true){ ?><th>Foto</th><?php } ?>
       <?php if($nam == true){ ?><th>Nombre</th><?php } ?>
       <?php if($tip == true){ ?><th>Tipo</th><?php } ?>
@@ -286,7 +287,9 @@ $user_query = new WP_User_Query($args);
     if (true){ ?>
     <tr>
 
-      <td><a href="<?php echo get_bloginfo('url').'/edit-profile/?id='.$user_id;?>"><?php echo $cont;?></a></td>
+      <td><?php echo $cont;?></td>
+      
+      <td><a href="<?php echo get_bloginfo('url').'/edit-profile/?id='.$user_id;?>"><?php echo $user_id;?></a></td>
       
       <?php if($pho == true){ ?><td><?php echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><img src="'.$user_photo.'"></div>'; ?></td><?php } ?>
       

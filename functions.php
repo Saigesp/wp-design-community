@@ -112,6 +112,10 @@ function reg_last_login($login) {
     $user = get_userdatabylogin($login);
     update_usermeta($user->ID, 'last_login', current_time('mysql'));
 }
+function get_last_login($user_id) {
+    $last_login = get_user_meta($user_id, 'last_login', true);
+    return $last_login;
+}
 // Echo last login
 function the_last_login($user_id) {
     $last_login = get_user_meta($user_id, 'last_login', true);
@@ -641,12 +645,14 @@ function wpdc_add_custom_user_profile_fields( $user ) {
       <th><label for="asociation_position">Rol organizativo</label></th>
       <td>
         <select name="asociation_position">
-          <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
-          <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
-          <option value="tesorero" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
-          <option value="secretario" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
-          <option value="vocal" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
-          <option value="socio" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
+              <option value="" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == '') echo 'selected';?>>Ninguno</option>
+              <option value="socio" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
+              <option value="founder" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'founder') echo 'selected';?>>Socio Fundador</option>
+              <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+              <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+              <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+              <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+              <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
         </select>
       </td>
     </tr>
@@ -739,6 +745,28 @@ function retrieve_languages() {
   }
   return $languages;
 }
+
+
+
+
+function change_role_name($rolename){
+  if($rolename == 'subscriber') return 'Suscriptor';
+  elseif($rolename == 'author') return 'Asociado';
+  elseif($rolename == 'editor') return 'Junta Directiva';
+  elseif($rolename == 'administrator') return 'Informático';
+  else return $rolename;
+}
+
+
+function get_editable_roles() {
+    global $wp_roles;
+
+    $all_roles = $wp_roles->roles;
+    $editable_roles = apply_filters('editable_roles', $all_roles);
+
+    return $editable_roles;
+}
+
 
 
 ?>

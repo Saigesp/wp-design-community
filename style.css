@@ -1606,6 +1606,7 @@ blockquote p {
 	text-align: center;
 	color:rgba(0,0,0,0.2);
 	transition: color 500ms ease;
+	padding: 15px 0;
 }
 
 .flexboxer--author__edit .wrap--empty:hover .more--section {

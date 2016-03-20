@@ -129,6 +129,15 @@ function inject_in_all() { ?>
 
         $('.select-user').chosen(); 
 
+
+    /**
+     * PAGE EDIT PROFILE
+     ***********************************/
+    <?php } else if (is_page('edit-profile')) { ?>
+
+
+
+
     /**
      * PAGE EDIT EVENT
      ***********************************/

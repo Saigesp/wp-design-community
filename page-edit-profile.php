@@ -15,9 +15,13 @@
 
   <section class="wrap wrap--content wrap--author">
 		<figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
-		<img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')
+		<img src="<?php
+    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($current_user_id, 100, 'medium') != '')
 		  echo get_wp_user_avatar_src($current_user_id, 100, 'medium');
-		  else echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
+		elseif (userphoto_exists($current_user_id)) 
+      userphoto($current_user_id);
+    else
+      echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
 		</figure>
 		<p class="authorarticlefoot">
 		    <input type="text" value="<?php echo get_user_meta($current_user_id,'first_name', 1);?>" placeholder="Nombre"> <input type="text" value="<?php echo get_user_meta($current_user_id,'last_name', 1); ?>" placeholder="Apellidos">

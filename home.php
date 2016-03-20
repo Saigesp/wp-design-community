@@ -18,4 +18,13 @@ $query = new WP_Query( $args );
   	}
   ?>
 </div>
+
+<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
+	<div class="flexboxer flexboxer--home">
+		<div class="wrap wrap--content">
+<?php dynamic_sidebar( 'sidebar-1' ); ?>
+		</div>
+	</div>
+<?php endif; ?>
+
 <?php get_footer(); ?>

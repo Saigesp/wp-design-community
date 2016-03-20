@@ -18,6 +18,18 @@ add_filter('show_admin_bar', '__return_false');
 // Active thumbnails
 add_theme_support( 'post-thumbnails' );
 
+function wpdc_widgets_init() {
+  register_sidebar(array(
+    'name' => __( 'Calendar', 'wpdc' ),
+    'id' => 'sidebar-1',
+    'before_widget' => '',
+    'after_widget' => '',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+}
+add_action( 'init', 'wpdc_widgets_init' );
+
 // Active menus
 register_nav_menus( array(
   'menutop' => 'Top Menu',

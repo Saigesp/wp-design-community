@@ -71,7 +71,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 				<p>Fecha de publicación: <?php echo get_the_date('j \d\e M \d\e Y\, H:i\h'); ?></p>
 			</div>
 			<div class="wrap wrap--frame wrap--frame__middle">
-				<p class="right"><a href="">Editar evento</a></p>
+				<p class="right"><a href="<?php echo get_bloginfo('url');?>/edit-event/?id=<?php the_ID(); ?>">Editar evento</a></p>
 				<p class="right">
 					<?php
 					if(get_post_status() == 'publish'){

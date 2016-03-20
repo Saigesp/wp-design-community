@@ -63,7 +63,7 @@
 
 			<div class="wrap wrap--frame wrap--frame__decim">
 				<span class="hide"><strong>Fecha de registro: </strong></span>
-				<?php echo $booking_date; ?>
+				<span class="hide"><?php echo $booking_date; ?></span>
 				<span class="hide"><strong>Espacios: </strong></span>
 				<?php echo $booking_spaces; ?>
 			</div>

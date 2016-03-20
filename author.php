@@ -29,14 +29,22 @@
 ?>
 <div class="flexboxer flexboxer--author">
   <section class="wrap wrap--content">
+    <?php //var_dump($user_info);?>
       <figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
-        <img src="<?php if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($term_slug, 100, 'medium') != '')
-          echo get_wp_user_avatar_src($term_slug, 100, 'medium');
-          else echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
+        <img src="<?php
+        if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_info->ID, 100, 'medium') != '')
+          echo get_wp_user_avatar_src($user_info->ID, 100, 'medium');
+        elseif (true) {
+            echo get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user_info->userphoto_image_file;
+        } else
+          echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
       </figure>
+      <?php
+      $user_meta = get_user_meta($user_info->ID);
+      //var_dump($user_meta);?>
     <p class="authorarticlefoot">
       <a href="<?php echo get_author_posts_url( $term_slug ); ?>">
-        <?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?>
+        <?php echo get_the_author_meta('first_name', $term_slug) . ' '. get_the_author_meta('last_name', $term_slug); ?>
       </a>
       <br>
       <?php echo get_user_meta($term_slug,position,true);?>

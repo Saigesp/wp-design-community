@@ -297,7 +297,7 @@ $user_query = new WP_User_Query($args);
       
       <?php if($tip == true){ ?><td><?php echo get_the_author_meta( 'type', $user_id);?></td><?php } ?>
 
-      <?php if($pos == true){ ?><td><?php echo $user_meta['asociation_position'][0];?></td><?php } ?>
+      <?php if($pos == true){ ?><td><?php echo get_the_author_meta('asociation_position', $user_id);?></td><?php } ?>
       
       <?php if($tit == true){ ?><td><?php echo get_the_author_meta( 'titulacion', $user_id );?><br><?php echo get_the_author_meta( 'centro_de_estudios', $user_id );?></td><?php } ?>
       
@@ -328,8 +328,6 @@ $user_query = new WP_User_Query($args);
       <?php if($val == true){ ?><td><?php $hasiovalidado = $op_user['hasiovalidado'];	if(count($hasiovalidado) > 1){ foreach ($hasiovalidado as $v) { if ($v == 0) continue; if(!user_id_exists($v)) continue; echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$v ).' '.get_the_author_meta('last_name',$v ).'"><a href="'.get_author_posts_url($v).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $v),array(28, 28) ).'</a></div>'; }}?></td><?php } ?>
       
       <?php if($hva == true){ ?><td><?php $havalidado = $op_user['havalidado'];	if(count($havalidado) > 1){ foreach ($havalidado as $v) { if ($v == 0) continue; if(!user_id_exists($v)) continue; echo '<div class="profile-mini-foto" style="float:left; text-align: center; display: inline-flex; margin: 0;" title="'.get_the_author_meta('first_name',$v ).' '.get_the_author_meta('last_name',$v ).'"><a href="'.get_author_posts_url($v).'">'.wp_get_attachment_image(get_the_author_meta('foto_personal', $v),array(28, 28) ).'</a></div>'; }}?></td><?php } ?>
-      
-      <td><a href="http://xn--diseadoresindustriales-nec.es/wp-admin/user-edit.php?user_id=<?php echo $user_id;?>"><?php the_svg_icon('edit')?></a></td>
       
     </tr>
   <?php }} ?>

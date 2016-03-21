@@ -103,11 +103,22 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   */
 
 
-
   /* DATOS DE LA PÁGINA
   *
   *****************************************************
   */
+  // ROL
+  if (!empty($_POST['roles'])){
+    $WP_User = new WP_User($user->ID);
+    foreach( $WP_User->roles as $role ) {
+      $role = get_role( $role );
+      if ( $role != null ) $user->remove_role($role->name);
+    } 
+    $user->add_role(esc_attr( $_POST['roles'] ));
+  }
+
+  // CARGO
+  update_user_meta( $user->ID, 'asociation_position', $_POST['asociation_position']);
 
   // PERFIL PÚBLICO
   if (!empty($_POST['perfil_publico'])){
@@ -116,14 +127,103 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     $wp_rewrite->flush_rules( false );
   }
 
+  // KARMA
+  if (!empty($_POST['karma'])) {
+   $op_user = get_user_meta($user_id, 'op_user', true );
+   $op_user['karma'] = esc_attr( $_POST['karma'] );
+   update_user_meta($user_id, 'op_user', $op_user );
+  }
+
+  // INVITACIONES
+  if (!empty($_POST['invitations'])) {
+   $op_user = get_user_meta($user_id, 'op_user', true );
+   $op_user['invitations'] = esc_attr( $_POST['invitations'] );
+   update_user_meta($user_id, 'op_user', $op_user );
+  }
+
   if ( count($error) == 0 ) {
         do_action('edit_user_profile_update', $user->ID);
         wp_redirect( get_permalink() );
         exit;
     }
+}
 
+
+
+
+
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-govern' ) {
+  $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
+  foreach ($cargos as $cargo) {
+    if (!empty($_POST[$cargo])){
+      // Quitar rol de editor a anterior
+      $juntales = get_users();
+      foreach ($juntales as $juntal) {
+        if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo ){
+          $juntal->remove_role('editor');
+          $juntal->add_role(esc_attr('author'));
+          update_user_meta($juntal->ID, 'asociation_position', '' );
+        } 
+      }
+      //Añadir rol de editor
+      $juntales = get_users();
+      foreach ($juntales as $juntal) {
+        if ($juntal->ID == $_POST[$cargo] ){
+          $juntal->remove_role('author');
+          $juntal->add_role(esc_attr('editor'));
+          update_user_meta($juntal->ID, 'asociation_position', $cargo );
+        } 
+      }
+    }
+  }
+  if (!empty($_POST['vocales'])){
+      // Quitar rol a anteriores
+      $juntales = get_users();
+      foreach ($juntales as $juntal) {
+        if (get_the_author_meta('asociation_position', $juntal->ID) == 'vocal'){
+          $juntal->remove_role('editor');
+          $juntal->add_role(esc_attr('author'));
+          update_user_meta($juntal->ID, 'asociation_position', '' );
+        } 
+      }
+      // Añadir rol a nuevo
+      foreach ($_POST['vocales'] as $vocal_id) {
+        $vocal = get_userdata($vocal_id);
+          $vocal->remove_role('author');
+          $vocal->add_role(esc_attr('editor'));
+          update_user_meta($vocal_id, 'asociation_position', 'vocal' );
+      }
   }
 
 
+
+}
+
+
+
+
+
+
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
+  if(!empty($_POST['asociate'])){
+    $new_socis = $_POST['asociate'];
+    foreach ($new_socis as $user_id) {
+      $user = get_userdata($user_id);
+      $user->remove_role('subscriber');
+      $user->add_role('author');
+    }
+  }
+
+  if(!empty($_POST['desasociate'])){
+    $old_socis = $_POST['desasociate'];
+    foreach ($old_socis as $soc_id) {
+      $soc = get_userdata($soc_id);
+      $soc->add_role('subscriber');
+      $soc->remove_role('author');
+    }
+  }
+}
 
 ?>

@@ -37,6 +37,12 @@ function the_svg_icon ($icon, $class = ''){
 					S463.163,371.217,420.735,371.217z"/>
 			</g>
 		</svg>'; break;
+    case "edit" : echo '<svg version="1.1" id="edit" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="18px"
+					 viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+				<path d="M617.8,203.4l175.8,175.8l-445,445L172.9,648.4L617.8,203.4z M927,161l-78.4-78.4c-30.3-30.3-79.5-30.3-109.9,0l-75.1,75.1
+					l175.8,175.8l87.6-87.6C950.5,222.4,950.5,184.5,927,161z M80.9,895.5c-3.2,14.4,9.8,27.3,24.2,23.8L301,871.8L125.3,696L80.9,895.5
+					z"/>
+				</svg>'; break;
 	case 'close' : echo '<svg version="1.1" id="close" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
 				<path d="M79.851,65.758L64.09,49.997l14.163-14.164c3.892-3.892,3.892-10.201,0-14.092c-3.892-3.892-10.2-3.892-14.092,0

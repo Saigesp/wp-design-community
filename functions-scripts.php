@@ -126,16 +126,14 @@ function inject_in_all() { ?>
      * PAGE CONFIGURATION PRESIDENCE
      ***********************************/
     <?php } else if (is_page('configuration-presidence')) { ?>
-
-        $('.select-user').chosen(); 
-
+      $('.select-user').chosen(); 
 
     /**
-     * PAGE EDIT PROFILE
+     * PAGE CONFIGURATION SECRETARY
      ***********************************/
-    <?php } else if (is_page('edit-profile')) { ?>
-
-
+    <?php } else if (is_page('configuration-secretary')) { ?>
+      
+      $('.chosen').chosen();
 
 
     /**

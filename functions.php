@@ -44,7 +44,9 @@ new_page_title('Control Users');
 new_page_title('Configuration');
 new_page_title('Configuration presidence');
 new_page_title('Configuration treasury');
+new_page_title('Configuration secretary');
 
+new_page_title('Disenadores');
 
 // Create pages
 function new_page_title($post_title){
@@ -646,13 +648,12 @@ function wpdc_add_custom_user_profile_fields( $user ) {
       <td>
         <select name="asociation_position">
               <option value="" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == '') echo 'selected';?>>Ninguno</option>
-              <option value="socio" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'socio') echo 'selected';?>>Socio</option>
-              <option value="founder" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'founder') echo 'selected';?>>Socio Fundador</option>
-              <option value="presidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
-              <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
-              <option value="tesorero" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
-              <option value="secretario" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
-              <option value="vocal" <?php if (esc_attr(get_the_author_meta('sociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
+              <option value="fundador" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'fundador') echo 'selected';?>>Socio Fundador</option>
+              <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+              <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+              <option value="tesorero" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+              <option value="secretario" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+              <option value="vocal" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
         </select>
       </td>
     </tr>
@@ -751,22 +752,27 @@ function retrieve_languages() {
 
 function change_role_name($rolename){
   if($rolename == 'subscriber') return 'Suscriptor';
-  elseif($rolename == 'author') return 'Asociado';
+  elseif($rolename == 'author') return 'Socio';
   elseif($rolename == 'editor') return 'Junta Directiva';
   elseif($rolename == 'administrator') return 'Informático';
+  elseif($rolename == 'presidente') return 'Presidente';
+  elseif($rolename == 'vicepresidente') return 'Vicepresidente';
+  elseif($rolename == 'tesorero') return 'Tesorero';
+  elseif($rolename == 'secretario') return 'Secretario';
+  elseif($rolename == 'vocal') return 'Vocal';
   else return $rolename;
 }
 
+if(!function_exists('get_my_editable_roles')){
+  function get_my_editable_roles() {
+      global $wp_roles;
 
-function get_editable_roles() {
-    global $wp_roles;
+      $all_roles = $wp_roles->roles;
+      $editable_roles = apply_filters('editable_roles', $all_roles);
 
-    $all_roles = $wp_roles->roles;
-    $editable_roles = apply_filters('editable_roles', $all_roles);
-
-    return $editable_roles;
+      return $editable_roles;
+  }
 }
-
 
 
 ?>

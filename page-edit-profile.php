@@ -85,6 +85,24 @@
   			</div>
   		</div>
   	</div>
+    <div class="wrap wrap--flex">
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="titulacion">Titulación</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+        <input type="text" name="titulacion" class="tolisten" value="<?php echo esc_attr(get_the_author_meta('titulacion', $user->ID));?>"/>
+        </div>
+      </div>
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="centro_de_estudios">Centro de estudios</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+          <input type="text" name="centro_de_estudios" class="tolisten" value="<?php echo esc_attr(get_the_author_meta('centro_de_estudios', $user->ID));?>">
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="wrap wrap--content wrap--form wrap--authornetworks">
@@ -118,10 +136,28 @@
       </div>
       <div class="wrap wrap--frame__middle wrap--flex">
         <div class="wrap wrap--frame__middle">
-          <label for="hola">Google+</label>
+          <label for="googleplus">Google+</label>
         </div>
         <div class="wrap wrap--frame__middle">
           <input type="text" name="googleplus" class="tolisten" value="<?php echo get_user_meta($user->ID,googleplus,true);?>">
+        </div>
+      </div>
+    </div>
+    <div class="wrap wrap--flex">
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="behance">Behance</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+        <input type="text" name="behance" class="tolisten" value="<?php echo get_user_meta($user->ID,behance,true);?>"/>
+        </div>
+      </div>
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="domestika">Domestika</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+          <input type="text" name="domestika" class="tolisten" value="<?php echo get_user_meta($user->ID,domestika,true);?>">
         </div>
       </div>
     </div>
@@ -142,25 +178,33 @@
   				<label for="position">Rol</label>
   			</div>
   			<div class="wrap wrap--frame__middle">
-		        <select name="asociation_position" class="tolisten">
-              <?php foreach (get_editable_roles() as $role_name => $role_info){
+		        <select name="roles" class="tolisten">
+              <?php foreach (get_my_editable_roles() as $role_name => $role_info){
                 if($role_name == 'contributor') continue;
-                echo '<option value="'.$role_name.'">'.change_role_name($role_name).'</option>';
+                echo '<option value="'.$role_name.'"';
+                if(empty($roles) && $role_name == 'subscriber') echo 'selected';
+                if(in_array($role_name, $roles)) echo 'selected';
+                echo ' >'.change_role_name($role_name).'</option>';
               } ?>
 		        </select>
   			</div>
   		</div>
   		<div class="wrap wrap--frame__middle wrap--flex">
   			<div class="wrap wrap--frame__middle">
-  				<label for="hola">Estado</label>
+  				 <?php  if(!in_array('subscriber', $roles)) {?><label for="hola">Estado</label><?php } ?>
   			</div>
   			<div class="wrap wrap--frame__middle">
-  				<select name="status" id="" class="tolisten">
-              <option value="">Suspendido</option>
-              <option value="">Registrado</option>
-              <option value="">Pendiente de validar</option>
-              <option value="">Validado</option>    
+          <?php  if(!in_array('subscriber', $roles)) {?>
+          <select name="asociation_position">
+                <option value="" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == '') echo 'selected';?>>Ninguno</option>
+                <option value="fundador" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'fundador') echo 'selected';?>>Socio Fundador</option>
+                <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
+                <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
+                <option value="tesorero" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
+                <option value="secretario" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
+                <option value="vocal" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vocal') echo 'selected';?>>Vocal</option>
           </select>
+          <?php } ?>
   			</div>
   		</div>
   	</div>
@@ -216,7 +260,7 @@
   </section>
 
   <section class="wrap wrap--frame">
-    <?php var_dump($user->user_registered);?>
+    <?php var_dump($roles);?>
   </section>
 
 

@@ -1,16 +1,6 @@
 <?php get_header();
 ?>
 
-<?php if (isset($_POST["update_settings"])) {
-
-    	//if (!isset($_POST["tweet_prueba"])) echo '<div id="message" class="updated">Configuración guardada</div>';
-		} else {
-
-      }
-
-?>
-
-
 <!-- flexboxer -->
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">

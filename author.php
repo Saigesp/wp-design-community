@@ -71,6 +71,11 @@
       <?php } ?>
     </p>
     <p class="description"><?php echo $user_info->description;?></p>
+    <div class="wrap wrap--icon wrap--icon__close" >
+      <a href="<?php echo get_bloginfo('url');?>/edit-profile/?id=<?php echo $user_info->ID;?>">
+        <?php the_svg_icon('edit', 'icon--corner'); ?>
+      </a>
+    </div>
   </section><!-- end of author -->
 
   <section class="wrap wrap--content">

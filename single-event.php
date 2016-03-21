@@ -97,10 +97,10 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	    <h3>Gestión de reservas</h3>
 	    <?php include(locate_template('loop-booking.php')); ?>
 	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
-	    	<?php the_svg_icon('close', 'js-close-alert'); ?>
+	    	<?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
 	    </div>
 	    <div class="wrap wrap--icon wrap--icon__pdf" onclick="">
-	    	<?php the_svg_icon('pdf'); ?>
+	    	<?php the_svg_icon('pdf', 'icon--corner icon--corner__second'); ?>
 	    </div>
 	</section><!-- end of booking management -->
 

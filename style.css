@@ -480,6 +480,17 @@ code {
 	vertical-align: middle;
 }
 
+/* When registration is enabled */
+.wrap--menu__user .register-submit {
+	padding: 0 10px 10px;
+}
+
+.wrap--menu__user .register-submit a {
+	width: 100%;
+	text-align: center;
+	padding: 5px;
+}
+
 /* When user is logged */
 .wrap--menu__user > ul > li > a {
 	line-height: 30px;

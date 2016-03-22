@@ -32,7 +32,6 @@ function inject_in_all() { ?>
     }
 
 
-
     /**
      * ALL PAGES
      ***********************************/
@@ -52,12 +51,38 @@ function inject_in_all() { ?>
       $("#close").on("click", function(){
         $(".alert").removeClass('alert--error').addClass('hide');
         //$("")
-      })
+      });
 
+
+      $('#wrapper form').submit(function(event){
+        var errors = [];
+        $('#wrapper form input').each(function(){
+          if($(this).prop('required') && $(this).val() == ''){ //|| $(this).attr('type') != 'hidden'
+              errors.push('Campo requerido: ' + $(this).attr('placeholder'));
+          }
+        });
+        if(errors.length > 0) {
+          //$('#alerts').html('');
+          for (i = 0; i < errors.length; i++){
+            $('#alerts').append(
+              '<div class="alert alert--error">'+
+                '<p>'+errors[i]+'</p>'+
+              '</div>');
+          }
+          return false;
+        }else{
+          return true;
+        }
+        
+      });
+
+
+
+    
+    <?php if ('event' == get_post_type()) { ?>
     /**
      * SIGLE EVENT
      ***********************************/
-    <?php if ('event' == get_post_type()) { ?>
 
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
@@ -93,7 +118,6 @@ function inject_in_all() { ?>
         }
 
         <?php } ?>
-
 
     /**
      * PAGE CONTROL USERS

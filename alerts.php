@@ -1,6 +1,6 @@
 <?php
 
-if (!empty($_GET["action"])) { 
+/*if (!empty($_GET["action"])) { 
 	$msg = '<div class="wrap wrap--content alert alert--';
 	switch ($_GET["action"]) {
 
@@ -25,11 +25,26 @@ if (!empty($_GET["action"])) {
 
 	echo $msg;
 
-
-	/* Close button */
 	echo '<div class="wrap wrap--icon wrap--icon__close">';
 	the_svg_icon('close', 'js-close-alert');
 	echo '</div></div>';
-}
+}*/
+
+
 
 ?>
+<div class="flexboxer">
+  <section id="alerts" class="wrap wrap--frame wrap--alerts">
+    <?php if (!empty($_GET["action"])) { 
+      if(esc_attr($_GET["action"]) == 'register'){
+        if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Usuario existente, por favor, escoge otro</div>';
+        if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Email ya existente. ¿Has olvidado la contraseña?</div>';
+        if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Algunos campos no son válidos</div>';
+        if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Error en el registro</div>';
+      }elseif(esc_attr($_GET["action"]) == 'login'){
+        if(esc_attr($_GET["success"])) echo '<div class="alert alert--success">Bienvenido</div>';
+        else echo '<div class="alert alert--error">Algo raro sucedió :/</div>';
+      }
+     } ?>
+  </section> 
+</div>

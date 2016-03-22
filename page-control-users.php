@@ -24,14 +24,14 @@ foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
 if (empty($_GET["filter"])){
 
   /* Default options */
-
   $nam = true; // Name
-  $tip = true; // Type
+  $pos = true; // Type
 
 
 }else{
 
   // Get filters
+  $filter = $_GET['filter'] == '' || $_GET['filter'] == 'administrator' ? 'all' : $_GET['filter'];
   $order = $_GET['order'] == '' ? 'registered' : $_GET['order'];
 
   // Get options
@@ -55,13 +55,12 @@ if (empty($_GET["filter"])){
   $val = in_array("val", $user_labels) ? true : false;
   $hva = in_array("hva", $user_labels) ? true : false;
   $cuo = in_array("cuo", $user_labels) ? true : false;
-  
 }
 
 $original_query = $wp_query;
 
 if ($order != 'registered' && $order != 'login'){ //
-  if ($filter == 'all' || $filter == ''){
+  if ($filter == 'all'){
       $args = array( 
       'exclude' => $exclude_list,
       'orderby' => 'meta_value',
@@ -69,104 +68,28 @@ if ($order != 'registered' && $order != 'login'){ //
       'meta_key' => $order,
       'number' => 9999,
     );
-  }
-  if ($filter == 'nc'){
+  } else{
       $args = array( 
       'exclude' => $exclude_list,
-      'role' => 'subscriber',
+      'role' => $filter,
       'orderby' => 'meta_value',
       'meta_key' => $order,
       'order' => 'DESC',
       'number' => 9999,
-    );
-  }
-  if ($filter == 'p'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'subscriber',
-      'orderby' => 'meta_value',
-      'order' => 'DESC',
-      'meta_key' => $order,
-      'number' => 9999,
-      'meta_query'     => array(
-        array(
-          'key'       => 'perfil_publico',
-          'value'     => '1',
-          'compare'   => '=',
-          'type'      => 'NUMERIC',
-        ),
-      ),
-    );
-  }
-  if ($filter == 'c'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'author',
-      'orderby' => 'meta_value',
-      'order' => 'DESC',
-      'meta_key' => $order,
-      'number' => 9999,
-    );
-  }
-  if ($filter == 's'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'bloqued',
-      'orderby' => 'meta_value',
-      'order' => 'DESC',
-      'meta_key' => $order,
-      'number' => 9999,
-  
     );
   }
 }else{
-if ($filter == 'all' || $filter == ''){
+if ($filter == 'all'){
       $args = array( 
       'exclude' => $exclude_list,
       'orderby' => $order,
       'order' => 'DESC',
       'number' => 9999,
     );
-  }
-  if ($filter == 'nc'){
+  }else{
       $args = array( 
       'exclude' => $exclude_list,
-      'role' => 'subscriber',
-      'orderby' => $order,
-      'order' => 'DESC',
-      'number' => 9999,
-    );
-  }
-  if ($filter == 'p'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'subscriber',
-      'orderby' => $order,
-      'order' => 'DESC',
-      'number' => 9999,
-      'meta_query'     => array(
-        array(
-          'key'       => 'perfil_publico',
-          'value'     => '1',
-          'compare'   => '=',
-          'type'      => 'NUMERIC',
-        ),
-      ),
-    );
-  }
-  if ($filter == 'c'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'author',
-      'orderby' => $order,
-      'order' => 'DESC',
-      'number' => 9999,
-    );
-  }
-  if ($filter == 's'){
-      $args = array( 
-      'exclude' => $exclude_list,
-      'role' => 'bloqued',
+      'role' => $filter,
       'orderby' => $order,
       'order' => 'DESC',
       'number' => 9999,
@@ -174,11 +97,29 @@ if ($filter == 'all' || $filter == ''){
   }
 }
 
+/*  if ($filter == 'p'){
+      $args = array( 
+      'exclude' => $exclude_list,
+      'role' => 'subscriber',
+      'orderby' => 'meta_value',
+      'order' => 'DESC',
+      'meta_key' => $order,
+      'number' => 9999,
+      'meta_query'     => array(
+        array(
+          'key'       => 'perfil_publico',
+          'value'     => '1',
+          'compare'   => '=',
+          'type'      => 'NUMERIC',
+        ),
+      ),
+    );
+  }*/
 
 $user_query = new WP_User_Query($args);
 ?>
-<form class="wrap wrap--frame wrap--filterusers">
 
+<form class="wrap wrap--frame wrap--filterusers">
   <div class="wrap wrap--flex wrap--options" id="usercontroloption">
     <div class="wrap wrap--content wrap--content__full">
       <select name="labels[]" id="user-labels" multiple="multiple">
@@ -215,16 +156,18 @@ $user_query = new WP_User_Query($args);
     </div>
   </div>
 
+  
   <div class="wrap wrap--content wrap--flex wrap--filters">
     <div class="wrap wrap--content wrap--content__middle">
       <select name="filter">
       	<option value="all" <?php if($filter == 'all') echo 'selected';?>>Todos los usuarios</option>
-        <option value="s" <?php if($filter == 's') echo 'selected';?>>Suspendidos</option>
-        <option value="nc" <?php if($filter == 'nc') echo 'selected';?>>En proceso de registro</option>
-      	<option value="p" <?php if($filter == 'p') echo 'selected';?>>Pendientes de validar</option>
-        <option value="c" <?php if($filter == 'c') echo 'selected';?>>Validados</option>
+        <option value="subscriber" <?php if($filter == 'subscriber') echo 'selected';?>><?php echo change_role_name('subscriber');?></option>
+      	<!--<option value="p" <?php /*if($filter == 'p') echo 'selected'*/;?>>Socios pendientes de validar</option>-->
+        <option value="author" <?php if($filter == 'author') echo 'selected';?>><?php echo change_role_name('author');?></option>
+        <option value="editor" <?php if($filter == 'editor') echo 'selected';?>><?php echo change_role_name('editor');?></option>
       </select>
     </div>
+
     <div class="wrap wrap--content wrap--content__middle">
       <select name="order">
       	<option value="registered" <?php if($order == 'registered') echo 'selected';?>>Fecha creación</option>
@@ -236,11 +179,24 @@ $user_query = new WP_User_Query($args);
     </div>
   </div>
 
-  <input type="submit" value="Mostrar" class="submit button"/>
+  <div class="wrap wrap--content wrap--flex wrap--filters">
+    <div class="wrap wrap--frame__middle">
+      <?php if($user_query->total_users > 0){ ?>
+          <p>Se han encontrado <?php echo $user_query->total_users;?> resultados</p>
+      <?php } ?>
+    </div>
+    <div class="wrap wrap--frame__middle">
+      <input type="submit" value="Mostrar" class="submit button"/>
+    </div>
+  </div>
+
+  
 
 </form>
 <?php if($user_query->total_users > 0){ 
   $cont = 0; ?>
+
+
 
 <div id="usercontrolmain" class="wrap wrap--content wrap--content__fullwidth wrap--userlist">
   <table>

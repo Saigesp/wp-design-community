@@ -152,7 +152,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-
+  /* CAMBIO DE GOBIERNO
+  *
+  *****************************************************
+  */
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-govern' ) {
   $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
   foreach ($cargos as $cargo) {
@@ -204,8 +207,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-
-
+/* CAMBIO ESTATUS DE ASOCIADO
+*
+*****************************************************
+*/
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
   if(!empty($_POST['asociate'])){
     $new_socis = $_POST['asociate'];
@@ -225,5 +230,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 }
+
+
+
+
+
 
 ?>

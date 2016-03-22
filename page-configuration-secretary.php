@@ -62,8 +62,18 @@ $subscribers = new WP_User_Query(
 		<p>Existen <strong><?php echo count($all_users);?></strong> usuarios registrados y <strong><?php echo count($socios->results);?></strong> socios.</p>
 	</section>
 
-	<section class="wrap wrap--content">
-		<h3>Cambiar estatus de socio</h3>
+    <!-- admin options -->
+    <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">
+        <div class="wrap wrap--frame wrap--frame__middle">
+            <p>Evento privado</p>
+        </div>
+        <div class="wrap wrap--frame wrap--frame__middle">
+            <p class="right"><a onclick="ToggleSection('changememberstatus')">Gestionar socios</a></p>
+        </div>
+    </section><!-- end of admin options -->
+
+	<section id="changememberstatus" class="wrap wrap--content wrap--hidden js-section">
+		<h3>Cambiar estatus</h3>
         <div class="wrap wrap--frame">
             <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle">
@@ -94,12 +104,14 @@ $subscribers = new WP_User_Query(
                 </div>
             </div>
         </div>
+        <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
+            <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+        </div>
 	</section>
-
 	
   <section class="wrap wrap--frame wrap--empty wrap--submit">
     <p class="submit">
-      <input name="updateuser" type="submit" id="submit-all" class="button button-primary" value="Guardar cambios">
+      <input name="updateuser" type="submit" id="submit-all" class="button button-primary" value="Crear usuario">
       <input name="action" type="hidden" id="action" value="update-secretary" />
     </p>
   </section>

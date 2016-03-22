@@ -1,7 +1,7 @@
 <?php get_header(); ?> 
 
   <!-- flexboxer -->
-  <div class="flexboxer flexboxer--page">
+  <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--page">
     <?php if (have_posts()) : ?>
       <?php while (have_posts()) : the_post(); ?>
       

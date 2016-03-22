@@ -1463,15 +1463,18 @@ blockquote p {
 
 
 /* Hidden */
-.flexboxer > .wrap--hidden {
+.flexboxer  .wrap--hidden {
 	display: none !important;
 	position: relative;
 }
 
-.flexboxer > .wrap--hidden.active {
-	display: block !important;
+.flexboxer  .wrap--hidden.active {
+	 display: block !important; 
 }
 
+.flexboxer  .wrap--hidden__flex.active {
+	display: flex !important;
+}
 
 /* Transparent */
 .flexboxer .wrap--transparent {
@@ -2154,6 +2157,9 @@ a.button-secondary {
 
 .wrap--filterusers input[type="submit"] {
 	padding: 4px 10px 5px;
+	width: 240px;
+	margin: 0;
+	margin-left: calc(100% - 240px);
 }
 
 .wrap--filterusers > .wrap{
@@ -2438,6 +2444,10 @@ textarea.js-medium-editor,
 /* ALERTS
  *
  ***********************************/
+.wrap--alerts {
+	
+}
+
 .alert {
 	padding: 20px 10px;
 	position: relative;
@@ -2455,13 +2465,13 @@ textarea.js-medium-editor,
     text-decoration: underline;
 }
 
-.alert--warning { background-color: #FFBD13;}
+.alert--warning { background-color: #FFBD13 !important;}
 
-.alert--error { background-color: #F34A65;}
+.alert--error { background-color: #F34A65 !important;}
 
-.alert--success { background-color: #66CC66;}
+.alert--success { background-color: #66CC66 !important;}
 
-.alert--info { background-color: #0099FF;}
+.alert--info { background-color: #0099FF !important;}
 
 .alert .wrap--icon__close {
     position: absolute;
@@ -2536,8 +2546,8 @@ textarea.js-medium-editor,
 	}
     /* PAGE CONTROL USERS */
    .wrap--filterusers .submit {
-		margin: 0 5px 5px calc(100% - 105px);
-		width: 100px;
+
+
 	}
 }
 @media only screen and (max-width : 549px) {
@@ -2840,13 +2850,18 @@ textarea.js-medium-editor,
 		min-height: initial;
 		min-width: initial;
 	}
+	.flexboxer .wrap--flex input[type="checkbox"],
+	.flexboxer .wrap--flex input[type="radio"] { 
+		display: inline-block;
+		width: auto;
+	}
 	label {
 		min-height: 35px;
 		line-height: 35px;
 	}
 	/* MODAL */
 	.wrap--modal {
-		position: absolute;
+		position: absolute !important;
 		padding: 20px;
 		left: 5%;
 		top: 25%;

@@ -13,7 +13,7 @@
   if(get_bloginfo('users_can_register')) { ?>
 
       <p class="register-submit">
-        <a class="button button-secondary" onclick="ToggleMenu("menuregister")">Registro</a>
+        <a class="button button-secondary" href="<?php echo get_bloginfo('url').'/wp-login.php?action=register';?>/new-member">Registro</a>
       </p>
 
   <?php }

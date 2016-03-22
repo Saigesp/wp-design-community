@@ -580,6 +580,24 @@ add_action( 'admin_menu', 'remove_menu_item' );
  * FUNCIONES DE USUARIO
  ***********************************/
 
+// Crear usuario
+if (!function_exists('create_new_member')) {
+  function create_new_member($email_address, $username){
+    if ($username == '' || $username == null) $username = $email_address;
+    if ( null == username_exists( $email_address ) && $email_address!= '') {
+      $password = wp_generate_password( 12, false );
+      $user_id = wp_create_user( $username, $password, $email_address );
+      wp_update_user(array( 'ID' => $user_id, 'nickname' => $username));    
+    }
+  }
+}
+
+
+/* NUEVO USUARIO
+*
+*****************************************************
+*/
+
 // Añadir meta de usuario
 if (!function_exists('cb_contact_data')) {  
     function cb_contact_data($contactmethods) {
@@ -677,11 +695,23 @@ add_action( 'edit_user_profile_update', 'wpdc_save_custom_user_profile_fields' )
 /*
 * FUNCIONES DE LOGIN
 *********************************************/
-/* redirect nonadmin users after login */
-function soi_login_redirect( $redirect_to, $request, $user  ) {
-  return ( is_array( $user->roles ) && ( in_array('administrator',$user->roles) || in_array('editor',$user->roles) ) ) ? 'http://xn--diseadoresindustriales-nec.es/wp-admin' : 'http://xn--diseadoresindustriales-nec.es/modificar-perfil/';
-} 
-add_filter( 'login_redirect', 'soi_login_redirect', 10, 3 );
+/* redirect users after login */
+function no_admin_init() {      
+    // Is this the admin interface?
+    if (stripos($_SERVER['REQUEST_URI'],'/wp-admin/') !== false // Look for the presence of /wp-admin/ in the url
+        &&
+        stripos($_SERVER['REQUEST_URI'],'async-upload.php') == false // Allow calls to async-upload.php
+        &&
+        stripos($_SERVER['REQUEST_URI'],'admin-ajax.php') == false // Allow calls to admin-ajax.php
+        ) {
+
+        if (!current_user_can('manage_options')){ 
+          wp_redirect(get_option('home').'?action=login&success=true', 302);
+        }
+    }
+}
+// Add the action with maximum priority
+add_action('init','no_admin_init',0);
 
 /* redirect all users after logout */
 function go_home(){
@@ -694,7 +724,7 @@ add_action('wp_logout','go_home');
 function my_front_end_login_fail($username){
     $referrer = $_SERVER['HTTP_REFERER'];
     if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){
-        wp_redirect(get_bloginfo('url').'?action=wronglogin'); 
+        wp_redirect(get_bloginfo('url').'?action=login&success=false'); 
     exit;
     }
 }

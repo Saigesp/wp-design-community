@@ -26,11 +26,11 @@
 
 
 
-<?php include_once(locate_template('form-userdata.php')); ?>
+<?php include_once(locate_template('templates/forms/form-userdata.php')); ?>
 
-<?php include_once(locate_template('form-authordata.php')); ?>
+<?php include_once(locate_template('templates/forms/form-authordata.php')); ?>
 
-<?php include_once(locate_template('form-socialdata.php')); ?>
+<?php include_once(locate_template('templates/forms/form-socialdata.php')); ?>
 
   <?php if($other_user){ 
     $WP_User = new WP_User( $user->ID );
@@ -40,7 +40,7 @@
       if ( $role != null ) array_push($roles, $role->name);// change_role_name($role->name);
     } ?>
 
-    <?php include_once(locate_template('form-asociatedata.php')); ?>
+    <?php include_once(locate_template('templates/forms/form-asociatedata.php')); ?>
 
 
   <?php } ?>

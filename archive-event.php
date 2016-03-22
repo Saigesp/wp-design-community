@@ -30,7 +30,7 @@ $wp_query = new wp_query( $args );
 <div class="flexboxer flexboxer--page">
 
   <?php if (have_posts()) : while (have_posts()) : the_post();
-    include( locate_template(  'loop-box.php' ));
+    include( locate_template(  'templates/loops/loop-box.php' ));
   endwhile; endif; ?>
 
 </div><!-- end of flexboxer -->

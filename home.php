@@ -13,7 +13,7 @@ $query = new WP_Query( $args );
   <?php if ($query->have_posts()) {
       while ($query->have_posts()) { 
         $query->the_post();
-        include( locate_template(  'loop-archive.php' ));
+        include( locate_template(  'templates/loops/loop-archive.php' ));
       }
   	}
   ?>
@@ -22,7 +22,7 @@ $query = new WP_Query( $args );
 <?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
 	<div class="flexboxer flexboxer--home">
 		<div class="wrap wrap--content">
-<?php dynamic_sidebar( 'sidebar-1' ); ?>
+      <?php dynamic_sidebar( 'sidebar-1' ); ?>
 		</div>
 	</div>
 <?php endif; ?>

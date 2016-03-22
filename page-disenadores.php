@@ -19,7 +19,7 @@
   $user_query = new WP_User_Query($args);
   if (!empty( $user_query->results)) { 
     foreach ( $user_query->results as $user ) {
-      include( locate_template( 'loop-profile.php' ));
+      include( locate_template( 'templates/loops/loop-profile.php' ));
     }
   }
   ?> 
@@ -40,7 +40,7 @@
   $user_query = new WP_User_Query($args);
   if (!empty( $user_query->results)) { 
     foreach ( $user_query->results as $user ) {
-      include( locate_template( 'loop-profile.php' ));
+      include( locate_template( 'templates/loops/loop-profile.php' ));
     }
   }
   ?>

@@ -52,6 +52,6 @@
 <?php } ?>
 
 
-<?php include(locate_template('menu-user.php')); ?> 
+<?php include(locate_template('templates/menus/menu-user.php')); ?> 
 
 <div id="overlaybody" class="overlay overlay--body" onclick="ToggleMenu('close')"></div>

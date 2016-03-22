@@ -1,8 +1,5 @@
 <?php get_header(); ?>
 
-<?php include( locate_template(  'header-masonry.php' )); ?> 
-<?php include( locate_template(  'menu-middle.php' )); ?>
-
 <?php 
   $pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
   $post_per_page = get_option( 'posts_per_page', '10' );
@@ -34,7 +31,7 @@
 <div id="divwrap" class="wraparch index iascontainer customtax">
   <?php if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
-      <?php include( locate_template(  'loop-archive.php' )); ?> 
+      <?php include( locate_template(  'templates/loops/loop-archive.php' )); ?> 
     <?php endwhile; ?>
   <?php else : ?>
   <?php endif; ?>

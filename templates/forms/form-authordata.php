@@ -9,14 +9,14 @@
 				<input type="text" name="dbem_dnie" value="<?php echo esc_attr(get_the_author_meta('dbem_dnie', $user->ID));?>"/>
   			</div>
   		</div>
-  		<div class="wrap wrap--frame__middle wrap--flex">
-  			<div class="wrap wrap--frame__middle">
-  				<label for="dbem_address">Dirección</label>
-  			</div>
-  			<div class="wrap wrap--frame__middle">
-				<input type="text" name="dbem_address" value="<?php echo esc_attr(get_the_author_meta('dbem_address', $user->ID));?>"/>
-  			</div>
-  		</div>
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="hola">Fecha de nacimiento</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+          <input type="date" name="bornday" value="<?php echo esc_attr(get_the_author_meta('bornday', $user->ID));?>">
+        </div>
+      </div>
   	</div>
   	<div class="wrap wrap--flex">
   		<div class="wrap wrap--frame__middle wrap--flex">
@@ -27,14 +27,14 @@
 				<input type="text" name="dbem_phone" value="<?php echo esc_attr(get_the_author_meta('dbem_phone', $user->ID));?>"/>
   			</div>
   		</div>
-  		<div class="wrap wrap--frame__middle wrap--flex">
-  			<div class="wrap wrap--frame__middle">
-  				<label for="hola">Email</label>
-  			</div>
-  			<div class="wrap wrap--frame__middle">
-  				<input type="text" name="email" value="<?php echo esc_attr(get_the_author_meta('email', $user->ID));?>">
-  			</div>
-  		</div>
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="dbem_address">Dirección</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+        <input type="text" name="dbem_address" value="<?php echo esc_attr(get_the_author_meta('dbem_address', $user->ID));?>"/>
+        </div>
+      </div>
   	</div>
     <div class="wrap wrap--flex">
       <div class="wrap wrap--frame__middle wrap--flex">

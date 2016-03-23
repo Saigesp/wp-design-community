@@ -236,4 +236,100 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
+
+
+
+
+
+
+/* NUEVA CUOTA
+*
+*****************************************************
+*/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'new-fee' ) {
+
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'fee';
+
+    if (trim($_POST['fee_name']) === '') $hasError = true;
+    if (!is_numeric($_POST['fee_quantity'])) $hasError = true;
+
+    if(!$hasError){
+      $post_information = array(
+          'post_title' => wp_strip_all_tags( $_POST['fee_name'] ),
+          'post_content' => 'Ey',
+          'post_type' => $publish_type,
+          'post_status' => $publish_status,
+      );
+      $post_id = wp_insert_post( $post_information );
+
+      update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
+      update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
+      
+      //if ( $post_id )  wp_redirect( 'http://xn--diseadoresindustriales-nec.es/preguntas/?send=ok' ); exit;
+    } 
+}
+
+
+/* ACTUALIZAR CUOTA
+*
+*****************************************************
+*/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-fee' ) {
+
+      //update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
+      //update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
+      $post_id = $_POST['fee_id'];
+      $hasError = false;
+      if ($post_id == '') $hasError = true;
+
+      if(!$hasError){
+
+        //Añadir abono
+        if(!empty($_POST['members_payed']) && is_array($_POST['members_payed']) ){
+          $payed_members = get_post_meta($post_id, 'members_payed', true);
+          if(!is_array($payed_members)) $payed_members = array();
+          foreach ($_POST['members_payed'] as $user_id) {
+            if (!in_array($user_id, $payed_members)) array_push($payed_members, $user_id);
+          }
+          update_post_meta($post_id, 'members_payed', $payed_members);
+        }
+
+        //Añadir abono pendiente
+        if(!empty($_POST['members_pending']) && is_array($_POST['members_pending']) ){
+          $pending_members = get_post_meta($post_id, 'members_pending', true);
+          if(!is_array($pending_members)) $pending_members = array();
+          foreach ($_POST['members_pending'] as $user_id) {
+            if (!in_array($user_id, $pending_members)) array_push($pending_members, $user_id);
+          }
+          update_post_meta($post_id, 'members_pending', $pending_members);
+        }
+
+        // Quitar abono
+        if(!empty($_POST['members_paydown']) && is_array($_POST['members_paydown']) ){
+          $payed_members = get_post_meta($post_id, 'members_payed', true);
+          if(!is_array($payed_members)) $payed_members = array();
+          foreach ($_POST['members_paydown'] as $key => $user_id) {
+            if( ($key = array_search($user_id, $payed_members)) !== false) unset($payed_members[$key]);
+          }
+          update_post_meta($post_id, 'members_payed', $payed_members);
+        }
+
+        // Quitar abono pendiente
+        if(!empty($_POST['members_pendingdown']) && is_array($_POST['members_pendingdown']) ){
+          $pending_members = get_post_meta($post_id, 'members_pending', true);
+          if(!is_array($pending_members)) $pending_members = array();
+          foreach ($_POST['members_pendingdown'] as $user_id) {
+            if( ($key = array_search($user_id, $pending_members)) !== false) unset($pending_members[$key]);
+          }
+          update_post_meta($post_id, 'members_pending', $pending_members);
+        }
+      }
+
+}
+
+
 ?>

@@ -95,7 +95,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	<!-- booking management -->
 	<section id="bookingmanager" class="wrap wrap--content wrap--hidden js-section">
 	    <h3>Gestión de reservas</h3>
-	    <?php include(locate_template('loop-booking.php')); ?>
+	    <?php include(locate_template('templates/loops/loop-booking.php')); ?>
 	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
 	    	<?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
 	    </div>

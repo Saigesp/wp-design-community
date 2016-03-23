@@ -17,6 +17,7 @@ var project = 'wp-design-community',
     min_files_css = [ // CSS Archives to minimize
         dev + 'plugins/**/*.css',
         '!' + dev + 'plugins/**/*.min.css',
+        node + '*/css/pikaday.css',
         bower + '*/chosen.css'
     ],
     min_files_js = [ // JS Archives to minimize
@@ -25,6 +26,8 @@ var project = 'wp-design-community',
         node + '*/src/jquery-ias.js',
         node + '*/js/jquery-imagefill.js',
         node + '*/lib/jquery.printThis.js',
+        node + '*/pikaday.js',
+        node + '*/src/moment.js',
         bower + '*/chosen.jquery.js'
     ],
     css_minimized_files = [ // CSS Archives to copy

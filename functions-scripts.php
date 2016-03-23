@@ -53,6 +53,9 @@ function inject_in_all() { ?>
         //$("")
       });
 
+      if ($(".chosen").length > 0){
+        $('.chosen').chosen();
+      }
 
       $('#wrapper form').submit(function(event){
         var errors = [];
@@ -119,6 +122,22 @@ function inject_in_all() { ?>
 
         <?php } ?>
 
+
+    /**
+     * PAGE CONTROL USERS
+     ***********************************/
+    <?php } ?>
+    <?php if (is_archive('fee')) { ?>
+
+
+    var picker = new Pikaday({
+        field: document.getElementById('datepicker'),
+        format: 'DD MM YYYY',
+        onSelect: function() {
+        }
+    });
+
+
     /**
      * PAGE CONTROL USERS
      ***********************************/
@@ -127,7 +146,7 @@ function inject_in_all() { ?>
 
 
 
-        $('#user-labels').chosen();
+
 
 
     /**
@@ -144,20 +163,6 @@ function inject_in_all() { ?>
               $('.wrap--twitteroptions').addClass('hide');
             }
         });
-
-
-    /**
-     * PAGE CONFIGURATION PRESIDENCE
-     ***********************************/
-    <?php } else if (is_page('configuration-presidence')) { ?>
-      $('.select-user').chosen(); 
-
-    /**
-     * PAGE CONFIGURATION SECRETARY
-     ***********************************/
-    <?php } else if (is_page('configuration-secretary')) { ?>
-      
-      $('.chosen').chosen();
 
 
     /**

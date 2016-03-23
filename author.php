@@ -78,11 +78,6 @@
     </div>
   </section><!-- end of author -->
 
-  <section class="wrap wrap--content">
-    <?php var_dump($user_info);?>
-    <?php var_dump($user_meta);?>
-  </section>
-
   <section class="wrap wrap--frame">
     <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>
       <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>

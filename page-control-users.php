@@ -122,7 +122,7 @@ $user_query = new WP_User_Query($args);
 <form class="wrap wrap--frame wrap--filterusers">
   <div class="wrap wrap--flex wrap--options" id="usercontroloption">
     <div class="wrap wrap--content wrap--content__full">
-      <select name="labels[]" id="user-labels" multiple="multiple">
+      <select name="labels[]" id="user-labels" class="chosen" multiple="multiple">
         <optgroup label="Datos personales">
           <option value="nam" <?php if($nam) echo 'selected';?> >Nombre</option>
           <option value="pho" <?php if($pho) echo 'selected';?> >Foto</option>

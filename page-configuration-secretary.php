@@ -56,16 +56,12 @@ $subscribers = new WP_User_Query(
 <!-- flexboxer -->
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">
-  
-	<section class="wrap wrap--content">
-		<h3>Usuarios</h3>
-		<p>Existen <strong><?php echo count($all_users);?></strong> usuarios registrados y <strong><?php echo count($socios->results);?></strong> socios.</p>
-	</section>
 
     <!-- admin options -->
     <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">
         <div class="wrap wrap--frame wrap--frame__middle">
-            <p>Evento privado</p>
+            <p><strong><?php echo count($all_users);?></strong> usuarios registrados</p>
+            <p><strong><?php echo count($socios->results);?></strong> socios</p>
         </div>
         <div class="wrap wrap--frame wrap--frame__middle">
             <p class="right"><a onclick="ToggleSection('changememberstatus')">Gestionar socios</a></p>
@@ -108,6 +104,14 @@ $subscribers = new WP_User_Query(
             <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
         </div>
 	</section>
+
+    <section id="" class="wrap wrap--content wrap--userlist">
+        <h3>Lista de socios</h3>
+        <?php 
+        $users = $socios;
+        include(locate_template('templates/loops/loop-userlist.php'));
+        ?>
+    </section>
 	
   <section class="wrap wrap--frame wrap--empty wrap--submit">
     <p class="submit">

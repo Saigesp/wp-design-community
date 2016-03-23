@@ -47,7 +47,7 @@ $users = new WP_User_Query(
                     <label for="">Vicepresidencia</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="vicepresidente" id="" class="select select-user">
+                    <select name="vicepresidente" id="" class="select select-user chosen">
                         <option value="0">Ninguno</option>
                         <?php foreach ( $users->results as $user ) {
                                 echo '<option value="'.esc_html($user->ID ).'" ';
@@ -62,7 +62,7 @@ $users = new WP_User_Query(
                     <label for="">Secretaría</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="secretario" id="" class="select select-user">
+                    <select name="secretario" id="" class="select select-user chosen">
                         <option value="0">Ninguno</option>
                         <?php foreach ( $users->results as $user ) {
                                 echo '<option value="'.esc_html($user->ID ).'" ';
@@ -79,7 +79,7 @@ $users = new WP_User_Query(
                     <label for="">Tesorería</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="tesorero" id="" class="select select-user">
+                    <select name="tesorero" id="" class="select select-user chosen">
                         <option value="0">Ninguno</option>
                         <?php foreach ( $users->results as $user ) {
                                 echo '<option value="'.esc_html($user->ID ).'" ';
@@ -94,7 +94,7 @@ $users = new WP_User_Query(
                     <label for="vocales[]">Vocales</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="vocales[]" id="" class="select select-user" multiple="multiple">
+                    <select name="vocales[]" id="" class="select select-user chosen" multiple="multiple">
                         <option value="0">Ninguno</option>
                         <?php foreach ( $users->results as $user ) {
                                 echo '<option value="'.esc_html($user->ID ).'" ';
@@ -115,7 +115,7 @@ $users = new WP_User_Query(
                 <label for="">¿Quién será el nuevo lider?</label>
             </div>
             <div class="wrap wrap--frame__middle">
-                <select name="" id="" class="select select-user">
+                <select name="" id="" class="select select-user chosen">
                     <option value="0"></option>
                     <?php foreach ( $users->results as $user ) {
                             echo '<option value="'.esc_html($user->ID ).'">'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';

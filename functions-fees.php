@@ -8,7 +8,6 @@ if (post_type_exists('fees')) {
 	//unregister_post_type( 'fees' );
 }
 
-new_page_title('Edit Fee');
 new_page_title('Pay Fee');
 
 /**

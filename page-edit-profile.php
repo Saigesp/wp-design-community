@@ -41,6 +41,7 @@
     } ?>
 
     <?php include_once(locate_template('templates/forms/form-asociatedata.php')); ?>
+    <?php include_once(locate_template('templates/forms/form-pagedata.php')); ?>
 
 
   <?php } ?>

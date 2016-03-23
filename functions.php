@@ -593,10 +593,39 @@ if (!function_exists('create_new_member')) {
 }
 
 
-/* NUEVO USUARIO
+/* LOOP USUARIO
 *
 *****************************************************
 */
+
+function loopuserlist($user_id){
+    $user = get_userdata($user_id);
+    $usermeta = get_user_meta($user_id);
+
+    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+        $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+    elseif ($user->userphoto_image_file != '')
+        $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+    else
+        $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+    echo '<tr>'; 
+    echo '<td><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
+    echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
+    if(is_singular( 'fee' )){
+      echo '<td>';
+      the_svg_icon('close');
+      echo '</td>';
+    }
+    echo '</tr>';
+}
+
+
+
+
+
+
+
 
 // Añadir meta de usuario
 if (!function_exists('cb_contact_data')) {  

@@ -354,16 +354,30 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 */
  
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'pay-fee' ) {
+  $post_id = get_the_ID();
+  $user_id = get_current_user_id();
+  $paymethod = $_POST['paymethod'];
+  $hasError = false;
+  if ($post_id == '') $hasError = true;
+  if ($paymethod == '') $hasError = true;
+  if (!is_singular('fee'))  $hasError = true;
+  if (!is_numeric($user_id))  $hasError = true;
 
-  //Añadir abono pendiente
-/*  if(!empty($_POST['members_pending']) && is_array($_POST['members_pending']) ){
-    $pending_members = get_post_meta($post_id, 'members_pending', true);
-    if(!is_array($pending_members)) $pending_members = array();
-    foreach ($_POST['members_pending'] as $user_id) {
-      if (!in_array($user_id, $pending_members)) array_push($pending_members, $user_id);
+  if(!$hasError){
+
+    if($paymethod == 'transferency'){
+      $pending_members = get_post_meta($post_id, 'members_pending', true);
+      if(!is_array($pending_members)) $pending_members = array();
+      if (!in_array($user_id, $pending_members)) $pending_members[$user_id] = current_time('mysql');
+      update_post_meta($post_id, 'members_pending', $pending_members);
+    }elseif($paymethod == 'paypal'){
+      //TODO Pago por paypal
+    }else{
+      //TODO Errores
     }
-    update_post_meta($post_id, 'members_pending', $pending_members);
-  }*/
+  }else{
+    //TODO Errores
+  }
 
 }
 

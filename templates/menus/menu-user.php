@@ -69,14 +69,6 @@
         <a href="<?php echo get_bloginfo('url');?>/fee">Cuotas</a>
       </li>
 
-      <li class="menu-item menu-item-type-custom menu-item-object-custom">
-        <a href="<?php echo get_bloginfo('url');?>/edit-fee">Crear cuota</a>
-      </li>
-
-      <li class="menu-item menu-item-type-custom menu-item-object-custom">
-        <a href="<?php echo get_bloginfo('url');?>/pay-fee">Pagar cuota</a>
-      </li>
-
     </ul>
   </nav>
 <?php } ?>

@@ -26,6 +26,17 @@ function inject_in_all() { ?>
       }
     }
 
+    function ToggleSelect(select_id){
+      var section = jQuery('#'+select_id+' option:selected').val();
+      console.log(section);
+      if(jQuery('#js-select-'+section).hasClass('active') || select_id == 'close'){
+        jQuery('.js-select').removeClass("active");
+      }else{
+        jQuery('.js-select').removeClass("active");
+        jQuery('#js-select-'+section).addClass("active");
+      }
+    }
+
     function imageresize() {
         if (jQuery('.js-fullheight').length > 0) jQuery('.js-fullheight').css("height", jQuery(window).height() - jQuery('#headertop').outerHeight());
         if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();
@@ -102,25 +113,33 @@ function inject_in_all() { ?>
 
         <?php if(true){ ?>
 
-        if ($("#bookingmanager-form select").length > 0) {
-          $("#bookingmanager-form select").change(function() {
-            $(this).attr("class", "").addClass("booking_status--"+this.value);
-            $("#bookingmanager-form .button-primary").removeClass('hide');
-          });
-        }
-
-
-        if ($("#pdf_icon").length > 0) {
-          $("#pdf_icon").on("click", function(){
-            $('#bookingmanager-form-list').printThis({
-              title: 'Lista de reservas de <?php the_title(); ?>, <?php bloginfo("name"); ?>, @<?php echo get_userdata(get_current_user_id())->user_login;?>',
-              exclude: ['.do_not_print', '.print_exclude' ],
-              styles: ['http://www.saigesp.es/wp-content/themes/gridly/style.css']
+          if ($("#bookingmanager-form select").length > 0) {
+            $("#bookingmanager-form select").change(function() {
+              $(this).attr("class", "").addClass("booking_status--"+this.value);
+              $("#bookingmanager-form .button-primary").removeClass('hide');
             });
-          })
-        }
+          }
+
+
+          if ($("#pdf_icon").length > 0) {
+            $("#pdf_icon").on("click", function(){
+              $('#bookingmanager-form-list').printThis({
+                title: 'Lista de reservas de <?php the_title(); ?>, <?php bloginfo("name"); ?>, @<?php echo get_userdata(get_current_user_id())->user_login;?>',
+                exclude: ['.do_not_print', '.print_exclude' ],
+                styles: ['http://www.saigesp.es/wp-content/themes/gridly/style.css']
+              });
+            })
+          }
 
         <?php } ?>
+
+
+
+
+    /**
+     * SIGLE FEE
+     ***********************************/
+    <?php } elseif ('fee' == get_post_type()) { ?>
 
 
     /**
@@ -138,11 +157,7 @@ function inject_in_all() { ?>
     });
 
 
-    /**
-     * PAGE CONTROL USERS
-     ***********************************/
-    <?php } ?>
-    <?php if (is_page('control-users')) { ?>
+
 
 
 

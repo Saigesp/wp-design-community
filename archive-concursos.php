@@ -1,7 +1,7 @@
 <?php get_header();
 
 if(is_user_role('administrator') || is_user_role('editor')) { 
-  include(locate_template('functions-validation.php'));
+  //include(locate_template('functions-validation.php'));
 }
 ?>
   <!-- flexboxer -->
@@ -16,43 +16,62 @@ if(is_user_role('administrator') || is_user_role('editor')) {
               <p></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p class="right"><a onclick="ToggleSection('createfee')">Crear cuota</a></p>
+              <p class="right"><a onclick="ToggleSection('createconcurso')">Crear concurso</a></p>
           </div>
       </section><!-- end of admin options -->
 
-      <section id="createfee" class="wrap wrap--content wrap--form wrap--hidden js-section">
-        <h3>Crea cuota</h3>
+      <section id="createconcurso" class="wrap wrap--content wrap--form wrap--hidden js-section">
+        <h3>Crea concurso</h3>
         <div class="wrap wrap--flex">
           <div class="wrap wrap--frame__middle">
-            <label for="fee_name">Nombre de la cuota</label>
+            <label for="concurso_name">Nombre del concurso</label>
           </div>
           <div class="wrap wrap--frame__middle">
-            <input type="text" name="fee_name" value=""/>
+            <input id="concurso_name" type="text" name="concurso_name" required value=""/>
           </div>
         </div>
         <div class="wrap wrap--flex">
           <div class="wrap wrap--frame__middle">
-            <label for="fee_quantity">Cantidad</label>
+            <label for="concurso_org">Organismo convocante</label>
           </div>
           <div class="wrap wrap--frame__middle">
-            <input type="number" name="fee_quantity" min="0" max="999" step="0.01" value=""/>
+            <input id="concurso_org" type="text" name="concurso_org" required value=""/>
+          </div>
+        </div>
+        <div class="wrap wrap--flex">
+          <div class="wrap wrap--frame__middle">
+            <label for="concurso_bases">Más información</label>
+          </div>
+          <div class="wrap wrap--frame__middle">
+            <input id="concurso_bases" type="text" name="concurso_bases" required value="" placeholder="http://"/>
+          </div>
+        </div>
+        <div class="wrap wrap--flex">
+          <div class="wrap wrap--frame__middle">
+            <label for="concurso_quantity">Máximo premio</label>
+          </div>
+          <div class="wrap wrap--frame__middle">
+            <input id="concurso_quantity" type="text" name="concurso_quantity" value=""/>
           </div>
         </div>
         <div class="wrap wrap--flex">
           <div class="wrap wrap--frame__middle wrap--flex">
-            <label for="fee_date">Inicio</label>
+            <label for="datepicker">Cierre de convocatoria</label>
           </div>
           <div class="wrap wrap--frame__middle">
-            <input id="datepicker" type="text" name="fee_date" value=""/>
+            <input id="datepicker" type="text" name="fee_date" value="" required />
           </div>
+        </div>
+        <div class="wrap wrap--flex">
+          <textarea name="description" class="description js-medium-editor tolisten"><?php echo $user->description;?></textarea>
         </div>
         <div class="wrap wrap--flex wrap--submit">
           <div class="wrap wrap--frame__middle wrap--flex">
           </div>
           <div class="wrap wrap--frame__middle wrap--flex">
             <p class="submit">
-              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Crear cuota">
-              <input name="action" type="hidden" id="action" value="new-fee" />
+              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Crear concurso">
+              <input name="action" type="hidden" id="action" value="new-concurso" />
             </p>
           </div>
         </div>
@@ -103,7 +122,7 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 
       <!-- noinfo -->
       <section class="wrap wrap--content">
-        <h2>No hay cuotas creadas</h2>
+        <h2>No hay concursos creados</h2>
       </section><!-- end of noinfo -->
 
     <?php endif; ?>

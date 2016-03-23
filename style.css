@@ -1615,10 +1615,10 @@ blockquote p {
 
 .wrap table .icon--corner {
 	height: 14px;
-    width: 14px;
-    padding: 8px;
+	width: 14px;
+	padding: 8px;
 	cursor: pointer;
-	margin: 6px 10px 0 0;
+	/* margin: 6px 10px 0 0; */
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -1865,6 +1865,15 @@ input[type="checkbox"]:checked+label .icon--check{
     -webkit-box-shadow: 0 1px 0 #5EAB5E;
     box-shadow: 0 1px 0 #5EAB5E;
     vertical-align: top;
+}
+
+input[type="text"].likeh3 {
+	background-color: transparent;
+	padding: 0;
+	font-weight: 700;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 22px;
+    line-height: 1.0909090909;
 }
 
 
@@ -2433,7 +2442,17 @@ textarea.js-medium-editor,
 	padding: 10px;
 	color: black;
 	background-color: rgba(0,0,0,0.1);
+	width: 100%;
+
 }
+
+#wrapper .js-medium-editor {
+	padding: 10px;
+	background-color: rgba(0,0,0,0.1);
+	width: 100%;
+}
+
+
 
 .medium-editor-placeholder:after,
 .medium-editor-toolbar-form a {
@@ -2614,7 +2633,7 @@ textarea.js-medium-editor,
  * MEDIA QUERYS
  *************************************************************************************************/
 @media only screen and (max-width : 349px) {
-	.showonmobile {
+	.hideonmobile {
 		display: none !important;
 	}
 	.breaklinemobile {
@@ -2623,7 +2642,7 @@ textarea.js-medium-editor,
 	}
 }
 @media only screen and (min-width : 350px) {
-	.hideonmobile {
+	.showonmobile {
 		display: none !important;
 	}
 	.categoryarch, 

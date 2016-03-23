@@ -9,12 +9,7 @@ $subscribers = new WP_User_Query(
             'relation' => 'OR',
             array(
                 'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
-                'value' => 'subscriber',
-                'compare' => 'like'
-            ),
-            array(
-                'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
-                'value' => '',
+                'value' => 'author',
                 'compare' => 'like'
             )
         )
@@ -33,7 +28,7 @@ $subscribers = new WP_User_Query(
           <?php if($subscribers->total_users > 0){ ?>
 
             <section class="wrap wrap--content">
-              <h2><a href="<?php the_permalink();?>"><?php the_title();?></a></h2>
+              <h2><?php the_title();?></h2>
               <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle">
                   <p>Fecha: <?php echo get_post_meta(get_the_ID(), 'fee_date', true); ?></p>
@@ -43,39 +38,44 @@ $subscribers = new WP_User_Query(
                 </div>
               </div>
               <div class="wrap wrap--frame wrap--userlist ">
-                <h4>Socios con la cuota abonada</h4>
+                <h4><?php echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true));?> Socios con la cuota abonada</h4>
                 <table>
                   <?php
-                  $users = get_post_meta(get_the_ID(), 'members_payed', true);
-                  include(locate_template('templates/loops/loop-userlist.php'));
+                  $members_payed = get_post_meta(get_the_ID(), 'members_payed', true);
+                  foreach($members_payed as $user_id => $time){
+                    $user = get_userdata($user_id);
+                    $usermeta = get_user_meta($user_id);
+
+                    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+                        $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+                    elseif ($user->userphoto_image_file != '')
+                        $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+                    else
+                        $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+                    echo '<tr>'; 
+                    echo '<td><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
+                    echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
+                    echo '<td><input type="checkbox" class="hidden" id="checkbox-pay-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-pay-'.$user_id.'">';
+                    the_svg_icon('close', 'icon--corner');
+                    echo '</label></td>';
+                    echo '</tr>';
+                  }
                   ?>
                 </table>
               </div>
               <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle wrap--flex">
+                </div>
+                <div class="wrap wrap--frame__middle wrap--flex">
                   <div class="wrap wrap--frame__middle">
                     <label for="members_payed[]">Añadir abonos:</label>
                   </div>
                   <div class="wrap wrap--frame__middle">
-                    <select name="members_payed[]" id="" class="select select-user chosen" multiple="multiple">
+                    <select name="members_payed[]" id="" class="select select-user chosen" multiple="multiple" data-placeholder="Selecciona usuarios">
                       <option value="0">Ninguno</option>
                       <?php foreach ( $subscribers->results as $subscriber ) {
-                              if(in_array($subscriber->ID, $users)) continue;
-                              echo '<option value="'.esc_html($subscriber->ID ).'" ';
-                              echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
-                          } ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="wrap wrap--frame__middle wrap--flex">
-                  <div class="wrap wrap--frame__middle">
-                    <label for="members_topay[]">Quitar abonos:</label>
-                  </div>
-                  <div class="wrap wrap--frame__middle">
-                    <select name="members_paydown[]" id="" class="select select-user chosen" multiple="multiple">
-                      <option value="0">Ninguno</option>
-                      <?php foreach ( $subscribers->results as $subscriber ) {
-                              if(!in_array($subscriber->ID, $users)) continue;
+                              if(in_array($subscriber->ID, $members_payed)) continue;
                               echo '<option value="'.esc_html($subscriber->ID ).'" ';
                               echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
                           } ?>
@@ -84,39 +84,47 @@ $subscribers = new WP_User_Query(
                 </div>
               </div>
               <div class="wrap wrap--frame wrap--userlist">
-                <h4>Socios con la couta pendiente de validar</h4>
+                <h4><?php echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true));?> Socios con la cuota pendiente de validar</h4>
                 <table>
                   <?php
-                  $users = get_post_meta(get_the_ID(), 'members_pending', true);
-                  include(locate_template('templates/loops/loop-userlist.php'));
+                  $members_pending = get_post_meta(get_the_ID(), 'members_pending', true);
+                  foreach($members_pending as $user_id){
+                    $user = get_userdata($user_id);
+                    $usermeta = get_user_meta($user_id);
+
+                    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+                        $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+                    elseif ($user->userphoto_image_file != '')
+                        $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+                    else
+                        $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+                    echo '<tr>'; 
+                    echo '<td><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
+                    echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
+                    echo '<td><input type="checkbox" class="hidden" id="checkbox-pen-'.$user_id.'" name="members_pendingdown[]" value="'.$user_id.'"><label for="checkbox-pen-'.$user_id.'">';
+                    the_svg_icon('close', 'icon--corner');
+                    echo '</label></td>';
+                    echo '<td><input type="checkbox" class="hidden" id="checkbox-topay-'.$user_id.'" name="members_validate[]" value="'.$user_id.'"><label for="checkbox-topay-'.$user_id.'">';
+                    the_svg_icon('check', 'icon--corner icon--corner__second');
+                    echo '</label></td>';
+                    echo '</tr>';
+                  }
                   ?>
                 </table>
               </div>
               <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle wrap--flex">
+                </div>
+                <div class="wrap wrap--frame__middle wrap--flex">
                   <div class="wrap wrap--frame__middle">
                     <label for="members_pending[]">Añadir abono pendiente</label>
                   </div>
                   <div class="wrap wrap--frame__middle">
-                    <select name="members_pending[]" id="" class="select select-user chosen" multiple="multiple">
+                    <select name="members_pending[]" id="" class="select select-user chosen" multiple="multiple" data-placeholder="Selecciona usuarios">
                       <option value="0">Ninguno</option>
                       <?php foreach ( $subscribers->results as $subscriber ) {
-                              if(in_array($subscriber->ID, $users)) continue;
-                              echo '<option value="'.esc_html($subscriber->ID ).'" ';
-                              echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
-                          } ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="wrap wrap--frame__middle wrap--flex">
-                  <div class="wrap wrap--frame__middle">
-                    <label for="members_pendingdown[]">Quitar abono pendiente</label>
-                  </div>
-                  <div class="wrap wrap--frame__middle">
-                    <select name="members_pendingdown[]" id="" class="select select-user chosen" multiple="multiple">
-                      <option value="0">Ninguno</option>
-                      <?php foreach ( $subscribers->results as $subscriber ) {
-                              if(!in_array($subscriber->ID, $users)) continue;
+                              if(in_array($subscriber->ID, $members_pending)) continue;
                               echo '<option value="'.esc_html($subscriber->ID ).'" ';
                               echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
                           } ?>

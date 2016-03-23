@@ -613,9 +613,9 @@ function loopuserlist($user_id){
     echo '<td><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
     echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
     if(is_singular( 'fee' )){
-      echo '<td>';
+      echo '<td><input type="checkbox" class="hidden" id="checkbox-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-'.$user_id.'">';
       the_svg_icon('close');
-      echo '</td>';
+      echo '</label></td>';
     }
     echo '</tr>';
 }

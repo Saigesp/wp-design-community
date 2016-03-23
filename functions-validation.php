@@ -293,7 +293,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           $payed_members = get_post_meta($post_id, 'members_payed', true);
           if(!is_array($payed_members)) $payed_members = array();
           foreach ($_POST['members_payed'] as $user_id) {
-            if (!in_array($user_id, $payed_members)) array_push($payed_members, $user_id);
+            if( ($key = array_search($user_id, $payed_members)) === false) $payed_members[$user_id] = current_time('mysql');
           }
           update_post_meta($post_id, 'members_payed', $payed_members);
         }
@@ -303,7 +303,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           $pending_members = get_post_meta($post_id, 'members_pending', true);
           if(!is_array($pending_members)) $pending_members = array();
           foreach ($_POST['members_pending'] as $user_id) {
-            if (!in_array($user_id, $pending_members)) array_push($pending_members, $user_id);
+            if( ($key = array_search($user_id, $pending_members)) === false) $pending_members[$user_id] = current_time('mysql');
           }
           update_post_meta($post_id, 'members_pending', $pending_members);
         }
@@ -312,8 +312,8 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         if(!empty($_POST['members_paydown']) && is_array($_POST['members_paydown']) ){
           $payed_members = get_post_meta($post_id, 'members_payed', true);
           if(!is_array($payed_members)) $payed_members = array();
-          foreach ($_POST['members_paydown'] as $key => $user_id) {
-            if( ($key = array_search($user_id, $payed_members)) !== false) unset($payed_members[$key]);
+          foreach ($_POST['members_paydown'] as $user_id) {
+            if($payed_members[$user_id] != '') unset($payed_members[$user_id]);
           }
           update_post_meta($post_id, 'members_payed', $payed_members);
         }
@@ -323,13 +323,48 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           $pending_members = get_post_meta($post_id, 'members_pending', true);
           if(!is_array($pending_members)) $pending_members = array();
           foreach ($_POST['members_pendingdown'] as $user_id) {
-            if( ($key = array_search($user_id, $pending_members)) !== false) unset($pending_members[$key]);
+            if($pending_members[$user_id] != '') unset($pending_members[$user_id]);
           }
           update_post_meta($post_id, 'members_pending', $pending_members);
         }
+
+        // Validar abono pendiente
+        if(!empty($_POST['members_validate']) && is_array($_POST['members_validate']) ){
+          $payed_members = get_post_meta($post_id, 'members_payed', true);
+          $pending_members = get_post_meta($post_id, 'members_pending', true);
+          if(!is_array($pending_members)) $pending_members = array();
+          if(!is_array($payed_members)) $payed_members = array();
+          foreach ($_POST['members_validate'] as $user_id) {
+            if($pending_members[$user_id] != '') unset($pending_members[$user_id]);
+            if( ($key = array_search($user_id, $payed_members)) === false) $payed_members[$user_id] = current_time('mysql');
+          }
+          update_post_meta($post_id, 'members_pending', $pending_members);
+          update_post_meta($post_id, 'members_payed', $payed_members);          
+        }
+
       }
 
 }
 
+
+
+/* PAGAR CUOTA
+*
+*****************************************************
+*/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'pay-fee' ) {
+
+  //Añadir abono pendiente
+/*  if(!empty($_POST['members_pending']) && is_array($_POST['members_pending']) ){
+    $pending_members = get_post_meta($post_id, 'members_pending', true);
+    if(!is_array($pending_members)) $pending_members = array();
+    foreach ($_POST['members_pending'] as $user_id) {
+      if (!in_array($user_id, $pending_members)) array_push($pending_members, $user_id);
+    }
+    update_post_meta($post_id, 'members_pending', $pending_members);
+  }*/
+
+}
 
 ?>

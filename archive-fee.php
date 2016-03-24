@@ -82,10 +82,11 @@ if(is_user_role('administrator') || is_user_role('editor')) {
             <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
               <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle">
-                  <h4>Socios con la cuota abonada: <?php echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true)); ?></h4>
+                  <p>Socios con la cuota abonada: <?php if(get_post_meta(get_the_ID(), 'members_payed', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true)); else echo '0';?><br>
+                  Socios con la cuota pendiente de validar: <?php if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true)); else echo '0'; ?></p>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                  <h4>Socios con la cuota pendiente de validar: <?php echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true)); ?></h4>
+                  <p></p>
                 </div>
               </div>
             <?php }else{ ?>

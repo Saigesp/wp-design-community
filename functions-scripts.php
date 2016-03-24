@@ -190,7 +190,7 @@ function inject_in_all() { ?>
 
     var picker = new Pikaday({
         field: document.getElementById('datepicker'),
-        format: 'DD MM YYYY',
+        format: 'YYYY-MM-DD h:mm:ss',
         onSelect: function() {
         }
     });

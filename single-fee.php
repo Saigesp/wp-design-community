@@ -46,7 +46,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                 </div>
               </div>
               <div class="wrap wrap--frame wrap--userlist ">
-                <h4><?php echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true));?> Socios con la cuota abonada</h4>
+                <h4><?php if(get_post_meta(get_the_ID(), 'members_payed', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true)); else echo '0';?> Socios con la cuota abonada</h4>
                 <table>
                   <?php
                   foreach($members_payed as $user_id => $time){
@@ -92,7 +92,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                 </div>
               </div>
               <div class="wrap wrap--frame wrap--userlist">
-                <h4><?php echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true));?> Socios con la cuota pendiente de validar</h4>
+                <h4><?php if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true)); else echo '0';?> Socios con la cuota pendiente de validar</h4>
                 <table>
                   <?php
                   

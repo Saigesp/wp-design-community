@@ -3131,6 +3131,17 @@ textarea.js-medium-editor,
 		width: 100%;
 		max-width: calc(100% - 60px);
 	}
+	/* HOME */
+	.flexboxer .wrap--slider {
+		background-color: white;
+	}
+	.flexboxer .wrap--slider .wrap--eventlist {
+	margin: 0;
+	}
+	.flexboxer .wrap--eventlist .wrap--event {
+	padding: 10px;
+	}
+	/* FILTER USERS */
 	.wrap--filterusers .wrap--content {
 	    margin-bottom: 0;
 	    margin-top: 0;
@@ -3140,7 +3151,6 @@ textarea.js-medium-editor,
 		padding: 0;
 		margin: 3px;
 	}
-
 	.wrap--filterusers > .wrap--content > .wrap--content + .wrap--content {
 		margin-top: 3px;
 	}

@@ -42,7 +42,8 @@
         if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Algunos campos no son válidos</div>';
         if(esc_attr($_GET["failed"]) == 'username_exists') echo '<div class="alert alert--error">Error en el registro</div>';
       }elseif(esc_attr($_GET["action"]) == 'login'){
-        if(esc_attr($_GET["success"])) echo '<div class="alert alert--success">Bienvenido</div>';
+        if(esc_attr($_GET["success"]) == 'false') echo '<div class="alert alert--error">Credenciales incorrectas</div>';
+        //if(esc_attr($_GET["success"])) echo '<div class="alert alert--success">Bienvenido</div>';
         else echo '<div class="alert alert--error">Algo raro sucedió :/</div>';
       }
      } ?>

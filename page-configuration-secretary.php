@@ -28,15 +28,9 @@ $socios = new WP_User_Query(
 $subscribers = new WP_User_Query(
     array(
         'meta_query' => array(
-            'relation' => 'OR',
             array(
                 'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
                 'value' => 'subscriber',
-                'compare' => 'like'
-            ),
-            array(
-                'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
-                'value' => '',
                 'compare' => 'like'
             )
         )

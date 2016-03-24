@@ -16,8 +16,8 @@ $subscribers = new WP_User_Query(
     )
 );
 
-$members_payed = get_post_meta(get_the_ID(), 'members_payed', true);
-$members_pending = get_post_meta(get_the_ID(), 'members_pending', true);
+$members_payed = is_array(get_post_meta(get_the_ID(), 'members_payed', true)) ? get_post_meta(get_the_ID(), 'members_payed', true) : array();
+$members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)) ? get_post_meta(get_the_ID(), 'members_pending', true) : array();
 
 ?>
 

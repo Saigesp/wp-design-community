@@ -46,6 +46,8 @@ function inject_in_all() { ?>
     /**
      * ALL PAGES
      ***********************************/
+
+
     jQuery(document).ready(function($) {
 
       imageresize();
@@ -61,7 +63,6 @@ function inject_in_all() { ?>
 
       $("#close").on("click", function(){
         $(".alert").removeClass('alert--error').addClass('hide');
-        //$("")
       });
 
       if ($(".chosen").length > 0){
@@ -90,7 +91,45 @@ function inject_in_all() { ?>
         
       });
 
+    <?php if (is_home()) { ?>
+     /**
+     * HOME
+     ***********************************/
 
+       $(window).on('load',function() {
+
+        var $carousel = $('#mainslider').flickity({
+          wrapAround: true,
+          freeScroll: true,
+          contain: true
+        });
+
+        // Flickity instance
+        var flkty = $carousel.data('flickity');
+        // elements
+        var $cellButtonGroup = $('.button-group--cells');
+        var $cellButtons = $cellButtonGroup.find('.button');
+
+        // update selected cellButtons
+        $carousel.on( 'cellSelect', function() {
+          $cellButtons.filter('.is-selected')
+            .removeClass('is-selected');
+          $cellButtons.eq( flkty.selectedIndex )
+            .addClass('is-selected');
+        });
+
+        // select cell on button click
+        $cellButtonGroup.on( 'click', '.button', function() {
+          var index = $(this).index();
+          $carousel.flickity( 'select', index );
+        });
+
+        $carousel.flickity('resize');
+
+      });
+
+
+    <?php } ?>
 
     
     <?php if ('event' == get_post_type()) { ?>

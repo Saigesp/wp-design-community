@@ -64,7 +64,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                     echo '<td class="hideonmobile"><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
                     echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
                     echo '<td>'.$time.'</td>';
-                    echo '<td><input type="checkbox" class="hidden" id="checkbox-pay-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-pay-'.$user_id.'">';
+                    echo '<td><input type="checkbox" class="tolisten hidden" id="checkbox-pay-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-pay-'.$user_id.'">';
                     the_svg_icon('close', 'icon--corner');
                     echo '</label></td>';
                     echo '</tr>';
@@ -80,7 +80,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                     <label for="members_payed[]">Añadir abonos:</label>
                   </div>
                   <div class="wrap wrap--frame__middle">
-                    <select name="members_payed[]" id="" class="select select-user chosen" multiple="multiple" data-placeholder="Selecciona usuarios">
+                    <select name="members_payed[]" id="" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
                       <option value="0">Ninguno</option>
                       <?php foreach ( $subscribers->results as $subscriber ) {
                               if($members_pending[$subscriber->ID] != '' || $members_payed[$subscriber->ID] != '') continue;
@@ -111,7 +111,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                     echo '<td class="hideonmobile"><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
                     echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
                     echo '<td>'.$time.'</td>';
-                    echo '<td><input type="checkbox" class="hidden" id="checkbox-pen-'.$user_id.'" name="members_pendingdown[]" value="'.$user_id.'"><label for="checkbox-pen-'.$user_id.'">';
+                    echo '<td><input type="checkbox" class="tolisten hidden" id="checkbox-pen-'.$user_id.'" name="members_pendingdown[]" value="'.$user_id.'"><label for="checkbox-pen-'.$user_id.'">';
                     the_svg_icon('close', 'icon--corner');
                     echo '</label></td>';
                     echo '<td><input type="checkbox" class="hidden" id="checkbox-topay-'.$user_id.'" name="members_validate[]" value="'.$user_id.'"><label for="checkbox-topay-'.$user_id.'">';
@@ -130,7 +130,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                     <label for="members_pending[]">Añadir abono pendiente</label>
                   </div>
                   <div class="wrap wrap--frame__middle">
-                    <select name="members_pending[]" id="" class="select select-user chosen" multiple="multiple" data-placeholder="Selecciona usuarios">
+                    <select name="members_pending[]" id="" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
                       <option value="0">Ninguno</option>
                       <?php foreach ( $subscribers->results as $subscriber ) {
                               if($members_pending[$subscriber->ID] != '' || $members_payed[$subscriber->ID] != '') continue;
@@ -143,7 +143,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
               </div>
             </section>
 
-            <section class="wrap wrap--frame wrap--empty wrap--submit">
+            <section class="wrap wrap--frame wrap--empty wrap--submit  wrap--hidden">
               <p class="submit">
                 <input name="fee_id" type="hidden" id="fee_id" value="<?php the_ID();?>">
                 <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Actualizar cuota">
@@ -201,7 +201,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
             </div>        
         </section>
 
-        <section class="wrap wrap--frame wrap--empty wrap--submit">
+        <section class="wrap wrap--frame wrap--empty wrap--submit wrap--hidden">
           <p class="submit">
             <input name="payfee" type="submit" id="submit-all" class="button button-primary" value="Pagar cuota">
             <input name="action" type="hidden" id="action" value="pay-fee" />

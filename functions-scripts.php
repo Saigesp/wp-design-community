@@ -27,6 +27,7 @@ function inject_in_all() { ?>
       }else{
         jQuery('.js-section').removeClass("active");
         jQuery('.js-section-launch').removeClass("active");
+        jQuery('.js-section-'+section).addClass("active");
         jQuery('#'+section).addClass("active");
         jQuery(elem).addClass('active');
       } 
@@ -268,7 +269,16 @@ function inject_in_all() { ?>
      ***********************************/
     <?php } elseif ('fee' == get_post_type()) { ?>
 
-
+      if ($(".tolisten").length > 0) {
+        $('.tolisten').change(function(){
+          $('.wrap--submit').addClass('active');
+        })
+      }
+      if ($("#paymethod").length > 0) {
+        $('#paymethod').change(function(){
+          $('.wrap--submit').addClass('active');
+        })
+      }
     /**
      * PAGE CONTROL USERS
      ***********************************/

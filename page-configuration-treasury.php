@@ -95,13 +95,17 @@ if(is_user_role('administrator') || is_user_role('editor')) {
                 <a href="<?php the_permalink();?>"><?php the_title();?></a>
               </div>
               <div class="wrap wrap--frame__middle">
-                <span class="js-date"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
-                <span class="js-date-fromnow"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
+                <span class="js-date"><?php echo date('d-m-Y', strtotime(get_post_meta(get_the_ID(), 'fee_date', true)));?></span>
+                <span class="js-date-fromnow help-info"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
               </div>
             </div>
             <div class="wrap wrap--frame__middle wrap--flex">
               <div class="wrap wrap--frame__middle">
-                <?php echo get_post_meta(get_the_ID(), 'fee_quantity', true); ?> €
+                <?php
+                echo get_post_meta(get_the_ID(), 'fee_quantity', true).' €'; 
+                if(get_post_meta(get_the_ID(), 'members_payed', true) != '')
+                  echo ' <span class="help-info">Recaudados '.get_post_meta(get_the_ID(), 'fee_quantity', true)*sizeof(get_post_meta(get_the_ID(), 'members_payed', true)).' €</span>';
+                ?>
               </div>
               <div class="wrap wrap--frame__middle">
             <?php if(date(strtotime(get_post_meta(get_the_ID(), 'fee_date', true))) > date(strtotime('now'))){

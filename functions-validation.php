@@ -374,7 +374,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       if(!is_array($pending_members)) $pending_members = array();
       if (!in_array($user_id, $pending_members)) $pending_members[$user_id] = current_time('mysql');
       update_post_meta($post_id, 'members_pending', $pending_members);
-      $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a>.';
+      $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a><a href="#hidden">'.current_time('mysql').'</a>';
     }elseif($paymethod == 'paypal'){
       //TODO Pago por paypal
     }else{

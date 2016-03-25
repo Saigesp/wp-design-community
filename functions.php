@@ -13,12 +13,11 @@ include_once(locate_template('functions-concursos.php'));
 include_once(locate_template('functions-svg.php'));
 
 //AJAX
-function my_frontend_script() {
+function ajax_script_FTW() {
   wp_enqueue_script( 'ajax', get_template_directory_uri() . '/templates/ajax.js', array( 'jquery' ), '1.0.0', true );
   wp_localize_script( 'ajax', 'Ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
-
-add_action( 'wp_enqueue_scripts', 'my_frontend_script' );
+add_action( 'wp_enqueue_scripts', 'ajax_script_FTW' );
 
 
 // Hide admin bar
@@ -442,25 +441,32 @@ function my_theme_add_editor_styles() {
 
 
 /**
- * DELETE COMMENTS IN AJAX
+ * MANAGE COMMENTS IN AJAX
  ***********************************/
 
-function my_delete_post(){
+function delete_post(){
   $permission = check_ajax_referer( 'my_delete_post_nonce', 'nonce', false );
-  if( $permission == false ) {
-    echo 'error';
-  }
-  else {
-    wp_delete_comment($_REQUEST['id'], false);
-    echo 'success';
-  }
+  if( $permission == false ) die();
+  else wp_delete_comment($_REQUEST['id'], false);
   die();
 }
-add_action( 'wp_ajax_my_delete_post', 'my_delete_post' );
+add_action( 'wp_ajax_delete_post', 'delete_post' );
 
+function delete_post_FTW(){
+  $permission = check_ajax_referer( 'my_delete_post_nonce', 'nonce', false );
+  if( $permission == false ) die();
+  else wp_delete_comment($_REQUEST['id'], true);
+  die();
+}
+add_action( 'wp_ajax_delete_post_FTW', 'delete_post_FTW' );
 
-
-
+function aprove_post_FTW(){
+  $permission = check_ajax_referer( 'my_delete_post_nonce', 'nonce', false );
+  if( $permission == false ) die();
+  else wp_set_comment_status( $_REQUEST['id'],'approve');
+  die();
+}
+add_action( 'wp_ajax_approve_post_FTW', 'aprove_post_FTW' );
 
 
 

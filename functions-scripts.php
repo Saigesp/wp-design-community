@@ -75,7 +75,7 @@ function inject_in_all() { ?>
         $(".alert").removeClass('alert--error').addClass('hide');
       });
 
-      if ($(".chosen").length > 0){
+      if ( $(".chosen").length > 0){
         $('.chosen').chosen();
       }
 
@@ -100,6 +100,84 @@ function inject_in_all() { ?>
         }
         
       });
+
+
+
+
+
+
+
+
+      moment.locale('es', {
+          months : "enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre".split("_"),
+          monthsShort : "ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.".split("_"),
+          weekdays : "domingo_lunes_martes_miércoles_jueves_viernes_sábado".split("_"),
+          weekdaysShort : "dom._lun._mar._mie._jue._vie._sab.".split("_"),
+          weekdaysMin : "Do_Lu_Ma_Mi_Ju_Vi_Sa".split("_"),
+          longDateFormat : {
+              LT : "HH:mm",
+              LTS : "HH:mm:ss",
+              L : "DD/MM/YYYY",
+              LL : "D MMMM YYYY",
+              LLL : "D MMMM YYYY LT",
+              LLLL : "dddd D MMMM YYYY LT"
+          },
+          calendar : {
+              sameDay: "[Hoy a las] LT",
+              nextDay: '[Mañana a las] LT',
+              nextWeek: 'dddd [a las] LT',
+              lastDay: '[Ayer a las] LT',
+              lastWeek: 'dddd [a las] LT',
+              sameElse: 'L'
+          },
+          relativeTime : {
+              future : "Dentro de %s",
+              past : "Hace %s",
+              s : "segundos",
+              m : "un minuto",
+              mm : "%d minutos",
+              h : "una hora",
+              hh : "%d horas",
+              d : "un día",
+              dd : "%d días",
+              M : "un mes",
+              MM : "%d meses",
+              y : "un año",
+              yy : "%d años"
+          },
+          ordinalParse : /\d{1,2}(er|ème)/,
+          ordinal : function (number) {
+              return number + 'º';
+          },
+          meridiemParse: /PD|MD/,
+          isPM: function (input) {
+              return input.charAt(0) === 'M';
+          },
+          meridiem : function (hours, minutes, isLower) {
+              return hours < 12 ? 'PD' : 'MD';
+          },
+          week : {
+              dow : 1, // Monday is the first day of the week.
+              doy : 4  // The week that contains Jan 4th is the first week of the year.
+          }
+      });
+
+
+      if ($(".js-date-fromnow").length > 0){
+        $('.js-date-fromnow').each(function(i){
+          var element = $(this);
+          var date = element.text();
+          date = moment(date, "YYYY-MM-DD HH:mm:ss").fromNow();
+          element.text(date);
+        })
+      }
+
+
+
+
+
+
+
 
     <?php if (is_home()) { ?>
      /**
@@ -206,13 +284,6 @@ function inject_in_all() { ?>
     });
 
 
-
-
-
-
-
-
-
     /**
      * PAGE CONFIGURATION
      ***********************************/
@@ -227,6 +298,16 @@ function inject_in_all() { ?>
               $('.wrap--twitteroptions').addClass('hide');
             }
         });
+
+
+
+    /**
+     * PAGE CONTROL TREASURY
+     ***********************************/
+    <?php } else if (is_page('configuration-treasury')) { ?>
+
+
+
 
 
     /**

@@ -95,7 +95,8 @@ if(is_user_role('administrator') || is_user_role('editor')) {
                 <a href="<?php the_permalink();?>"><?php the_title();?></a>
               </div>
               <div class="wrap wrap--frame__middle">
-                <?php echo get_post_meta(get_the_ID(), 'fee_date', true); ?>
+                <span class="js-date"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
+                <span class="js-date-fromnow"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
               </div>
             </div>
             <div class="wrap wrap--frame__middle wrap--flex">

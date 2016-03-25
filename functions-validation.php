@@ -366,20 +366,20 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
   if(!$hasError){
 
+    $treasury_page = get_page_by_title('Configuration treasury');
+    $username = get_userdata($user_id)->first_name.' '.get_userdata($user_id)->last_name;
+
     if($paymethod == 'transferency'){
       $pending_members = get_post_meta($post_id, 'members_pending', true);
       if(!is_array($pending_members)) $pending_members = array();
       if (!in_array($user_id, $pending_members)) $pending_members[$user_id] = current_time('mysql');
       update_post_meta($post_id, 'members_pending', $pending_members);
-      $message = '<a href="'.get_permalink($post_id).'">'.get_usermeta($user_id, 'first_name', true).' '.get_usermeta($user_id, 'last_name', true).' pagará mediante transferencia.  (<span class="js-date-tonow">'.current_time('mysql').'</span>)</a>';
+      $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a>.';
     }elseif($paymethod == 'paypal'){
       //TODO Pago por paypal
     }else{
       //TODO Errores
     }
- 
-    $treasury_page = get_page_by_title('Configuration treasury');
-    $username = get_userdata($user_id)->first_name.' '.get_userdata($user_id)->last_name;
 
     $commentdata = array(
       'comment_post_ID' => $treasury_page->ID,

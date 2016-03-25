@@ -85,7 +85,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 					}
 					?>
 				</p>
-				<p class="right"><a onclick="ToggleSection('bookingmanager')">Gestionar reservas</a></p>
+				<p class="right"><a class="js-section-launch" onclick="ToggleSection(this)" data-section="bookingmanager">Gestionar reservas</a></p>
 			</div>
 		</section><!-- end of admin options -->
 
@@ -96,7 +96,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	<section id="bookingmanager" class="wrap wrap--content wrap--hidden js-section">
 	    <h3>Gestión de reservas</h3>
 	    <?php include(locate_template('templates/loops/loop-booking.php')); ?>
-	    <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
+	    <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
 	    	<?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
 	    </div>
 	    <div class="wrap wrap--icon wrap--icon__pdf" onclick="">

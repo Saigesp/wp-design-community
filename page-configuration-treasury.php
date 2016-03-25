@@ -21,13 +21,13 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 <div class="flexboxer flexboxer--event">
 
 		<!-- admin options -->
-      <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">
+      <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
           <div class="wrap wrap--frame wrap--frame__middle">
               <p></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p class="right"><a onclick="ToggleSection('createfee')">Crear cuota</a></p>
-              <p class="right"><a onclick="ToggleSection('setbankaccount')">Configurar cuenta bancaria</a></p>
+              <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="createfee">Crear cuota</a></p>
+              <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="setbankaccount">Configurar cuenta bancaria</a></p>
           </div>
       </section><!-- end of admin options -->
 
@@ -67,7 +67,7 @@ if(is_user_role('administrator') || is_user_role('editor')) {
             </p>
           </div>
         </div>
-        <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
+        <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
             <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
         </div>
       </section>

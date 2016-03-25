@@ -34,12 +34,12 @@
 <div class="flexboxer flexboxer--event">
   
 	<section id="generalconfiguration" class="wrap wrap--content wrap--collapse js-section">
-		<h3 onclick="ToggleSection('generalconfiguration')">Configuración general</h3>
+		<h3 onclick="ToggleSection(this)" data-section="generalconfiguration" class="js-section-launch">Configuración general</h3>
         <p>a</p>
 	</section>
 
 	<section id="twitterconfiguration" class="wrap wrap--content wrap--collapse js-section">
-		<h3 onclick="ToggleSection('twitterconfiguration')">Configuración de Twitter</h3>
+		<h3 onclick="ToggleSection(this)" data-section="twitterconfiguration" class="js-section-launch">Configuración de Twitter</h3>
 		<div class="wrap wrap--frame">
 			<input type="checkbox" name="automate_twitter" id="automatic-twitter" value="true" <?php if($automate_twitter == true) echo 'checked';?> / >
 		  	<label for="automate_twitter"> Habilitar configuración automática de twitter</label>

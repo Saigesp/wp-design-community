@@ -17,13 +17,19 @@ function inject_in_all() { ?>
       }
     }
 
-    function ToggleSection(args){
-      if(jQuery('#'+args).hasClass('active') || args == 'close'){
+    function ToggleSection(elem){
+      elem = jQuery(elem)[0];
+      section = jQuery(elem).data('section');
+
+      if(jQuery(elem).hasClass('active') || section == 'close'){
+        jQuery(elem).removeClass('active');
         jQuery('.js-section').removeClass("active");
       }else{
         jQuery('.js-section').removeClass("active");
-        jQuery('#'+args).addClass("active");
-      }
+        jQuery('.js-section-launch').removeClass("active");
+        jQuery('#'+section).addClass("active");
+        jQuery(elem).addClass('active');
+      } 
     }
 
     function ToggleSelect(select_id){

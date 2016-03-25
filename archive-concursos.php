@@ -16,7 +16,7 @@ if(is_user_role('administrator') || is_user_role('editor')) {
               <p></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p class="right"><a onclick="ToggleSection('createconcurso')">Crear concurso</a></p>
+              <p class="right"><a class="js-section-launch" onclick="ToggleSection(this)" data-section="createconcurso">Crear concurso</a></p>
           </div>
       </section><!-- end of admin options -->
 
@@ -75,7 +75,7 @@ if(is_user_role('administrator') || is_user_role('editor')) {
             </p>
           </div>
         </div>
-        <div class="wrap wrap--icon wrap--icon__close" onclick="ToggleSection('close')">
+        <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
             <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
         </div>
       </section>

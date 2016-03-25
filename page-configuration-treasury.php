@@ -20,6 +20,8 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">
 
+      <?php include(locate_template('templates/harry/harry.php')); ?>
+
 		<!-- admin options -->
       <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
           <div class="wrap wrap--frame wrap--frame__middle">
@@ -125,15 +127,6 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 
     <?php endif; ?>
 
-
-
-	
-	<section class="wrap wrap--frame wrap--submit">
-		<p class="submit">
-			<input type="hidden" name="update_settings" value="Y" />
-			<input type="submit" class="button button-primary" value="Guardar cambios">
-		</p>
-	</section>
   
 </div><!-- end of flexboxer -->
 </form>

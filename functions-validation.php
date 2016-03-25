@@ -354,6 +354,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 */
  
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'pay-fee' ) {
+
   $post_id = get_the_ID();
   $user_id = get_current_user_id();
   $paymethod = $_POST['paymethod'];
@@ -361,7 +362,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   if ($post_id == '') $hasError = true;
   if ($paymethod == '') $hasError = true;
   if (!is_singular('fee'))  $hasError = true;
-  if (!is_numeric($user_id))  $hasError = true;
+  if (!is_numeric($user_id) || $user_id < 1)  $hasError = true;
 
   if(!$hasError){
 
@@ -370,15 +371,48 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       if(!is_array($pending_members)) $pending_members = array();
       if (!in_array($user_id, $pending_members)) $pending_members[$user_id] = current_time('mysql');
       update_post_meta($post_id, 'members_pending', $pending_members);
+      $message = '<a href="'.get_permalink($post_id).'">'.get_usermeta($user_id, 'first_name', true).' '.get_usermeta($user_id, 'last_name', true).' pagará mediante transferencia.  (<span class="js-date-tonow">'.current_time('mysql').'</span>)</a>';
     }elseif($paymethod == 'paypal'){
       //TODO Pago por paypal
     }else{
       //TODO Errores
     }
+ 
+    $treasury_page = get_page_by_title('Configuration treasury');
+    $username = get_userdata($user_id)->first_name.' '.get_userdata($user_id)->last_name;
+
+    $commentdata = array(
+      'comment_post_ID' => $treasury_page->ID,
+      'comment_author' => $username,
+      'comment_author_email' => get_userdata($user_id)->user_email,
+      'comment_author_url' => get_userdata($user_id)->user_url,
+      'comment_content' => $message,
+      'comment_type' => '',
+      'comment_parent' => 0,
+      'user_id' => 1,
+      'comment_approved' => 1
+    );
+
+   $comment_id = wp_new_comment( $commentdata );
+
+   add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
+
   }else{
     //TODO Errores
   }
 
+
 }
+
+
+
+/* ELIMINAR COMENTARIO
+*
+*****************************************************
+*/
+
+
+
+
 
 ?>

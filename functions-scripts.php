@@ -18,8 +18,8 @@ function inject_in_all() { ?>
     }
 
     function ToggleSection(elem){
-      elem = jQuery(elem)[0];
-      section = jQuery(elem).data('section');
+      var elem = jQuery(elem)[0];
+      var section = jQuery(elem).data('section');
 
       if(jQuery(elem).hasClass('active') || section == 'close'){
         jQuery(elem).removeClass('active');
@@ -47,6 +47,10 @@ function inject_in_all() { ?>
         if (jQuery('.js-fullheight').length > 0) jQuery('.js-fullheight').css("height", jQuery(window).height() - jQuery('#headertop').outerHeight());
         if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();
     }
+
+
+
+
 
 
     /**

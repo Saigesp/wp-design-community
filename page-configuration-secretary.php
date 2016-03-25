@@ -38,18 +38,11 @@ $subscribers = new WP_User_Query(
 );
 ?>
 
-  <?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) { ?>
-    <section class="wrap wrap--frame wrap--author">
-      <section class="wrapwrap--content alert alert--success">
-          <p>Cambios guardados correctamente.</p>
-      </section>
-    </section>
-  <?php } ?>
-
-
 <!-- flexboxer -->
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">
+
+    <?php include(locate_template('templates/harry/harry.php')); ?>
 
     <!-- admin options -->
     <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">

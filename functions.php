@@ -12,6 +12,14 @@ include_once(locate_template('functions-fees.php'));
 include_once(locate_template('functions-concursos.php'));
 include_once(locate_template('functions-svg.php'));
 
+//AJAX
+function my_frontend_script() {
+  wp_enqueue_script( 'ajax', get_template_directory_uri() . '/templates/ajax.js', array( 'jquery' ), '1.0.0', true );
+  wp_localize_script( 'ajax', 'Ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}
+
+add_action( 'wp_enqueue_scripts', 'my_frontend_script' );
+
 
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
@@ -433,6 +441,27 @@ function my_theme_add_editor_styles() {
 
 
 
+/**
+ * DELETE COMMENTS IN AJAX
+ ***********************************/
+
+function my_delete_post(){
+  $permission = check_ajax_referer( 'my_delete_post_nonce', 'nonce', false );
+  if( $permission == false ) {
+    echo 'error';
+  }
+  else {
+    wp_delete_comment($_REQUEST['id'], false);
+    echo 'success';
+  }
+  die();
+}
+add_action( 'wp_ajax_my_delete_post', 'my_delete_post' );
+
+
+
+
+
 
 
 
@@ -620,12 +649,6 @@ function loopuserlist($user_id){
     }
     echo '</tr>';
 }
-
-
-
-
-
-
 
 
 // Añadir meta de usuario

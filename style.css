@@ -3394,7 +3394,8 @@ textarea.js-medium-editor,
 		max-width: 1080px;
 	}
 
-	.flexboxer .wrap--frame {
+	.flexboxer .wrap--frame,
+	.flexboxer .wrap--content__toframe {
 		max-width: 1120px;
 	}
 	.flexboxer .wrap--frame__fullwidth,

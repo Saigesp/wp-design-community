@@ -25,11 +25,10 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 		<!-- admin options -->
       <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p></p>
+              <p class=""><a onclick="ToggleSection(this)" class="js-section-launch" data-section="setbankaccount">Configurar cuentas</a></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
               <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="createfee">Crear cuota</a></p>
-              <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="setbankaccount">Configurar cuenta bancaria</a></p>
           </div>
       </section><!-- end of admin options -->
 
@@ -75,8 +74,18 @@ if(is_user_role('administrator') || is_user_role('editor')) {
       </section>
   
 	<section id="setbankaccount" class="wrap wrap--content wrap--hidden js-section">
-		<h3>Cuentas bancaria</h3>
-        <p>Especifica la cuenta a la que realizar las transferencias para el pago de cuotas.</p>
+		<h3>Cuentas</h3>
+    <h4>Cuenta bancaria</h4>
+    <p>Especifica a los usuarios de tu sitio dónde hacer los ingresos bancarios.</p>
+    <div class="wrap wrap--frame wrap--flex">
+      <div class="wrap wrap--frame__middle">
+        <label for="bank_account">Código de la cuenta bancaria.</label>
+      </div>
+      <div class="wrap wrap--frame__middle">
+        <input id="bank_account" type="text" name="bank_account" value="" placeholder="IBAN ES 01 0123 0123 01 0123456789"/>
+      </div>
+    </div>
+    <h4>Paypal</h4>
 	</section>
 
 <?php if (have_posts()) : ?>

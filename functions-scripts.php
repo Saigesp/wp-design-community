@@ -24,6 +24,7 @@ function inject_in_all() { ?>
       if(jQuery(elem).hasClass('active') || section == 'close'){
         jQuery(elem).removeClass('active');
         jQuery('.js-section').removeClass("active");
+        jQuery('.js-section-launch').removeClass("active");
       }else{
         jQuery('.js-section').removeClass("active");
         jQuery('.js-section-launch').removeClass("active");

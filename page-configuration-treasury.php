@@ -86,6 +86,9 @@ if(is_user_role('administrator') || is_user_role('editor')) {
       </div>
     </div>
     <h4>Paypal</h4>
+    <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
+        <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+    </div>
 	</section>
 
 <?php if (have_posts()) : ?>

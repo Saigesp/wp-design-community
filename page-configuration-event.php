@@ -53,13 +53,9 @@ if(is_user_role('administrator') || is_user_role('editor')) {
       <h2>Eventos</h2>
       <h4>Eventos</h4>
       <?php while (have_posts()) : the_post(); 
-        //$postmeta = get_post_meta($post->ID);
-        $members_payed = is_array(get_post_meta(get_the_ID(), 'members_payed', true)) ? get_post_meta(get_the_ID(), 'members_payed', true) : array();
-        $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)) ? get_post_meta(get_the_ID(), 'members_pending', true) : array();
         $EM_Event = em_get_event($post->ID, 'post_id');
         $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->event_start_time);
         $event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_end_time);
-        //var_dump($EM_Event);
         ?>
 
         <!-- content -->
@@ -116,7 +112,7 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 
       <!-- noinfo -->
       <section class="wrap wrap--content">
-        <h2>No hay cuotas creadas</h2>
+        <h2>No hay eventos creados</h2>
       </section><!-- end of noinfo -->
 
     <?php endif; ?>

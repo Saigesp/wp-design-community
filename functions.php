@@ -53,7 +53,7 @@ new_page_title('Configuration');
 new_page_title('Configuration presidence');
 new_page_title('Configuration treasury');
 new_page_title('Configuration secretary');
-new_page_title('Configuration event');
+new_page_title('Configuration concursos');
 
 new_page_title('Disenadores');
 

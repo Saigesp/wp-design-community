@@ -66,6 +66,10 @@
       </li>
 
       <li class="menu-item menu-item-type-custom menu-item-object-custom">
+        <a href="<?php echo get_bloginfo('url');?>/configuration-concursos">Gestión de concursos</a>
+      </li>
+
+      <li class="menu-item menu-item-type-custom menu-item-object-custom">
         <a href="<?php echo get_bloginfo('url');?>/control-users">Control de usuarios</a>
       </li>
 

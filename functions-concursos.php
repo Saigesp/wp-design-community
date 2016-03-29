@@ -4,9 +4,6 @@
 if (!post_type_exists('concursos')) {
 	add_action( 'init', 'concursos_post_type', 0 );
 }
-if (post_type_exists('concurso')) {
-	unregister_post_type( 'concurso' );
-}
 
 /**
  * CREATING A FUNCTION TO CREATE FEES CPT

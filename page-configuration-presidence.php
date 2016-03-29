@@ -36,10 +36,10 @@ $users = new WP_User_Query(
         <!-- admin options -->
       <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p class=""><a onclick="ToggleSection(this)" class="js-section-launch active" data-section="gobteam">Configurar gobierno</a></p>
+              <p class=""></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p class="right"></p>
+              <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch active" data-section="gobteam">Configurar gobierno</a></p>
           </div>
       </section><!-- end of admin options -->
   

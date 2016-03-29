@@ -25,10 +25,11 @@ if(is_user_role('administrator') || is_user_role('editor')) {
 		<!-- admin options -->
       <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
           <div class="wrap wrap--frame wrap--frame__middle">
-              <p><a onclick="ToggleSection(this)" class="js-section-launch" data-section="seteventoptions">Configurar eventos</a></p>
+              <p></p>
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
-            <p class="right"><a href="" class="js-section-launch">Crear evento</a></p>
+            <p class="right"><a href="<?php echo get_bloginfo('url');?>/edit-event" target="_blank" class="">Crear evento</a></p>
+            <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="seteventoptions">Configurar eventos</a></p>
           </div>
       </section><!-- end of admin options -->
 
@@ -98,8 +99,13 @@ if(is_user_role('administrator') || is_user_role('editor')) {
                 }else{
                   echo 'Sin reservas';
                 }
-                if(strtotime('now') > strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time))
+                if(date(strtotime('now')) > strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time))
                   echo ' <span class="help-info">Finalizado</span>';
+                elseif(date(strtotime('now')) > strtotime($EM_Event->event_start_date.' '.$EM_Event->event_start_time) && date(strtotime('now')) > strtotime($EM_Event->event_end_date.' '.$EM_Event->event_end_time))
+                  echo ' <span class="help-info">En transcurso</span>';
+                elseif(date(strtotime('now')) < strtotime($EM_Event->event_start_date.' '.$EM_Event->event_start_time))
+                  echo ' <span class="help-info">Programado</span>';
+                
                 ?>
               </div>
             </div>

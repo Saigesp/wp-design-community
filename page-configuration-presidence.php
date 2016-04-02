@@ -45,10 +45,6 @@ $users = new WP_User_Query(
       </div>
     </section><!-- end of admin options -->
 
-    <section class="wrap wrap--frame">
-        <?php var_dump($_POST);?>
-    </section>
-
     <!-- permisos -->
     <section id="capacities" class="wrap wrap--content wrap--form wrap--hidden active js-section">
         <h3>Configurar permisos</h3>
@@ -186,6 +182,23 @@ $users = new WP_User_Query(
 
         <h3>Responsables</h3>
         <p>Los responsables de área deben ser socios.</p>
+
+        <!-- responsable de ofertas de trabajo -->
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <label for="rp_posts[]">Responsables de noticias</label>
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <select name="rp_posts[]" id="rp_posts" class="select select-user chosen" multiple="multiple">
+                    <option value="0">Ninguno</option>
+                    <?php foreach ( $users->results as $user ) {
+                            echo '<option value="'.esc_html($user->ID ).'" ';
+                            if(get_the_author_meta('asociation_responsability', $user->ID) == 'rp_posts') echo 'selected';
+                            echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+                        } ?>
+                </select>
+            </div>
+        </div><!-- end of responsable de ofertas de trabajo -->
         
         <!-- responsable de eventos -->
         <div class="wrap wrap--frame wrap--flex">
@@ -197,7 +210,7 @@ $users = new WP_User_Query(
                     <option value="0">Ninguno</option>
                     <?php foreach ( $users->results as $user ) {
                             echo '<option value="'.esc_html($user->ID ).'" ';
-                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
+                            if(get_the_author_meta('asociation_responsability', $user->ID) == 'rp_events') echo 'selected';
                             echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
                         } ?>
                 </select>
@@ -214,7 +227,7 @@ $users = new WP_User_Query(
                     <option value="0">Ninguno</option>
                     <?php foreach ( $users->results as $user ) {
                             echo '<option value="'.esc_html($user->ID ).'" ';
-                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
+                            if(get_the_author_meta('asociation_responsability', $user->ID) == 'rp_concursos') echo 'selected';
                             echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
                         } ?>
                 </select>
@@ -224,14 +237,14 @@ $users = new WP_User_Query(
         <!-- responsable de ofertas de trabajo -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="rp_concursos[]">Responsables de ofertas de trabajo</label>
+                <label for="rp_jobs[]">Responsables de ofertas de trabajo</label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="rp_jobs[]" id="rp_concursos" class="select select-user chosen" multiple="multiple">
                     <option value="0">Ninguno</option>
                     <?php foreach ( $users->results as $user ) {
                             echo '<option value="'.esc_html($user->ID ).'" ';
-                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
+                            if(get_the_author_meta('asociation_responsability', $user->ID) == 'rp_jobs') echo 'selected';
                             echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
                         } ?>
                 </select>

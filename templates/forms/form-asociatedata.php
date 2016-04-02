@@ -41,7 +41,7 @@
         </div>
         <div class="wrap wrap--frame__middle">
           <?php  if(!in_array('subscriber', $roles)) {?>
-          <select name="asociation_position">
+          <select name="asociation_position" multiple="multiple">
                 <option value="" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == '') echo 'selected';?>>Ninguno</option>
                 <option value="fundador" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'fundador') echo 'selected';?>>Socio Fundador</option>
                 <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>

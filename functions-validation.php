@@ -151,13 +151,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changegovern'){
 
-    /* Cambio de gobierno (también ceder presidencia) */
     $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
+    $responsabilities = array('rp_events', 'rp_concursos', 'rp_jobs', 'rp_posts');
+    $juntales = get_users();
+
+    /* Cambio de gobierno (también ceder presidencia) */
     foreach ($cargos as $cargo) {
       if (!empty($_POST[$cargo])){
-
-        // Quitar rol de editor a anterior
-        $juntales = get_users();
         foreach ($juntales as $juntal) {
           if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo ){
             $juntal->remove_role('editor');
@@ -165,8 +165,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
             update_user_meta($juntal->ID, 'asociation_position', '' );
           } 
         }
-
-        //Añadir rol de editor
         $juntales = get_users();
         foreach ($juntales as $juntal) {
           if ($juntal->ID == $_POST[$cargo] ){
@@ -177,10 +175,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         }
       }
     }
-    if (!empty($_POST['vocales'])){
 
-      // Quitar rol a anteriores
-      $juntales = get_users();
+    /* Cambiar vocales */
+    if (!empty($_POST['vocales'])){
       foreach ($juntales as $juntal) {
         if (get_the_author_meta('asociation_position', $juntal->ID) == 'vocal'){
           $juntal->remove_role('editor');
@@ -188,7 +185,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           update_user_meta($juntal->ID, 'asociation_position', '' );
         } 
       }
-      // Añadir rol a nuevo
       foreach ($_POST['vocales'] as $vocal_id) {
         $vocal = get_userdata($vocal_id);
           $vocal->remove_role('author');
@@ -196,6 +192,20 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           update_user_meta($vocal_id, 'asociation_position', 'vocal' );
       }
     }
+
+    /* Cambiar responsabilidades */
+    foreach($responsabilities as $responsability){
+      if (!empty($_POST[$responsability])){
+        foreach ($juntales as $user) {
+          if (get_the_author_meta('asociation_responsability', $user->ID) === $responsability)
+            update_user_meta($user->ID, 'asociation_responsability', '' );
+        }
+        foreach ($_POST[$responsability] as $user_id)
+            update_user_meta($user_id, 'asociation_responsability', $responsability );
+      }
+    }
+
+
 
   }else if ($_POST['updatesection'] == 'changecapacities') {
     

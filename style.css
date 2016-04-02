@@ -1965,7 +1965,8 @@ textarea:focus{
 }
 
 a.button,
-input[type="submit"] {
+input[type="submit"],
+button {
     border: 0;
     padding: 7px 10px;
 	color: white;

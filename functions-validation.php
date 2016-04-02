@@ -1,11 +1,13 @@
 <?php
 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' ) {
-
-  /* DATOS PERSONALES
+  /* CAMBIO DE PERFIL
   *
   *****************************************************
   */
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' ) {
+
+  /* DATOS PERSONALES */
   // NOMBRE
   if (!empty($_POST['last-name']) && !empty($_POST['last-name'])) update_user_meta($user->ID, 'last_name', esc_attr($_POST['last-name']));
 
@@ -40,10 +42,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-  /* REDES SOCIALES
-  *
-  *****************************************************
-  */
+  /* REDES SOCIALES */
   // TWITTER
   if ($_POST['twitter'][0] == '@')
     $_POST['twitter'] = substr($_POST['twitter'], 1); 
@@ -74,10 +73,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   update_user_meta( $user->ID, 'googleplus', esc_attr( $_POST['googleplus'] ) );
 
 
-  /* DATOS PROFESIONALES
-  *
-  *****************************************************
-  */
+  /* DATOS PROFESIONALES */
   // TITULACIÓN
   if (!empty($_POST['titulacion'])) update_user_meta( $user->ID, 'titulacion', esc_attr( $_POST['titulacion'] ) );
 
@@ -97,16 +93,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   } 
 
 
-  /* DATOS DE ASOCIADO
-  *
-  *****************************************************
-  */
+  /* DATOS DE ASOCIADO */
 
 
-  /* DATOS DE LA PÁGINA
-  *
-  *****************************************************
-  */
+  /* DATOS DE LA PÁGINA */
   // ROL
   if (!empty($_POST['roles'])){
     $WP_User = new WP_User($user->ID);
@@ -152,35 +142,43 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-  /* CAMBIO DE GOBIERNO
-  *
-  *****************************************************
-  */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-govern' ) {
-  $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
-  foreach ($cargos as $cargo) {
-    if (!empty($_POST[$cargo])){
-      // Quitar rol de editor a anterior
-      $juntales = get_users();
-      foreach ($juntales as $juntal) {
-        if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo ){
-          $juntal->remove_role('editor');
-          $juntal->add_role(esc_attr('author'));
-          update_user_meta($juntal->ID, 'asociation_position', '' );
-        } 
-      }
-      //Añadir rol de editor
-      $juntales = get_users();
-      foreach ($juntales as $juntal) {
-        if ($juntal->ID == $_POST[$cargo] ){
-          $juntal->remove_role('author');
-          $juntal->add_role(esc_attr('editor'));
-          update_user_meta($juntal->ID, 'asociation_position', $cargo );
-        } 
+/* CONFIGURACION PRESIDENCIA
+*
+*****************************************************
+*/
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence' ) {
+
+
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changegovern'){
+
+    /* Cambio de gobierno (también ceder presidencia) */
+    $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
+    foreach ($cargos as $cargo) {
+      if (!empty($_POST[$cargo])){
+
+        // Quitar rol de editor a anterior
+        $juntales = get_users();
+        foreach ($juntales as $juntal) {
+          if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo ){
+            $juntal->remove_role('editor');
+            $juntal->add_role(esc_attr('author'));
+            update_user_meta($juntal->ID, 'asociation_position', '' );
+          } 
+        }
+
+        //Añadir rol de editor
+        $juntales = get_users();
+        foreach ($juntales as $juntal) {
+          if ($juntal->ID == $_POST[$cargo] ){
+            $juntal->remove_role('author');
+            $juntal->add_role(esc_attr('editor'));
+            update_user_meta($juntal->ID, 'asociation_position', $cargo );
+          } 
+        }
       }
     }
-  }
-  if (!empty($_POST['vocales'])){
+    if (!empty($_POST['vocales'])){
+
       // Quitar rol a anteriores
       $juntales = get_users();
       foreach ($juntales as $juntal) {
@@ -197,11 +195,20 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           $vocal->add_role(esc_attr('editor'));
           update_user_meta($vocal_id, 'asociation_position', 'vocal' );
       }
+    }
+
+  }else if ($_POST['updatesection'] == 'changecapacities') {
+    
+  }else if ($_POST['updatesection'] == 'changepresident') {
+
   }
 
 
-
 }
+
+
+
+
 
 
 

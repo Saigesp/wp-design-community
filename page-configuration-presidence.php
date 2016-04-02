@@ -33,18 +33,94 @@ $users = new WP_User_Query(
 
     <?php include(locate_template('templates/harry/harry.php')); ?>
 
-        <!-- admin options -->
-      <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
-          <div class="wrap wrap--frame wrap--frame__middle">
-              <p class=""></p>
+    <!-- admin options -->
+    <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent wrap--menu">
+      <div class="wrap wrap--frame wrap--frame__middle">
+          <p class=""></p>
+      </div>
+      <div class="wrap wrap--frame wrap--frame__middle">
+          <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch active" data-section="capacities">Configurar permisos</a></p>
+          <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="gobteam">Configurar gobierno</a></p>
+          <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch" data-section="byemrpresident">Ceder la presidencia</a></p>
+      </div>
+    </section><!-- end of admin options -->
+
+    <section id="capacities" class="wrap wrap--content wrap--hidden active js-section">
+        <h3>Configurar permisos</h3>
+        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame__middle">Permisos generales de la página</div>
+            <div class="wrap wrap--frame__middle">
+                <select name="capacity_mode" id="capacity_mode">
+                    <option value="dictator">Dictadura</option>
+                    <option value="president">Monarquía parlamentaria</option>
+                    <option value="comrade">Comuna Hippie</option>
+                </select>
+            </div>
+        </div>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame__middle">Transparencia</div>
+            <div class="wrap wrap--frame__middle">
+                <select name="capacity_mode" id="capacity_mode">
+                    <option value="dictator">Opaco</option>
+                    <option value="president">Semitransparente</option>
+                    <option value="comrade">Transparente</option>
+                </select>
+            </div>
+        </div>        
+
+        <h3>Responsables</h3>
+        <p>Los responsables de área deben ser socios.</p>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame__middle">
+                <label for="rp_events[]">Responsable de eventos</label>
+            </div>
+            <div class="wrap wrap--frame__middle">
+                <select name="rp_events[]" id="rp_events" class="select select-user chosen" multiple="multiple">
+                    <option value="0">Ninguno</option>
+                    <?php foreach ( $users->results as $user ) {
+                            echo '<option value="'.esc_html($user->ID ).'" ';
+                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
+                            echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+                        } ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame__middle">
+                <label for="rp_concursos[]">Responsable de concursos</label>
+            </div>
+            <div class="wrap wrap--frame__middle">
+                <select name="rp_concursos[]" id="rp_concursos" class="select select-user chosen" multiple="multiple">
+                    <option value="0">Ninguno</option>
+                    <?php foreach ( $users->results as $user ) {
+                            echo '<option value="'.esc_html($user->ID ).'" ';
+                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
+                            echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+                        } ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="wrap wrap--flex wrap--submit">
+          <div class="wrap wrap--frame__middle wrap--flex">
           </div>
-          <div class="wrap wrap--frame wrap--frame__middle">
-              <p class="right"><a onclick="ToggleSection(this)" class="js-section-launch active" data-section="gobteam">Configurar gobierno</a></p>
+          <div class="wrap wrap--frame__middle wrap--flex">
+            <p class="submit">
+              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Guardar cambios">
+              <input name="action" type="hidden" id="action" value="new-fee" />
+            </p>
           </div>
-      </section><!-- end of admin options -->
+        </div>
+
+        <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
+            <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+        </div>
+    </section>
   
-	<section id="gobteam" class="wrap wrap--content wrap--hidden active js-section">
-		<h3>Equipo de gobierno</h3>
+	<section id="gobteam" class="wrap wrap--content wrap--hidden js-section">
+		<h3>Configurar gobierno</h3>
         <p>Los miembros de la Junta Directiva deben ser socios.</p>
 
         <div class="wrap wrap--frame wrap--flex">
@@ -111,43 +187,22 @@ $users = new WP_User_Query(
             </div>
         </div>
 
-        <h3>Responsables de área</h3>
-        <p>Los responsables de área deben ser socios.</p>
-
-        <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame__middle">
-                <label for="rp_events[]">Responsable de eventos</label>
-            </div>
-            <div class="wrap wrap--frame__middle">
-                <select name="rp_events[]" id="rp_events" class="select select-user chosen" multiple="multiple">
-                    <option value="0">Ninguno</option>
-                    <?php foreach ( $users->results as $user ) {
-                            echo '<option value="'.esc_html($user->ID ).'" ';
-                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
-                            echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
-                        } ?>
-                </select>
-            </div>
+        <div class="wrap wrap--flex wrap--submit">
+          <div class="wrap wrap--frame__middle wrap--flex">
+          </div>
+          <div class="wrap wrap--frame__middle wrap--flex">
+            <p class="submit">
+              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Cambiar gobierno">
+              <input name="action" type="hidden" id="action" value="new-fee" />
+            </p>
+          </div>
         </div>
 
-        <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame__middle">
-                <label for="rp_concursos[]">Responsable de concursos</label>
-            </div>
-            <div class="wrap wrap--frame__middle">
-                <select name="rp_concursos[]" id="rp_concursos" class="select select-user chosen" multiple="multiple">
-                    <option value="0">Ninguno</option>
-                    <?php foreach ( $users->results as $user ) {
-                            echo '<option value="'.esc_html($user->ID ).'" ';
-                            if(get_the_author_meta('asociation_position', $user->ID) == 'vocal') echo 'selected';
-                            echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
-                        } ?>
-                </select>
-            </div>
-        </div>
+    </section>
 
+    <section id="byemrpresident" class="wrap wrap--content wrap--hidden js-section">
         <h3>Ceder la presidencia</h3>
-        <p>Oh! Siempre te recordaremos como el gran lider que fuiste!.</p>
+        <p>Oh! Siempre te recordaremos como el gran lider que fuiste!</p>
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame__middle">
                 <label for="">¿Quién será el nuevo lider?</label>
@@ -161,16 +216,18 @@ $users = new WP_User_Query(
                 </select>
             </div>
         </div>
+
         <div class="wrap wrap--flex wrap--submit">
           <div class="wrap wrap--frame__middle wrap--flex">
           </div>
           <div class="wrap wrap--frame__middle wrap--flex">
             <p class="submit">
-              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Cambiar gobierno">
+              <input name="updatefee" type="submit" id="submit-all" class="button button-primary" value="Dimitir">
               <input name="action" type="hidden" id="action" value="new-fee" />
             </p>
           </div>
         </div>
+
         <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
             <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
         </div>

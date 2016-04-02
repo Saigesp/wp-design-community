@@ -72,19 +72,6 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 			</div>
 			<div class="wrap wrap--frame wrap--frame__middle">
 				<p class="right"><a href="<?php echo get_bloginfo('url');?>/edit-event/?id=<?php the_ID(); ?>">Editar evento</a></p>
-				<p class="right">
-					<?php
-					if(get_post_status() == 'publish'){
-						echo '<strong><a href="" class="color-error">Despublicar</a></strong>';
-					}elseif(get_post_status() == 'pending' || get_post_status() == 'draft'){
-						echo '<strong><a href="" class="color-success">Publicar</a></strong>';
-					}elseif(get_post_status() == 'future'){
-						echo '<strong><a href="">Reprogramar</a></strong>';
-					}elseif(get_post_status() == 'trash'){
-						echo '<strong><a href="">Restaurar</a></strong>';
-					}
-					?>
-				</p>
 				<p class="right"><a class="js-section-launch" onclick="ToggleSection(this)" data-section="bookingmanager">Gestionar reservas</a></p>
 			</div>
 		</section><!-- end of admin options -->

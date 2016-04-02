@@ -9,7 +9,9 @@ include_once(locate_template('functions-scripts.php'));
 include_once(locate_template('functions-options.php'));
 include_once(locate_template('functions-twitter.php')); // TODO Poner si está activada opción de twitter
 include_once(locate_template('functions-fees.php'));
+include_once(locate_template('functions-jobs.php'));
 include_once(locate_template('functions-concursos.php'));
+include_once(locate_template('functions-documentos.php'));
 include_once(locate_template('functions-svg.php'));
 
 //AJAX

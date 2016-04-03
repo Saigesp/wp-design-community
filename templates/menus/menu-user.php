@@ -30,23 +30,15 @@
       </li>
     <?php } ?>
 
-    <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+    <?php if(is_user_role('administrator') || is_user_role('editor') || get_user_meta($current_user->ID, 'asociation_responsability', true) != '') { ?>
       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-admin">
         <a onclick="ToggleMenu('menuadmin')">Administración</a>
       </li>
     <?php } ?>
 
-    <li class="menu-item menu-item-type-custom menu-item-object-custom">
-      <a href="<?php echo get_bloginfo('url');?>/events">Eventos</a>
-    </li>
-
-    <li class="menu-item menu-item-type-custom menu-item-object-custom">
-      <a href="<?php echo get_bloginfo('url');?>/fee">Cuotas</a>
-    </li>
-
-    <li class="menu-item menu-item-type-custom menu-item-object-custom">
-      <a href="<?php echo get_bloginfo('url');?>/concursos">Concursos</a>
-    </li>
+      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-logout">
+        <a href="<?php echo wp_logout_url();?>">Cerrar sesión</a>
+      </li>
 
   </ul>
 <?php }?>

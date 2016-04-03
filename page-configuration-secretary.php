@@ -57,57 +57,70 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             </div>
         </section><!-- end of admin options -->
 
+        <!-- change status to members -->
     	<section id="changememberstatus" class="wrap wrap--content wrap--hidden js-section">
     		<h3>Cambiar estatus</h3>
-            <div class="wrap wrap--frame">
-                <div class="wrap wrap--frame wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                        <label for="">Hacer socio</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-    					<select name="asociate[]" id="" class="select select-user chosen" multiple="multiple">
-    						<option value="0">Ninguno</option>
-    				        <?php foreach ( $subscribers->results as $subscriber ) {
-    				                echo '<option value="'.esc_html($subscriber->ID ).'" ';
-    				                echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
-    				            } ?>
-    				    </select>
-                    </div>
+
+            <!-- make associate -->
+            <div class="wrap wrap--frame wrap--flex">
+                <div class="wrap wrap--frame__middle">
+                    <label for="">Hacer socio</label>
                 </div>
-                <div class="wrap wrap--frame wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                        <label for="">Dar de baja como socio</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-    					<select name="desasociate[]" id="" class="select select-user chosen" multiple="multiple">
-    						<option value="0">Ninguno</option>
-    				        <?php foreach ( $socios->results as $socio ) {
-    				                echo '<option value="'.esc_html($socio->ID ).'" ';
-    				                echo ' >'.esc_html($socio->first_name).' '.esc_html($socio->last_name).'</option>';
-    				            } ?>
-    				    </select>
-                    </div>
+                <div class="wrap wrap--frame__middle">
+                    <select name="asociate[]" id="" class="select select-user chosen" multiple="multiple">
+                        <option value="0">Ninguno</option>
+                        <?php foreach ( $subscribers->results as $subscriber ) {
+                                echo '<option value="'.esc_html($subscriber->ID ).'" ';
+                                echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
+                            } ?>
+                    </select>
                 </div>
-            </div>
+            </div><!-- end of make associate -->
+
+            <!-- undo associate -->
+            <div class="wrap wrap--frame wrap--flex">
+                <div class="wrap wrap--frame__middle">
+                    <label for="">Dar de baja como socio</label>
+                </div>
+                <div class="wrap wrap--frame__middle">
+                    <select name="desasociate[]" id="" class="select select-user chosen" multiple="multiple">
+                        <option value="0">Ninguno</option>
+                        <?php foreach ( $socios->results as $socio ) {
+                                echo '<option value="'.esc_html($socio->ID ).'" ';
+                                echo ' >'.esc_html($socio->first_name).' '.esc_html($socio->last_name).'</option>';
+                            } ?>
+                    </select>
+                </div>
+            </div><!-- end of undo associate -->
+
+
+            <!-- submit -->
+            <div class="wrap wrap--flex wrap--submit">
+              <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+              </div>
+              <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                <p class="submit">
+                  <button name="updatesection" value="changestatus" type="submit" class="button button-primary">Cambiar estatus</button>
+                  <input name="action" type="hidden" id="action" value="update-secretary" />
+                </p>
+              </div>
+            </div><!-- end of submit -->
+
+            <!-- close button -->
             <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
                 <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
-            </div>
-    	</section>
+            </div><!-- end of close button -->
 
+    	</section><!-- end of change status to members -->
+
+        <!-- userlist -->
         <section id="" class="wrap wrap--content wrap--userlist">
             <h3>Lista de socios</h3>
             <?php 
             $users = $socios;
             include(locate_template('templates/loops/loop-userlist.php'));
             ?>
-        </section>
-    	
-      <section class="wrap wrap--frame wrap--empty wrap--submit">
-        <p class="submit">
-          <input name="updateuser" type="submit" id="submit-all" class="button button-primary" value="Crear usuario">
-          <input name="action" type="hidden" id="action" value="update-secretary" />
-        </p>
-      </section>
+        </section><!-- end of userlist -->
       
     </div><!-- end of flexboxer -->
     </form>

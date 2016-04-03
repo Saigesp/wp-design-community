@@ -146,7 +146,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence' ) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
 
   // Change govern
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changegovern'){
@@ -246,26 +246,30 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-/* CAMBIO ESTATUS DE ASOCIADO
+/* CONFIGURATION SECRETARY
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
-  if(!empty($_POST['asociate'])){
-    $new_socis = $_POST['asociate'];
-    foreach ($new_socis as $user_id) {
-      $user = get_userdata($user_id);
-      $user->remove_role('subscriber');
-      $user->add_role('author');
-    }
-  }
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' && (get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario' || is_user_role('administrator'))) {
 
-  if(!empty($_POST['desasociate'])){
-    $old_socis = $_POST['desasociate'];
-    foreach ($old_socis as $soc_id) {
-      $soc = get_userdata($soc_id);
-      $soc->add_role('subscriber');
-      $soc->remove_role('author');
+  if ($_POST['updatesection'] == 'changestatus') {
+
+    if(!empty($_POST['asociate'])){
+      $new_socis = $_POST['asociate'];
+      foreach ($new_socis as $user_id) {
+        $user = get_userdata($user_id);
+        $user->remove_role('subscriber');
+        $user->add_role('author');
+      }
+    }
+
+    if(!empty($_POST['desasociate'])){
+      $old_socis = $_POST['desasociate'];
+      foreach ($old_socis as $soc_id) {
+        $soc = get_userdata($soc_id);
+        $soc->add_role('subscriber');
+        $soc->remove_role('author');
+      }
     }
   }
 }

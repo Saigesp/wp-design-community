@@ -50,9 +50,9 @@ $users = new WP_User_Query(
 
         <!-- permisos generales -->
         <h3>Permisos</h3>
-        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
+        <p>Estos permisos determinarán las capacidades de participación de los usuarios en la página.</p>
         <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame wrap--frame__middle">Permisos generales de la página</div>
+            <div class="wrap wrap--frame wrap--frame__middle"><strong>Permisos generales de la página</strong></div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="capacity_mode" id="capacity_mode" placeholder="Selecciona una opción" onchange="ToggleSelect('capacity_mode')">
                     <option value="dictator" <?php if(get_option('capacity_mode') == 'dictator') echo 'selected ' ?>>Dictadura</option>
@@ -88,9 +88,9 @@ $users = new WP_User_Query(
 
         <!-- transparencia -->
         <h3>Transparencia</h3>
-        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
+        <p>Esta opción determinará el nivel de transparencia en la gestión que se aplicará.</p>
         <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame wrap--frame__middle">Transparencia</div>
+            <div class="wrap wrap--frame wrap--frame__middle"><strong>Transparencia</strong></div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="transparency_mode" id="transparency_mode" placeholder="Selecciona una opción" onchange="ToggleSelect('transparency_mode')">
                     <option value="dark">Opaco</option>
@@ -103,19 +103,33 @@ $users = new WP_User_Query(
             <div class="wrap wrap--frame wrap--frame__middle">
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
-                <h4>Opaco</h4>
+                <h4>Opacidad</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+            </div>
+        </div>
+        <div id="js-select-grey" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-transparency_mode <?php if(get_option('transparency_mode') == 'grey') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Semitransparencia</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+            </div>
+        </div>
+        <div id="js-select-white" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-transparency_mode <?php if(get_option('transparency_mode') == 'white') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Transparencia</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
             </div>
         </div><!-- endo of transparencia -->
 
 
-
+        <!-- habilitar secciones -->
         <h3>Habilitar secciones</h3>
         <p>Las secciones no incluídas no podrán consultarse ni gestionarse, pero su contenido permanecerá intacto.</p>
-
-        <!-- habilitar secciones -->
         <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame wrap--frame__middle">Secciones activas:</div>
+            <div class="wrap wrap--frame wrap--frame__middle"><strong>Secciones activas</strong></div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="active_section[]" id="active_section" class="select chosen" multiple="multiple">
                     <option value="">Ninguno</option>
@@ -147,12 +161,12 @@ $users = new WP_User_Query(
     <!-- gobierno section -->
 	<section id="gobteam" class="wrap wrap--content wrap--form wrap--hidden js-section">
 		<h3>Configurar gobierno</h3>
-        <p>Los miembros de la Junta Directiva deben ser socios.</p>
+        <p>Los miembros de la Junta Directiva tienen capacidades de edición de todos los contenidos de la web, excepto la gestión de socios, exclusiva para el secretario, y la gestión de cuotas, exclusiva del tesorero. Para poder elegir a un usuario, éste antes ha de tener estatus de asociado.</p>
 
         <!-- vicepresidencia -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="">Vicepresidencia</label>
+                <label for=""><strong>Vicepresidencia</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="vicepresidente" id="" class="select select-user chosen">
@@ -164,12 +178,19 @@ $users = new WP_User_Query(
                         } ?>
                 </select>
             </div>
+        </div>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <p>La <strong>vicepresidencia</strong> no tiene ningún permiso especial asignado.</p><br>
+            </div>
         </div><!-- end of vicepresidencia -->
 
         <!-- secretaría -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="">Secretaría</label>
+                <label for=""><strong>Secretaría</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="secretario" id="" class="select select-user chosen">
@@ -181,12 +202,19 @@ $users = new WP_User_Query(
                         } ?>
                 </select>
             </div>
+        </div>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <p>La <strong>secretaría</strong> gestiona las altas y bajas de socios, así como la publicación de documentos y convocatorias.</p><br>
+            </div>
         </div><!-- end of secretaría -->
 
         <!-- tesorero -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="">Tesorería</label>
+                <label for=""><strong>Tesorería</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="tesorero" id="" class="select select-user chosen">
@@ -198,12 +226,19 @@ $users = new WP_User_Query(
                         } ?>
                 </select>
             </div>
+        </div>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <p>La <strong>tesorería</strong> gestiona el sistema de cuotas de los socios.</p><br>
+            </div>
         </div><!-- end of tesorero -->
 
         <!-- vocales -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="vocales[]">Vocales</label>
+                <label for="vocales[]"><strong>Vocales</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="vocales[]" id="" class="select select-user chosen" multiple="multiple">
@@ -215,15 +250,22 @@ $users = new WP_User_Query(
                         } ?>
                 </select>
             </div>
+        </div>
+        <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <p>Las <strong>vocalías</strong> no tienen ningún permiso especial asignado.</p><br>
+            </div>
         </div><!-- end of vocales -->
 
-        <h3>Responsables</h3>
-        <p>Los responsables de área deben ser socios.</p>
+        <h3>Responsables de contenido</h3>
+        <p>Los responsables de contenido tienen permiso para publicar, supervisar y modificar el contenido de la sección que tienen asignada. Puede haber varios responsables por sección, y un mismo responsable puede llevar varias secciones. Los responsables deben tener al menos estatus de socio.</p>
 
         <!-- responsable de ofertas de trabajo -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="rp_posts[]">Responsables de noticias</label>
+                <label for="rp_posts[]"><strong>Responsables de noticias</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="rp_posts[]" id="rp_posts" class="select select-user chosen" multiple="multiple">
@@ -240,7 +282,7 @@ $users = new WP_User_Query(
         <!-- responsable de eventos -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="rp_events[]">Responsables de eventos</label>
+                <label for="rp_events[]"><strong>Responsables de eventos</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="rp_events[]" id="rp_events" class="select select-user chosen" multiple="multiple">
@@ -257,7 +299,7 @@ $users = new WP_User_Query(
         <!-- responsable de concursos -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="rp_concursos[]">Responsables de concursos</label>
+                <label for="rp_concursos[]"><strong>Responsables de concursos</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="rp_concursos[]" id="rp_concursos" class="select select-user chosen" multiple="multiple">
@@ -274,7 +316,7 @@ $users = new WP_User_Query(
         <!-- responsable de ofertas de trabajo -->
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">
-                <label for="rp_jobs[]">Responsables de ofertas de trabajo</label>
+                <label for="rp_jobs[]"><strong>Responsables de ofertas de trabajo</strong></label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="rp_jobs[]" id="rp_concursos" class="select select-user chosen" multiple="multiple">
@@ -313,7 +355,7 @@ $users = new WP_User_Query(
                 <label for="">¿Quién será el nuevo lider?</label>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
-                <select name="" id="" class="select select-user chosen">
+                <select name="presidente" id="" class="select select-user chosen">
                     <option value="0"></option>
                     <?php foreach ( $users->results as $user ) {
                             echo '<option value="'.esc_html($user->ID ).'">'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';

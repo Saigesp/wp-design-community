@@ -260,6 +260,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         $user = get_userdata($user_id);
         $user->remove_role('subscriber');
         $user->add_role('author');
+        update_user_meta($user_id, 'asociation_status', 'validado' );
       }
     }
 
@@ -269,13 +270,19 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         $soc = get_userdata($soc_id);
         $soc->add_role('subscriber');
         $soc->remove_role('author');
+        update_user_meta($user_id, 'asociation_status', '' );
+      }
+    }
+
+    if(!empty($_POST['members_tovalide']) && is_array($_POST['members_tovalide']) ){
+      foreach ($_POST['members_tovalide'] as $user_id){
+        update_user_meta($user_id, 'asociation_status', 'validado' );
       }
     }
 
     if(!empty($_POST['members_tosuspend']) && is_array($_POST['members_tosuspend']) ){
       foreach ($_POST['members_tosuspend'] as $user_id){
         update_user_meta($user_id, 'asociation_status', 'suspendido' );
-        echo ' xey-'.$user_id;
       }
     }
 

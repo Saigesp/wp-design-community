@@ -51,9 +51,12 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <div class="wrap wrap--frame wrap--frame__middle">
                 <p><strong><?php echo count($all_users);?></strong> usuarios registrados</p>
                 <p><strong><?php echo count($socios->results);?></strong> socios</p>
+                <p><strong>X</strong> documentos publicados</p>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
+                <p class="right">Crear usuario</p>
                 <p class="right"><a class="js-section-launch" onclick="ToggleSection(this)" data-section="changememberstatus">Gestionar socios</a></p>
+                <p class="right">Gestionar documentos</p>
             </div>
         </section><!-- end of admin options -->
 
@@ -108,13 +111,14 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <!-- valide asociate -->
             <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <label for="members_tovalide">Suspender usuarios:</label>
+                    <label for="members_tovalide">Validar usuarios</label>
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
                     <select name="members_tovalide[]" id="members_tovalide" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
                         <?php
                         if(is_object($socios)){
                             foreach($socios->results as $user){
+                                if(get_user_meta($user->ID, 'asociation_status', true) == 'validado') continue;
                                 echo '<option value="'.esc_html($user->ID ).'" ';
                                 echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
                             }
@@ -127,13 +131,14 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <!-- suspend asociate -->
             <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <label for="members_tosuspend[]">Suspender usuarios:</label>
+                    <label for="members_tosuspend[]">Suspender usuarios</label>
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
                     <select name="members_tosuspend[]" id="" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
                         <?php
                         if(is_object($socios)){
                             foreach($socios->results as $user){
+                                if(get_user_meta($user->ID, 'asociation_status', true) != 'validado') continue;
                                 echo '<option value="'.esc_html($user->ID ).'" ';
                                 echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
                             }
@@ -197,10 +202,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                         </div>
                         <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                             <div class="wrap wrap--frame wrap--frame__middle">
-                                <?php
-                                if(get_user_meta($user->ID, 'asociation_status', true) == '') echo '<span class="help-info">not set</span>';
-                                else echo get_user_meta($user->ID, 'asociation_status', true);
-                                ?>
+                                <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
                             </div>
                             <div class="wrap wrap--frame wrap--frame__middle">
                                 <span class="help-info">

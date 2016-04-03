@@ -38,7 +38,6 @@ var project = 'wp-design-community',
         node + '*/dist/**/*.min.js',
         node + 'imagesloaded/imagesloaded.pkgd.min.js',
         node + 'moment/*/moment.min.js'
-
     ];
 
 var dist_inject_path_slice = dist.length - 2;
@@ -49,18 +48,15 @@ var favicon_icon_path = '<?php echo get_stylesheet_directory_uri(); ?>/img/favic
 
 // Load plugins
 var gulp = require('gulp'),
-    browserSync = require('browser-sync'), // Asynchronous browser loading on .scss file changes
+    browserSync = require('browser-sync'),
     reload = browserSync.reload,
-    autoprefixer = require('gulp-autoprefixer'), // Autoprefixing magic
+    autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-uglifycss'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     notify = require('gulp-notify'),
-    rimraf = require('gulp-rimraf'), // Helps with removing files and directories in our run tasks
+    rimraf = require('gulp-rimraf'),
     inject = require('gulp-inject');
-	//cache = require('gulp-cache'),
-    //sourcemaps = require('gulp-sourcemaps'),
-    //postcss = require('gulp-postcss'),
     es = require('event-stream'),
     realFavicon = require('gulp-real-favicon'),
     fs = require('fs')

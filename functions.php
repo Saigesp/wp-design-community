@@ -632,34 +632,6 @@ if (!function_exists('create_new_member')) {
 }
 
 
-/* LOOP USUARIO
-*
-*****************************************************
-*/
-
-function loopuserlist($user_id){
-    $user = get_userdata($user_id);
-    $usermeta = get_user_meta($user_id);
-
-    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
-        $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
-    elseif ($user->userphoto_image_file != '')
-        $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
-    else
-        $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
-
-    echo '<tr>'; 
-    echo '<td><div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'"><img src="'.$user_photo.'"></div><td>';
-    echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
-    if(is_singular( 'fee' )){
-      echo '<td><input type="checkbox" class="hidden" id="checkbox-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-'.$user_id.'">';
-      the_svg_icon('close');
-      echo '</label></td>';
-    }
-    echo '</tr>';
-}
-
-
 // Añadir meta de usuario
 if (!function_exists('cb_contact_data')) {  
     function cb_contact_data($contactmethods) {
@@ -863,6 +835,10 @@ function change_role_name($rolename){
   elseif($rolename == 'tesorero') return 'Tesorero';
   elseif($rolename == 'secretario') return 'Secretario';
   elseif($rolename == 'vocal') return 'Vocal';
+  elseif($rolename == 'rp_events') return 'Resp. Eventos';
+  elseif($rolename == 'rp_concursos') return 'Resp. Concursos';
+  elseif($rolename == 'rp_jobs') return 'Resp. Ofertas laborales';
+  elseif($rolename == 'rp_posts') return 'Resp. Noticias';
   else return $rolename;
 }
 

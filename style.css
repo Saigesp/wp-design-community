@@ -1483,7 +1483,6 @@ blockquote p {
 	width: 14px;
 	padding: 8px;
 	cursor: pointer;
-	/* margin: 6px 10px 0 0; */
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -1493,9 +1492,31 @@ blockquote p {
 	right: 36px;
 }
 
+/* Userlist */
+.wrap--userlist .wrap--photo {
+	width: 100px;
+    height: auto;
+    max-height: 100px;
+    margin: 0;
+    overflow: hidden;
+}
 
+.wrap--userlist .wrap--photo.wrap--photo__mini {
+	width: 30px;
+	height: 30px;
+    border-radius: 20px;
+    margin: 3px 0;
+}
 
+.wrap--userlist .wrap--photo img {
+	width: 100%;
+	height: auto;
+}
 
+.wrap--userlist .username {
+	line-height: 36px;
+	padding-left: 5px;
+}
 
 
 
@@ -1856,28 +1877,6 @@ blockquote p {
 	margin: 0 5px 5px;
 	width: calc(100% - 10px);
 }
-
-.wrap--userlist .wrap--photo {
-	width: 100px;
-    height: auto;
-    max-height: 100px;
-    margin: 0;
-    overflow: hidden;
-}
-
-.wrap--userlist .wrap--photo.wrap--photo__mini {
-	width: 30px;
-	height: 30px;
-    border-radius: 20px;
-    margin: 3px 0;
-}
-
-.wrap--userlist .wrap--photo img {
-	width: 100%;
-	height: auto;
-}
-
-
 
 
 

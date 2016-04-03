@@ -59,7 +59,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
 
         <!-- change status to members -->
     	<section id="changememberstatus" class="wrap wrap--content wrap--hidden js-section">
-    		<h3>Cambiar estatus</h3>
+    		<h3>Gestionar socios</h3>
 
             <!-- make associate -->
             <div class="wrap wrap--frame wrap--flex">
@@ -93,7 +93,6 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                 </div>
             </div><!-- end of undo associate -->
 
-
             <!-- submit -->
             <div class="wrap wrap--flex wrap--submit">
               <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
@@ -116,10 +115,67 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         <!-- userlist -->
         <section id="" class="wrap wrap--content wrap--userlist">
             <h3>Lista de socios</h3>
-            <?php 
+            <h4>Socios</h4>
+            <?php
             $users = $socios;
-            include(locate_template('templates/loops/loop-userlist.php'));
-            ?>
+            if(is_object($users)){
+                foreach($users->results as $user){
+                    $user = get_userdata($user->ID);
+                    $usermeta = get_user_meta($user->ID);
+
+                    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user->ID, 100, 'medium') != '')
+                        $user_photo = get_wp_user_avatar_src($user->ID, 100, 'medium');
+                    elseif ($user->userphoto_image_file != '')
+                        $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+                    else
+                        $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+                    ?>
+                    <div class="wrap wrap--frame wrap--flex">
+                        <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                            <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                                <div class="wrap wrap--photo wrap--photo__mini" title="<?php echo get_the_author_meta('first_name',$user->ID).' '.get_the_author_meta('last_name',$user->ID);?>"><img src="<?php echo $user_photo;?>"></div>
+                                <a href="<?php echo get_author_posts_url($user->ID);?>" class="username"><?php echo get_the_author_meta('first_name',$user->ID).' '.get_the_author_meta('last_name',$user->ID);?></a>
+                            </div>
+                            <div class="wrap wrap--frame wrap--frame__middle">
+                                <?php
+                                echo change_role_name(get_the_author_meta('asociation_position', $user->ID));
+                                if(get_the_author_meta('asociation_position', $user->ID) != '' && get_the_author_meta('asociation_responsability', $user->ID) != '') echo ' / ';
+                                echo change_role_name(get_the_author_meta('asociation_responsability', $user->ID));?>
+                            </div>
+                        </div>
+                        <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                            <div class="wrap wrap--frame wrap--frame__middle">
+                                <?php
+                                if(get_the_author_meta('asociation_status') == '') echo 'Validado';
+                                else echo get_the_author_meta('asociation_status');
+                                ?>
+                            </div>
+                            <div class="wrap wrap--frame wrap--frame__middle">
+                                <span class="help-info">
+                                    <?php
+                                    $missing_data = array();
+                                    if(get_the_author_meta('dbem_dnie', $user->ID) == '') array_push($missing_data,'DNI');
+                                    if(get_the_author_meta('dbem_phone', $user->ID) == '') array_push($missing_data,'Teléfono');
+                                    if(get_the_author_meta('dbem_address', $user->ID) == '') array_push($missing_data,'Dirección');
+                                    if(get_the_author_meta('bornday', $user->ID) == '') array_push($missing_data,'Fecha de nacimiento');
+
+                                    if(count($missing_data) > 0 ){
+                                        if(count($missing_data) == 1 ) echo 'Falta '.$missing_data[0];
+                                        else {
+                                            echo 'Faltan ';
+                                            foreach ($missing_data as $data) echo $data.', ';
+                                        }
+                                    }
+                                    ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                <?php }
+
+            }else{
+                // TODO No object
+            } ?>
         </section><!-- end of userlist -->
       
     </div><!-- end of flexboxer -->

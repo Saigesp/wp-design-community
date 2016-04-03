@@ -18,10 +18,11 @@
   			</div>
   		</div>
   	</div>
+
     <div class="wrap wrap--flex">
       <div class="wrap wrap--frame__middle wrap--flex">
         <div class="wrap wrap--frame__middle">
-          <label for="position">Rol</label>
+          <label for="position">Tipo de usuario</label>
         </div>
         <div class="wrap wrap--frame__middle">
             <select name="roles" class="tolisten">
@@ -37,14 +38,12 @@
       </div>
       <div class="wrap wrap--frame__middle wrap--flex">
         <div class="wrap wrap--frame__middle">
-           <?php  if(!in_array('subscriber', $roles)) {?><label for="hola">Estado</label><?php } ?>
+           <?php  if(!in_array('subscriber', $roles)) {?><label for="asociation_position">Cargo</label><?php } ?>
         </div>
         <div class="wrap wrap--frame__middle">
           <?php  if(!in_array('subscriber', $roles)) {?>
-          <select name="asociation_position" multiple="multiple">
+          <select name="asociation_position">
                 <option value="" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == '') echo 'selected';?>>Ninguno</option>
-                <option value="fundador" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'fundador') echo 'selected';?>>Socio Fundador</option>
-                <option value="presidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'presidente') echo 'selected';?>>Presidente</option>
                 <option value="vicepresidente" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'vicepresidente') echo 'selected';?>>Vicepresidente</option>
                 <option value="tesorero" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'tesorero') echo 'selected';?>>Tesorero</option>
                 <option value="secretario" <?php if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == 'secretario') echo 'selected';?>>Secretario</option>
@@ -54,4 +53,34 @@
         </div>
       </div>
     </div>
+
+    <div class="wrap wrap--flex">
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+          <label for="responsability">Responsable de área</label>
+        </div>
+        <div class="wrap wrap--frame__middle">
+            <select name="responsability" class="tolisten chosen" multiple="multiple">
+              <option value="rp_events">Responsable de eventos</option>
+              <option value="rp_concursos">Responsable de concursos</option>
+              <option value="rp_jobs">Responsable de ofertas laborales</option>
+              <option value="rp_post">Responsable de noticias</option>
+            </select>
+        </div>
+      </div>
+      <div class="wrap wrap--frame__middle wrap--flex">
+        <div class="wrap wrap--frame__middle">
+           <?php  if(!in_array('subscriber', $roles)) {?><label for="fundator">Socio fundador</label><?php } ?>
+        </div>
+        <div class="wrap wrap--frame__middle">
+          <?php  if(!in_array('subscriber', $roles)) {?>
+          <select name="fundator">
+                <option value="false" <?php if (esc_attr(get_the_author_meta('asociation_fundator', $user->ID)) != true) echo 'selected';?>>No</option>
+                <option value="true" <?php if (esc_attr(get_the_author_meta('asociation_fundator', $user->ID)) == true) echo 'selected';?>>Si</option>
+          </select>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+
   </section>

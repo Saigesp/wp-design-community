@@ -250,7 +250,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' && (get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario' || is_user_role('administrator'))) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
 
   if ($_POST['updatesection'] == 'changestatus') {
 
@@ -271,6 +271,15 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         $soc->remove_role('author');
       }
     }
+
+    if(!empty($_POST['members_tosuspend']) && is_array($_POST['members_tosuspend']) ){
+      foreach ($_POST['members_tosuspend'] as $user_id){
+        update_user_meta($user_id, 'asociation_status', 'suspendido' );
+        echo ' xey-'.$user_id;
+      }
+    }
+
+
   }
 }
 
@@ -314,6 +323,11 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       //if ( $post_id )  wp_redirect( 'http://xn--diseadoresindustriales-nec.es/preguntas/?send=ok' ); exit;
     } 
 }
+
+
+
+
+
 
 
 /* ACTUALIZAR CUOTA

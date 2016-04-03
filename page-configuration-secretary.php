@@ -57,18 +57,29 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             </div>
         </section><!-- end of admin options -->
 
+        <?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
+
+    if(!empty($_POST['members_tosuspend']) && is_array($_POST['members_tosuspend']) ){ ?>
+
+    <section class="wrap wrap--frame">
+        <?php var_dump($_POST);?>
+    </section>
+
+    <?php }} ?>
+
         <!-- change status to members -->
     	<section id="changememberstatus" class="wrap wrap--content wrap--hidden js-section">
     		<h3>Gestionar socios</h3>
 
+            <h4>Gestionar altas y bajas</h4>
+
             <!-- make associate -->
             <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle">
-                    <label for="">Hacer socio</label>
+                    <label for="asociate">Hacer socio</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="asociate[]" id="" class="select select-user chosen" multiple="multiple">
-                        <option value="0">Ninguno</option>
+                    <select name="asociate[]" id="asociate" class="select select-user chosen" multiple="multiple">
                         <?php foreach ( $subscribers->results as $subscriber ) {
                                 echo '<option value="'.esc_html($subscriber->ID ).'" ';
                                 echo ' >'.esc_html($subscriber->first_name).' '.esc_html($subscriber->last_name).'</option>';
@@ -80,11 +91,10 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <!-- undo associate -->
             <div class="wrap wrap--frame wrap--flex">
                 <div class="wrap wrap--frame__middle">
-                    <label for="">Dar de baja como socio</label>
+                    <label for="desasociate">Dar de baja como socio</label>
                 </div>
                 <div class="wrap wrap--frame__middle">
-                    <select name="desasociate[]" id="" class="select select-user chosen" multiple="multiple">
-                        <option value="0">Ninguno</option>
+                    <select name="desasociate[]" id="desasociate" class="select select-user chosen" multiple="multiple">
                         <?php foreach ( $socios->results as $socio ) {
                                 echo '<option value="'.esc_html($socio->ID ).'" ';
                                 echo ' >'.esc_html($socio->first_name).' '.esc_html($socio->last_name).'</option>';
@@ -93,13 +103,54 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                 </div>
             </div><!-- end of undo associate -->
 
+            <h4>Cambiar estatus</h4>
+
+            <!-- valide asociate -->
+            <div class="wrap wrap--frame wrap--flex">
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <label for="members_tovalide">Suspender usuarios:</label>
+                </div>
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <select name="members_tovalide[]" id="members_tovalide" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
+                        <?php
+                        if(is_object($socios)){
+                            foreach($socios->results as $user){
+                                echo '<option value="'.esc_html($user->ID ).'" ';
+                                echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div><!-- end of valide asociate -->
+
+            <!-- suspend asociate -->
+            <div class="wrap wrap--frame wrap--flex">
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <label for="members_tosuspend[]">Suspender usuarios:</label>
+                </div>
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <select name="members_tosuspend[]" id="" class="select select-user chosen tolisten" multiple="multiple" data-placeholder="Selecciona usuarios">
+                        <?php
+                        if(is_object($socios)){
+                            foreach($socios->results as $user){
+                                echo '<option value="'.esc_html($user->ID ).'" ';
+                                echo ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div><!-- end of suspend asociate -->
+
+
             <!-- submit -->
             <div class="wrap wrap--flex wrap--submit">
               <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
               </div>
               <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                 <p class="submit">
-                  <button name="updatesection" value="changestatus" type="submit" class="button button-primary">Cambiar estatus</button>
+                  <button name="updatesection" value="changestatus" type="submit" class="button button-primary">Guardar cambios</button>
                   <input name="action" type="hidden" id="action" value="update-secretary" />
                 </p>
               </div>
@@ -120,6 +171,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             $users = $socios;
             if(is_object($users)){
                 foreach($users->results as $user){
+
                     $user = get_userdata($user->ID);
                     $usermeta = get_user_meta($user->ID);
 
@@ -146,8 +198,8 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                         <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                             <div class="wrap wrap--frame wrap--frame__middle">
                                 <?php
-                                if(get_the_author_meta('asociation_status') == '') echo 'Validado';
-                                else echo get_the_author_meta('asociation_status');
+                                if(get_user_meta($user->ID, 'asociation_status', true) == '') echo '<span class="help-info">not set</span>';
+                                else echo get_user_meta($user->ID, 'asociation_status', true);
                                 ?>
                             </div>
                             <div class="wrap wrap--frame wrap--frame__middle">
@@ -157,7 +209,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                                     if(get_the_author_meta('dbem_dnie', $user->ID) == '') array_push($missing_data,'DNI');
                                     if(get_the_author_meta('dbem_phone', $user->ID) == '') array_push($missing_data,'Teléfono');
                                     if(get_the_author_meta('dbem_address', $user->ID) == '') array_push($missing_data,'Dirección');
-                                    if(get_the_author_meta('bornday', $user->ID) == '') array_push($missing_data,'Fecha de nacimiento');
+                                    if(get_the_author_meta('bornday', $user->ID) == '') array_push($missing_data,'Fecha');
 
                                     if(count($missing_data) > 0 ){
                                         if(count($missing_data) == 1 ) echo 'Falta '.$missing_data[0];

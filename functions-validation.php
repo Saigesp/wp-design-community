@@ -290,7 +290,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *****************************************************
 */
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'new-fee' ) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'new-fee'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
 
     $hasError = false;
     $publish_status = 'publish';
@@ -321,7 +321,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *****************************************************
 */
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-fee' ) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-fee'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
 
       //update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
       //update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
@@ -446,13 +446,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 }
-
-
-
-/* ELIMINAR COMENTARIO
-*
-*****************************************************
-*/
 
 
 

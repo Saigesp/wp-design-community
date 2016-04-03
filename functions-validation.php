@@ -208,6 +208,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
   }else if ($_POST['updatesection'] == 'changecapacities') {
+
+    if(!empty($_POST['capacity_mode'])) change_options('capacity_mode', $_POST['capacity_mode'], 'yes');
+    if(!empty($_POST['transparency_mode'])) change_options('transparency_mode', $_POST['transparency_mode'], 'no');
+    if(!empty($_POST['active_section'])) change_options('active_section', $_POST['active_section'], 'yes');
     
   }else if ($_POST['updatesection'] == 'changepresident') {
 

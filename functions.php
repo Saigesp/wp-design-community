@@ -852,7 +852,7 @@ function retrieve_languages() {
 
 
 
-
+// Translate role names
 function change_role_name($rolename){
   if($rolename == 'subscriber') return 'Suscriptor';
   elseif($rolename == 'author') return 'Socio';
@@ -876,6 +876,30 @@ if(!function_exists('get_my_editable_roles')){
       return $editable_roles;
   }
 }
+
+
+
+
+/* FUNCTION ADD/UPDATE OPTION */
+if(!function_exists('change_options')){
+  function change_options($option_name, $new_value, $load){
+    if (get_option($option_name) !== false) {
+      update_option( $option_name, $new_value );
+    }else{
+      $deprecated = null;
+      $autoload = $load == null ? 'no' : $load;
+      add_option( $option_name, $new_value, $deprecated, $autoload );
+    }
+  }
+}
+
+
+
+
+
+
+
+
 
 
 ?>

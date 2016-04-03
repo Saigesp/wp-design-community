@@ -55,9 +55,9 @@ $users = new WP_User_Query(
             <div class="wrap wrap--frame wrap--frame__middle">Permisos generales de la página</div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <select name="capacity_mode" id="capacity_mode" placeholder="Selecciona una opción">
-                    <option value="dictator">Dictadura</option>
-                    <option value="president">Monarquía parlamentaria</option>
-                    <option value="comrade">Comuna Hippie</option>
+                    <option value="dictator" <?php if(get_option('capacity_mode') == 'dictator') echo 'selected ' ?>>Dictadura</option>
+                    <option value="president" <?php if(get_option('capacity_mode') == 'president') echo 'selected ' ?>>Monarquía parlamentaria</option>
+                    <option value="comrade" <?php if(get_option('capacity_mode') == 'comrade') echo 'selected ' ?>>Comuna Hippie</option>
                 </select>
             </div>
         </div><!-- end of permisos generales -->
@@ -81,11 +81,12 @@ $users = new WP_User_Query(
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">Secciones activas:</div>
             <div class="wrap wrap--frame wrap--frame__middle">
-                <select name="page_sections[]" id="page_sections" class="select chosen" multiple="multiple">
-                    <option value="concursos">Concursos</option>
-                    <option value="events">Eventos</option>
-                    <option value="jobs">Ofertas de trabajo</option>
-                    <option value="post">Artículos</option>
+                <select name="active_section[]" id="active_section" class="select chosen" multiple="multiple">
+                    <option value="">Ninguno</option>
+                    <option value="concursos" <?php if(in_array('concursos', get_option('active_section'))) echo 'selected ' ?>>Concursos</option>
+                    <option value="events" <?php if(in_array('events', get_option('active_section'))) echo 'selected ' ?>>Eventos</option>
+                    <option value="jobs" <?php if(in_array('jobs', get_option('active_section'))) echo 'selected ' ?>>Ofertas de trabajo</option>
+                    <option value="posts" <?php if(in_array('posts', get_option('active_section'))) echo 'selected ' ?>>Artículos</option>
                 </select>
             </div>
         </div><!-- end of habilitar secciones -->

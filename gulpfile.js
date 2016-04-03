@@ -27,7 +27,6 @@ var project = 'wp-design-community',
         node + '*/js/jquery-imagefill.js',
         node + '*/lib/jquery.printThis.js',
         node + '*/pikaday.js',
-        node + '*/src/moment.js',
         bower + '*/chosen.jquery.js'
     ],
     css_minimized_files = [ // CSS Archives to copy
@@ -37,7 +36,8 @@ var project = 'wp-design-community',
     ],
     js_minimized_files = [ // JS Archives to copy
         node + '*/dist/**/*.min.js',
-        node + 'imagesloaded/imagesloaded.pkgd.min.js'
+        node + 'imagesloaded/imagesloaded.pkgd.min.js',
+        node + 'moment/*/moment.min.js'
 
     ];
 

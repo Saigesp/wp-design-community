@@ -47,32 +47,68 @@ $users = new WP_User_Query(
 
     <!-- permisos -->
     <section id="capacities" class="wrap wrap--content wrap--form wrap--hidden active js-section">
-        <h3>Configurar permisos</h3>
-        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
 
         <!-- permisos generales -->
+        <h3>Permisos</h3>
+        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">Permisos generales de la página</div>
             <div class="wrap wrap--frame wrap--frame__middle">
-                <select name="capacity_mode" id="capacity_mode" placeholder="Selecciona una opción">
+                <select name="capacity_mode" id="capacity_mode" placeholder="Selecciona una opción" onchange="ToggleSelect('capacity_mode')">
                     <option value="dictator" <?php if(get_option('capacity_mode') == 'dictator') echo 'selected ' ?>>Dictadura</option>
-                    <option value="president" <?php if(get_option('capacity_mode') == 'president') echo 'selected ' ?>>Monarquía parlamentaria</option>
-                    <option value="comrade" <?php if(get_option('capacity_mode') == 'comrade') echo 'selected ' ?>>Comuna Hippie</option>
+                    <option value="president" <?php if(get_option('capacity_mode') == 'president') echo 'selected ' ?>>Presidencia</option>
+                    <option value="comrade" <?php if(get_option('capacity_mode') == 'comrade') echo 'selected ' ?>>Comuna</option>
                 </select>
+            </div>
+        </div>
+        <div id="js-select-dictator" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-capacity_mode <?php if(get_option('capacity_mode') == 'dictator') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Dictadura</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+            </div>
+        </div>
+        <div id="js-select-president" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-capacity_mode <?php if(get_option('capacity_mode') == 'president') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Presidencia</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+            </div>
+        </div>
+        <div id="js-select-comrade" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-capacity_mode <?php if(get_option('capacity_mode') == 'comrade') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Comuna</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
             </div>
         </div><!-- end of permisos generales -->
 
         <!-- transparencia -->
+        <h3>Transparencia</h3>
+        <p>Estos permisos determinarán las capacidades de gestión de los usuarios, así como la información hecha pública.</p>
         <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame wrap--frame__middle">Transparencia</div>
             <div class="wrap wrap--frame wrap--frame__middle">
-                <select name="transparency_mode" id="capacity_mode" placeholder="Selecciona una opción">
+                <select name="transparency_mode" id="transparency_mode" placeholder="Selecciona una opción" onchange="ToggleSelect('transparency_mode')">
                     <option value="dark">Opaco</option>
                     <option value="grey">Semitransparente</option>
                     <option value="white">Transparente</option>
                 </select>
             </div>
+        </div>
+        <div id="js-select-dark" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-transparency_mode <?php if(get_option('transparency_mode') == 'dark') echo 'active'?>">
+            <div class="wrap wrap--frame wrap--frame__middle">
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+                <h4>Opaco</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+            </div>
         </div><!-- endo of transparencia -->
+
+
 
         <h3>Habilitar secciones</h3>
         <p>Las secciones no incluídas no podrán consultarse ni gestionarse, pero su contenido permanecerá intacto.</p>

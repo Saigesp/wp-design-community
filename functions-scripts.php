@@ -36,11 +36,10 @@ function inject_in_all() { ?>
 
     function ToggleSelect(select_id){
       var section = jQuery('#'+select_id+' option:selected').val();
-      console.log(section);
       if(jQuery('#js-select-'+section).hasClass('active') || select_id == 'close'){
-        jQuery('.js-select').removeClass("active");
+        jQuery('.js-select-'+select_id).removeClass("active");
       }else{
-        jQuery('.js-select').removeClass("active");
+        jQuery('.js-select-'+select_id).removeClass("active");
         jQuery('#js-select-'+section).addClass("active");
       }
     }

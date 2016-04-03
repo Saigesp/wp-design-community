@@ -67,24 +67,21 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Dictadura</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Dictadura Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div>
             <div id="js-select-president" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-capacity_mode <?php if(get_option('capacity_mode') == 'president') echo 'active'?>">
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Presidencia</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Presidencia Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div>
             <div id="js-select-comrade" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-capacity_mode <?php if(get_option('capacity_mode') == 'comrade') echo 'active'?>">
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Comuna</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Comuna Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div><!-- end of permisos generales -->
 
@@ -105,24 +102,21 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Opacidad</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Opacidad Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div>
             <div id="js-select-grey" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-transparency_mode <?php if(get_option('transparency_mode') == 'grey') echo 'active'?>">
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Semitransparencia</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Semitransparencia Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div>
             <div id="js-select-white" class="wrap wrap--frame wrap--flex wrap--hidden wrap--hidden__flex js-select js-select-transparency_mode <?php if(get_option('transparency_mode') == 'white') echo 'active'?>">
                 <div class="wrap wrap--frame wrap--frame__middle">
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle">
-                    <h4>Transparencia</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
+                    <p>Transparencia Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quasi officia, tempora vitae non maxime impedit consequatur velit dolores quisquam error ut iste nisi reiciendis alias hic animi. Esse, accusantium.</p>
                 </div>
             </div><!-- endo of transparencia -->
 

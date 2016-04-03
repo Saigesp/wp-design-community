@@ -193,10 +193,10 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                 </select>
               </div>
             </div>
-            <div id="js-select-transferency" class="wrap wrap--frame wrap--hidden js-select">
+            <div id="js-select-transferency" class="wrap wrap--frame wrap--hidden js-select js-section-paymethod">
               Pago por transferencia
             </div>
-            <div id="js-select-paypal" class="wrap wrap--frame wrap--hidden js-select">
+            <div id="js-select-paypal" class="wrap wrap--frame wrap--hidden js-select js-section-paymethod">
               Paypal
             </div>        
         </section>

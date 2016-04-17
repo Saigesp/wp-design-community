@@ -470,11 +470,28 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-
-
-
-
-
+/* ELIMINAR DOCUMENTO y SUS ATACHMENTS
+*
+*****************************************************
+*/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['updatesection'] ) && $_POST['updatesection'] == 'removedoc' ) {
+  if(!empty($_POST['docs_remove']) && is_array($_POST['docs_remove'])){
+    foreach ($_POST['docs_remove'] as $post_id) {
+      $attachments = get_posts( array(
+          'post_type' => 'attachment',
+          'posts_per_page' => -1,
+          'post_parent' => $post_id
+      ));
+      if ($attachments) {
+        foreach ( $attachments as $attachment ) {
+          wp_delete_attachment( $attachment->ID, true );
+        }
+      }
+      wp_delete_post( $post_id, true );
+    }
+  }
+}
 
 
 ?>

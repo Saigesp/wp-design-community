@@ -196,7 +196,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                     <p class="submit">
-                        <button name="updatesection" type="submit" id="submit-doc" class="button button-primary" value="uploaddoc">Guardar documentos</button>
+                        <button name="updatesection" type="submit" id="submit-doc" class="button button-primary" value="uploaddoc">Añadir documentos</button>
                         <input name="action" type="hidden" id="action" value="update-doc" />
                     </p>
                 </div>
@@ -233,7 +233,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                         </div>
                         <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                             <div class="wrap wrap--frame wrap--frame__middle">
-                                <?php the_date(); ?>
+                                <?php echo get_the_date(); ?>
                             </div>
                             <div class="wrap wrap--frame wrap--frame__middle">
                                 <input type="checkbox" class="tolisten hidden" id="checkbox-doc-<?php the_ID(); ?>" name="docs_remove[]" value="<?php the_ID(); ?>">
@@ -254,8 +254,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                 </div>
                 <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                     <p class="submit">
-                        <button name="updatesection" type="submit" id="remove-doc" class="button button-primary" value="removedoc">Eliminar documentos</button>
-                        <input name="action" type="hidden" id="action" value="remove-doc" />
+                        <button name="updatesection" type="submit" id="remove-doc" class="button button-primary button--danger" value="removedoc">Eliminar documentos</button>
                     </p>
                 </div>
             </div><!-- end of submit document -->

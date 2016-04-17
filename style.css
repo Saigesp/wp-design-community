@@ -1395,7 +1395,7 @@ button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  color: #245A3C;
+  color: white;
   background: #5FD694;
   border-bottom: 5px solid #46A26F;
   text-decoration: none;
@@ -1466,7 +1466,14 @@ input[type="text"].likeh3 {
 
 
 
+.button--danger {
+	border-color: #B7394D;
+    background: #F34A65;
+}
 
+.button--danger:hover{
+	background: #DC4B62;
+}
 
 
 

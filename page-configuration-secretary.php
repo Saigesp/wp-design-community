@@ -57,7 +57,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <div class="wrap wrap--frame wrap--frame__middle">
                 <p><strong><?php echo count($all_users);?></strong> usuarios registrados</p>
                 <p><strong><?php echo count($socios->results);?></strong> socios</p>
-                <p><strong>X</strong> documentos publicados</p>
+                <p><strong><?php echo $documents->post_count;?></strong> documentos</p>
             </div>
             <div class="wrap wrap--frame wrap--frame__middle">
                 <p class="right">Crear usuario</p>
@@ -177,32 +177,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         <!-- manage documents -->
         <section id="managedocs" class="wrap wrap--content wrap--hidden js-section">
             <h3>Gestionar documentos</h3>
-            <p>Los documentos deben ser archivos PDF o ZIP</p>
-
-            <!-- upload document -->
-            <h4>Nuevo documento</h4>
-            <div class="wrap wrap--frame wrap--flex">
-                <div class="wrap wrap--frame wrap--frame__middle">
-                    <input type="text" placeholder="Nombre" name="doc_name" id="docname">
-                </div>
-                <div class="wrap wrap--frame wrap--frame__middle">
-                    <input id="inputfiles" type="file" name="files[]" accept=".pdf,.zip" class ="files-data form-control" multiple />
-                </div>
-            </div>
-
-            <!-- submit document -->
-            <div class="wrap wrap--flex wrap--submit">
-                <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
-                </div>
-                <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
-                    <p class="submit">
-                        <button name="updatesection" type="submit" id="submit-doc" class="button button-primary" value="uploaddoc">Añadir documentos</button>
-                        <input name="action" type="hidden" id="action" value="update-doc" />
-                    </p>
-                </div>
-            </div><!-- end of submit document -->
-
-
+            
             <!-- document list -->
             <?php if ( $documents->have_posts() ) { ?>
                 <h4>Listado de documentos</h4>
@@ -215,18 +190,18 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                     <div class="wrap wrap--frame wrap--flex wrap--table">
                         <div class="wrap wrap--frame wrap--frame__middle">
                             <?php if($old_files != '') { ?>
-                                <a href="<?php echo $old_files; ?>"><?php the_title(); ?></a>
+                                <a target="_blank" href="<?php echo $old_files; ?>"><?php the_title(); ?></a>
                             <?php }else{ 
                                 if(count($media) > 1){
                                     the_title();
                                     $filesnum = 0;
                                     foreach($media as $media_id){
                                         $filesnum++;
-                                        echo ' <a href="'.$media_id->guid.'" title="'.$media_id->post_name.'">[Doc'.$filesnum.']</a> ';
+                                        echo ' <a target="_blank" href="'.$media_id->guid.'" title="'.$media_id->post_name.'">[Doc'.$filesnum.']</a> ';
                                     }
                                 } else {
                                     foreach($media as $media_id){
-                                        echo ' <a href="'.$media_id->guid.'" title="'.$media_id->post_name.'">'.get_the_title().'</a> ';
+                                        echo ' <a target="_blank" href="'.$media_id->guid.'" title="'.$media_id->post_name.'">'.get_the_title().'</a> ';
                                     }
                                 }
                             }?>
@@ -248,7 +223,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                 <p>No hay documentos todavía. ¿Quieres subir uno?</p>
             <?php } wp_reset_postdata(); ?><!-- end of document list -->
 
-            <!-- submit document -->
+            <!-- remove document -->
             <div class="wrap wrap--flex wrap--submit">
                 <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
                 </div>
@@ -257,7 +232,36 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
                         <button name="updatesection" type="submit" id="remove-doc" class="button button-primary button--danger" value="removedoc">Eliminar documentos</button>
                     </p>
                 </div>
+            </div><!-- end of remove document -->
+
+            <!-- upload document -->
+            <h4>Nuevo documento</h4>
+            <p>Los documentos deben ser archivos PDF o ZIP</p>
+            <div class="wrap wrap--frame wrap--flex">
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <input type="text" placeholder="Nombre" name="doc_name" id="docname">
+                </div>
+                <div class="wrap wrap--frame wrap--frame__middle">
+                    <input id="inputfiles" type="file" name="files[]" accept=".pdf,.zip" class ="files-data form-control" multiple />
+                </div>
+            </div>
+
+            <!-- submit document -->
+            <div class="wrap wrap--flex wrap--submit">
+                <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                </div>
+                <div class="wrap wrap--frame wrap--frame__middle wrap--flex">
+                    <p class="submit">
+                        <button name="updatesection" type="submit" id="submit-doc" class="button button-primary" value="uploaddoc">Añadir documentos</button>
+                        <input name="action" type="hidden" id="action" value="update-doc" />
+                    </p>
+                </div>
             </div><!-- end of submit document -->
+
+            <!-- close button -->
+            <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
+                <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+            </div><!-- end of close button -->
 
         </section><!-- end of manage documents -->
 

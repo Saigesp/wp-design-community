@@ -52,4 +52,7 @@ function concursos_post_type() {
 	flush_rewrite_rules();
 }
 
+
+
+
 ?>

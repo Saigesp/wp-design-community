@@ -179,12 +179,11 @@ function inject_in_all() { ?>
 
 
 
-
-    <?php if (is_home()) { ?>
-     /**
+/**
      * HOME
      ***********************************/
-
+    <?php if (is_home()) { ?>
+     
        $(window).on('load',function() {
 
         var $carousel = $('#mainslider').flickity({
@@ -220,11 +219,13 @@ function inject_in_all() { ?>
 
     <?php } ?>
 
-    
-    <?php if ('event' == get_post_type()) { ?>
+
+
+
     /**
      * SIGLE EVENT
-     ***********************************/
+     ***********************************/    
+    <?php if ('event' == get_post_type()) { ?>
 
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
@@ -261,9 +262,6 @@ function inject_in_all() { ?>
 
         <?php } ?>
 
-
-
-
     /**
      * SIGLE FEE
      ***********************************/
@@ -279,6 +277,9 @@ function inject_in_all() { ?>
           $('.wrap--submit').addClass('active');
         })
       }
+
+
+
     /**
      * PAGE CONTROL USERS
      ***********************************/
@@ -312,11 +313,42 @@ function inject_in_all() { ?>
 
 
     /**
-     * PAGE CONTROL TREASURY
+     * PAGE SECRETARY
      ***********************************/
-    <?php } else if (is_page('configuration-treasury')) { ?>
+    <?php } else if (is_page('configuration-secretary')) { ?>
 
 
+        $('body').on('click', '#submit-doc', function(e){
+            debugger;
+
+            e.preventDefault;
+
+            var fd = new FormData();
+            var files_data = $('#inputfiles');
+            var title = $('#docname').val();
+            
+            // Loop through each data and create an array file[] containing our files data.
+            $.each($(files_data), function(i, obj) {
+                $.each(obj.files,function(j,file){
+                    fd.append('files[' + j + ']', file);
+                })
+            });
+            
+            fd.append('action', 'cvf_upload_files');  
+            
+            fd.append('doc_name', title); 
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    alert(response); // Append Server Response
+                }
+            });
+        });
 
 
 

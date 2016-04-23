@@ -214,6 +214,8 @@ function inject_in_all() { ?>
 
         $carousel.flickity('resize');
 
+        $('.gallery-cell').imagefill();
+
       });
 
 

@@ -12,16 +12,15 @@ $query = new WP_Query( $args );
 
 <div class="flexboxer flexboxer--home">
 
-  <?php if ($query->have_posts()) { ?>
-
-    <section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent">
+    <section class="wrap wrap--fullwidth wrap--harry">
+      <div class="wrap wrap--frame wrap--flex">
         <div class="wrap wrap--frame wrap--frame__middle">
           <div class="wrap wrap--logo">
             <a href="<?php bloginfo('url'); ?>">
               <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
                 <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
               <?php } else { ?>
-                <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
+                <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo-white.png"/>
               <?php } ?>
             </a>
           </div>
@@ -29,41 +28,24 @@ $query = new WP_Query( $args );
         <div class="wrap wrap--frame wrap--frame__middle">
             <p class="right">Otro menu</p>
         </div>
+      </div>
     </section>
 
-    <section class="wrap wrap--frame wrap--flex wrap--slider">
-      <div class="wrap wrap--frame__treequart">
-        <div id="mainslider" class="main-gallery">
-          <?php while ($query->have_posts()) { $query->the_post(); ?>
-            <div class="gallery-cell">
-              <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>" alt="" style="height:360px;" >
-            </div>
-          <?php }
-          $query = new WP_Query( $args );
-          ?>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__quart">
-        <div class="wrap wrap--frame wrap--eventlist">
+  <?php if ($query->have_posts()) { ?>
+    <section class="wrap wrap--fullwidth wrap--slider">
+      <div id="mainslider" class="main-gallery">
         <?php while ($query->have_posts()) { $query->the_post(); ?>
-          <div class="wrap wrap--event">
-            <?php the_title();?>
+          <div class="gallery-cell">
+            <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>" alt="" style="height:360px;" >
           </div>
-        <?php } ?>
-        </div>
-        <div class="button-row">
-          <div class="button-group button-group--cells">
-<!--             <button class="button is-selected">1</button>
-            <button class="button">2</button>
-            <button class="button">3</button>
-            <button class="button">4</button>
-            <button class="button">5</button> -->
-          </div>
-        </div>
+        <?php }
+        $query = new WP_Query( $args );
+        ?>
       </div>
     </section>
-
   <?php } ?>
+
+
   <?php
   $query = new WP_Query( $args );
   if ($query->have_posts()) {

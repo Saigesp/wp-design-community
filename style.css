@@ -691,6 +691,10 @@ a[href="#hidden"] {
     flex: 1 0 100%;
 }
 
+.flexboxer .wrap--fullwidth {
+	width: 100%;
+}
+
 .flexboxer .wrap--frame .wrap--submit {
 	margin: 0;
 }
@@ -1800,6 +1804,10 @@ input[type="text"].likeh3 {
  ***********************************/
 .flickity-page-dots {
 	display: none;
+}
+
+.gallery-cell {
+  width: 100%;
 }
 
 /**

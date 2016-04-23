@@ -114,7 +114,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
                     echo '<td><input type="checkbox" class="tolisten hidden" id="checkbox-pen-'.$user_id.'" name="members_pendingdown[]" value="'.$user_id.'"><label for="checkbox-pen-'.$user_id.'">';
                     the_svg_icon('close', 'icon--corner');
                     echo '</label></td>';
-                    echo '<td><input type="checkbox" class="hidden" id="checkbox-topay-'.$user_id.'" name="members_validate[]" value="'.$user_id.'"><label for="checkbox-topay-'.$user_id.'">';
+                    echo '<td><input type="checkbox" class="tolisten hidden" id="checkbox-topay-'.$user_id.'" name="members_validate[]" value="'.$user_id.'"><label for="checkbox-topay-'.$user_id.'">';
                     the_svg_icon('check', 'icon--corner icon--corner__second');
                     echo '</label></td>';
                     echo '</tr>';

@@ -284,7 +284,7 @@ function inject_in_all() { ?>
      * PAGE CONTROL USERS
      ***********************************/
     <?php } ?>
-    <?php if (is_archive('fee')) { ?>
+    <?php if (is_page('configuration-treasury')) { ?>
 
 
     var picker = new Pikaday({

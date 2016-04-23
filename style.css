@@ -1132,9 +1132,14 @@ a[href="#hidden"] {
 /**
  * HOME (home.php)
  ***********************************/
+.flexboxer--home {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
 .flexboxer--home .wrap--harry {
 	margin-bottom: 0;
-	padding: 100px 0 !important;
+	padding: 100px 0 60px !important;
 	box-shadow: none !important;
 	background: transparent;
 	color: black;
@@ -1142,6 +1147,7 @@ a[href="#hidden"] {
 
 .flexboxer--home .wrap--slider {
 	margin-top: 0;
+	max-width: 
 }
 
 .flexboxer--home .wrap--slider .gallery-cell {

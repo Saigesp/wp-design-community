@@ -12,22 +12,21 @@ $query = new WP_Query( $args );
 
 <div class="flexboxer flexboxer--home">
 
-  <section class="wrap wrap--fullwidth wrap--harry">
-    <div class="wrap wrap--frame wrap--flex">
-      <div class="wrap wrap--frame wrap--frame__middle">
-        <div class="wrap wrap--logo">
-          <a href="<?php bloginfo('url'); ?>">
-            <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
-              <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
-            <?php } else { ?>
-              <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
-            <?php } ?>
-          </a>
-        </div>
+  <section class="wrap wrap--frame__tocontent wrap--fullwidth wrap--harry wrap--flex">
+    <div class="wrap wrap--frame wrap--frame__middle">
+      <div class="wrap wrap--logo">
+        <a href="<?php bloginfo('url'); ?>">
+          <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
+            <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
+          <?php } else { ?>
+            <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
+          <?php } ?>
+        </a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
       </div>
-      <div class="wrap wrap--frame wrap--frame__middle">
-          <p class="right">Otro menu</p>
-      </div>
+    </div>
+    <div class="wrap wrap--frame wrap--frame__middle">
+        <p class="right">Otro menu</p>
     </div>
   </section>
 
@@ -46,6 +45,26 @@ $query = new WP_Query( $args );
     <section class="wrap wrap--content wrap--transparent wrap--titlesection">
       <h3>Acerca de AEDI</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint odio, veniam possimus et distinctio amet eos suscipit optio, nam nesciunt, facilis labore architecto assumenda minus. Delectus quaerat quibusdam consequuntur tempora?</p>
+
+<div class="flexboxer flexboxer--disenadores">
+  <?php
+  $original_query = $wp_query;
+  $args = array( 
+      'exclude' => array( 1 ),
+      'role' => 'author',
+      'order' => 'registered',
+      'number' => 10,
+  );
+  $user_query = new WP_User_Query($args);
+  if (!empty( $user_query->results)) { 
+    foreach ( $user_query->results as $user ) {
+      if((!function_exists('get_wp_user_avatar_src') || get_wp_user_avatar_src($user->ID, 100, 'medium') == '') && ($user->userphoto_image_file == '') && is_home()) continue;
+      include( locate_template( 'templates/loops/loop-profile.php' ));
+    }
+  }
+  ?>
+</div>
+
     </section>
 
   <?php

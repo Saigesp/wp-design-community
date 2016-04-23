@@ -109,9 +109,33 @@ td {border-width: 0 1px 1px 0;}del {color: #767676;}hr {background-color: rgba(0
 ::-moz-selection {background: #24890d;color: #fff;text-shadow: none;}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * GENERAL
- ***********************************/
+*************************************************************************************************/
 html {
 	font-size: 62.5%;
 	width: 100%;
@@ -133,7 +157,7 @@ body {
 body,
 #wrapper,
 #wraparticle {
-	background: #F0F0EB;
+	background: #F5F5F5;
 }
 
 #divwrap {
@@ -203,8 +227,6 @@ code {
 }
 
 
-
-
 /**
  * FUNCTIONALS
  ***********************************/
@@ -241,9 +263,6 @@ a[href="#hidden"] {
 }
 
 
-
-
-
 /**
  * USER PROFILES PHOTOS
  ***********************************/
@@ -267,9 +286,20 @@ a[href="#hidden"] {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 /**
- * HEADER TABS
- ***********************************/
+ * HEADER
+*************************************************************************************************/
 .headertop {
 	position: fixed;
 	top: 0;
@@ -392,10 +422,9 @@ a[href="#hidden"] {
 
 
 
-
 /**
- * MENUS (GENERAL)
- ***********************************/
+ * MENUS
+*************************************************************************************************/
 .wrap--menu {
 
 }
@@ -910,6 +939,11 @@ a[href="#hidden"] {
 	right: 36px;
 }
 
+/* Archive */
+.flexboxer  .thumb {
+	height: 300px;
+}
+
 /* Userlist */
 .wrap--userlist .wrap--photo {
 	width: 100px;
@@ -939,6 +973,17 @@ a[href="#hidden"] {
 .wrap--userlist .wrap--frame__middle {
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1046,6 +1091,90 @@ a[href="#hidden"] {
 .wrap--harry .notification .action--archive:hover { color: #66CC66; }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * PAGES (SPECIFIC)
+ *************************************************************************************************/
+
+/**
+ * HOME (home.php)
+ ***********************************/
+.flexboxer--home .wrap--harry {
+	margin-bottom: 0;
+	padding: 100px 0 !important;
+	box-shadow: none !important;
+	background: transparent;
+	color: black;
+}
+
+.flexboxer--home .wrap--slider {
+	margin-top: 0;
+}
+
+.flexboxer--home .wrap--slider .gallery-cell {
+	height: 460px;
+}
+
+.flexboxer .wrap--titlesection {
+	max-width: 100% !important;
+	flex: 1 1 100% !important;
+	text-align: center;
+}
+
+.flexboxer .wrap--titlesection h3{
+	font-size: 4rem;
+	font-weight: 100;
+	margin-top: 100px !important;
+}
+
+.flexboxer--home .wrap--article {
+	flex: 1 1 300px;
+	margin: 10px !important;
+}
+
+.flexboxer--home .wrap--article__first {
+/*	flex: 1 1 100% !important;
+	margin: 10px auto !important;*/
+}
+
+.flexboxer .wrap--article__first .thumb {
+
+}
+
+
 /**
  * PAGE EDIT PROFILE (page-edit-profile.php)
  ***********************************/
@@ -1128,6 +1257,12 @@ a[href="#hidden"] {
 
 
 
+
+
+
+
+
+
 /**
  * PAGE FEE (single-fee.php)
  ***********************************/
@@ -1141,6 +1276,14 @@ a[href="#hidden"] {
     top: 0;
     right: 0;
 }
+
+
+
+
+
+
+
+
 
 /**
  * PAGE EDIT EVENT (page-edit-event.php)
@@ -1255,6 +1398,15 @@ a[href="#hidden"] {
 	width: 100%;
 }
 
+
+
+
+
+
+
+
+
+
 /**
  * PAGE CONTROL USERS (page-control-users.php)
  ***********************************/
@@ -1328,10 +1480,14 @@ a[href="#hidden"] {
 
 
 
+/**
+ * COMMON
+ *************************************************************************************************/
+
 
 /**
  * TABLES
- *************************************************************************************************/
+ ***********************************/
 table,
 th,
 td {
@@ -1343,10 +1499,9 @@ td {
 }
 
 
-
 /**
  * FORMS
- *************************************************************************************************/
+ ***********************************/
 input,
 input[type="text"],
 input[type="password"],
@@ -1811,6 +1966,8 @@ input[type="text"].likeh3 {
 	width: 100%;
 }
 
+
+
 /**
  * CHOSEN (bower_components/chosen)
  ***********************************/
@@ -1880,6 +2037,8 @@ input[type="text"].likeh3 {
 	border-radius: 0
 }
 
+
+
 /**
  * MEDIUM EDITOR (node_modules/medium-editor)
  ***********************************/
@@ -1943,6 +2102,8 @@ textarea.js-medium-editor,
 	border-color: rgb(40,180,184) transparent transparent
 }
 
+
+
 /**
  * OVERFLOW
  ***********************************/
@@ -1964,8 +2125,10 @@ textarea.js-medium-editor,
   /* mix-blend-mode: color; */
 }
 
-/* OVERLAY
- *
+
+
+/* 
+ * OVERLAY
  ***********************************/
 
 .overlay {
@@ -1988,10 +2151,8 @@ textarea.js-medium-editor,
     top: 45px;
 }
 
-/* En versión móvil queremos que la clase
-*  .overflow--blue sea negra y siempre visible.
-*  Será azul en resoluciones mayores, y solo
-*  activable como hover. 
+/* En versión móvil queremos que la clase .overflow--blue sea negra y siempre visible.
+*  Será azul en resoluciones mayores, y solo activable como hover. 
 ****************************/
 .overflow--blue,
 .overflow--blue__hover:hover {
@@ -2734,6 +2895,7 @@ textarea.js-medium-editor,
 	/* HARRY */
 	.flexboxer .wrap--harry {
 		padding: 30px 0;
+		/* background: tan; */
 	}
 	.flexboxer .wrap--harry h4 {
 		font-size: 5rem;

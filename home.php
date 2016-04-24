@@ -12,7 +12,7 @@ $query = new WP_Query( $args );
 
 <div class="flexboxer flexboxer--home">
 
-  <section class="wrap wrap--frame__tocontent wrap--fullwidth wrap--harry wrap--flex">
+  <section class="wrap wrap--frame__tocontent wrap--fullwidth wrap--header wrap--flex wrap--transparent">
     <div class="wrap wrap--frame wrap--frame__middle">
       <div class="wrap wrap--logo">
         <a href="<?php bloginfo('url'); ?>">
@@ -32,7 +32,6 @@ $query = new WP_Query( $args );
           <?php the_svg_icon('facebook'); ?>
           <?php the_svg_icon('instagram'); ?>
         </div>
-          
     </div>
   </section>
 
@@ -91,7 +90,7 @@ $query = new WP_Query( $args );
 
     <?php while ($query->have_posts()) { 
       $query->the_post();
-      include( locate_template(  'templates/loops/loop-archive.php' ));
+      include( locate_template(  'templates/loops/loop-event.php' ));
     }
 	}
   ?>

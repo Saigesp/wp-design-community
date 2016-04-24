@@ -1,7 +1,7 @@
 <?php if(has_post_thumbnail()){ ?>
   
   <!-- thumbnail -->
-  <section class="wrap wrap--frame">
+  <section class="wrap wrap--frame wrap--article">
     <header id="header-<?php the_ID(); ?>" class="header header--article">
       <figure id="thumbnail" class="thumb thumb--article js-fullheight js-fullheight-thumb">
         <?php the_post_thumbnail('full');  ?>

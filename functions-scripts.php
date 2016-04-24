@@ -49,6 +49,26 @@ function inject_in_all() { ?>
         if (jQuery('.js-fullheight-thumb').length > 0) jQuery('.js-fullheight-thumb').imagefill();
     }
 
+    function beautydate() {
+      if (jQuery(".js-date").length > 0){
+        jQuery('.js-date').each(function(i){
+          var element = jQuery(this);
+          var date = element.text();
+          date = moment(date, "YYYY-MM-DD HH:mm:ss").format("D MMMM YYYY");
+          element.text(date);
+          element.removeClass('js-date')
+        })
+      }
+
+      if (jQuery(".js-date-fromnow").length > 0){
+        jQuery('.js-date-fromnow').each(function(i){
+          var element = jQuery(this);
+          var date = element.text();
+          date = moment(date, "YYYY-MM-DD HH:mm:ss").fromNow();
+          element.text(date);
+        })
+      }
+    }
 
 
 
@@ -164,14 +184,7 @@ function inject_in_all() { ?>
       });
 
 
-      if ($(".js-date-fromnow").length > 0){
-        $('.js-date-fromnow').each(function(i){
-          var element = $(this);
-          var date = element.text();
-          date = moment(date, "YYYY-MM-DD HH:mm:ss").fromNow();
-          element.text(date);
-        })
-      }
+      beautydate();
 
 
 
@@ -225,9 +238,16 @@ function inject_in_all() { ?>
 
 
     /**
-     * SIGLE EVENT
+     * SIGLE / ARCHIVE EVENT
      ***********************************/    
     <?php if ('event' == get_post_type()) { ?>
+
+
+      <?php if(is_archive()){ ?>
+
+        
+
+      <?php }else{ ?>
 
         if ($(".em-ticket").length > 1) {
           $("<h3>Datos de contacto</h3>").insertBefore(".em-booking-form-details");
@@ -242,30 +262,28 @@ function inject_in_all() { ?>
           $('<h3>Inicia sesión</h3>').insertBefore(".em-booking-login-form");
         }
 
-        <?php if(true){ ?>
+        if ($("#bookingmanager-form select").length > 0) {
+          $("#bookingmanager-form select").change(function() {
+            $(this).attr("class", "").addClass("booking_status--"+this.value);
+            $("#bookingmanager-form .button-primary").removeClass('hide');
+          });
+        }
 
-          if ($("#bookingmanager-form select").length > 0) {
-            $("#bookingmanager-form select").change(function() {
-              $(this).attr("class", "").addClass("booking_status--"+this.value);
-              $("#bookingmanager-form .button-primary").removeClass('hide');
+        if ($("#pdf_icon").length > 0) {
+          $("#pdf_icon").on("click", function(){
+            $('#bookingmanager-form-list').printThis({
+              title: 'Lista de reservas de <?php the_title(); ?>, <?php bloginfo("name"); ?>, @<?php echo get_userdata(get_current_user_id())->user_login;?>',
+              exclude: ['.do_not_print', '.print_exclude' ],
+              styles: ['http://www.saigesp.es/wp-content/themes/gridly/style.css']
             });
-          }
+          })
+        }
 
+      <?php } ?>
 
-          if ($("#pdf_icon").length > 0) {
-            $("#pdf_icon").on("click", function(){
-              $('#bookingmanager-form-list').printThis({
-                title: 'Lista de reservas de <?php the_title(); ?>, <?php bloginfo("name"); ?>, @<?php echo get_userdata(get_current_user_id())->user_login;?>',
-                exclude: ['.do_not_print', '.print_exclude' ],
-                styles: ['http://www.saigesp.es/wp-content/themes/gridly/style.css']
-              });
-            })
-          }
-
-        <?php } ?>
 
     /**
-     * SIGLE FEE
+     * SIGLE / ARCHIVE FEE
      ***********************************/
     <?php } elseif ('fee' == get_post_type()) { ?>
 
@@ -321,7 +339,6 @@ function inject_in_all() { ?>
 
 
         $('body').on('click', '#submit-doc', function(e){
-            debugger;
 
             e.preventDefault;
 

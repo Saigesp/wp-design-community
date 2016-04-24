@@ -7,6 +7,8 @@ $post_per_page = get_option( 'posts_per_page', '10' );
 
 $args = array (
   'order' => 'DESC',
+  'orderby' => 'meta_value',
+  'meta_key' => '_event_start_date',
   'posts_per_page' => -1,
   'post_type' => 'event'
 );
@@ -18,6 +20,8 @@ $offset = $post_per_page * ($pagec - 1);
 $total_pages = ceil($total_post / $post_per_page);
 $args = array( 
   'order' => 'DESC',
+  'orderby' => 'meta_value',
+  'meta_key' => '_event_start_date',
   'posts_per_page' => $post_per_page,
   'offset'    => $offset,
   'post_type' => 'event'

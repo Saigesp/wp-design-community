@@ -1,4 +1,8 @@
-<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--article <?php if($article_count == 0) echo 'wrap--article__first';?>">
+<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--article
+  <?php if($article_count == 0 && $pagec == 1) echo ' wrap--article__full wrap--article__special';?>
+  <?php if($article_count > 7 && $article_count < 10) echo ' wrap--article__medium';?>
+  <?php if(round(rand(0,5)) == 5) echo ' wrap--article__special';?>
+  ">
   <?php if(has_post_thumbnail()){?>
     <figure class="thumb thumb--archive js-imagefill">
       <a href="<?php the_permalink() ?>">

@@ -46,8 +46,7 @@ $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->even
   </div>
 </section>
 <?php 
-
- if($article_count == 0 && $pagec == 100) var_dump($EM_Tickets);
-
-$article_count++; ?>
+//if($article_count == 0 && $pagec == 1) var_dump($EM_Tickets);
+$article_count++;
+?>
 

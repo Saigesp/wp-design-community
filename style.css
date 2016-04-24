@@ -1289,6 +1289,17 @@ a[href="#hidden"] {
     font-size: 1.2rem;
 }
 
+.flexborex--archive__events .dates .status {
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.flexborex--archive__events .dates .status a {
+	color: white;
+	transition: opacity 350ms ease-in;
+}
+
+
 .flexborex--archive__events .description {
 	display: none;
 }

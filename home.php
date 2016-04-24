@@ -27,6 +27,12 @@ $query = new WP_Query( $args );
     </div>
     <div class="wrap wrap--frame wrap--frame__middle">
         <p class="right">Otro menu</p>
+        <div class="wrap wrap--frame wrap--social">
+          <?php the_svg_icon('twitter'); ?>
+          <?php the_svg_icon('facebook'); ?>
+          <?php the_svg_icon('instagram'); ?>
+        </div>
+          
     </div>
   </section>
 

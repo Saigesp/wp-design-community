@@ -315,22 +315,24 @@ a[href="#hidden"] {
 	margin: 0;
 }
 
+/* icons */
 .headertop .wrap--icon {
-	background-color: #BE1522;
+	/* background-color: #BE1522; */
 	position: absolute;
 	top: 0;
 	padding: 0;
 	line-height: 0;
 	transition: background 350ms ease;
+	cursor: pointer;
 }
 
 .headertop .wrap--icon__topmenu {
-	background-color: #941247;
+	/* background-color: #941247; */
 	right: 0;
 }
 
 .headertop .wrap--icon__usermenu {
-	background-color: #AD1451;
+	/* background-color: #AD1451; */
 	right: 60px;
 }
 
@@ -338,7 +340,7 @@ a[href="#hidden"] {
 .headertop .wrap--icon__topmenu:active,
 .headertop .wrap--icon__usermenu:hover,
 .headertop .wrap--icon__usermenu:active {
-	background-color: #C41547;
+	/* background-color: #C41547; */
 }
 
 .headertop .icon {
@@ -356,6 +358,23 @@ a[href="#hidden"] {
 .headertop .icon--doner {
 
 }
+
+/* profile photo */
+.headertop .wrap--photo {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	padding: 10px;
+	background: transparent;
+}
+
+.headertop .wrap--photo img {
+	width: 100;
+	height: 100%;
+	border-radius: 30px;
+}
+
+/* navtop */
 .headertop .navtop li {
 	list-style: none;
 	font-weight: 400;
@@ -370,6 +389,7 @@ a[href="#hidden"] {
 	display: none;
 }
 
+/* logo */
 .headertop .wrap--logo,
 .headertop .wrap--path {
     display: inline-block;
@@ -386,6 +406,7 @@ a[href="#hidden"] {
     max-height: 40px;
 }
 
+/* title */
 .headertop .wrap--pagetitle {
 	display: inline-block;
 }
@@ -1154,13 +1175,13 @@ a[href="#hidden"] {
 	height: 460px;
 }
 
-.flexboxer .wrap--titlesection {
+.flexboxer--home .wrap--titlesection {
 	max-width: 100% !important;
 	flex: 1 1 100% !important;
 	text-align: center;
 }
 
-.flexboxer .wrap--titlesection h3{
+.flexboxer--home .wrap--titlesection h3{
 	font-size: 4rem;
 	font-weight: 100;
 	margin-top: 100px !important;
@@ -1179,6 +1200,31 @@ a[href="#hidden"] {
 .flexboxer .wrap--article__first .thumb {
 
 }
+
+/* Social icons */
+.flexboxer--home .wrap--social {
+	text-align: right;
+}
+.flexboxer--home .wrap--social svg {
+	width: 16px;
+	height: 16px;
+	fill: white;
+	padding: 5px;
+	margin: 2px;
+	border-radius: 100px;
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.flexboxer--home .wrap--social svg:hover{
+	padding: 7px;
+	margin: 0;
+}
+
+.flexboxer--home .wrap--social .icon--twitter { background-color: deepskyblue;}
+.flexboxer--home .wrap--social .icon--facebook { background-color: #3B5998;}
+.flexboxer--home .wrap--social .icon--instagram { background-color: #2E5E86;}
 
 
 /**

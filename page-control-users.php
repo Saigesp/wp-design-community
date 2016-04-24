@@ -233,13 +233,6 @@ $user_query = new WP_User_Query($args);
   	$last_fee = get_the_author_meta( 'last_fee', $user_id);
     $user_meta = get_user_meta($user_id);
 
-    if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
-      $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
-    elseif ($user->userphoto_image_file != '')
-      $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
-    else
-      $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
-
     if (true){ ?>
     <tr>
 
@@ -247,7 +240,7 @@ $user_query = new WP_User_Query($args);
       
       <td><a href="<?php echo get_bloginfo('url').'/edit-profile/?id='.$user_id;?>"><?php echo $user_id;?></a></td>
       
-      <?php if($pho == true){ ?><td><?php echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name',$user_id ).' '.get_the_author_meta('last_name',$user_id ).'"><img src="'.$user_photo.'"></div>'; ?></td><?php } ?>
+      <?php if($pho == true){ ?><td><?php the_profile_photo($user_id);?></td><?php } ?>
       
       <?php if($nam == true){ ?><td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?></a><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
       

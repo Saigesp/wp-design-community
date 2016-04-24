@@ -1,5 +1,7 @@
 <header class="headertop wrap wrap--flex">
   <div class="wrapper wrap wrap--frame">
+
+    <!-- logo -->
     <div class="wrap wrap--logo">
     	<a href="<?php bloginfo('url'); ?>">
         <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
@@ -8,7 +10,9 @@
     		  <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
         <?php } ?>
     	</a>
-    </div>
+    </div><!-- end of logo -->
+
+    <!-- top title -->
     <div class="wrap wrap--pagetitle">
       <?php if(is_author()){ ?>
         <div class="wrap wrap--path showontablet">
@@ -31,25 +35,35 @@
         	<?php the_svg_icon('share');?>
         </div>
       <?php } ?>
-    </div>
+    </div><!-- end of top title -->
+
+    <!-- usermenu -->
     <div class="wrap wrap--icon wrap--icon__usermenu" onclick="ToggleMenu('menuuser')">
-      <?php the_svg_icon('doner');?>
-    </div>
+      <?php
+      if(!is_user_logged_in()) the_svg_icon('doner');
+      else the_profile_photo($current_user->ID);
+      ?>
+
+    </div><!-- end of usermenu -->
+
+    <!-- rightmenu launcher -->
     <?php if (has_nav_menu('menutop')) { ?>
-    <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu('menutop')">
-      <?php the_svg_icon('kebab');?>
-    </div>
-    <?php } ?>
+      <div class="wrap wrap--icon wrap--icon__topmenu" onclick="ToggleMenu('menutop')">
+        <?php the_svg_icon('kebab');?>
+      </div>
+    <?php } ?><!-- end of rightmenu launcher -->
+    
   </div>
 </header>
 
 
 
+<!-- rightmenu -->
 <?php if (has_nav_menu('menutop')) { ?>
   <nav id="menutop" class="wrap wrap--menu wrap--menu__top js-menu js-fullheight animecubic350">
     <?php wp_nav_menu( array( 'theme_location' => 'menutop', 'container' => false ) ); ?>
   </nav>
-<?php } ?>
+<?php } ?><!-- end of rightmenu -->
 
 
 <?php include(locate_template('templates/menus/menu-user.php')); ?> 

@@ -167,6 +167,7 @@ function add_op_user_meta($user_id) {
 }
 add_action( 'user_register', 'add_op_user_meta', 10, 1 );
 
+// Update theme user meta
 function update_op_user_meta($user_id, $field, $input){
   $op_user = get_user_meta($user_id, 'op_user', true );
   if(isset($op_user)){
@@ -176,6 +177,26 @@ function update_op_user_meta($user_id, $field, $input){
     update_user_meta($user_id, 'op_user', $op_user ); 
   } 
 }
+
+// Profile image
+function the_profile_photo($user){
+
+  if(is_object($user) && is_int($user->ID))
+    $user_id = $user->ID;
+  elseif(is_int($user) && $user > 0){
+    $user_id = $user;
+    $user = get_userdata($user_id);
+  }
+
+  if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+    $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+  elseif ($user->userphoto_image_file != '')
+    $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+  else
+    $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+    echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name', $user_id).' '.get_the_author_meta('last_name', $user_id).'"><img src="'.$user_photo.'"></div>';
+} 
 
 //Unregist post type
 if ( !function_exists( 'unregister_post_type' ) ) {

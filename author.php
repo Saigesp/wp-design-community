@@ -31,16 +31,8 @@
 <div class="flexboxer flexboxer--author">
 
   <section class="wrap wrap--content">
-    <?php //var_dump($user_info);?>
-      <figure class="wrap wrap--photo wrap--photo__author wrap--photo__block" style="background-color: #666;">
-        <img src="<?php
-        if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_info->ID, 100, 'medium') != '')
-          echo get_wp_user_avatar_src($user_info->ID, 100, 'medium');
-        elseif ($user_info->userphoto_image_file != '') {
-            echo get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user_info->userphoto_image_file;
-        } else
-          echo get_stylesheet_directory_uri().'/img/default/nophoto.png'; ?>"/>
-      </figure>
+    <?php the_profile_photo($user_info->ID);?>
+      
     <p class="authorarticlefoot">
       <a href="<?php echo get_author_posts_url( $user_info->ID ); ?>">
         <?php echo get_the_author_meta('first_name', $user_info->ID) . ' '. get_the_author_meta('last_name', $term_slug); ?>

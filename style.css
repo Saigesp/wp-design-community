@@ -1235,19 +1235,25 @@ a[href="#hidden"] {
  * ARCHIVE EVENTS HOME (archive-event.php)
  ***********************************/
 .flexborex--archive__events {
-	max-width: 1200px;
-	margin: 0 auto;
+	max-width: 100%;
 }
 
 .flexborex--archive__events .wrap--article {
-	flex: 1 1 300px;
+	flex: 1 1 100%;
 	margin: 0;
 	border-top: 1px solid white;
     border-bottom: 1px solid white;
+    max-width: 100%;
+    box-shadow: none !important;
+    transition: opacity 350ms ease;
 }
 
 .flexborex--archive__events .wrap--article + .wrap--article {
 	border-top: 0;
+}
+
+.flexborex--archive__events .wrap--article:hover .overflow {
+	opacity: 0.5;
 }
 
 .flexborex--archive__events .content {
@@ -2058,7 +2064,8 @@ input[type="text"].likeh3 {
  * INFINITE AJAX SCROLL (node_modules/github-ias)
  ***********************************/
 .ias-trigger,
-.ias-spinner {
+.ias-spinner,
+.ias-noneleft {
     width: 100%;
     padding: 20px 0;
 }
@@ -2246,7 +2253,7 @@ textarea.js-medium-editor,
 }
 
 .overflow--black {
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.7);
 }
 
 .overflow--blue,
@@ -2765,6 +2772,7 @@ textarea.js-medium-editor,
 	  width: 700px;
 	  margin: 25px auto 20px;
 	}
+	/* FLEXBOXER */
 	.flexboxer > .wrap {
 	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
 	    /* box-shadow: 0 1px 3px rgba(0,0,0,.13); */
@@ -2824,16 +2832,17 @@ textarea.js-medium-editor,
 		width: 100%;
 		max-width: calc(100% - 60px);
 	}
+	/* ARCHIVE EVENTS */
+	.flexborex--archive__events .wrap--article {
+		flex: 1 1 50%;
+		margin: 0;
+		border: 0;
+	}	
 	/* HOME */
 	.flexboxer .wrap--slider {
 		background-color: white;
 	}
-	.flexboxer .wrap--slider .wrap--eventlist {
-	margin: 0;
-	}
-	.flexboxer .wrap--eventlist .wrap--event {
-	padding: 10px;
-	}
+
 	/* FILTER USERS */
 	.wrap--filterusers .wrap--content {
 	    margin-bottom: 0;
@@ -2860,22 +2869,13 @@ textarea.js-medium-editor,
 		display: initial;
 	}
 
-	/* ARTICLE FOOTER */
+	/* FOOTER */
 	.backcontainer,
 	.relatedarticles {
 		margin: 15px auto;
 		max-width: 700px;
 	}
-	/* MASONRY TEXT */
-	.articlemasonry .categoryarch,
-	.articlemasonry .contentauthor {
-		display: table;
-		width: 50%;
-	}
-	/* BOTONES REDES SOCIALES */
-	.buttons-share__fixed {
-		top: 26px;
-	}
+
 	/* FORM PAGE EDIT EVENT */
 	#em-location-data {
 		display: flex;
@@ -2969,10 +2969,10 @@ textarea.js-medium-editor,
 		top: 25%;
 		width: calc(50% - 40px);
 	}
+	/* FLEXBOXER */
 	.flexboxer .wrap--content {
 		max-width: 1080px;
 	}
-
 	.flexboxer .wrap--frame,
 	.flexboxer .wrap--content__toframe,
 	.alert {
@@ -2981,6 +2981,78 @@ textarea.js-medium-editor,
 	.flexboxer .wrap--frame__fullwidth,
 	.flexboxer .wrap--content__fullwidth {
 		width: 100%;
+	}
+	/* ARCHIVE EVENTS */
+	.flexborex--archive__events .wrap--article {
+		flex: 1 1 33%;
+		max-width: 100%;
+	}	
+	.flexborex--archive__events .wrap--article .content {
+		flex: 1 1 33%;
+		max-width: 100%;
+		padding: 100px 30px;
+		height: 360px;
+	}	
+	.flexborex--archive__events .wrap--article .thumb {
+		height: 360px;
+		opacity: 0;
+		transition: all 600ms ease-in;
+	}
+	.flexborex--archive__events .wrap--article:hover .thumb{
+		opacity: 1;
+	}
+	.flexborex--archive__events .dates {
+		bottom: 100px;
+		left: 30px;
+		color: black;
+	}
+	.flexborex--archive__events .wrap--article h2 a,
+	.flexborex--archive__events .dates {
+		color: black;
+		transition: color 350ms ease;
+	}
+	.flexborex--archive__events .wrap--article .thumb img {
+		transition: all 600ms ease-in;
+	}
+	.flexborex--archive__events .wrap--article:hover h2 a,
+	.flexborex--archive__events .wrap--article:hover .dates {
+		color: white;
+	}
+	.flexborex--archive__events .wrap--article:hover .overflow {
+		opacity: 0.8;
+	}
+	.flexborex--archive__events .wrap--article:hover .thumb img {
+		transform: scale(1.05);
+	}
+	/* ARCHIVE EVENTS (first)*/
+	.flexborex--archive__events .wrap--article__first {
+		flex: 1 1 100%;
+	}
+	.flexborex--archive__events .wrap--article__first .content {
+		flex: 1 1 100%;
+		max-width: 100%;
+		height: 500px;
+		padding: 250px 0 100px;
+	}
+	.flexborex--archive__events .wrap--article__first .thumb {
+		opacity: 1;
+		height: 500px;
+	}
+	.flexborex--archive__events .wrap--article__first h2 {
+		max-width: 80%;
+		padding: 0 45px;
+		margin: 0 auto;
+		font-size: 3vw;
+	}
+	.flexborex--archive__events .wrap--article__first h2 a,
+	.flexborex--archive__events .wrap--article__first .dates {
+		color: white;
+	    position: static;
+	    top: initial;
+	    left: initial;
+	    max-width: 80%;
+	    bottom: initial;
+	    margin: 40px auto 0;
 	}
 }
 

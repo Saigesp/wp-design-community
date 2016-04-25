@@ -14,7 +14,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	<?php if(has_post_thumbnail()){ ?>
 
 		<!-- thumbnail -->
-		<section class="wrap wrap--frame ">
+		<section class="wrap wrap--fullwidth">
 			<header id="header-<?php the_ID(); ?>" class="header header--article">
 				<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
 					<?php the_post_thumbnail('full');  ?>

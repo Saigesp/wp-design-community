@@ -1,20 +1,32 @@
-<footer id="footerpage" class="footer">
-	<div id="colophon" class="wrap wrap--footer">
-    	<div class="divleft">
-    		<p><?php bloginfo('sitename'); ?></p>
-    	</div>
-		<div class="divright">
-			<p><a href="http://www.talkandcode.com/Terms">Aviso legal</a>
-				<a href="https://www.facebook.com/talkandcode"><?php the_svg_icon('facebook');?></a>
-				<a href="https://twitter.com/talkandcode"><?php the_svg_icon('twitter');?></a>
-				<a href="https://www.linkedin.com/company/5321507"><?php the_svg_icon('linkedin');?></a>
-			</p>
-    	</div>
-	</div>
+</div><!-- end of wrapper -->
+
+<!-- footer -->
+<footer id="footer" class="wrap wrap--footer">
+  <div class="flexboxer">
+  
+    <div class="wrap wrap--frame wrap--flex">
+      <div class="wrap wrap--frame__middle">
+        <ul>
+          <li> &copy; <?php echo get_the_date('Y');?> <a href="<?php bloginfo('url'); ?>" target="_blank"><?php bloginfo('sitename'); ?></a></li>
+        </ul>
+            <!-- middlemenu -->
+            <?php /* if (has_nav_menu('menufooter')) { ?>
+              <?php wp_nav_menu( array( 'theme_location' => 'menufooter', 'container' => false ) ); ?>
+            <?php } */ ?><!-- end of middlemenu -->
+      </div>
+      <div class="wrap wrap--frame__middle text--right">
+        <ul>
+          <li>
+          <a href="https://www.facebook.com/aedisevilla/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/facebook.svg" alt="Facebook" class="icon icon--rrss"></a>
+          <a href="https://twitter.com/AEDISevilla" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/twitter.svg" alt="Twitter" class="icon icon--rrss"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer> <!-- end footer -->
 
 
-</div><!-- end of wrapper -->
   <!-- inject:js -->
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/chosen/chosen.jquery.min.js"></script>

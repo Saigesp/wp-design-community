@@ -38,7 +38,7 @@ endwhile; endif;
   <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--fees">
 
     <?php if (have_posts()) : ?>
-    <section class="wrap wrap--content">
+    <section class="wrap wrap--content wrap--shadow">
       <h2>Cuotas</h2>
       <p><?php
         if($must_pay == 0 && $pending_in == 0) echo 'Bien! No tienes cuotas pendientes!';
@@ -97,7 +97,7 @@ endwhile; endif;
     <?php else : ?>
 
       <!-- noinfo -->
-      <section class="wrap wrap--content">
+      <section class="wrap wrap--content wrap--transparent">
         <h2>No hay cuotas creadas</h2>
       </section><!-- end of noinfo -->
 

@@ -33,73 +33,30 @@
 <form method="POST" action="">
 <div class="flexboxer flexboxer--event">
   
-	<section id="generalconfiguration" class="wrap wrap--content wrap--collapse js-section">
+	<section id="generalconfiguration" class="wrap wrap--content wrap--shadow wrap--collapse js-section">
 		<h3 onclick="ToggleSection(this)" data-section="generalconfiguration" class="js-section-launch">Configuración general</h3>
         <p>a</p>
 	</section>
 
-	<section id="twitterconfiguration" class="wrap wrap--content wrap--collapse js-section">
+	<section id="twitterconfiguration" class="wrap wrap--content wrap--form wrap--shadow wrap--collapse js-section">
 		<h3 onclick="ToggleSection(this)" data-section="twitterconfiguration" class="js-section-launch">Configuración de Twitter</h3>
 		<div class="wrap wrap--frame">
 			<input type="checkbox" name="automate_twitter" id="automatic-twitter" value="true" <?php if($automate_twitter == true) echo 'checked';?> / >
-		  	<label for="automate_twitter"> Habilitar configuración automática de twitter</label>
+		  	<label for="automatic-twitter"><span>Habilitar configuración automática de twitter</span></label>
 		</div>
 		<div class="wrap wrap--frame wrap--twitteroptions <?php if(!$automate_twitter) echo 'hide';?>">
 			<p>Para configurar automáticamente una cuenta de twitter para que responda a eventos de la web, como registro de usuarios o publicación de entradas, es necesario obtener unas claves en twitter que te habilitarán como desarrollador. Estas claves se asocian a la cuenta de twitter con la que habilites la opción de desarrollador.<br>Puedes obtener las credenciales de twitter aquí: <a href="http://apps.twitter.com">apps.twitter.com</a></p>
-            <div class="wrap wrap--frame wrap--flex">
-                <div class="wrap wrap--frame__middle wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                    	<label for="consumer_key">Consumer key:</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-                    	<input type="text" name="consumer_key" size="50" value="<?php echo $consumer_key;?>"/>
-                    </div>
-                </div>
-                <div class="wrap wrap--frame__middle wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                    	<label for="consumer_secret">Consumer secret:</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-                    	<input type="text" name="consumer_secret" size="50" value="<?php echo $consumer_secret;?>"/>
-                    </div>
-                </div>
-            </div>
-            <div class="wrap wrap--frame wrap--flex">
-                <div class="wrap wrap--frame__middle wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                    	<label for="access_token">Access token:</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-                    	<input type="text" name="access_token" size="50" value="<?php echo $access_token;?>"/>
-                    </div>
-                </div>
-                <div class="wrap wrap--frame__middle wrap--flex">
-                    <div class="wrap wrap--frame__middle">
-                    	<label for="access_token_secret">Access token secret:</label>
-                    </div>
-                    <div class="wrap wrap--frame__middle">
-                    	<input type="text" name="access_token_secret" size="50" value="<?php echo $access_token_secret;?>"/>
-                    </div>
-                </div>
-            </div>
-            <div class="wrap wrap--frame wrap--flex">
-                <div class="wrap wrap--frame__middle">
-                </div>
-                <div class="wrap wrap--frame__middle wrap--flex">
-	                <div class="wrap wrap--frame__middle">
-	                </div>
-		            <div class="wrap wrap--frame__middle">
-						<?php if ($consumer_key != '' && $consumer_secret != '' && $access_token != '' && $access_token_secret != ''){ ?>
-							<input type="submit" name="tweet_prueba" class="button button-primary" value="Enviar tweet de prueba">
-						<?php }elseif($automate_twitter){ ?>
-					    	<input type="submit" name="" class="button button-primary" value="Enviar tweet de prueba" disabled>
-						<?php }?>
-		            </div>
-                </div>
-            </div>
+            <?php wpdc_the_input_text('consumer_key', $consumer_key, 'Consumer key', '');?>
+            <?php wpdc_the_input_text('consumer_secret', $consumer_secret, 'Consumer secret', '');?>
+            <?php wpdc_the_input_text('access_token_secret', $access_token_secret, 'Access token secret', '');?>
+            <?php wpdc_the_input_text('access_token', $access_token, 'Access token', '');?>
+
+            <?php if ($consumer_key != '' && $consumer_secret != '' && $access_token != '' && $access_token_secret != ''){ ?>
+                <?php wpdc_the_submit('tweet_prueba', '', '', 'Enviar tweet de prueba');?>
+			<?php }?>
 		</div>
 		<div class="wrap wrap--frame wrap--twitteroptions wrap--twitteroptions__actions <?php if(!$automate_twitter) echo 'hide';?>">
-	        <h3>Activación de servicios de twitter</h3>
+	        <h3 class="sep">Activación de servicios de twitter</h3>
 			<?php if ($consumer_key != '' && $consumer_secret != '' && $access_token != '' && $access_token_secret != ''){ ?>
 	          <p>¿Cuando quieres lanzar los tweets?</p>
 	          <table class="form-table">
@@ -123,12 +80,9 @@
 				<p>Es necesario que obtengas las claves arriba indicadas para poder activar los servicios</p>
 			<?php }?>			
 		</div>
-	</section>
-	<section class="wrap wrap--frame wrap--submit">
-		<p class="submit">
-			<input type="hidden" name="update_settings" value="Y" />
-			<input type="submit" class="button button-primary" value="Guardar cambios">
-		</p>
+
+        <?php wpdc_the_submit('update_settings_twitter', 'update_settings', 'update-config', 'Guardar cambios');?>
+
 	</section>
   
 </div><!-- end of flexboxer -->

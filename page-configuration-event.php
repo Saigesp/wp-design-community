@@ -46,7 +46,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_ev
             </div>
           </div>
           <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
-              <?php the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+              <?php // the_svg_icon('close', 'icon--corner js-close-alert'); ?>
           </div>
         </section>
 

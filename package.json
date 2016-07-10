@@ -1,8 +1,27 @@
 {
   "name": "wpdesigncommunity",
-  "version": "1.0.0",
-  "description": "",
+  "author": {
+    "name" : "Santiago Espinosa",
+    "email" : "saigesp@saigesp.es",
+    "url" : "http://www.saigesp.es/"
+  },
+  "version": "1.2.0",
+  "description": "Customized CMS for designers community",
   "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "napa"
+  },
+  "napa": {
+    "github-selection-sharer": "xdamman/selection-sharer",
+    "github-ias": "webcreate/infinite-ajax-scroll",
+    "github-imagefill": "johnpolacek/imagefill.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Saigesp/wp-design-community.git"
+  },
+  "license": "ISC",
   "dependencies": {
     "browser-sync": "^2.11.1",
     "event-stream": "^3.3.2",
@@ -30,19 +49,10 @@
     "run-sequence": "^1.1.5",
     "stream-series": "^0.1.1"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "napa"
-  },
-  "napa": {
-    "github-selection-sharer": "xdamman/selection-sharer",
-    "github-ias": "webcreate/infinite-ajax-scroll",
-    "github-imagefill": "johnpolacek/imagefill.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Saigesp/wp-design-community.git"
-  },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "gulp-header": "^1.8.7",
+    "gulp-less": "^3.1.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-watch": "^4.3.8"
+  }
 }

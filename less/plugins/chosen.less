@@ -1,0 +1,67 @@
+/**
+ * CHOSEN
+ ***********************************/
+
+.event-categories {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
+	> label {
+		vertical-align: top;
+		flex: 1 0 100px;
+	}
+	.chosen-container {
+	 flex: 1 0 100px;
+	 display: block;
+	}
+}
+
+/* General */
+.chosen-container {
+	width: 100% !important;
+	&-multi .chosen-choices {
+		border: 0;
+		background: rgba(0,0,0,0.1);
+		padding: 5px 5px 0;
+		li {
+			&.search-choice {
+				background: white;
+				border: 0;
+				border-radius: 0;
+				margin: 0 5px 5px 0;
+				line-height: 19px;
+			}
+			&.search-field {
+				height: 25px
+			}
+		}
+	}
+	&-active .chosen-choices {
+		box-shadow: none;
+	}
+	&-single .chosen-single {
+		background: rgba(0,0,0,0.1);
+		border: 0;
+		border-radius: 0;
+		padding: 5px;
+		min-height: 35px;
+		box-shadow: none;
+		font-size: 1.6rem;
+	}
+	.chosen-drop {
+		border: 0;
+		/* box-shadow: none; */
+	}
+	.chosen-results li.highlighted {
+		background-color: rgb(40,180,184);
+	}
+}
+
+
+/* Select */
+.chosen-container-active.chosen-with-drop .chosen-single,
+.chosen-container-single .chosen-drop {
+	border: 0;
+	border-radius: 0
+}

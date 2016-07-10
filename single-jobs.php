@@ -65,7 +65,7 @@ $members_pending = get_post_meta(get_the_ID(), 'members_pending', true);
                     echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
                     echo '<td>'.$time.'</td>';
                     echo '<td><input type="checkbox" class="hidden" id="checkbox-pay-'.$user_id.'" name="members_paydown[]" value="'.$user_id.'"><label for="checkbox-pay-'.$user_id.'">';
-                    the_svg_icon('close', 'icon--corner');
+                    // the_svg_icon('close', 'icon--corner');
                     echo '</label></td>';
                     echo '</tr>';
                   }
@@ -112,10 +112,10 @@ $members_pending = get_post_meta(get_the_ID(), 'members_pending', true);
                     echo '<td><a href="'.get_author_posts_url($user_id).'">'.get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id).'</a></td>';
                     echo '<td>'.$time.'</td>';
                     echo '<td><input type="checkbox" class="hidden" id="checkbox-pen-'.$user_id.'" name="members_pendingdown[]" value="'.$user_id.'"><label for="checkbox-pen-'.$user_id.'">';
-                    the_svg_icon('close', 'icon--corner');
+                    // the_svg_icon('close', 'icon--corner');
                     echo '</label></td>';
                     echo '<td><input type="checkbox" class="hidden" id="checkbox-topay-'.$user_id.'" name="members_validate[]" value="'.$user_id.'"><label for="checkbox-topay-'.$user_id.'">';
-                    the_svg_icon('check', 'icon--corner icon--corner__second');
+                    // the_svg_icon('check', 'icon--corner icon--corner__second');
                     echo '</label></td>';
                     echo '</tr>';
                   }

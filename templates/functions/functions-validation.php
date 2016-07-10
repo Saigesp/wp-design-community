@@ -176,7 +176,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
 
     // Change vocals
-    if (!empty($_POST['vocales'])){
+    if (!empty($_POST['vocal'])){
       foreach ($juntales as $juntal) {
         if (get_the_author_meta('asociation_position', $juntal->ID) == 'vocal'){
           $juntal->remove_role('editor');
@@ -184,7 +184,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           update_user_meta($juntal->ID, 'asociation_position', '' );
         } 
       }
-      foreach ($_POST['vocales'] as $vocal_id) {
+      foreach ($_POST['vocal'] as $vocal_id) {
         $vocal = get_userdata($vocal_id);
         $vocal->remove_role('author');
         $vocal->add_role(esc_attr('editor'));

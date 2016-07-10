@@ -37,7 +37,7 @@ get_header();
 						<?php } ?>
 						<p class="author"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a></p>
 						<p class="date"><?php the_date();?></p>
-						<?php if(function_exists('wpp_get_views')){ ?><p class="views"><?php the_svg_icon('eye'); echo wpp_get_views(get_the_ID(),'all');?></p><?php } ?>
+						<?php if(function_exists('wpp_get_views')){ ?><p class="views"><?php // the_svg_icon('eye'); echo wpp_get_views(get_the_ID(),'all');?></p><?php } ?>
 					</div>
 						<div id="content-<?php the_ID(); ?>" class="content">
 							<?php the_content(); ?>
@@ -51,7 +51,7 @@ get_header();
 									if( $archive ) { ?>
 									    	<p>
 									    		<a href="<?php echo $archive;?>">
-									    			<?php the_svg_icon('download');?> <?php echo 'Descarga <span class="filename">'. $archivename.'</span>';?>
+									    			<?php // the_svg_icon('download');?> <?php echo 'Descarga <span class="filename">'. $archivename.'</span>';?>
 									    		</a>
 									    	</p>
 								<?php } } ?>
@@ -75,17 +75,17 @@ get_header();
 										}
 										if(get_user_meta(get_the_author_meta('ID'),twitter,true) != '') { ?>
 											<a href="<?php echo 'https://twitter.com/'.get_user_meta(get_the_author_meta('ID'),twitter,true);?>" target="_blank">
-												<?php the_svg_icon('twitter');?>
+												<?php // the_svg_icon('twitter');?>
 											</a>
 										<?php } ?>
 										<?php if(get_user_meta(get_the_author_meta('ID'),googleplus,true) != '') { ?>
 											<a rel="author" href="<?php echo get_user_meta(get_the_author_meta('ID'),googleplus,true);?>" target="_blank">
-												<?php the_svg_icon('gplus');?>
+												<?php // the_svg_icon('gplus');?>
 											</a>
 										<?php } ?>
 									    <?php if(get_user_meta(get_the_author_meta('ID'),linkedin,true) != '') { ?>
 									    <a href="<?php echo get_user_meta(get_the_author_meta('ID'),linkedin,true);?>" target="_blank">
-									      <?php the_svg_icon('linkedin');?>
+									      <?php // the_svg_icon('linkedin');?>
 									    </a>
 									    <?php } ?>
 									</p>

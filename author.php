@@ -48,24 +48,24 @@
       <br>
       <?php if(get_user_meta($term_slug,twitter,true) != '') { ?>
       <a href="<?php echo 'https://twitter.com/'.get_user_meta($term_slug,twitter,true);?>">
-        <?php the_svg_icon('twitter');?>
+        <?php // the_svg_icon('twitter');?>
       </a>
       <?php } ?>
       <?php if(get_user_meta($term_slug,googleplus,true) != '') { ?>
       <a rel="author" href="<?php echo get_user_meta($term_slug,googleplus,true);?>">
-        <?php the_svg_icon('gplus');?>
+        <?php // the_svg_icon('gplus');?>
       </a>
       <?php } ?>
       <?php if(get_user_meta($term_slug,linkedin,true) != '') { ?>
       <a href="<?php echo get_user_meta($term_slug,linkedin,true);?>">
-        <?php the_svg_icon('linkedin');?>
+        <?php // the_svg_icon('linkedin');?>
       </a>
       <?php } ?>
     </p>
     <p class="description"><?php echo $user_info->description;?></p>
     <div class="wrap wrap--icon wrap--icon__close" >
       <a href="<?php echo get_bloginfo('url');?>/edit-profile/?id=<?php echo $user_info->ID;?>">
-        <?php the_svg_icon('edit', 'icon--corner'); ?>
+        <?php // the_svg_icon('edit', 'icon--corner'); ?>
       </a>
     </div>
   </section><!-- end of author -->

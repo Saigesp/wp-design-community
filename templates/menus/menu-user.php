@@ -1,22 +1,7 @@
-<nav id="menuuser" class="wrap wrap--menu wrap--menu__user js-menu animecubic350">
+<nav id="menu_user" class="menu menu--side menu--side__right menu--user js-menu animecubic350">
 <?php if(!is_user_logged_in()){
 
-  // Login form
-  $args = array(
-    'label_username' => __( 'Usuario' ),
-    'label_password' => __( 'Contraseña' ),
-    'label_remember' => __( 'Recuerdame' ),
-    'label_log_in'   => __( 'Iniciar sesión' ),
-  );
-  wp_login_form( $args ); 
 
-  if(get_bloginfo('users_can_register')) { ?>
-
-      <p class="register-submit">
-        <a class="button button-secondary" href="<?php echo get_bloginfo('url').'/wp-login.php?action=register';?>/new-member">Registro</a>
-      </p>
-
-  <?php }
 }else{ ?> 
   <ul id="menu-admin-menu-base" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
 

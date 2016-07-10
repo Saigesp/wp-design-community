@@ -46,6 +46,7 @@ var favicon_master_img = dev + 'img/favicon.png';
 var favicon_output_path = dev + 'img/favicon/';
 var favicon_icon_path = '<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/'; //Prepared to wordpress
 
+
 // Load plugins
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
@@ -53,6 +54,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-uglifycss'),
     uglify = require('gulp-uglify'),
+    less = require('gulp-less'),
     rename = require('gulp-rename'),
     notify = require('gulp-notify'),
     rimraf = require('gulp-rimraf'),
@@ -61,13 +63,51 @@ var gulp = require('gulp'),
     realFavicon = require('gulp-real-favicon'),
     fs = require('fs')
     series = require('stream-series')
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    watch      = require('gulp-watch'),
+    header     = require('gulp-header'),
+    pkg        = require('./package.json');
+
+
+/* Prepare banner text */
+var banner = ['/*',  
+  'Theme Name: <%= pkg.name %> ',
+  'Theme URI: <%= pkg.repository.url %>',
+  'Author: <%= pkg.author.name %>',
+  'Author email: <%= pkg.author.email %>',
+  'Description: <%= pkg.description %>',
+  'Version: <%= pkg.version %>',
+  'Licence: <%= pkg.license %>',
+  'Licence URI: GNU General Public License v2 or later',
+  'Tags: <%= pkg.author.name %>',
+  'Text Domain: <%= pkg.author.name %>',
+  ' */',
+  ''].join('\n');
 
 /* default
  *  
  ***********************************/
 gulp.task('default', function() {
 
+});
+
+
+
+/* Compile LESS
+ *  
+ ***********************************/
+gulp.task('less', function() {  
+  gulp.src('./less/style.less')
+    .pipe(less())
+    .pipe(header(banner, {pkg: pkg}))
+    .pipe(gulp.dest('./'));
+});
+
+/* watch less
+ *  
+ ***********************************/
+gulp.task('watch-less', ['less'], function() {  
+  gulp.watch('./dev/*.less' , ['less']);
 });
 
 

@@ -26,7 +26,7 @@
 	echo $msg;
 
 	echo '<div class="wrap wrap--icon wrap--icon__close">';
-	the_svg_icon('close', 'js-close-alert');
+	// the_svg_icon('close', 'js-close-alert');
 	echo '</div></div>';
 }*/
 

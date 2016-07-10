@@ -5,14 +5,14 @@
  ***********************************/
 // Add more functions
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-include_once(locate_template('functions-scripts.php'));
-include_once(locate_template('functions-options.php'));
-include_once(locate_template('functions-twitter.php')); // TODO Poner si está activada opción de twitter
-include_once(locate_template('functions-fees.php'));
-include_once(locate_template('functions-jobs.php'));
-include_once(locate_template('functions-concursos.php'));
-include_once(locate_template('functions-documentos.php'));
-include_once(locate_template('functions-svg.php'));
+include_once(locate_template('templates/functions/functions-scripts.php'));
+include_once(locate_template('templates/components.php'));
+include_once(locate_template('templates/functions/functions-options.php'));
+include_once(locate_template('templates/functions/functions-twitter.php')); // TODO Poner si está activada opción de twitter
+include_once(locate_template('templates/functions/functions-fees.php'));
+include_once(locate_template('templates/functions/functions-jobs.php'));
+include_once(locate_template('templates/functions/functions-concursos.php'));
+include_once(locate_template('templates/functions/functions-documentos.php'));
 
 //AJAX
 function ajax_script_FTW() {
@@ -43,6 +43,7 @@ add_action( 'init', 'wpdc_widgets_init' );
 // Active menus
 register_nav_menus( array(
   'menutop' => 'Top Menu',
+  'menuheader' => 'Header Menu',
   'menumiddle' => 'Menu medio',
 	'menufooter' => 'Menu inferior',
 ) );
@@ -56,6 +57,7 @@ new_page_title('Configuration presidence');
 new_page_title('Configuration treasury');
 new_page_title('Configuration secretary');
 new_page_title('Configuration concursos');
+new_page_title('Configuration jobs');
 
 new_page_title('Disenadores');
 

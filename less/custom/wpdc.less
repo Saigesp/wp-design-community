@@ -1,0 +1,380 @@
+
+
+
+.flexboxer .wrap--flex .em-location-map-container {
+	width: 100% !important;
+}
+
+
+
+
+/**
+ * PAGES (SPECIFIC)
+ *************************************************************************************************/
+
+/**
+ * HOME (home.php)
+ ***********************************/
+.flexboxer--home {
+	max-width: 1200px;
+	margin: 0 auto;
+	.wrap--slider {
+		margin-top: 0;
+		.gallery-cell {
+			height: 460px;
+		}
+	}
+	.wrap--article {
+		flex: 1 1 300px;
+		margin: 10px !important;
+		&__first {
+		/*	flex: 1 1 100% !important;
+			margin: 10px auto !important;*/
+			.thumb {
+
+			}
+		}
+	}
+}
+
+
+
+
+/**
+ * ARCHIVE EVENTS HOME (archive-event.php)
+ ***********************************/
+.flexborex--archive__events {
+	max-width: 100%;
+	.wrap--article {
+		flex: 1 1 100%;
+		margin: 0;
+		border-top: 1px solid white;
+	    border-bottom: 1px solid white;
+	    max-width: 100%;
+	    box-shadow: none !important;
+	    transition: opacity 350ms ease;
+		&:hover .overflow {
+			opacity: 0.5;
+		}
+		+ .wrap--article {
+			border-top: 0;
+		}
+	}
+	.content {
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 300px;
+	    z-index: 10;
+	    padding: 40px 20px;
+	    box-sizing: border-box;
+		h2 {
+			font-weight: 900;
+		    font-size: 2.4rem;
+		    line-height: 1.2;
+			a {
+				color: white;
+			}
+		}
+	}
+	.dates {
+		position: absolute;
+	    color: white;
+	    bottom: 20px;
+	    left: 20px;
+		span {
+		    text-transform: uppercase;
+		    font-size: 1.2rem;
+		}
+		.status {
+		    font-weight: 900;
+		    font-size: 1.2rem;
+			a {
+				color: white;
+				transition: opacity 350ms ease-in;
+			}
+		}
+	}
+	.description {
+		display: none;
+	}
+}
+
+
+/**
+ * SINGLE FEE (single-fee.php)
+ ***********************************/
+.wrap--userlist td .icon-close {
+	height: 14px;
+    width: 14px;
+    padding: 8px;
+    background: red;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+}
+
+
+
+/**
+ * PAGE EDIT PROFILE (page-edit-profile.php)
+ ***********************************/
+.flexboxer--author__edit {
+	.wrap--empty {
+		background: rgba(0,0,0,0.1);
+		cursor: pointer;
+		transition: background 500ms ease;
+		&:hover {
+			background: rgba(0,0,0,0.2);
+			.more--section {
+				color: rgba(255,255,255,0.5);
+			}
+		}
+	}
+	.more--section {
+		margin: 0;
+		text-align: center;
+		color:rgba(0,0,0,0.2);
+		transition: color 500ms ease;
+		padding: 15px 0;
+	}
+	form {
+		position: relative;
+	}
+	input[type="text"]:focus,
+	input[type="text"]:hover,
+	.js-medium-editor:hover {
+		background: rgba(0,0,0,0.1);
+	}
+}
+
+
+
+
+
+
+/**
+ * PAGE DISEÑADORES (page-disenadores.php)
+ ***********************************/
+.flexboxer--disenadores {
+	.wrap--user {
+		background-color: transparent;
+		margin: 10px 0 0 10px;
+	}
+
+	.wrap--photo {
+		width: 100px;
+		height: 100px;
+		overflow: hidden;
+		position: relative;
+		&__position {
+			background-color: black;
+			color: white;
+			padding: 5px;
+			width: 90px;
+			height: 90px;
+			h2 {
+				margin-top: 25px;
+				font-size: 1.8rem;
+				line-height: 2.4rem;
+			}
+		}
+		&:hover .overflow {
+			top: 0;
+		}
+		.overflow {
+			top: 100px;
+		}
+		img {
+			width: 100%;
+			height: auto;
+		}
+		p {
+			color: white;
+			margin: 5px;
+			font-size: 1.2rem;
+		}
+	}
+	
+
+}
+
+
+
+
+/**
+ * PAGE EDIT EVENT (page-edit-event.php)
+ ***********************************/
+.flexboxer--event__edit {
+	.wrap {
+		order: 99;
+	}
+	.wrap--event-form {
+		&-image {
+			background-color: rgba(0,0,0,0.1);
+			height: 340px;
+			display: block;
+			flex: 1 0 100%;
+			transition: background 300ms ease;
+			h3{
+				color: rgba(0,0,0,0.6);
+				margin-bottom: 0;
+				text-align: center;
+			}
+			> h3,
+			> .inside {
+				display: none;
+			}
+
+			img {
+				 cursor: pointer;
+				 opacity: 0;
+				 transition: opacity 300ms ease;
+			}
+			.overflow {
+				cursor: pointer;
+			}
+		}
+		&-image 	{ order: 1; }
+		&-name 		{ order: 2; }
+		&-when 		{ order: 3; }
+		&-details 	{ order: 4; }
+		&-where 	{ order: 5; }
+	}
+	+ p {
+		&.submit {
+			display: block;
+			width: 100%;
+			max-width: 900px;
+			margin: 0 auto;
+		}
+		&.submit input {
+			width: 100%;
+			margin-bottom: 10px
+		}
+	}
+	h3.event-form-details{
+	    transition: all 1000ms ease;
+	}
+}
+
+
+#em-form-with-recurrence p {
+	margin: 10px 0;
+}
+
+#em-location-data {
+	&.em-location-data table.em-location-data {
+		tbody,
+		tr,
+		th,
+		td {
+			width: auto;
+		    float: none;
+		    border: none;
+		    display: block;
+		}
+		tr + tr {
+			margin-top: 10px;
+		}
+		td i {
+			display: none;
+		}
+		&-region {
+			display: none;
+		}
+		input {
+			width: 100%;
+		}
+	}
+	.em-location-map-container {
+		display: none;
+	}
+}
+
+
+#qt_em-editor-content_toolbar,
+#wp-em-editor-content-editor-tools {
+	display: none;
+}
+
+
+
+
+.em-location-data-nolocation {
+	margin: 0 0 25px;
+    padding-top: 5px;
+}
+
+
+
+/**
+ * MANAGE BOOKINGS in PAGE EDIT EVENT (page-edit-event.php)
+ ***********************************/
+.booking_status {
+
+}
+
+.booking_status--1 { background: darkseagreen; }
+.booking_status--2, .booking_status--3 { background: darksalmon; }
+.booking_status--0, .booking_status--4, .booking_status--5 { }
+
+#bookingmanager-form .wrap--submit .submit {
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+/**
+ * PAGE CONTROL USERS (page-control-users.php)
+ ***********************************/
+.flexboxer--controlusers .chosen-container-multi {
+	width: 100% !important;
+}
+
+.wrap--filterusers {
+	input[type="submit"] {
+		padding: 4px 10px 5px;
+		width: 240px;
+		margin: 0;
+		margin-left: calc(100% - 240px);
+	}
+
+	> .wrap{
+		margin: 0 auto;
+	}
+
+	> .wrap--content,
+	> .wrap > .wrap--content {
+		flex: 1 0 calc(100% - 10px);
+	    padding: 5px;
+	    margin: 0 auto;
+	}
+
+	> .wrap--content > .wrap--content {
+		padding: 0;
+		margin: 3px 0;
+		& + .wrap--content {
+			margin-top: 5px;
+		}
+	}
+
+	.wrap--filters {
+		padding-top: 0;
+	}
+
+	.submit {
+		margin: 0 5px 5px;
+		width: calc(100% - 10px);
+	}
+
+}

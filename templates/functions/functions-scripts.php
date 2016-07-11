@@ -92,10 +92,6 @@ function inject_in_all() { ?>
 
       $(".js-showonload").removeClass("js-showonload-active");
 
-      $("#close").on("click", function(){
-        $(".alert").removeClass('alert--error').addClass('hide');
-      });
-
       if ( $(".chosen").length > 0){
         $('.chosen').chosen();
       }
@@ -121,13 +117,6 @@ function inject_in_all() { ?>
         }
         
       });
-
-
-
-
-
-
-
 
       moment.locale('es', {
           months : "enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre".split("_"),
@@ -306,14 +295,17 @@ function inject_in_all() { ?>
     <?php } ?>
     <?php if (is_page('configuration-treasury')) { ?>
 
-
-    var picker = new Pikaday({
-        field: document.getElementById('datepicker'),
-        format: 'YYYY-MM-DD h:mm:ss',
-        onSelect: function() {
-        }
-    });
-
+      console.log('hola');
+      var $datepicker = $('.js-pikaday').pikaday({
+          format: 'YYYY-MM-DD h:mm:ss',
+          minDate: new Date(2016, 0, 1),
+          maxDate: new Date(2020, 12, 31),
+          yearRange: [2016,2020],
+          onSelect: function() {
+          },          
+      });
+      
+      //$datepicker.pikaday('show').pikaday('nextMonth');
 
     /**
      * PAGE CONFIGURATION

@@ -19,12 +19,27 @@ function wpdc_the_pageoptions($menu){
 }
 
 
-function wpdc_the_input_text($name, $value, $label, $placeholder){
+function wpdc_the_input_text($name, $value, $label, $placeholder, $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-	$output .= '<input id="'.$name.'-input" type="text" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'"/>';
+	$output .= '<input id="'.$name.'-input" type="text" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'"';
+	if($disabled) $output .= ' disabled ';
+	$output .= '/>';
+	$output .= '</div></div>';
+    echo $output;
+}
+
+
+function wpdc_the_input_date($name, $value, $label, $disabled = false){
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
+	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<input id="'.$name.'-input" type="text" class="js-pikaday" name="'.$name.'" value="'.$value.'"';
+	if($disabled) $output .= ' disabled ';
+	$output .= '/>';
 	$output .= '</div></div>';
     echo $output;
 }
@@ -56,7 +71,7 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option';
+	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option" ';
 	if($multiple) $output .= 'multiple="multiple"';
 	$output .= '/>';
     foreach ($options as $val => $text) {

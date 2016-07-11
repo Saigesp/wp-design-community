@@ -1,5 +1,5 @@
-<section id="newconcurso" class="wrap wrap--content wrap--form wrap--hidden js-section">
-  <h3>Crear concurso</h3>
+<section id="newconcurso" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section">
+  <h3 class="title title--section">Crear concurso</h3>
 
   <?php wpdc_the_input_text('concurso_name', '', 'Nombre del concurso', 'Nombre del concurso');?>
 

@@ -1,5 +1,5 @@
 <section id="managedocs" class="wrap wrap--content wrap--form wrap--hidden js-section">
-    <h3>Gestionar documentos</h3>
+    <h3 class="title title--section">Gestionar documentos</h3>
     
     <!-- document list -->
     <?php if ( $documents->have_posts() ) { ?>

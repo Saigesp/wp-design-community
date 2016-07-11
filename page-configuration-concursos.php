@@ -40,7 +40,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
 
 
     <?php if (have_posts()) : ?>
-      <section class="wrap wrap--content">
+      <section class="wrap wrap--content wrap--shadow">
         <h2>Concursos</h2>
         <h3 class="sep">Listado de concursos</h3>
         <?php while (have_posts()) : the_post(); ?>
@@ -72,7 +72,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
       <?php else : ?>
 
         <!-- noinfo -->
-        <section class="wrap wrap--content">
+        <section class="wrap wrap--content wrap--shadow">
           <h2>Concursos</h2>
           <p>Todavía no has creado ningún concurso. <a onclick="ToggleSection(this)" data-section="newconcurso">¿Quieres crear uno?</a></p>
         </section><!-- end of noinfo -->

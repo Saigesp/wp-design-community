@@ -22,7 +22,7 @@ $page_sections = [
 ?>
 
 <section id="capacities" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden active js-section">
-    <h2 class="title title--section">Gestión de permisos y roles</h2>
+    <h3 class="title title--section">Gestión de permisos y roles</h3>
 
     <!-- permisos generales -->
     <h3 class="sep">Permisos</h3>

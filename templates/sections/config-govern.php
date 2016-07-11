@@ -1,5 +1,5 @@
 <section id="gobteam" class="wrap wrap--content wrap--form wrap--hidden js-section">
-    <h2 class="title title--section">Configurar gobierno</h2>
+    <h3 class="title title--section">Configurar gobierno</h3>
 
 	<h3 class="sep">Junta directiva</h3>
     <p class="help help--section">Los miembros de la Junta Directiva tienen capacidades de edición de todos los contenidos de la web, excepto la gestión de socios, exclusiva para el secretario, y la gestión de cuotas, exclusiva del tesorero. Para poder elegir a un usuario, éste antes ha de tener estatus de asociado.</p>

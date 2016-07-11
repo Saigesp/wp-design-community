@@ -1,57 +1,16 @@
-  <section class="wrap wrap--content wrap--form wrap--authornetworks">
-    <h3>Redes sociales</h3>
-    <div class="wrap wrap--flex">
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="facebook">Facebook</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <input type="text" name="facebook" class="tolisten" value="<?php echo get_user_meta($user->ID,facebook,true);?>"/>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="dbem_address">Twitter</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <input type="text" name="twitter" class="tolisten" value="<?php echo get_user_meta($user->ID,twitter,true);?>"/>
-        </div>
-      </div>
-    </div>
-    <div class="wrap wrap--flex">
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="linkedin">Linkedin</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <input type="text" name="linkedin" class="tolisten" value="<?php echo get_user_meta($user->ID,linkedin,true);?>"/>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="googleplus">Google+</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-          <input type="text" name="googleplus" class="tolisten" value="<?php echo get_user_meta($user->ID,googleplus,true);?>">
-        </div>
-      </div>
-    </div>
-    <div class="wrap wrap--flex">
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="behance">Behance</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <input type="text" name="behance" class="tolisten" value="<?php echo get_user_meta($user->ID,behance,true);?>"/>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="domestika">Domestika</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-          <input type="text" name="domestika" class="tolisten" value="<?php echo get_user_meta($user->ID,domestika,true);?>">
-        </div>
-      </div>
-    </div>
+  <section class="wrap wrap--content wrap--form wrap--shadow wrap--authornetworks">
+    <h3 class="title title--section">Redes sociales</h3>
+
+    <?php wpdc_the_input_text('facebook', get_user_meta($user->ID,facebook,true), 'Usuario de facebook', 'usuario');?>
+
+    <?php wpdc_the_input_text('twitter', get_user_meta($user->ID,twitter,true), 'Usuario de twitter', 'usuario');?>
+    
+    <?php wpdc_the_input_text('linkedin', get_user_meta($user->ID,linkedin,true), 'Url de linkedin', 'http://');?>
+
+    <?php wpdc_the_input_text('googleplus', get_user_meta($user->ID,googleplus,true), 'Usuario de Google+', 'usuario');?>
+
+    <?php wpdc_the_input_text('behance', get_user_meta($user->ID,behance,true), 'Usuario de Behance', 'usuario');?>
+
+    <?php wpdc_the_input_text('domestika', get_user_meta($user->ID,domestika,true), 'Usuario de Domestika', 'usuario');?>
+
   </section>

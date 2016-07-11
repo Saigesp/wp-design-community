@@ -1,5 +1,5 @@
   <section class="wrap wrap--content wrap--form">
-  	<h3>Datos del usuario</h3>
+  	<h3 class="title title--section">Datos del usuario</h3>
     <div class="wrap wrap--flex">
       <div class="wrap wrap--frame__middle wrap--flex">
         <div class="wrap wrap--frame__middle">

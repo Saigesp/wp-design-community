@@ -3,11 +3,8 @@ $args = array( 'post_id' => get_the_ID());
 $args_trash = array( 'post_id' => get_the_ID(), 'status' => 'trash');
 $comments = get_comments( $args );
 $comments_trash = get_comments( $args_trash );
-
-
-
 ?>
-<section class="wrap wrap--fullwidth wrap--harry">
+<section class="wrap wrap--fullwidth wrap--meeseeks">
   <div class="wrap wrap--frame">
     <h4>Hola <?php echo get_userdata(get_current_user_id())->first_name;?></h4>
     <div class="wrap wrap--frame wrap--flex">

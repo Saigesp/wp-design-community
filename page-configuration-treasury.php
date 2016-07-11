@@ -11,11 +11,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
   );
   $wp_query = new wp_query( $args );
 
-
-/*  if(is_user_role('administrator') || is_user_role('editor')) { 
-    include(locate_template('functions-validation.php'));
-  }
-*/
+  include(locate_template('templates/functions/functions-validation.php'));
 
   $pageoptions = [
       "feelist" => "X Cuotas",
@@ -26,9 +22,9 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
 
   <!-- flexboxer -->
   <form method="POST" action="">
-    <div class="flexboxer flexboxer--event">
+    <div class="flexboxer flexboxer--configuration__treasury">
 
-      <?php// include(locate_template('templates/harry/harry.php')); ?>
+      <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
       <!-- admin options -->
       <?php wpdc_the_pageoptions($pageoptions);?>
@@ -41,7 +37,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
           
       <!-- fee list -->
       <?php if (have_posts()) { ?>
-        <?php include(locate_template('templates/sections/config-bankaccount.php')); ?>
+        <?php include(locate_template('templates/sections/listing-fee.php')); ?>
       <?php } else { ?>
         <section id="feelist" class="wrap wrap--content wrap--shadow js-section wrap--hidden active">
           <h2>Cuotas</h2>

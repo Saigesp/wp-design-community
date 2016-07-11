@@ -1,9 +1,9 @@
 {
   "name": "wpdesigncommunity",
   "author": {
-    "name" : "Santiago Espinosa",
-    "email" : "saigesp@saigesp.es",
-    "url" : "http://www.saigesp.es/"
+    "name": "Santiago Espinosa",
+    "email": "saigesp@saigesp.es",
+    "url": "http://www.saigesp.es/"
   },
   "version": "1.2.0",
   "description": "Customized CMS for designers community",

@@ -1,5 +1,5 @@
 <section id="" class="wrap wrap--content wrap--shadow wrap--userlist">
-    <h2>Listado de socios</h2>
+    <h3 class="title title--section">Listado de socios</h3>
     <?php
     $users = $socios;
     if(is_object($users) && sizeof($users) > 1){

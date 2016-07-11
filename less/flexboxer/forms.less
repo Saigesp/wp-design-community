@@ -8,11 +8,17 @@
 			#basicinput;
 			&:required{
 				&.ng-dirty.ng-invalid,
-	      &.invalid-important {
+	      		&.invalid-important {
 					border-left: 5px solid red !important;
 				}
 				&.ng-dirty.ng-valid {
 					border-left: 5px solid green;
+				}
+			}
+			&:disabled {
+				background: transparent;
+				&:hover{
+					background: transparent;
 				}
 			}
 		}

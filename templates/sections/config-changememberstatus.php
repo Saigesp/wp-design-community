@@ -1,5 +1,5 @@
 <section id="changememberstatus" class="wrap wrap--content wrap--shadow wrap--hidden js-section">
-    <h2>Gestionar socios</h2>
+    <h3 class="title title--section">Gestionar socios</h3>
 
     <h3 class="sep">Gestionar altas y bajas</h3>
 

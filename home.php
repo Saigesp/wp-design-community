@@ -6,7 +6,7 @@ $args = array (
 	'post_type' => array('event'),
   'posts_per_page' => 5
 );
-$query = new WP_Query( $args );
+$events_query = new WP_Query( $args );
 
 ?>
 
@@ -32,7 +32,7 @@ $query = new WP_Query( $args );
     </div>
   </section>
 
-  <?php if ($query->have_posts()) { ?>
+  <?php if ($events_query->have_posts()) { ?>
     <section class="wrap wrap--fullwidth wrap--slider">
       <div id="mainslider" class="main-gallery">
         <?php while ($query->have_posts()) { $query->the_post(); ?>
@@ -44,30 +44,28 @@ $query = new WP_Query( $args );
     </section>
   <?php } ?>
 
-    <section class="wrap wrap--content wrap--transparent wrap--titlesection">
-      <h3>Acerca de AEDI</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint odio, veniam possimus et distinctio amet eos suscipit optio, nam nesciunt, facilis labore architecto assumenda minus. Delectus quaerat quibusdam consequuntur tempora?</p>
-
-<div class="flexboxer flexboxer--disenadores">
-  <?php
-  $original_query = $wp_query;
-  $args = array( 
-      'exclude' => array( 1 ),
-      'role' => 'author',
-      'order' => 'registered',
-      'number' => 10,
-  );
-  $user_query = new WP_User_Query($args);
-  if (!empty( $user_query->results)) { 
-    foreach ( $user_query->results as $user ) {
-      if((!function_exists('get_wp_user_avatar_src') || get_wp_user_avatar_src($user->ID, 100, 'medium') == '') && ($user->userphoto_image_file == '') && is_home()) continue;
-      include( locate_template( 'templates/loops/loop-profile.php' ));
-    }
-  }
-  ?>
-</div>
-
-    </section>
+  <section class="wrap wrap--content wrap--transparent wrap--titlesection">
+    <h3>Acerca de </h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint odio, veniam possimus et distinctio amet eos suscipit optio, nam nesciunt, facilis labore architecto assumenda minus. Delectus quaerat quibusdam consequuntur tempora?</p>
+    <div class="flexboxer flexboxer--disenadores">
+      <?php
+      $original_query = $wp_query;
+      $args = array( 
+          'exclude' => array( 1 ),
+          'role' => 'author',
+          'order' => 'registered',
+          'number' => 10,
+      );
+      $user_query = new WP_User_Query($args);
+      if (!empty( $user_query->results)) { 
+        foreach ( $user_query->results as $user ) {
+          if((!function_exists('get_wp_user_avatar_src') || get_wp_user_avatar_src($user->ID, 100, 'medium') == '') && ($user->userphoto_image_file == '') && is_home()) continue;
+          include( locate_template( 'templates/loops/loop-profile.php' ));
+        }
+      }
+      ?>
+    </div>
+  </section>
 
   <?php
   $args = array (
@@ -96,7 +94,7 @@ $query = new WP_Query( $args );
 
 <?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
 	<div class="flexboxer flexboxer--home">
-		<div class="wrap wrap--content">
+		<div class="wrap wrap--content wrap--transparent">
       <?php dynamic_sidebar( 'sidebar-1' ); ?>
 		</div>
 	</div>

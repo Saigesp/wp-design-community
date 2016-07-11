@@ -1,5 +1,5 @@
 <section id="newjob" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section">
-  <h3>Crear oferta laboral</h3>
+  <h3 class="title title--section">Crear oferta de trabajo</h3>
 
   <?php wpdc_the_input_text('job_name', '', 'Nombre de la oferta', 'Prácticas en...');?>
 

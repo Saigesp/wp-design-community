@@ -16,7 +16,7 @@
 <div class="flexboxer flexboxer--author flexboxer--author__edit">
 <?php if(is_user_logged_in()){ ?>
 
-  <?php include(locate_template('functions-validation.php')); ?>
+  <?php include(locate_template('templates/functions/functions-validation.php')); ?>
 
   <?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' ) { ?>
     <section class="wrap wrap--frame wrap--author">

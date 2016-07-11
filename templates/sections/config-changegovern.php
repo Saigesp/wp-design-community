@@ -1,6 +1,5 @@
 <section id="byemrpresident" class="wrap wrap--content wrap--shadow wrap--form wrap--hidden js-section">
-
-    <h2 class="title title--section">Ceder la presidencia</h2>
+    <h3 class="title title--section">Ceder la presidencia</h3>
     <p class="help help--section">Oh! Siempre te recordaremos como el gran lider que fuiste!</p>
 
     <!-- nuevo lider -->

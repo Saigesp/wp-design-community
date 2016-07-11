@@ -1,5 +1,5 @@
 <section id="setbankaccount" class="wrap wrap--content wrap--shadow wrap--form wrap--hidden js-section">
-  <h2 class="title title--section">Configuración de cuentas</h2>
+  <h3 class="title title--section">Configuración de cuentas</h3>
 
   <h3 class="sep">Cuenta bancaria</h3>
   <p class="help help--section">Especifica a los usuarios de tu sitio dónde hacer los ingresos bancarios.</p>

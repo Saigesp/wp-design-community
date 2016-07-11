@@ -33,7 +33,7 @@
 
 
 ?>
-<div class="flexboxer">
+<div class="flexboxer hidden">
   <section id="alerts" class="wrap wrap--frame wrap--alerts">
     <?php if (!empty($_GET["action"])) { 
       if(esc_attr($_GET["action"]) == 'register'){

@@ -15,7 +15,7 @@
     <textarea name="description" class="description js-medium-editor tolisten"><?php echo $user->description;?></textarea>
   </div>
   
-  <?php wpdc_the_submit('updatefee', 'Crear concurso', 'new-concurso', 'Crear concurso');?>
+  <?php wpdc_the_submit('updatefee', 'Crear concurso', 'new-concurso', '', 'Crear concurso');?>
 
   <?php include(locate_template('templates/sections/section-close.php')); ?>
 </section>

@@ -5,7 +5,7 @@
 
   <?php wpdc_the_input_email('user_email', '', 'Email', 'user@email.com');?>
   
-  <?php wpdc_the_submit('updateuser', 'Crear usuario', 'new-user', 'Crear usuario');?>
+  <?php wpdc_the_submit('updateuser', 'Crear usuario', 'new-user', '', 'Crear usuario');?>
 
   <?php include(locate_template('templates/sections/section-close.php')); ?>
 </section>

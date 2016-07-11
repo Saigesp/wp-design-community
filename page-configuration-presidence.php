@@ -35,9 +35,9 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
 
     <!-- flexboxer -->
     <form method="POST" action="">
-        <div class="flexboxer flexboxer--event">
+        <div class="flexboxer flexboxer--configuration flexboxer--configuration__presidence flexboxer--full">
 
-            <?php //include(locate_template('templates/harry/harry.php')); ?>
+            <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
             <!-- admin options -->
             <?php wpdc_the_pageoptions($pageoptions);?>
@@ -46,7 +46,9 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
             <?php include(locate_template('templates/sections/config-capacities.php')); ?>
 
             <!-- gobierno section -->
-            <?php include(locate_template('templates/sections/config-govern.php')); ?>
+            <?php
+            $users = $users->results;
+            include(locate_template('templates/sections/config-govern.php')); ?>
 
             <!-- dimitir section -->
             <?php include(locate_template('templates/sections/config-changegovern.php')); ?>

@@ -139,6 +139,27 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 }
 
 
+/* INVITAR/CREAR USUARIO
+*
+*****************************************************
+*/ /*
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'create-user' ) {
+
+    $email_address = $_POST['user_reg'];
+    if ( null == username_exists( $email_address ) && $email_address!= '') {
+      $password = wp_generate_password( 12, false );
+      $user_id = wp_create_user( $email_address, $password, $email_address );
+      wp_update_user(array( 'ID' => $user_id, 'nickname' => $email_address));
+      //$op_user = get_the_author_meta('op_user',$current_user->ID, true);
+      //if (is_array($op_user['hainvitado'])){
+      //  array_push($op_user['hainvitado'], $user_id);
+      //} 
+      //update_user_meta($current_user->ID, 'op_user', $op_user );    
+      $user = new WP_User( $user_id ); 
+    }
+    //echo $email_adress;
+
+} */
 
 
 
@@ -148,8 +169,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 */
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
 
+  $msg = '';
+
   // Change govern
-  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changegovern'){
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'Cambiar gobierno'){
 
     $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
     $responsabilities = array('rp_events', 'rp_concursos', 'rp_jobs', 'rp_posts');
@@ -157,61 +180,78 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
     // Change vicepresident, secretary, treasury
     foreach ($cargos as $cargo) {
-      if (!empty($_POST[$cargo])){
-        foreach ($juntales as $juntal) {
-          if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo ){
-            $juntal->remove_role('editor');
-            $juntal->add_role(esc_attr('author'));
-            update_user_meta($juntal->ID, 'asociation_position', '' );
-          } 
+      foreach ($juntales as $juntal) {
+        if (get_the_author_meta('asociation_position', $juntal->ID) == $cargo && $juntal->ID != $_POST[$cargo]){
+          $juntal->remove_role('editor');
+          $juntal->add_role(esc_attr('author'));
+          update_user_meta($juntal->ID, 'asociation_position', '' );
         }
-        foreach ($juntales as $juntal) {
-          if ($juntal->ID == $_POST[$cargo] ){
-            $juntal->remove_role('author');
-            $juntal->add_role(esc_attr('editor'));
-            update_user_meta($juntal->ID, 'asociation_position', $cargo );
-          } 
-        }
+      }
+      foreach ($juntales as $juntal) {
+        if ($juntal->ID == $_POST[$cargo] && get_the_author_meta('asociation_position', $juntal->ID) != $cargo){
+          $juntal->remove_role('author');
+          $juntal->add_role(esc_attr('editor'));
+          update_user_meta($juntal->ID, 'asociation_position', $cargo );
+          $msg .= '<p>El usuario '.$juntal->user_login.' ahora es '.change_role_name($cargo).'</p>';
+        } 
       }
     }
 
     // Change vocals
-    if (!empty($_POST['vocal'])){
-      foreach ($juntales as $juntal) {
-        if (get_the_author_meta('asociation_position', $juntal->ID) == 'vocal'){
-          $juntal->remove_role('editor');
-          $juntal->add_role(esc_attr('author'));
-          update_user_meta($juntal->ID, 'asociation_position', '' );
-        } 
-      }
-      foreach ($_POST['vocal'] as $vocal_id) {
-        $vocal = get_userdata($vocal_id);
-        $vocal->remove_role('author');
-        $vocal->add_role(esc_attr('editor'));
-        update_user_meta($vocal_id, 'asociation_position', 'vocal' );
-      }
+    foreach ($juntales as $juntal) {
+      if (get_the_author_meta('asociation_position', $juntal->ID) == 'vocal' && !in_array($juntal->ID, $_POST['vocal'])){
+        $juntal->remove_role('editor');
+        $juntal->add_role(esc_attr('author'));
+        update_user_meta($juntal->ID, 'asociation_position', '' );
+      } 
+    }
+    foreach ($_POST['vocal'] as $vocal_id) {
+      if(get_the_author_meta('asociation_position', $vocal_id) == 'vocal') continue;
+      $vocal = get_userdata($vocal_id);
+      $vocal->remove_role('author');
+      $vocal->add_role(esc_attr('editor'));
+      update_user_meta($vocal_id, 'asociation_position', 'vocal' );
+      $msg .= '<p>El usuario '.$vocal->user_login.' ahora es vocal</p>';
     }
 
     // Change responsabilities
     foreach($responsabilities as $responsability){
-      if (!empty($_POST[$responsability])){
+      //if(is_array($_POST[$responsability])){
         foreach ($juntales as $user) {
-          if (get_the_author_meta('asociation_responsability', $user->ID) === $responsability)
-            update_user_meta($user->ID, 'asociation_responsability', '' );
+          if(is_array($_POST[$responsability])){
+            if (get_the_author_meta('asociation_responsability', $user->ID) == $responsability && !in_array($user->ID, $_POST[$responsability])){
+              update_user_meta($user->ID, 'asociation_responsability', '' );
+            }
+          }
         }
-        foreach ($_POST[$responsability] as $user_id)
+        if(is_array($_POST[$responsability])){
+          foreach ($_POST[$responsability] as $user_id){
+            if (get_the_author_meta('asociation_responsability', $user_id) == $responsability) continue;
             update_user_meta($user_id, 'asociation_responsability', $responsability );
-      }
+            $user = get_userdata($user_id);
+            $msg .= '<p>El usuario '.$user->user_login.' ahora es '.change_role_name($responsability).'</p>';
+          }
+        }
+     // }
     }
-
-
 
   }else if ($_POST['updatesection'] == 'changecapacities') {
 
     // Change permissions
-    if(!empty($_POST['capacity_mode'])) change_options('capacity_mode', $_POST['capacity_mode'], 'yes');
-    if(!empty($_POST['transparency_mode'])) change_options('transparency_mode', $_POST['transparency_mode'], 'no');
-    if(!empty($_POST['active_section'])) change_options('active_section', $_POST['active_section'], 'yes');
+    if(!empty($_POST['capacity_mode'])){
+      change_options('capacity_mode', $_POST['capacity_mode'], 'yes');
+      $msg .= '<p>Permisos del sistema cambiados a: <strong>'.$_POST['capacity_mode'].'</strong></p>';
+    }
+
+    if(!empty($_POST['transparency_mode'])){
+      change_options('transparency_mode', $_POST['transparency_mode'], 'no');
+      $msg .= '<p>Transparencia del sistema cambiada a: <strong>'. $_POST['transparency_mode'].'</strong></p>';
+    }
+
+    if(!empty($_POST['active_section'])){
+      change_options('active_section', $_POST['active_section'], 'yes');
+      $msg .= '<p>Secciones activas cambiadas</p>';
+    }
     
   }else if ($_POST['updatesection'] == 'changepresident') {
 
@@ -235,7 +275,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
   }
 
-
+  $args   = array(
+    'type'          => 'success', //success, info, warning
+    'where'         => 'meeseeks',
+    'auto_close'    => true,
+    'delay'         => '5', // s
+    );
+  if($msg) new Frontend_box( $msg, $args);
 }
 
 
@@ -252,27 +298,50 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 */
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
 
-  if ($_POST['updatesection'] == 'changestatus') {
+  if ($_POST['updatesection'] == 'Actualizar asociados') {  
 
     if(!empty($_POST['asociate'])){
       $new_socis = $_POST['asociate'];
+      $msg = '';
       foreach ($new_socis as $user_id) {
         $user = get_userdata($user_id);
         $user->remove_role('subscriber');
         $user->add_role('author');
         update_user_meta($user_id, 'asociation_status', 'validado' );
+        $msg .= '<p>El usuario '.$user->user_login.' ahora es socio</p>';
       }
+      // Frontend notification
+      $args   = array(
+        'type'          => 'success', //success, info, warning
+        'where'         => 'meeseeks',
+        'auto_close'    => true,
+        'delay'         => '5', // s
+        );
+      new Frontend_box( $msg, $args);
     }
 
     if(!empty($_POST['desasociate'])){
       $old_socis = $_POST['desasociate'];
+      $msg = '';
       foreach ($old_socis as $soc_id) {
         $soc = get_userdata($soc_id);
         $soc->add_role('subscriber');
         $soc->remove_role('author');
         update_user_meta($user_id, 'asociation_status', '' );
+        $msg .= '<p>El usuario '.$soc->user_login.' ya no es socio</p>';
       }
+      // Frontend notification
+      $args   = array(
+        'type'          => 'warning', //success, info, warning
+        'where'         => 'meeseeks',
+        'auto_close'    => true,
+        'delay'         => '7', // s
+        );
+      new Frontend_box( $msg, $args);
     }
+  }
+
+  if ($_POST['updatesection'] == 'Actualizar asociados') {
 
     if(!empty($_POST['members_tovalide']) && is_array($_POST['members_tovalide']) ){
       foreach ($_POST['members_tovalide'] as $user_id){

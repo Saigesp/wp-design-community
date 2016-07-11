@@ -20,6 +20,10 @@
 /* General */
 .chosen-container {
 	width: 100% !important;
+	height: 100% !important;
+	ul.chosen-choices {
+		height: 100% !important;
+	}
 	&-multi .chosen-choices {
 		border: 0;
 		background: rgba(0,0,0,0.1);
@@ -44,10 +48,13 @@
 		background: rgba(0,0,0,0.1);
 		border: 0;
 		border-radius: 0;
-		padding: 5px;
-		min-height: 35px;
+		padding: 0 5px;
+		min-height: @input-height-min;
 		box-shadow: none;
 		font-size: 1.6rem;
+		div b {
+			background-position: 0 13px;
+		}
 	}
 	.chosen-drop {
 		border: 0;

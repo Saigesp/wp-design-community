@@ -7,7 +7,7 @@
 
   <?php wpdc_the_input_date('fee_date', '', 'Inicio', false);?>
 
-  <?php wpdc_the_submit('updatefee', 'Crear cuota', 'new-fee', 'Crear cuota');?>
+  <?php wpdc_the_submit('updatefee', 'Crear cuota', 'new-fee', '', 'Crear cuota');?>
 
   <?php include(locate_template('templates/sections/section-close.php')); ?>
 </section>

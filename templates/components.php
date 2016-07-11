@@ -56,12 +56,14 @@ function wpdc_the_input_email($name, $value, $label, $placeholder){
 }
 
 
-function wpdc_the_input_number($name, $value, $label, $min, $max){
+function wpdc_the_input_number($name, $value, $label, $min = 0, $max = 999, $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-	$output .= '<input id="'.$name.'-input" type="number" min="'.$min.'" max="'.$max.'" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'"/>';
+	$output .= '<input id="'.$name.'-input" type="number" min="'.$min.'" max="'.$max.'" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'"';
+	if($disabled) $output .= ' disabled ';
+	$output .= '/>';
 	$output .= '</div></div>';
     echo $output;
 }
@@ -89,24 +91,77 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 		$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 		$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-		if(is_array($user_array) && sizeof($user_array) > 1){
+		if(is_array($user_array) && sizeof($user_array) > 0){
 			$output .= '<select id="'.$name.'-input" name="'.$name;
 			if($multiple) $output .= '[]';
-			$output .= '" class="select select--user';
-			if($multiple) $output .= 'multiple="multiple"';
+			$output .= '" class="select select--user chosen"';
+			if($multiple) $output .= ' multiple="multiple"';
 			$output .= '/>';
-		    foreach ($user_array->results as $user) {
+			$output .= '<option value="">Ninguno</option>';
+		    foreach ($user_array as $user) {
 		    	$output .= '<option value="'.esc_html($user->ID ).'" ';
 		    	if(get_the_author_meta($user_meta, $user->ID) == $name) $output .= ' selected';
-		    	$output .= ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+		    	if($user->first_name != '' && $user->last_name != ''){
+		    		$output .= ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
+		    	}else{
+		    		$output .= ' >'.esc_html($user->user_login).' ('.esc_html($user->user_email).')</option>';
+		    	}
 		    }
 			$output .= '</select>';
 		}else {
-			$output .= '<label><strong>Usuarios insuficientes</strong></label>';
+			$output .= '<label>No hay usuarios</label>';
 		}
 		$output .= '</div></div>';
 	    echo $output;
 }
+
+function wpdc_the_input_select_role($name, $label, $multiple = false){
+
+    $WP_User = new WP_User( $user->ID );
+    $roles = array();
+    foreach( $WP_User->roles as $role ) {
+      $role = get_role( $role );
+      if ( $role != null )
+      	array_push($roles, $role->name);// change_role_name($role->name);
+    }
+
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
+	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option" ';
+	if($multiple) $output .= 'multiple="multiple"';
+	$output .= '/>';
+    foreach (get_my_editable_roles() as $role_name => $role_info){
+		if($role_name == 'contributor') continue;
+		$output .= '<option value="'.$role_name.'"';
+		if(empty($roles) && $role_name == 'subscriber') $output .= 'selected';
+		if(in_array($role_name, $roles)) $output .= 'selected';
+		$output .= ' >'.change_role_name($role_name).'</option>';
+	}
+	$output .= '</select>';
+	$output .= '</div></div>';
+    echo $output;
+}
+
+function wpdc_the_input_select_position($name, $label, $options, $multiple = false){
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
+	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option" ';
+	if($multiple) $output .= 'multiple="multiple"';
+	$output .= '/>';
+	foreach ($options as $charge) {
+		$output .= '<option value="'.$charge.'"';
+		if (esc_attr(get_the_author_meta('asociation_position', $user->ID)) == $charge) $output .= ' selected';
+		$output .= '>'.change_role_name($charge).'</option>';
+	}
+	$output .= '</select>';
+	$output .= '</div></div>';
+    echo $output;
+}
+
 
 function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false){
 	$output = '<div class="wrap wrap--frame">';
@@ -118,16 +173,77 @@ function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false)
 }
 
 
-function wpdc_the_submit($name, $value, $value_confirm, $text){
-	echo '<div class="wrap wrap--flex">
-      		<div class="wrap wrap--frame wrap--frame__middle">
-      		</div>
-			<div class="wrap wrap--frame wrap--frame__middle wrap--submit">
-				<button name="'.$name.'" value="'.$value.'" type="submit" class="button button-primary">'.$text.'</button>
-				<input name="action" type="hidden" id="action" value="'.$value_confirm.'" />
-			</div>
-		</div>
-	';
+function wpdc_the_input_checkbox_simple($name, $value = '', $label = '', $placeholder = '', $disabled = false){
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	if($placeholder != '') $output .= '<span>'.$placeholder.'</span>';
+	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle wrap--checkbox">';
+	$output .= '<input id="'.$name.'-check" type="checkbox" name="'.$name.'"';
+	if($value != '') $output .= ' value="'.$value.'"';
+	if($disabled) $output .= ' disabled ';
+	$output .= '/>';
+	$output .= '<label for="'.$name.'-check">';
+	if($label != '') $output .= '<span>'.$label.'</span>';
+	$output .= '</label>';
+	$output .= '</div></div>';
+    echo $output;
 }
+
+function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = null, $text = null){
+	if(!$text) $text = 'Enviar';
+	$output = '<div class="wrap wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle"></div>';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle wrap--submit">';
+	if($name_hidden && $value_hidden){
+		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button button-primary">';
+		$output .= '</input>';
+	}else{
+		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button button-primary">';
+		$output .= $text.'</button>';
+	}
+	if($name_hidden && $value_hidden) $output .= '<input name="'.$name_hidden.'" type="hidden" id="action" value="'.$value_hidden.'" />';
+	$output .= '</div></div>';
+	echo $output;
+}
+
+function wpdc_the_edit_icon($link, $position = 0){
+	$output = '<div class="wrap wrap--icon wrap--icon__edit">';
+	$output .= '<a href="'.$link.'">';
+	$output .= '<img src="'.get_stylesheet_directory_uri().'/img/icons/pencil.svg" alt="Edit" class="icon icon--edit icon--corner">';
+	$output .= '</a>';
+	$output .= '</div>';
+	echo $output;
+}
+
+?>
+<?php
+
+function wpdc_the_asociation_position($user_id) {
+	$output = '';
+	if(get_the_author_meta('asociation_position', $user_id)){
+		$output .= change_role_name(get_the_author_meta('asociation_position', $user_id));
+	}
+	if(get_the_author_meta('asociation_position', $user_id) && get_the_author_meta('asociation_responsability', $user_id)){
+		$output .= ' / ';
+	}
+	if(get_the_author_meta('asociation_responsability', $user_id)){
+		$output .= change_role_name(get_the_author_meta('asociation_responsability', $user->ID));
+	}
+	echo $output;
+}
+
+
+function wpdc_the_user_name($user_id) {
+	if(get_the_author_meta('first_name',$user_id) && get_the_author_meta('last_name',$user_id))
+		$user_full_name = get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id);
+	else
+		if(get_the_author_meta('user_login',$user_id) == get_the_author_meta('user_email',$user_id))
+			$user_full_name = get_the_author_meta('user_email',$user_id);
+		else
+			$user_full_name = get_the_author_meta('user_login',$user_id).' ('.get_the_author_meta('user_email',$user_id).')';
+
+	echo $user_full_name;
+}
+
 
 ?>

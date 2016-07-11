@@ -56,6 +56,9 @@
 				}
 			}
 		}
+		> .wrap + .wrap {
+			margin-left: 5px;
+		}
 		&:nth-child(odd) {
 			background: @list-item-odd-background-color;
 		}
@@ -77,6 +80,17 @@
 	}
 	.wrap--buttons {
 		min-height: 40px;
+	}
+	.wrap--photo {
+		width: 44px;
+		height: 44px;
+		display: inline-block;
+		vertical-align: top;
+		img {
+			height: 100%;
+			width: auto;
+			display: block;
+		}
 	}
 	a {
 		text-decoration: none;

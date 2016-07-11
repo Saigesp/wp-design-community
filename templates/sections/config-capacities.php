@@ -40,7 +40,7 @@ $page_sections = [
     <?php wpdc_the_input_select_option('transparency_mode', '', 'Transparencia', $page_sections, true);?>
 
     <!-- submit -->
-    <?php wpdc_the_submit('updatesection', 'changecapacities', 'update-presidence', 'Cambiar permisos');?>
+    <?php wpdc_the_submit('updatesection', 'changecapacities', 'update-presidence', '', 'Cambiar permisos');?>
 
     <?php include(locate_template('templates/sections/section-close.php')); ?>
 </section>

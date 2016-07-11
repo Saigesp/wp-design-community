@@ -47,9 +47,9 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
     $documents = new WP_Query( $wpdc_docs );
 
     $pageoptions = [
-        "stats" => "X Usuarios Y Socios",
-        "stats1" => "X Socios",
-        "stats2" => "X Documentos",
+        "usuarios" => sizeof($subscribers->results)." Usuarios",
+        "socios" => sizeof($socios->results)." Socios",
+        "stats2" => sizeof($documents->results)." Documentos",
         "newuser" => "Crear usuario",
         "changememberstatus" => "Gestionar socios",
         "managedocs" => "Gestionar documentos",
@@ -80,8 +80,21 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
             <!-- new user -->
             <?php include(locate_template('templates/sections/user-create.php')); ?>
 
+            <!-- asociatelist -->
+            <?php
+            $users = $socios;
+            $list_type = 'socios';
+            $list_ID = 'asociatelist';
+            include(locate_template('templates/sections/listing-user.php'));
+            ?>
+
             <!-- userlist -->
-            <?php include(locate_template('templates/sections/listing-user.php')); ?>
+            <?php
+            $users = $subscribers;
+            $list_type = 'usuarios';
+            $list_ID = 'userlist';
+            include(locate_template('templates/sections/listing-user.php'));
+            ?>
           
         </div>
     </form>

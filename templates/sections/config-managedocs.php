@@ -44,7 +44,7 @@
         </ul>
 
         <!-- remove document -->
-        <?php wpdc_the_submit('updatesection', 'removedoc', '', 'Eliminar documentos');?>
+        <?php wpdc_the_submit('updatesection', 'removedoc', '', '', 'Eliminar documentos');?>
         
     <?php } else { ?>
         <p>No hay documentos todavía. Cuando añadas uno, se verá aquí.</p>
@@ -74,7 +74,7 @@
     ?>
 
     <!-- submit document -->
-    <?php wpdc_the_submit('updatesection', 'uploaddoc', 'update-doc', 'Añadir documento');?>
+    <?php wpdc_the_submit('updatesection', 'uploaddoc', 'update-doc', '', 'Añadir documento');?>
 
     <!-- close -->
     <?php include(locate_template('templates/sections/section-close.php')); ?>

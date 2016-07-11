@@ -18,43 +18,26 @@
 
   <?php include(locate_template('templates/functions/functions-validation.php')); ?>
 
-  <?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' ) { ?>
-    <section class="wrap wrap--frame wrap--author">
-      <?php var_dump($_POST);?>
-    </section>
-  <?php } ?>
+  <?php include_once(locate_template('templates/forms/form-userdata.php')); ?>
 
+  <?php include_once(locate_template('templates/forms/form-authordata.php')); ?>
 
+  <?php include_once(locate_template('templates/forms/form-socialdata.php')); ?>
 
-<?php include_once(locate_template('templates/forms/form-userdata.php')); ?>
-
-<?php include_once(locate_template('templates/forms/form-authordata.php')); ?>
-
-<?php include_once(locate_template('templates/forms/form-socialdata.php')); ?>
-
-  <?php if($other_user){ 
-    $WP_User = new WP_User( $user->ID );
-    $roles = array();
-    foreach( $WP_User->roles as $role ) {
-      $role = get_role( $role );
-      if ( $role != null ) array_push($roles, $role->name);// change_role_name($role->name);
-    } ?>
+  <?php if($other_user){ ?>
 
     <?php include_once(locate_template('templates/forms/form-asociatedata.php')); ?>
-    <?php include_once(locate_template('templates/forms/form-pagedata.php')); ?>
 
+    <?php include_once(locate_template('templates/forms/form-pagedata.php')); ?>
 
   <?php } ?>
 
-  <section class="wrap wrap--frame wrap--empty">
+  <section class="wrap wrap--frame wrap--transparent">
     <h3 class="more more--section">Add a section</h3>
   </section>
 
-  <section class="wrap wrap--frame wrap--empty wrap--submit">
-    <p class="submit">
-      <input name="updateuser" type="submit" id="submit-all" class="button button-primary" value="Guardar cambios">
-      <input name="action" type="hidden" id="action" value="update-user" />
-    </p>
+  <section class="wrap wrap--frame wrap--transparent">
+    <?php wpdc_the_submit('updateuser', 'Guardar cambios', 'action', 'update-user', 'Guardar cambios');?>
   </section>
 
 

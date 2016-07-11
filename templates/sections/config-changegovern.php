@@ -6,7 +6,7 @@
     <?php wpdc_the_input_select_user('presidente', '¿Quién será el nuevo lider?', $users, 'asociation_position');?>
 
     <!-- submit -->
-    <?php wpdc_the_submit('updatesection', 'changepresident', 'update-presidence', 'Ceder presidencia');?>
+    <?php wpdc_the_submit('updatesection', 'changepresident', 'update-presidence', '', 'Ceder presidencia');?>
     
     <!-- close -->
     <?php include(locate_template('templates/sections/section-close.php')); ?>

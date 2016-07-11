@@ -54,3 +54,30 @@ $comments_trash = get_comments( $args_trash );
     </div>
   </div>
 </section>
+
+<?php if(is_user_role('administrator')){ ?>
+<?php if(!empty($_POST)) { ?>
+<section class="wrap wrap--content wrap--shadow">
+
+  <h3 class="title title--section">$_POST</h3>
+  <?php
+  if(is_array($_POST)) {
+    echo '<strong>Array()</strong><br>';
+    foreach ($_POST as $key => $value) {
+      if (is_array($value)){
+        foreach ($value as $k => $v) {
+          echo $key . '[' . $k . ']: ' . $v . '<br>';
+        }
+      }
+      else echo $key . ': ' . $value . '<br>';
+    }
+  }else{
+    var_dump($_POST);
+  }
+  ?>
+
+</section>
+<?php } ?>
+<?php } ?>
+
+<?php do_action( 'front_end_box/meeseeks' );?>

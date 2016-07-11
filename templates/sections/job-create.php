@@ -7,7 +7,7 @@
   
   <?php wpdc_the_input_text('job_info', '', 'Más información', 'http://');?>
   
-  <?php wpdc_the_submit('updatejob', 'Publicar oferta', 'new-job', 'Publicar oferta');?>
+  <?php wpdc_the_submit('updatejob', 'Publicar oferta', 'new-job', '', 'Publicar oferta');?>
 
   <?php include(locate_template('templates/sections/section-close.php')); ?>
 </section>

@@ -83,6 +83,18 @@ function inject_in_all() { ?>
 
       imageresize();
 
+      $('.wrap--alert').each(function(){
+          if( $(this).data('auto-close') == true ){
+              $(this).slideDown().delay( $(this).data('delay') * 1000 ).fadeOut();
+          } else {
+              $(this).slideDown();
+          }
+      });
+      $('.wrap--alert .icon--close').on('click', function(e){
+            e.preventDefault();
+            $(this).parents('.wrap--alert').addClass('invisible');
+      });
+
       if ($(".js-imagefill").length > 0){
         var imgLoad = imagesLoaded('.js-imagefill img');
         imgLoad.on( 'always', function( instance ) {

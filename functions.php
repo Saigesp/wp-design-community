@@ -14,6 +14,9 @@ include_once(locate_template('templates/functions/functions-jobs.php'));
 include_once(locate_template('templates/functions/functions-concursos.php'));
 include_once(locate_template('templates/functions/functions-documentos.php'));
 
+// Notificaciones https://timersys.com/create-bootstraps-style-alert-boxes-theme
+include_once(locate_template('plugins/frontend-notifications/class-frontend-box.php'));
+
 //AJAX
 function ajax_script_FTW() {
   wp_enqueue_script( 'ajax', get_template_directory_uri() . '/templates/ajax.js', array( 'jquery' ), '1.0.0', true );
@@ -58,6 +61,7 @@ new_page_title('Configuration treasury');
 new_page_title('Configuration secretary');
 new_page_title('Configuration concursos');
 new_page_title('Configuration jobs');
+new_page_title('Invitar');
 
 new_page_title('Disenadores');
 
@@ -862,16 +866,15 @@ function change_role_name($rolename){
   elseif($rolename == 'rp_concursos') return 'Resp. Concursos';
   elseif($rolename == 'rp_jobs') return 'Resp. Ofertas laborales';
   elseif($rolename == 'rp_posts') return 'Resp. Noticias';
+  elseif($rolename == '') return 'Ninguno';
   else return $rolename;
 }
 
 if(!function_exists('get_my_editable_roles')){
   function get_my_editable_roles() {
       global $wp_roles;
-
       $all_roles = $wp_roles->roles;
       $editable_roles = apply_filters('editable_roles', $all_roles);
-
       return $editable_roles;
   }
 }

@@ -17,7 +17,7 @@
     <?php wpdc_the_input_select_user('vocal', 'Vocales', $users, 'asociation_position', true);?>
 
     <h3 class="sep">Responsables de contenido</h3>
-    <p class="help help--section">Los responsables de contenido tienen permiso para publicar, supervisar y modificar el contenido de la sección que tienen asignada. Puede haber varios responsables por sección, y un mismo responsable puede llevar varias secciones. Los responsables deben tener al menos estatus de socio.</p>
+    <p class="help help--section">Los responsables de contenido tienen permiso para publicar, supervisar y modificar el contenido de la sección que tienen asignada. Puede haber varios responsables por sección. Los responsables deben tener al menos estatus de socio.</p>
 
     <!-- responsable de ofertas de trabajo -->
     <?php wpdc_the_input_select_user('rp_posts', 'Responsables de noticias', $users, 'asociation_responsability', true);?>
@@ -32,7 +32,7 @@
     <?php wpdc_the_input_select_user('rp_jobs', 'Responsables de ofertas de trabajo', $users, 'asociation_responsability', true);?>
 
     <!-- submit -->
-    <?php wpdc_the_submit('updatesection', 'changegovern', 'update-presidence', 'Cambiar gobierno');?>
+    <?php wpdc_the_submit('updatesection', 'changegovern', 'action', 'update-presidence', 'Cambiar gobierno');?>
 
 
 </section>

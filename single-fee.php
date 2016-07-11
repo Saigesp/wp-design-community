@@ -194,7 +194,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
               Paypal
             </div>  
 
-            <?php wpdc_the_submit('payfee', 'Pagar cuota', 'pay-fee', 'Pagar cuota');?>
+            <?php wpdc_the_submit('payfee', 'Pagar cuota', 'pay-fee', '', 'Pagar cuota');?>
 
         </section>
 

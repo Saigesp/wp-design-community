@@ -439,6 +439,21 @@ ins {
 .hidden {
   display: none !important;
 }
+.transparent {
+  opacity: 0 !important;
+}
+.wrap.invisible {
+  opacity: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.untouchable {
+  pointer-events: none !important;
+}
 /**
  * FLEXBOXER
  ***********************************/
@@ -467,9 +482,6 @@ body {
 #header {
   background: white;
   color: white;
-}
-#navleft {
-  background: #666;
 }
 #main .flexboxer > .wrap {
   background: white;
@@ -523,8 +535,11 @@ body {
 .flexboxer .wrap--frame__decimal {
   flex: 1 1 10%;
 }
+.flexboxer .wrap--frame__45 {
+  flex: 0 1  45px;
+}
 .flexboxer .wrap--frame__85 {
-  flex: 0 1 100px;
+  flex: 0 1  85px;
 }
 .flexboxer .wrap--frame__100 {
   flex: 0 1 100px;
@@ -1316,6 +1331,12 @@ ins {
 }
 .menu--frame p {
   margin: 0;
+  font-size: small;
+  line-height: 1.6;
+  color: #545454;
+}
+.menu--frame p a {
+  color: inherit;
 }
 .menu--frame p a.active {
   font-weight: 900;
@@ -1367,18 +1388,23 @@ ins {
 .wrap--alert {
   color: white;
   font-size: 1.6rem;
+  transition: all 350ms ease;
 }
 .wrap--alert__error {
+  color: white !important;
   background: #F96B85 !important;
 }
 .wrap--alert__success {
+  color: white !important;
   background: #5FD694 !important;
 }
 .wrap--alert__warning {
+  color: #333 !important;
   background: #FFD478 !important;
 }
 .wrap--alert__info {
-  background: #F96B85 !important;
+  color: white !important;
+  background: #63C8FF !important;
 }
 .wrap--alert p {
   margin: 0;
@@ -1450,7 +1476,7 @@ input[type="submit"].secondary:focus,
 button.secondary:focus {
   color: rgba(255, 255, 255, 0.8);
 }
-.button {
+.wrap .button {
   margin: 0;
   padding: 10px 20px;
   min-height: 50px;
@@ -1473,24 +1499,24 @@ button.secondary:focus {
   padding: 5px 12px;
   transition: all 200ms ease;
 }
-.button:hover {
+.wrap .button:hover {
   background-color: #22999b;
   color: white;
 }
-.button:focus {
+.wrap .button:focus {
   color: rgba(255, 255, 255, 0.8);
   outline: 0;
 }
-.button:active {
+.wrap .button:active {
   border-bottom-width: 1px;
   margin-top: 4px;
   min-height: 46px;
 }
-.button:disabled {
+.wrap .button:disabled {
   opacity: 0.4;
   cursor: default;
 }
-.button--secondary {
+.wrap .button--secondary {
   margin: 0;
   padding: 10px 20px;
   min-height: 50px;
@@ -1516,11 +1542,11 @@ button.secondary:focus {
   text-decoration: none;
   text-shadow: none;
 }
-.button--secondary:hover {
+.wrap .button--secondary:hover {
   background: #49A1E5;
   color: white;
 }
-.button--secondary:focus {
+.wrap .button--secondary:focus {
   color: rgba(255, 255, 255, 0.8);
 }
 .additem--fullwidth {
@@ -1915,6 +1941,9 @@ button.secondary:focus {
 .list > .item .wrap--buttons__left {
   text-align: left;
 }
+.list > .item > .wrap + .wrap {
+  margin-left: 5px;
+}
 .list > .item:nth-child(odd) {
   background: rgba(0, 0, 0, 0.1);
 }
@@ -1935,6 +1964,17 @@ button.secondary:focus {
 }
 .list .wrap--buttons {
   min-height: 40px;
+}
+.list .wrap--photo {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+  vertical-align: top;
+}
+.list .wrap--photo img {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 .list a {
   text-decoration: none;
@@ -3225,6 +3265,10 @@ pre code {
 /* General */
 .chosen-container {
   width: 100% !important;
+  height: 100% !important;
+}
+.chosen-container ul.chosen-choices {
+  height: 100% !important;
 }
 .chosen-container-multi .chosen-choices {
   border: 0;
@@ -3248,10 +3292,13 @@ pre code {
   background: rgba(0, 0, 0, 0.1);
   border: 0;
   border-radius: 0;
-  padding: 5px;
-  min-height: 35px;
+  padding: 0 5px;
+  min-height: 45px;
   box-shadow: none;
   font-size: 1.6rem;
+}
+.chosen-container-single .chosen-single div b {
+  background-position: 0 13px;
 }
 .chosen-container .chosen-drop {
   border: 0;
@@ -3639,3 +3686,6 @@ textarea.js-medium-editor,
 .flexboxer--controlusers form > .wrap--content + .wrap--content {
   padding-top: 5px;
 }
+/**
+ * PROFILE PICTURE
+ ***********************************/

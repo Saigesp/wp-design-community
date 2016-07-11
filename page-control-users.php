@@ -165,7 +165,7 @@ $user_query = new WP_User_Query($args);
   </div>
 
   <div class="wrap wrap--content wrap--submit wrap--form">
-    <?php wpdc_the_submit('getuserlist', 'Mostrar', 'get-userlist', 'Ver resultados');?>
+    <?php wpdc_the_submit('getuserlist', 'Mostrar', '', '', 'Ver resultados');?>
   </div>
 
   <?php if($user_query->total_users > 0){ ?>

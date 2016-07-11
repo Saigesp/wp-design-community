@@ -1,39 +1,12 @@
-  <section class="wrap wrap--content wrap--form">
-  	<h3 class="title title--section">Datos del usuario</h3>
-    <div class="wrap wrap--flex">
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="dbem_phone">Fecha de registro</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <p><?php echo date('d M Y H:i', strtotime($user->user_registered));?></p>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="hola">Último login</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-          <p><?php if(get_last_login($user->ID) != '') echo date('d M Y H:i', strtotime(get_last_login($user->ID)));?></p>
-        </div>
-      </div>
-    </div>
-    <div class="wrap wrap--flex">
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="dbem_phone">Karma</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-        <input type="number" steps="1" name="karma" class="tolisten" value="<?php echo $op_user['karma'];?>"/>
-        </div>
-      </div>
-      <div class="wrap wrap--frame__middle wrap--flex">
-        <div class="wrap wrap--frame__middle">
-          <label for="hola">Invitaciones</label>
-        </div>
-        <div class="wrap wrap--frame__middle">
-          <input type="number" steps="1" name="invitations" class="tolisten" value="<?php echo $op_user['invitations'];?>">
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="wrap wrap--content wrap--form wrap--shadow">
+	<h3 class="title title--section">Datos del usuario</h3>
+
+  <?php wpdc_the_input_date('registro', date('d M Y H:i', strtotime($user->user_registered)), 'Fecha de registro', true);?>
+
+  <?php wpdc_the_input_date('last_login', date('d M Y H:i', strtotime(get_last_login($user->ID))), 'Último acceso', true);?>
+
+  <?php wpdc_the_input_number('karma', $op_user['karma'], 'Karma', 0, 999, true);?>
+
+  <?php wpdc_the_input_number('invitations', $op_user['invitations'], 'Invitaciones', 0, 999, true);?>
+
+</section>

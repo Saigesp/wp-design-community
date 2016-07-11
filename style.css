@@ -1060,6 +1060,9 @@ ins {
   vertical-align: top;
   height: 40px;
 }
+.wrap--header .wrap--pagetitle {
+  display: inline-block;
+}
 .wrap--header .title {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -1167,6 +1170,9 @@ ins {
   }
   .wrap--header h2 {
     margin: 0;
+    line-height: 60px;
+  }
+  .wrap--header .title {
     line-height: 60px;
   }
   .wrap--header .logo {

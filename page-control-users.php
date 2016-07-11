@@ -1,19 +1,8 @@
 <?php get_header(); ?>
 
-<div class="flexboxer flexboxer--controlusers">
+<div class="flexboxer flexboxer--full flexboxer--controlusers">
 
 <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-
-<style>
-  #usercontrolmain {margin: 10px;}
-  #usercontrolmain table {width: 100%; text-align: left;}
-  #usercontrolmain table a svg {fill: #ccc}
-  #usercontrolmain table a svg:hover {fill: #F46553}
-  #usercontrolmain tr {height: 30px;}
-  #usercontrolmain tr:nth-child(even) {background: rgba(130,130,130,0.1);}
-  #usercontrolmain th, #usercontrolmain td {padding-right: 10px; vertical-align: middle;}
-  #usercontrolmain th {font-weight: 600;}
-</style>
 
 <?php
 
@@ -21,14 +10,10 @@ $exclude_list = array();
 $admins = get_users( array('role' => 'administrator') );
 foreach ($admins as $admin) array_push($exclude_list, $admin->ID);
 
+/* Default options */
 if (empty($_GET["filter"])){
-
-  /* Default options */
-  $nam = true; // Name
-  $pos = true; // Type
-
-
-}else{
+  $nam = true; $pos = true;
+} else {
 
   // Get filters
   $filter = $_GET['filter'] == '' || $_GET['filter'] == 'administrator' ? 'all' : $_GET['filter'];
@@ -55,6 +40,7 @@ if (empty($_GET["filter"])){
   $val = in_array("val", $user_labels) ? true : false;
   $hva = in_array("hva", $user_labels) ? true : false;
   $cuo = in_array("cuo", $user_labels) ? true : false;
+
 }
 
 $original_query = $wp_query;
@@ -119,56 +105,55 @@ if ($filter == 'all'){
 $user_query = new WP_User_Query($args);
 ?>
 
-<form class="wrap wrap--frame wrap--filterusers">
-  <div class="wrap wrap--flex wrap--options" id="usercontroloption">
-    <div class="wrap wrap--content wrap--content__full">
-      <select name="labels[]" id="user-labels" class="chosen" multiple="multiple">
-        <optgroup label="Datos personales">
-          <option value="nam" <?php if($nam) echo 'selected';?> >Nombre</option>
-          <option value="pho" <?php if($pho) echo 'selected';?> >Foto</option>
-          <option value="ema" <?php if($ema) echo 'selected';?> >Email</option>     
-          <option value="web" <?php if($web) echo 'selected';?> >Web</option>
-          <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
-          <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
-        </optgroup>
-        <optgroup label="Datos de usuario">
-          <option value="tip" <?php if($tip) echo 'selected';?> >Tipo de usuario</option>
-          <option value="pos" <?php if($pos) echo 'selected';?> >Posición en asociación</option>
-          <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
-          <option value="reg" <?php if($reg) echo 'selected';?> >Fecha de creación</option>
-          <option value="log" <?php if($log) echo 'selected';?> >Último login</option>
-          <option value="inv" <?php if($inv) echo 'selected';?> >Invitaciones restantes</option>
-          <option value="val" <?php if($val) echo 'selected';?> >Validado por</option>
-          <option value="hva" <?php if($hva) echo 'selected';?> >Ha validado a</option>
-        </optgroup>
-        <optgroup label="Datos de asociado">
-          <option value="con" <?php if($con) echo 'selected';?> >Fecha de asociación</option>
-          <option value="cuo" <?php if($cuo) echo 'selected';?> >Última cuota</option>
-        </optgroup>
-        <optgroup label="Visualizaciones">
-          <option value="vfi" <?php if($vfi) echo 'selected';?> >Aparición en resultados</option>
-          <option value="vpe" <?php if($vpe) echo 'selected';?> >Vistas de perfil</option>
-        </optgroup>
-        <optgroup label="Otros">
-        <option value="kar" <?php if($kar) echo 'selected';?> >Karma</option>
-        </optgroup>
-      </select>
-    </div>
-  </div>
+<form class="wrap wrap--frame wrap--shadow">
+
+  <div id="usercontroloption" class="wrap wrap--content">
+    <select name="labels[]" id="user-labels" class="chosen" multiple="multiple">
+      <optgroup label="Datos personales">
+        <option value="nam" <?php if($nam) echo 'selected';?> >Nombre</option>
+        <option value="pho" <?php if($pho) echo 'selected';?> >Foto</option>
+        <option value="ema" <?php if($ema) echo 'selected';?> >Email</option>     
+        <option value="web" <?php if($web) echo 'selected';?> >Web</option>
+        <option value="tit" <?php if($tit) echo 'selected';?> >Titulación</option>
+        <option value="exp" <?php if($exp) echo 'selected';?> >Experiencia</option>
+      </optgroup>
+      <optgroup label="Datos de usuario">
+        <option value="tip" <?php if($tip) echo 'selected';?> >Tipo de usuario</option>
+        <option value="pos" <?php if($pos) echo 'selected';?> >Posición en asociación</option>
+        <option value="est" <?php if($est) echo 'selected';?> >Estado</option>
+        <option value="reg" <?php if($reg) echo 'selected';?> >Fecha de creación</option>
+        <option value="log" <?php if($log) echo 'selected';?> >Último login</option>
+        <option value="inv" <?php if($inv) echo 'selected';?> >Invitaciones restantes</option>
+        <option value="val" <?php if($val) echo 'selected';?> >Validado por</option>
+        <option value="hva" <?php if($hva) echo 'selected';?> >Ha validado a</option>
+      </optgroup>
+      <optgroup label="Datos de asociado">
+        <option value="con" <?php if($con) echo 'selected';?> >Fecha de asociación</option>
+        <option value="cuo" <?php if($cuo) echo 'selected';?> >Última cuota</option>
+      </optgroup>
+      <optgroup label="Visualizaciones">
+        <option value="vfi" <?php if($vfi) echo 'selected';?> >Aparición en resultados</option>
+        <option value="vpe" <?php if($vpe) echo 'selected';?> >Vistas de perfil</option>
+      </optgroup>
+      <optgroup label="Otros">
+      <option value="kar" <?php if($kar) echo 'selected';?> >Karma</option>
+      </optgroup>
+    </select>
+  </div> 
 
   
-  <div class="wrap wrap--content wrap--flex wrap--filters">
-    <div class="wrap wrap--content wrap--content__middle">
+  <div class="wrap wrap--content wrap--flex wrap--form">
+    <div class="wrap wrap--frame wrap--frame__middle">
       <select name="filter">
       	<option value="all" <?php if($filter == 'all') echo 'selected';?>>Todos los usuarios</option>
         <option value="subscriber" <?php if($filter == 'subscriber') echo 'selected';?>><?php echo change_role_name('subscriber');?></option>
-      	<!--<option value="p" <?php /*if($filter == 'p') echo 'selected'*/;?>>Socios pendientes de validar</option>-->
+      	<?php /*<option value="p" <?php if($filter == 'p') echo 'selected';?>>Socios pendientes de validar</option>*/ ?>
         <option value="author" <?php if($filter == 'author') echo 'selected';?>><?php echo change_role_name('author');?></option>
         <option value="editor" <?php if($filter == 'editor') echo 'selected';?>><?php echo change_role_name('editor');?></option>
       </select>
     </div>
 
-    <div class="wrap wrap--content wrap--content__middle">
+    <div class="wrap wrap--frame wrap--frame__middle">
       <select name="order">
       	<option value="registered" <?php if($order == 'registered') echo 'selected';?>>Fecha creación</option>
         <option value="validate_date" <?php if($order == 'validate_date') echo 'selected';?>>Fecha validación</option>
@@ -179,16 +164,14 @@ $user_query = new WP_User_Query($args);
     </div>
   </div>
 
-  <div class="wrap wrap--content wrap--flex wrap--filters">
-    <div class="wrap wrap--frame__middle">
-      <?php if($user_query->total_users > 0){ ?>
-          <p>Se han encontrado <?php echo $user_query->total_users;?> resultados</p>
-      <?php } ?>
-    </div>
-    <div class="wrap wrap--frame__middle">
-      <input type="submit" value="Mostrar" class="submit button"/>
-    </div>
+  <div class="wrap wrap--content wrap--submit wrap--form">
+    <?php wpdc_the_submit('getuserlist', 'Mostrar', 'get-userlist', 'Ver resultados');?>
   </div>
+
+  <?php if($user_query->total_users > 0){ ?>
+      <p>Se han encontrado <?php echo $user_query->total_users;?> resultados</p>
+  <?php } ?>
+
 
   
 

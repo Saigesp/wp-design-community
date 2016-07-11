@@ -30,10 +30,7 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
 
 
         <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-          <?php if($subscribers->total_users > 0){
-
-
-            ?>
+          <?php if($subscribers->total_users > 0){?>
 
             <section class="wrap wrap--content">
               <h2><?php the_title();?></h2>
@@ -154,14 +151,15 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
           <?php }else{ // No authors in list ?>
 
             <!-- message no authors -->
-            <section class="wrap wrap--content">
-              <p>No hay usuarios</p>
+            <section class="wrap wrap--content wrap--transparent">
+              <p>No hay suscriptores</p>
             </section><!-- end of message no authors -->
 
           <?php } ?>
-        <?php }else{ // If is author ?>
 
-        <section class="wrap wrap--content">
+        <?php }else{ // If is user ?>
+
+        <section class="wrap wrap--content wrap--form">
           <h2><?php the_title(); ?></h2>
           <div class="wrap wrap--frame wrap--flex">
             <div class="wrap wrap--frame__middle">
@@ -181,31 +179,23 @@ $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)
           }
           ?>
           <?php if($members_pending[get_current_user_id()] == '' && $members_payed[get_current_user_id()] == ''){ ?>
-            <div class="wrap wrap--frame wrap--flex">
-              <div class="wrap wrap--frame__middle">
-                Método de pago
-              </div>
-              <div class="wrap wrap--frame__middle">
-                <select name="paymethod" id="paymethod" onchange="ToggleSelect('paymethod')">
-                  <option selected="true" disabled="disabled">Selecciona método de pago</option> 
-                  <option value="transferency">Pago mediante transferencia</option>
-                  <option value="paypal">Pago por paypal</option>
-                </select>
-              </div>
-            </div>
+            <h3 class="sep">Abonar cuota</h3>
+            <?php
+            $pay_options = [
+              "transferency" => "Pago mediante transferencia",
+              "paypal" => "Pago por paypal",
+            ];
+            wpdc_the_input_select_option('paymethod', '', 'Método de pago', $pay_options, $multiple = false);
+            ?>
             <div id="js-select-transferency" class="wrap wrap--frame wrap--hidden js-select js-section-paymethod">
               Pago por transferencia
             </div>
             <div id="js-select-paypal" class="wrap wrap--frame wrap--hidden js-select js-section-paymethod">
               Paypal
-            </div>        
-        </section>
+            </div>  
 
-        <section class="wrap wrap--frame wrap--empty wrap--submit wrap--hidden">
-          <p class="submit">
-            <input name="payfee" type="submit" id="submit-all" class="button button-primary" value="Pagar cuota">
-            <input name="action" type="hidden" id="action" value="pay-fee" />
-          </p>
+            <?php wpdc_the_submit('payfee', 'Pagar cuota', 'pay-fee', 'Pagar cuota');?>
+
         </section>
 
         <?php } ?>

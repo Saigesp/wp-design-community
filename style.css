@@ -3288,6 +3288,7 @@ textarea.js-medium-editor,
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.1);
   width: 100%;
+  box-sizing: border-box;
 }
 .medium-editor-placeholder {
   padding: 10px;
@@ -3593,35 +3594,42 @@ textarea.js-medium-editor,
 /**
  * PAGE CONTROL USERS (page-control-users.php)
  ***********************************/
+#usercontrolmain {
+  margin: 10px;
+}
+#usercontrolmain table {
+  width: 100%;
+  text-align: left;
+}
+#usercontrolmain table a svg {
+  fill: #ccc;
+}
+#usercontrolmain table a svg:hover {
+  fill: #F46553;
+}
+#usercontrolmain table tr {
+  height: 30px;
+}
+#usercontrolmain table tr:nth-child(even) {
+  background: rgba(130, 130, 130, 0.1);
+}
+#usercontrolmain table th,
+#usercontrolmain table td {
+  padding-right: 10px;
+  vertical-align: middle;
+}
+#usercontrolmain table th {
+  font-weight: 600;
+}
 .flexboxer--controlusers .chosen-container-multi {
   width: 100% !important;
 }
-.wrap--filterusers input[type="submit"] {
-  padding: 4px 10px 5px;
-  width: 240px;
+.flexboxer--controlusers form .wrap {
   margin: 0;
-  margin-left: calc(-140%);
 }
-.wrap--filterusers > .wrap {
-  margin: 0 auto;
+.flexboxer--controlusers form > .wrap--content {
+  padding-bottom: 5px;
 }
-.wrap--filterusers > .wrap--content,
-.wrap--filterusers > .wrap > .wrap--content {
-  flex: 1 0 calc(90%);
-  padding: 5px;
-  margin: 0 auto;
-}
-.wrap--filterusers > .wrap--content > .wrap--content {
-  padding: 0;
-  margin: 3px 0;
-}
-.wrap--filterusers > .wrap--content > .wrap--content + .wrap--content {
-  margin-top: 5px;
-}
-.wrap--filterusers .wrap--filters {
-  padding-top: 0;
-}
-.wrap--filterusers .submit {
-  margin: 0 5px 5px;
-  width: calc(90%);
+.flexboxer--controlusers form > .wrap--content + .wrap--content {
+  padding-top: 5px;
 }

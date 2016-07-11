@@ -108,6 +108,15 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 	    echo $output;
 }
 
+function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false){
+	$output = '<div class="wrap wrap--frame">';
+	$output .= '<textarea id="'.$name.'-textarea" class="description js-medium-editor" name="'.$name.'" placeholder="'.$placeholder.'"';
+	if($disabled) $output .= ' disabled ';
+	$output .= '>'.$value.'</textarea>';
+	$output .= '</div>';
+    echo $output;
+}
+
 
 function wpdc_the_submit($name, $value, $value_confirm, $text){
 	echo '<div class="wrap wrap--flex">

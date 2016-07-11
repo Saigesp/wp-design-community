@@ -1,4 +1,4 @@
-<section id="gobteam" class="wrap wrap--content wrap--form wrap--hidden js-section">
+<section id="gobteam" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section">
     <h3 class="title title--section">Configurar gobierno</h3>
 
 	<h3 class="sep">Junta directiva</h3>

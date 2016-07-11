@@ -337,44 +337,47 @@
 /**
  * PAGE CONTROL USERS (page-control-users.php)
  ***********************************/
-.flexboxer--controlusers .chosen-container-multi {
-	width: 100% !important;
-}
-
-.wrap--filterusers {
-	input[type="submit"] {
-		padding: 4px 10px 5px;
-		width: 240px;
-		margin: 0;
-		margin-left: calc(100% - 240px);
-	}
-
-	> .wrap{
-		margin: 0 auto;
-	}
-
-	> .wrap--content,
-	> .wrap > .wrap--content {
-		flex: 1 0 calc(100% - 10px);
-	    padding: 5px;
-	    margin: 0 auto;
-	}
-
-	> .wrap--content > .wrap--content {
-		padding: 0;
-		margin: 3px 0;
-		& + .wrap--content {
-			margin-top: 5px;
+#usercontrolmain {
+	margin: 10px;
+	table {
+		width: 100%;
+		text-align: left;
+		a svg {
+			fill: #ccc;
+			&:hover {
+				fill: #F46553;
+			}
+		}
+		tr {
+			height: 30px;
+			&:nth-child(even) {
+				background: rgba(130,130,130,0.1);
+			}
+		}
+		th,
+		td {
+			padding-right: 10px;
+			vertical-align: middle;
+		}
+		th {
+			font-weight: 600;
 		}
 	}
+}
 
-	.wrap--filters {
-		padding-top: 0;
+.flexboxer--controlusers {
+	.chosen-container-multi {
+		width: 100% !important;
 	}
-
-	.submit {
-		margin: 0 5px 5px;
-		width: calc(100% - 10px);
+	form {
+		.wrap {
+			margin: 0;
+		}
+		> .wrap--content{
+			padding-bottom: 5px;
+			+ .wrap--content {
+				padding-top: 5px;
+			}
+		}
 	}
-
 }

@@ -50,7 +50,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         "stats" => "X Usuarios Y Socios",
         "stats1" => "X Socios",
         "stats2" => "X Documentos",
-        "createuser" => "Crear usuario",
+        "newuser" => "Crear usuario",
         "changememberstatus" => "Gestionar socios",
         "managedocs" => "Gestionar documentos",
     ];
@@ -59,9 +59,14 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
 
     <!-- flexboxer -->
     <form method="POST" action="">
-        <div class="flexboxer flexboxer--page flexboxer--page__secretary">
 
-            <?php //include(locate_template('templates/harry/harry.php')); ?>
+        <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
+
+        <!-- Mr Meeseeks -->
+          <?php include(locate_template('templates/sections/meeseeks.php')); ?>
+        
+        </div>
+        <div class="flexboxer flexboxer--page flexboxer--page__secretary">
 
             <!-- admin options -->
             <?php wpdc_the_pageoptions($pageoptions);?>
@@ -71,6 +76,9 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
 
             <!-- manage documents -->
             <?php include(locate_template('templates/sections/config-managedocs.php')); ?>
+
+            <!-- new user -->
+            <?php include(locate_template('templates/sections/user-create.php')); ?>
 
             <!-- userlist -->
             <?php include(locate_template('templates/sections/listing-user.php')); ?>

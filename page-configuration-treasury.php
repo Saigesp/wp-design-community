@@ -22,9 +22,14 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
 
   <!-- flexboxer -->
   <form method="POST" action="">
-    <div class="flexboxer flexboxer--configuration__treasury">
 
+    <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
+
+    <!-- Mr Meeseeks -->
       <?php include(locate_template('templates/sections/meeseeks.php')); ?>
+    
+    </div>
+    <div class="flexboxer flexboxer--configuration__treasury">
 
       <!-- admin options -->
       <?php wpdc_the_pageoptions($pageoptions);?>

@@ -39,7 +39,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
 
       <?php if (have_posts()) : ?>
         <section class="wrap wrap--content wrap--shadow">
-          <h2>Concursos</h2>
+          <h3 class="title title--section">Concursos</h3>
           <h4>Concursos</h4>
           <?php while (have_posts()) : the_post(); 
             //$postmeta = get_post_meta($post->ID);
@@ -73,8 +73,9 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
       <?php else : ?>
 
         <!-- noinfo -->
-        <section class="wrap wrap--content wrap--transparent">
-          <h2>No hay ofertas laborales creadas</h2>
+        <section class="wrap wrap--content wrap--shadow">
+          <h3 class="title title--section">Ofertas laborales</h3>
+          <p>Todavía no has creado ninguna oferta. <a onclick="ToggleSection(this)" data-section="newjob">¿Quieres crear una?</a></p>
         </section><!-- end of noinfo -->
 
       <?php endif; ?>

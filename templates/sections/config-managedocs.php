@@ -1,4 +1,4 @@
-<section id="managedocs" class="wrap wrap--content wrap--form wrap--hidden js-section">
+<section id="managedocs" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section">
     <h3 class="title title--section">Gestionar documentos</h3>
     
     <!-- document list -->
@@ -61,6 +61,17 @@
             <input id="inputfiles" type="file" name="files[]" accept=".pdf,.zip" class ="files-data form-control" multiple />
         </div>
     </div>
+
+    <?php
+    $visibility_options = [
+        "administrator" => "Administradores",
+        "editor" => "Junta Directiva",
+        "socios" => "Asociados",
+        "subscribers" => "Registrados",
+        "visitors" => "Todos",
+    ];
+    wpdc_the_input_select_option('doc_visivility', '', 'Quién puede verlo', $visibility_options, true);
+    ?>
 
     <!-- submit document -->
     <?php wpdc_the_submit('updatesection', 'uploaddoc', 'update-doc', 'Añadir documento');?>

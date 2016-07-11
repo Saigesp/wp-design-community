@@ -11,5 +11,5 @@
       
 		<?php wpdc_the_input_text('last-name', get_user_meta($user->ID,'position',1), 'Perfil', 'Diseñador en LittlePep S.A.');?>      
 	
-    	<textarea name="description" class="description js-medium-editor tolisten"><?php echo $user->description;?></textarea>
+    	<?php wpdc_the_input_textarea('description', $user->description, 'Descripción');?>
   </section><!-- end of author -->

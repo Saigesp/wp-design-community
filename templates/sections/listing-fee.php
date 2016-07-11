@@ -12,7 +12,7 @@
             <a href="<?php the_permalink();?>"><?php the_title();?></a>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
-            <span class="js-date"><?php echo date('d-m-Y', strtotime(get_post_meta(get_the_ID(), 'fee_date', true)));?></span>
+            <span class="js-date"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
             <span class="js-date-fromnow help-info"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
@@ -29,10 +29,10 @@
           	  } else {
                   if(get_post_meta(get_the_ID(), 'members_payed', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_payed', true));
                   else echo '0';
-                  echo ' Abonos, ';
-                  if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true));
-                  else echo '0';
-                  echo ' En proceso';
+                  echo ' Abonos';
+                  if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo ' ('.sizeof(get_post_meta(get_the_ID(), 'members_pending', true));
+                  else echo ' (0';
+                  echo ' En proceso)';
           	}	?>
           </div>
         </li>

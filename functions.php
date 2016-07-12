@@ -807,7 +807,6 @@ add_action('wp_login_failed', 'my_front_end_login_fail');
 * SEND INVITATIONS (REGISTER) from frontend
 * http://wordpress.stackexchange.com/questions/7134/front-end-register-form/7151#7151
 *********************************************/
-
 function register_a_user(){
   if(isset($_GET['do']) && $_GET['do'] == 'register'):
 

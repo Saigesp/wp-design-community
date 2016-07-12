@@ -81,3 +81,4 @@ $comments_trash = get_comments( $args_trash );
 <?php } ?>
 
 <?php do_action( 'front_end_box/meeseeks' );?>
+<?php do_action( 'front_end_box/login' );?>

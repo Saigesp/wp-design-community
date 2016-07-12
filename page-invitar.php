@@ -85,9 +85,7 @@ if($op_user != null && is_numeric($op_user['invitaciones'])){
 
               <?php wpdc_the_input_checkbox_simple('terms', '', 'Acepto los términos y condiciones', 'Términos y condiciones');?>
 
-              <?php wpdc_the_input_checkbox_simple('bots', '', 'Invito a un diseñador');?>
-
-              <?php wpdc_the_submit('wp-submit', 'Enviar invitación', 'redirect_to', '/wordpress/invitar/?text=enviado', 'Enviar invitación');?>
+              <?php wpdc_the_submit('wp-submit', 'Enviar invitación', 'a', 'a', 'Enviar invitación');?>
   					</form>
 
           </section><!--profilebox -->

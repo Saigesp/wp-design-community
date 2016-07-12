@@ -10,9 +10,9 @@
         <!-- undo associate -->
         <?php wpdc_the_input_select_user('desasociate', 'Dar de baja como socio', $socios->results, '_to_define', true);?>
 
-        <?php wpdc_the_submit('updatesection', 'change_member_status', 'action', 'update-secretary', 'Actualizar asociados');?>
+        <?php wpdc_the_submit('updatesection', 'change_member_status', '', '', 'Actualizar asociados');?>
 
-        <h3 class="sep">Cambiar estado de validación</h3>
+        <h3 class="sep">Usuarios pendientes de validación</h3>
 
         <!-- valide asociate -->
         <?php wpdc_the_input_select_user('members_tovalide', 'Validar usuarios', $subscribers, 'asociation_status', true);?>
@@ -21,7 +21,7 @@
         <?php wpdc_the_input_select_user('members_tosuspend', 'Validar usuarios', $subscribers, 'asociation_status', true);?>
 
         <!-- submit change status -->
-        <?php wpdc_the_submit('updatesection', 'validatemembers', 'update-secretary', '', 'Actualizar pendientes');?>
+        <?php wpdc_the_submit('updatesection', 'validatemembers', '', '', 'Actualizar socios');?>
 
         <!-- close button -->
         <?php include(locate_template('templates/sections/section-close.php')); ?>

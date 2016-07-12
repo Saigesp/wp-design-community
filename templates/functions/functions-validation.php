@@ -167,7 +167,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
 
   $msg = '';
   $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
@@ -175,7 +175,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   $juntales = get_users();
 
   // Change govern
-  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'Cambiar gobierno'){
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changegovern'){
 
 
     // Change vicepresident, secretary, treasury
@@ -235,7 +235,8 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
      // }
     }
 
-  }else if ($_POST['updatesection'] == 'changecapacities') {
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changecapacities') {
 
     // Change permissions
     if(!empty($_POST['capacity_mode'])){
@@ -257,7 +258,8 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       $msg .= '<p>Secciones activas cambiadas</p>';
     }
     
-  }else if ($_POST['updatesection'] == 'changepresident') {
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changepresident') {
 
     // Change president
     if (!empty($_POST['presidente'])){
@@ -301,9 +303,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-secretary' ) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-secretary' ) {
 
-  if ($_POST['updatesection'] == 'Actualizar asociados') {  
+  if ($_POST['updatesection'] == 'change_member_status') {  
 
     if(!empty($_POST['asociate'])){
       $new_socis = $_POST['asociate'];
@@ -337,7 +339,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       }
       // Frontend notification
       $args   = array(
-        'type'          => 'warning', //success, info, warning
+        'type'          => 'success', //success, info, warning
         'where'         => 'meeseeks',
         'auto_close'    => true,
         'delay'         => '7', // s
@@ -346,7 +348,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 
-  if ($_POST['updatesection'] == 'Actualizar asociados') {
+  if ($_POST['updatesection'] == 'validatemembers') {
 
     if(!empty($_POST['members_tovalide']) && is_array($_POST['members_tovalide']) ){
       foreach ($_POST['members_tovalide'] as $user_id){

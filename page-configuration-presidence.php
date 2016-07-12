@@ -26,35 +26,33 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
     );
 
     $pageoptions = [
-        "capacities"        => "Configurar permisos",
         "gobteam"           => "Configurar gobierno",
+        "capacities"        => "Configurar permisos",
         "byemrpresident"    => "Ceder la presidencia",
     ];
 
     ?>
 
     <!-- flexboxer -->
-    <form method="POST" action="">
-        <div class="flexboxer flexboxer--configuration flexboxer--configuration__presidence flexboxer--full">
+    <div class="flexboxer flexboxer--configuration flexboxer--configuration__presidence flexboxer--full">
 
-            <?php include(locate_template('templates/sections/meeseeks.php')); ?>
+        <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
-            <!-- admin options -->
-            <?php wpdc_the_pageoptions($pageoptions);?>
+        <!-- admin options -->
+        <?php wpdc_the_pageoptions($pageoptions);?>
 
-            <!-- permisos -->
-            <?php include(locate_template('templates/sections/config-capacities.php')); ?>
+        <!-- gobierno section -->
+        <?php
+        $users = $users->results;
+        include(locate_template('templates/sections/config-govern.php')); ?>
 
-            <!-- gobierno section -->
-            <?php
-            $users = $users->results;
-            include(locate_template('templates/sections/config-govern.php')); ?>
+        <!-- permisos -->
+        <?php include(locate_template('templates/sections/config-capacities.php')); ?>
 
-            <!-- dimitir section -->
-            <?php include(locate_template('templates/sections/config-changegovern.php')); ?>
-          
-        </div><!-- end of flexboxer -->
-    </form>
+        <!-- dimitir section -->
+        <?php include(locate_template('templates/sections/config-changegovern.php')); ?>
+      
+    </div><!-- end of flexboxer -->
 
 <?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
 

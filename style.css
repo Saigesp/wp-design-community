@@ -3724,6 +3724,34 @@ textarea.js-medium-editor,
 .flexboxer--controlusers form > .wrap--content + .wrap--content {
   padding-top: 5px;
 }
-/**
- * PROFILE PICTURE
- ***********************************/
+.list > .item .wrap {
+  flex-shrink: 0;
+}
+.list > .item .wrap.wrap--frame__middle {
+  flex-basis: 50%;
+}
+.list > .item .wrap.wrap--frame__third {
+  flex-basis: 33%;
+}
+.list > .item .wrap.wrap--frame__fourth {
+  flex-basis: 25%;
+}
+.list > .item .wrap.wrap--frame__fifth {
+  flex-basis: 20%;
+}
+.list > .item .wrap.wrap--frame__100 {
+  flex-basis: 100px;
+}
+.list > .item .wrap.wrap--frame__85 {
+  flex-basis: 85px;
+}
+.list > .item .wrap.wrap--frame__45 {
+  flex-basis: 45px;
+}
+.flexboxer > .wrap.wrap--userlist {
+  max-width: initial;
+}
+.flexboxer > .wrap.wrap--userlist .wrap--photo {
+  border-radius: 100px;
+  overflow: hidden;
+}

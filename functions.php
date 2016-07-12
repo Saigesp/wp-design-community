@@ -103,6 +103,13 @@ function current_url() {
     return $current_url;
 }
 
+// Get current page url
+function current_page_url() {
+    global $wp;
+    $current_url = $wp->request;
+    return $current_url;
+}
+
 // Check user role
 function is_user_role( $role, $user_id = null ) {
     if (is_numeric($user_id)) $user = get_userdata($user_id);

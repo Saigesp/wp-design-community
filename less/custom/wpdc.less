@@ -387,10 +387,26 @@
 
 
 
-/**
- * PROFILE PICTURE
- ***********************************/
 
- .wrap--photo {
- 	
- }
+
+
+
+
+.list > .item .wrap {
+	flex-shrink: 0;
+	&.wrap--frame__middle 	{ flex-basis: 50%;}
+	&.wrap--frame__third 	{ flex-basis: 33%;}
+	&.wrap--frame__fourth 	{ flex-basis: 25%;}
+	&.wrap--frame__fifth 	{ flex-basis: 20%;}
+	&.wrap--frame__100 		{ flex-basis: 100px;}
+	&.wrap--frame__85 		{ flex-basis: 85px;}
+	&.wrap--frame__45 		{ flex-basis: 45px;}
+}
+
+.flexboxer > .wrap.wrap--userlist {
+	max-width: initial;
+	.wrap--photo{
+		border-radius: 100px;
+	    overflow: hidden;
+	}
+}

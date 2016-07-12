@@ -254,11 +254,12 @@ function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = nul
 	if($name_hidden && $value_hidden){
 		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button button-primary">';
 		$output .= '</input>';
+		$output .= '<input name="'.$name_hidden.'" type="hidden" value="'.$value_hidden.'" />';
 	}else{
 		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button button-primary">';
 		$output .= $text.'</button>';
+		$output .= '<input name="action" type="hidden" id="action" value="'.current_page_url().'" />';
 	}
-	if($name_hidden && $value_hidden) $output .= '<input name="'.$name_hidden.'" type="hidden" id="action" value="'.$value_hidden.'" />';
 	$output .= '</div></div>';
 	echo $output;
 }

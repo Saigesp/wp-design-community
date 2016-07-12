@@ -20,7 +20,9 @@ function wpdc_the_pageoptions($menu){
     echo $output;
 }
 
-
+/**
+ * INPUT TEXT
+ ***********************************/
 function wpdc_the_input_text($name, $value, $label, $placeholder, $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -33,7 +35,9 @@ function wpdc_the_input_text($name, $value, $label, $placeholder, $disabled = fa
     echo $output;
 }
 
-
+/**
+ * INPUT DATE
+ ***********************************/
 function wpdc_the_input_date($name, $value, $label, $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -46,7 +50,9 @@ function wpdc_the_input_date($name, $value, $label, $disabled = false){
     echo $output;
 }
 
-
+/**
+ * INPUT EMAIL
+ ***********************************/
 function wpdc_the_input_email($name, $value, $label, $placeholder){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -57,7 +63,9 @@ function wpdc_the_input_email($name, $value, $label, $placeholder){
     echo $output;
 }
 
-
+/**
+ * INPUT NUMBER
+ ***********************************/
 function wpdc_the_input_number($name, $value, $label, $min = 0, $max = 999, $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -70,6 +78,9 @@ function wpdc_the_input_number($name, $value, $label, $min = 0, $max = 999, $dis
     echo $output;
 }
 
+/**
+ * INPUT SELECT
+ ***********************************/
 function wpdc_the_input_select_option($name, $value, $label, $options, $multiple = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -90,6 +101,9 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
     echo $output;
 }
 
+/**
+ * INPUT SELECT USER
+ ***********************************/
 function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $multiple = false){
 		$output = '<div class="wrap wrap--frame wrap--flex">';
 		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -119,8 +133,10 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 	    echo $output;
 }
 
+/**
+ * INPUT SELECT ROLE
+ ***********************************/
 function wpdc_the_input_select_role($name, $label, $multiple = false){
-
     $WP_User = new WP_User( $user->ID );
     $roles = array();
     foreach( $WP_User->roles as $role ) {
@@ -128,7 +144,6 @@ function wpdc_the_input_select_role($name, $label, $multiple = false){
       if ( $role != null )
       	array_push($roles, $role->name);// change_role_name($role->name);
     }
-
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
@@ -147,7 +162,9 @@ function wpdc_the_input_select_role($name, $label, $multiple = false){
 	$output .= '</div></div>';
     echo $output;
 }
-
+/**
+ * INPUT SELECT POSITION
+ ***********************************/
 function wpdc_the_input_select_position($name, $label, $options, $multiple = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -166,7 +183,9 @@ function wpdc_the_input_select_position($name, $label, $options, $multiple = fal
     echo $output;
 }
 
-
+/**
+ * INPUT TEXTAREA
+ ***********************************/
 function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false){
 	$output = '<div class="wrap wrap--frame">';
 	$output .= '<textarea id="'.$name.'-textarea" class="description js-medium-editor" name="'.$name.'" placeholder="'.$placeholder.'"';
@@ -176,7 +195,9 @@ function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false)
     echo $output;
 }
 
-
+/**
+ * INPUT CHECKBOX
+ ***********************************/
 function wpdc_the_input_checkbox_simple($name, $value = '', $label = '', $placeholder = '', $disabled = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
@@ -193,6 +214,32 @@ function wpdc_the_input_checkbox_simple($name, $value = '', $label = '', $placeh
     echo $output;
 }
 
+/**
+ * INPUT FILE
+ ***********************************/
+function wpdc_the_input_file($name, $value, $label, $accept = null, $multiple = false, $disabled = false){
+	if(!$accept) $accept = '.jpg,.JPG,.png,.PNG,.gif,.GIF,.pdf,.PDF,.zip,.ZIP,.rar,.RAR';
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+			$output .= '<label for="'.$name.'-filename">'.$label.'</label>';
+		$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+			$output .= '<input id="'.$name.'-inputfile" type="file" name="'.$name;
+			if($multiple) $output .= '[]';
+			$output .= '" accept="'.$accept.'" class ="inputfile hidden" ';
+			if($multiple) $output .= ' multiple ';
+			$output .= ' />';
+			$output .= '<label for="'.$name.'-inputfile"><img src="'.get_stylesheet_directory_uri().'/img/icons/upload.svg" alt="Upload" class="icon icon--upload"></label>';
+			$output .= '<input type="text" placeholder="Nombre del archivo" name="'.$name.'-filename" id="'.$name.'-filename"';
+			if($disabled) $output .= ' disabled ';
+			$output .= '>';
+	$output .= '</div></div>';
+    echo $output;
+}
+
+
+/**
+ * INPUT SUBMIT
+ ***********************************/
 function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = null, $text = null){
 	if(!$text) $text = 'Enviar';
 	$output = '<div class="wrap wrap--flex">';
@@ -210,6 +257,18 @@ function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = nul
 	echo $output;
 }
 
+
+
+
+
+
+
+
+
+
+/**
+ * ICON EDIT
+ ***********************************/
 function wpdc_the_edit_icon($link, $position = 0){
 	$output = '<div class="wrap wrap--icon wrap--icon__edit">';
 	$output .= '<a href="'.$link.'">';
@@ -219,9 +278,25 @@ function wpdc_the_edit_icon($link, $position = 0){
 	echo $output;
 }
 
-?>
-<?php
 
+/**
+ * GET USER NAME
+ ***********************************/
+function wpdc_the_user_name($user_id) {
+	if(get_the_author_meta('first_name',$user_id) && get_the_author_meta('last_name',$user_id))
+		$user_full_name = get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id);
+	else
+		if(get_the_author_meta('user_login',$user_id) == get_the_author_meta('user_email',$user_id))
+			$user_full_name = get_the_author_meta('user_email',$user_id);
+		else
+			$user_full_name = get_the_author_meta('user_login',$user_id).' ('.get_the_author_meta('user_email',$user_id).')';
+
+	echo $user_full_name;
+}
+
+/**
+ * GET USER ASOCIATION POSITION
+ ***********************************/
 function wpdc_the_asociation_position($user_id) {
 	$output = '';
 	if(get_the_author_meta('asociation_position', $user_id)){
@@ -234,19 +309,6 @@ function wpdc_the_asociation_position($user_id) {
 		$output .= change_role_name(get_the_author_meta('asociation_responsability', $user->ID));
 	}
 	echo $output;
-}
-
-
-function wpdc_the_user_name($user_id) {
-	if(get_the_author_meta('first_name',$user_id) && get_the_author_meta('last_name',$user_id))
-		$user_full_name = get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id);
-	else
-		if(get_the_author_meta('user_login',$user_id) == get_the_author_meta('user_email',$user_id))
-			$user_full_name = get_the_author_meta('user_email',$user_id);
-		else
-			$user_full_name = get_the_author_meta('user_login',$user_id).' ('.get_the_author_meta('user_email',$user_id).')';
-
-	echo $user_full_name;
 }
 
 

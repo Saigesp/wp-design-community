@@ -51,17 +51,11 @@
             <p>No hay documentos todavía. Cuando añadas uno, se verá aquí.</p>
         <?php } wp_reset_postdata(); ?><!-- end of document list -->
 
-        <!-- upload document -->
         <h3 class="sep">Nuevo documento</h3>
         <p class="help help--section">Los documentos deben ser archivos PDF o ZIP</p>
-        <div class="wrap wrap--frame wrap--flex">
-            <div class="wrap wrap--frame wrap--frame__middle">
-                <input type="text" placeholder="Nombre" name="doc_name" id="docname">
-            </div>
-            <div class="wrap wrap--frame wrap--frame__middle">
-                <input id="inputfiles" type="file" name="files[]" accept=".pdf,.zip" class ="files-data form-control" multiple />
-            </div>
-        </div>
+
+        <!-- upload document -->
+        <?php wpdc_the_input_file('files', '', 'Documentos a añadir', '.pdf,.zip', true);?>
 
         <?php
         $visibility_options = [

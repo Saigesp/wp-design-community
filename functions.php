@@ -831,7 +831,7 @@ function register_a_user(){
       $user_pass = wp_generate_password();
       $user_id = wp_create_user($sanitized_user_login, $user_pass, $user_email);
       if(!$user_id){
-        $msg .= 'registration failed...';
+        $msg .= 'Algo falló :(';
       }else{
         update_user_option($user_id, 'default_password_nag', true, true);
         wp_new_user_notification($user_id, $user_pass);

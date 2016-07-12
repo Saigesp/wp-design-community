@@ -1717,6 +1717,21 @@ button.secondary:focus {
   border-bottom-width: 1px;
   margin-top: 4px;
 }
+.wrap--form input[type="file"] {
+  display: none;
+}
+.wrap--form input[type="file"] + label .icon {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.wrap--form input[type="file"] + label .icon:hover {
+  opacity: 0.6;
+}
+.wrap--form input[type="file"] + label + input {
+  width: calc(100% - 45px - 4px);
+  margin-left: 4px;
+}
 .wrap--form select {
   background: rgba(0, 0, 0, 0.1);
   padding: 5px;

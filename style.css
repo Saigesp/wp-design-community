@@ -3300,6 +3300,13 @@ pre code {
 .chosen-container-multi .chosen-choices li.search-field {
   height: 25px;
 }
+.chosen-container-multi .chosen-choices .search-field {
+  width: initial;
+  max-width: 50%;
+}
+.chosen-container-multi .chosen-choices .search-field input {
+  width: initial !important;
+}
 .chosen-container-active .chosen-choices {
   box-shadow: none;
 }

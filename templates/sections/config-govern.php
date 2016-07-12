@@ -4,6 +4,9 @@
 	<h3 class="sep">Junta directiva</h3>
     <p class="help help--section">Los miembros de la Junta Directiva tienen capacidades de edición de todos los contenidos de la web, excepto la gestión de socios, exclusiva para el secretario, y la gestión de cuotas, exclusiva del tesorero. Para poder elegir a un usuario, éste antes ha de tener estatus de asociado.</p>
 
+    <!-- presidencia -->
+    <?php wpdc_the_input_select_user('presidente', 'Presidencia', $users, 'asociation_position', false, true);?>
+
     <!-- vicepresidencia -->
     <?php wpdc_the_input_select_user('vicepresidente', 'Vicepresidencia', $users, 'asociation_position');?>
 

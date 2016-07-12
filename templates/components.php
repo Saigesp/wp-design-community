@@ -104,30 +104,36 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
 /**
  * INPUT SELECT USER
  ***********************************/
-function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $multiple = false){
+function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $multiple = false, $disable = false){
 		$output = '<div class="wrap wrap--frame wrap--flex">';
 		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 		$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 		$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-		if(is_array($user_array) && sizeof($user_array) > 0){
-			$output .= '<select id="'.$name.'-input" name="'.$name;
-			if($multiple) $output .= '[]';
-			$output .= '" class="select select--user chosen"';
-			if($multiple) $output .= ' multiple="multiple"';
-			$output .= '/>';
-			$output .= '<option value="">Ninguno</option>';
-		    foreach ($user_array as $user) {
-		    	$output .= '<option value="'.esc_html($user->ID ).'" ';
-		    	if(get_the_author_meta($user_meta, $user->ID) == $name) $output .= ' selected';
-		    	if($user->first_name != '' && $user->last_name != ''){
-		    		$output .= ' >'.esc_html($user->first_name).' '.esc_html($user->last_name).'</option>';
-		    	}else{
-		    		$output .= ' >'.esc_html($user->user_login).' ('.esc_html($user->user_email).')</option>';
-		    	}
-		    }
-			$output .= '</select>';
+		if(!$disable){
+			if(is_array($user_array) && sizeof($user_array) > 0){
+				$output .= '<select id="'.$name.'-input" name="'.$name;
+				if($multiple) $output .= '[]';
+				$output .= '" class="select select--user chosen"';
+				if($multiple) $output .= ' multiple="multiple"';
+				$output .= '/>';
+				$output .= '<option value="">Ninguno</option>';
+			    foreach ($user_array as $user) {
+			    	$output .= '<option value="'.esc_html($user->ID ).'" ';
+			    	if(get_the_author_meta($user_meta, $user->ID) == $name) $output .= ' selected';
+			    	$output .= ' >'.wpdc_get_user_name($user->ID).'</option>';
+			    }
+				$output .= '</select>';
+			}else {
+				$output .= '<label>No hay usuarios</label>';
+			}
 		}else {
-			$output .= '<label>No hay usuarios</label>';
+			$output .= '<label>';
+			foreach ($user_array as $user) {
+				if(get_the_author_meta($user_meta, $user->ID) == $name){
+					$output .= wpdc_get_user_name($user->ID);
+				}
+			}
+			$output .= '</label>';
 		}
 		$output .= '</div></div>';
 	    echo $output;
@@ -292,6 +298,17 @@ function wpdc_the_user_name($user_id) {
 			$user_full_name = get_the_author_meta('user_login',$user_id).' ('.get_the_author_meta('user_email',$user_id).')';
 
 	echo $user_full_name;
+}
+function wpdc_get_user_name($user_id) {
+	if(get_the_author_meta('first_name',$user_id) && get_the_author_meta('last_name',$user_id))
+		$user_full_name = get_the_author_meta('first_name',$user_id).' '.get_the_author_meta('last_name',$user_id);
+	else
+		if(get_the_author_meta('user_login',$user_id) == get_the_author_meta('user_email',$user_id))
+			$user_full_name = get_the_author_meta('user_email',$user_id);
+		else
+			$user_full_name = get_the_author_meta('user_login',$user_id).' ('.get_the_author_meta('user_email',$user_id).')';
+
+	return $user_full_name;
 }
 
 /**

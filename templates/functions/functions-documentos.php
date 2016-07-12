@@ -58,6 +58,8 @@ function documentos_post_type() {
 *
 *****************************************************
 */
+
+/*
 add_action('wp_ajax_cvf_upload_files', 'cvf_upload_files');
 add_action('wp_ajax_nopriv_cvf_upload_files', 'cvf_upload_files'); // Allow front-end submission 
 
@@ -137,6 +139,15 @@ function cvf_upload_files(){
                             // Generate meta data
                             $attach_data = wp_generate_attachment_metadata( $attach_id, $filename ); 
                             wp_update_attachment_metadata( $attach_id, $attach_data );
+
+                            $msg = "ey";
+                            $args   = array(
+                                'type'          => 'success', //success, info, warning
+                                'where'         => 'meeseeks',
+                                'auto_close'    => true,
+                                'delay'         => '5', // s
+                                );
+                            new Frontend_box( $msg, $args);
                             
                         }
                     }
@@ -158,6 +169,6 @@ function cvf_upload_files(){
     
     exit();
 }
-
+*/
 
 ?>

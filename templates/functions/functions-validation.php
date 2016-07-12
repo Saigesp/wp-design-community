@@ -361,9 +361,76 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         update_user_meta($user_id, 'asociation_status', 'suspendido' );
       }
     }
-
-
   }
+
+  if ($_POST['updatesection'] == 'publish_document') {
+    
+    $max_file_archives = 10; // Define how many images can be uploaded to the current post
+    $wp_upload_dir = wp_upload_dir();
+    $path = $wp_upload_dir['path'] . '/';
+    $count = 0;
+    $msg_ok = '';
+    $msg_e = '';
+    $publish_status = 'publish';
+    $publish_type = 'documentos';
+
+    if(count($_POST['files']) > $max_file_archives) {
+        $msg_e .= "<p>No puedes subir más de " . $max_file_archives . " archivos a la vez</p>";
+    } else {
+      $post_information = array(
+        'post_title' => wp_strip_all_tags( $_POST['files-filename'] ),
+        'post_content' => '[Post con documentos adjuntos]',
+        'post_type' => $publish_type,
+        'post_status' => $publish_status,
+      );
+      $post_id = wp_insert_post( $post_information );
+
+      foreach ( $_POST['files'] as $f => $name ) {
+        $count++;
+        $extension = pathinfo( $name, PATHINFO_EXTENSION );
+        $new_filename = $name;
+        $filename = $path.$new_filename;
+        $filetype = wp_check_filetype( basename( $filename ), null );
+        $wp_upload_dir = wp_upload_dir();
+        $attachment = array(
+          'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+          'post_mime_type' => $filetype['type'],
+          'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+          'post_content'   => '',
+          'post_status'    => 'inherit'
+        );
+        // Insert attachment to the database
+        $attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+        // Generate meta data
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename ); 
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+
+        $msg_ok .= "<p>".$filename." subido correctamente</p>";                    
+      }
+    }
+
+    if($msg_e){
+      $args_e   = array(
+          'type'          => 'error', //success, info, warning
+          'where'         => 'meeseeks',
+          'auto_close'    => true,
+          'delay'         => '7', // s
+          );
+      new Frontend_box( $msg_e, $args);
+    }
+    if($msg_ok){
+      $args_ok   = array(
+          'type'          => 'success', //success, info, warning
+          'where'         => 'meeseeks',
+          'auto_close'    => true,
+          'delay'         => '4', // s
+          );
+      new Frontend_box( $msg_ok, $args);
+    }
+  }
+
 }
 
 
@@ -383,7 +450,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 */
  
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'new-fee'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
-
 
     $hasError = false;
     $publish_status = 'publish';

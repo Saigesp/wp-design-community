@@ -58,6 +58,7 @@
         <?php wpdc_the_input_file('files', '', 'Documentos a añadir', '.pdf,.zip', true);?>
 
         <?php
+        /*
         $visibility_options = [
             "administrator" => "Administradores",
             "editor" => "Junta Directiva",
@@ -65,11 +66,12 @@
             "subscribers" => "Registrados",
             "visitors" => "Todos",
         ];
-        wpdc_the_input_select_option('doc_visivility', '', 'Quién puede verlo', $visibility_options, true);
+        wpdc_the_input_select_option('doc_visibility', '', 'Quién puede verlo', $visibility_options, true);
+        */
         ?>
 
         <!-- submit document -->
-        <?php wpdc_the_submit('updatesection', 'uploaddoc', 'update-doc', '', 'Añadir documento');?>
+        <?php wpdc_the_submit('updatesection', 'publish_document', '', '', 'Añadir documento');?>
 
         <!-- close -->
         <?php include(locate_template('templates/sections/section-close.php')); ?>

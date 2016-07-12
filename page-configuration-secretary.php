@@ -39,13 +39,6 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         )
     );
 
-    $wpdc_docs = array (
-        'post_type' => array('documentos'),
-        'posts_per_page' => '-1',
-    );
-
-    $documents = new WP_Query( $wpdc_docs );
-
     $pageoptions = [
         "usuarios" => sizeof($subscribers->results)." Usuarios",
         "socios" => sizeof($socios->results)." Socios",
@@ -74,7 +67,14 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         <?php include(locate_template('templates/sections/config-changememberstatus.php')); ?>
 
         <!-- manage documents -->
-        <?php include(locate_template('templates/sections/config-managedocs.php')); ?>
+        <?php
+        $wpdc_docs = array (
+            'post_type' => array('documentos'),
+            'posts_per_page' => '-1',
+        );
+        $documents = new WP_Query( $wpdc_docs );
+        include(locate_template('templates/sections/config-managedocs.php'));
+        ?>
 
         <!-- new user -->
         <?php include(locate_template('templates/sections/user-create.php')); ?>

@@ -341,14 +341,14 @@ function inject_in_all() { ?>
      ***********************************/
     <?php } else if (is_page('configuration-secretary')) { ?>
 
-
-        $('body').on('click', '#submit-doc', function(e){
+/*
+        $('body').on('click', 'button[value="publish_document"]', function(e){
 
             e.preventDefault;
 
             var fd = new FormData();
-            var files_data = $('#inputfiles');
-            var title = $('#docname').val();
+            var files_data = $('#files-inputfile');
+            var title = $('#files-filename').val();
             
             // Loop through each data and create an array file[] containing our files data.
             $.each($(files_data), function(i, obj) {
@@ -372,7 +372,7 @@ function inject_in_all() { ?>
                 }
             });
         });
-
+*/
 
 
     /**

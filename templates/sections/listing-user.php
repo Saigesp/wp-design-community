@@ -43,6 +43,5 @@
         </ul>
     <?php }else{
         echo '<p>Todavía no hay '.$list_type.' en la página.</p>';
-        if($list_type == 'usuarios') echo '<p><a href="">¿Quieres crear uno?</a></p>';
     } ?>
 </section>

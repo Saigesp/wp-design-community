@@ -73,8 +73,10 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option" ';
-	if($multiple) $output .= 'multiple="multiple"';
+	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option';
+	if($multiple) $output .= ' chosen';
+	$output .= ' "';
+	if($multiple) $output .= ' multiple="multiple"';
 	$output .= '/>';
     foreach ($options as $val => $text) {
     	$output .= '<option value="'.$val.'"';

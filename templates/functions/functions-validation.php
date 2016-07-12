@@ -170,13 +170,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
 
   $msg = '';
+  $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
+  $responsabilities = array('rp_events', 'rp_concursos', 'rp_jobs', 'rp_posts');
+  $juntales = get_users();
 
   // Change govern
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'Cambiar gobierno'){
 
-    $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
-    $responsabilities = array('rp_events', 'rp_concursos', 'rp_jobs', 'rp_posts');
-    $juntales = get_users();
 
     // Change vicepresident, secretary, treasury
     foreach ($cargos as $cargo) {
@@ -239,13 +239,17 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
     // Change permissions
     if(!empty($_POST['capacity_mode'])){
-      change_options('capacity_mode', $_POST['capacity_mode'], 'yes');
-      $msg .= '<p>Permisos del sistema cambiados a: <strong>'.$_POST['capacity_mode'].'</strong></p>';
+      if(get_option('capacity_mode') !== $_POST['capacity_mode']){
+        change_options('capacity_mode', $_POST['capacity_mode'], 'yes');
+        $msg .= '<p>Permisos del sistema cambiados</p>';
+      }
     }
 
     if(!empty($_POST['transparency_mode'])){
-      change_options('transparency_mode', $_POST['transparency_mode'], 'no');
-      $msg .= '<p>Transparencia del sistema cambiada a: <strong>'. $_POST['transparency_mode'].'</strong></p>';
+      if(get_option('transparency_mode') !== $_POST['transparency_mode']){
+        change_options('transparency_mode', $_POST['transparency_mode'], 'no');
+        $msg .= '<p>Transparencia del sistema cambiada</p>';
+      }
     }
 
     if(!empty($_POST['active_section'])){
@@ -269,6 +273,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           $juntal->remove_role('author');
           $juntal->add_role(esc_attr('editor'));
           update_user_meta($juntal->ID, 'asociation_position', 'presidente' );
+          $msg .= '<p>El usuario '.$juntal->user_login.' es el nuevo lider!</p>';
         } 
       }
     }

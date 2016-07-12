@@ -37,7 +37,7 @@ $page_sections = [
     <!-- habilitar secciones -->
     <h3 class="sep">Habilitar secciones</h3>
     <p class="help help--section">Las secciones no incluídas no podrán consultarse ni gestionarse, pero su contenido permanecerá intacto.</p>
-    <?php wpdc_the_input_select_option('transparency_mode', '', 'Transparencia', $page_sections, true);?>
+    <?php wpdc_the_input_select_option('sections_active', '', 'Secciones habilitadas', $page_sections, true);?>
 
     <!-- submit -->
     <?php wpdc_the_submit('updatesection', 'changecapacities', 'update-presidence', '', 'Cambiar permisos');?>

@@ -803,6 +803,70 @@ function my_front_end_login_fail($username){
 add_action('wp_login_failed', 'my_front_end_login_fail'); 
 
 
+/*
+* SEND INVITATIONS (REGISTER) from frontend
+* http://wordpress.stackexchange.com/questions/7134/front-end-register-form/7151#7151
+*********************************************/
+
+function register_a_user(){
+  if(isset($_GET['do']) && $_GET['do'] == 'register'):
+
+    $msg = '';
+    if(empty($_POST['user_login']) || empty($_POST['user_email'])) $msg .= '<p>Campos incorrectos</p>';
+    if(!empty($_POST['spam'])) $msg .= 'gtfo spammer';
+
+    $user_login = esc_attr($_POST['user_login']);
+    $user_email = esc_attr($_POST['user_email']);
+    require_once(ABSPATH.WPINC.'/registration.php');
+
+    $sanitized_user_login = sanitize_user($user_login);
+    $user_email = apply_filters('user_registration_email', $user_email);
+
+    if(!is_email($user_email)) $msg .= '<p>Email inválido</p>';
+    elseif(email_exists($user_email)) $msg .= '<p>Email ya en uso</p>';
+
+    if(empty($sanitized_user_login) || !validate_username($user_login)) $msg .= '<p>Nombre de usuario no válido</p>';
+    elseif(username_exists($sanitized_user_login)) $msg .= '<p>Nombre de usuario ya existente</p>';
+
+    if(!$msg){
+      $user_pass = wp_generate_password();
+      $user_id = wp_create_user($sanitized_user_login, $user_pass, $user_email);
+      if(!$user_id){
+        $msg .= 'registration failed...';
+      }else{
+        update_user_option($user_id, 'default_password_nag', true, true);
+        wp_new_user_notification($user_id, $user_pass);
+      }
+    }
+    if($msg){
+      $args = array(
+        'type'          => 'error', //success, info, warning
+        'where'         => 'login',
+        'auto_close'    => true,
+        'delay'         => '5', // s
+      );
+    }
+    else {
+      $msg = 'Usuario creado y email envidado a '.$user_email;
+      $args = array(
+        'type'          => 'success', //success, info, warning
+        'where'         => 'login',
+        'auto_close'    => true,
+        'delay'         => '5', // s
+      );
+    }
+    new Frontend_box( $msg, $args);
+
+  endif;
+}
+add_action('template_redirect', 'register_a_user');
+
+
+
+
+
+
+
 /**
  * FUNCIONES DE FILTRO DE IDIOMA
  ***********************************/

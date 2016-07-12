@@ -14,7 +14,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
   include(locate_template('templates/functions/functions-validation.php'));
 
   $pageoptions = [
-      "feelist" => "X Cuotas",
+      "feelist" => $wp_query->post_count." Cuotas creadas",
       "createfee" => "Crear cuota",
       "setbankaccount" => "Configurar cuentas",
   ];

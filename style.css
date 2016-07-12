@@ -3299,6 +3299,7 @@ pre code {
 }
 .chosen-container ul.chosen-choices .search-field input {
   width: 100% !important;
+  min-height: initial;
 }
 .chosen-container-multi .chosen-choices {
   border: 0;

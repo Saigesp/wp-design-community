@@ -127,13 +127,13 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 				$output .= '<label>No hay usuarios</label>';
 			}
 		}else {
-			$output .= '<label>';
+			$output .= '<span>';
 			foreach ($user_array as $user) {
 				if(get_the_author_meta($user_meta, $user->ID) == $name){
 					$output .= wpdc_get_user_name($user->ID);
 				}
 			}
-			$output .= '</label>';
+			$output .= '</span>';
 		}
 		$output .= '</div></div>';
 	    echo $output;
@@ -316,15 +316,13 @@ function wpdc_get_user_name($user_id) {
  ***********************************/
 function wpdc_the_asociation_position($user_id) {
 	$output = '';
-	if(get_the_author_meta('asociation_position', $user_id)){
-		$output .= change_role_name(get_the_author_meta('asociation_position', $user_id));
-	}
-	if(get_the_author_meta('asociation_position', $user_id) && get_the_author_meta('asociation_responsability', $user_id)){
-		$output .= ' / ';
-	}
-	if(get_the_author_meta('asociation_responsability', $user_id)){
-		$output .= change_role_name(get_the_author_meta('asociation_responsability', $user->ID));
-	}
+	$pos = get_the_author_meta('asociation_position', $user_id);
+	$res = get_the_author_meta('asociation_responsability', $user_id);
+
+	if(!empty($pos)) 					$output .= change_role_name($pos);
+	if(!empty($pos) && !empty($res)) 	$output .= ' | ';
+	if(!empty($res))					$output .= change_role_name($res);
+	
 	echo $output;
 }
 

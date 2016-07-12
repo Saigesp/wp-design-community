@@ -929,7 +929,7 @@ function change_role_name($rolename){
   elseif($rolename == 'rp_concursos') return 'Resp. Concursos';
   elseif($rolename == 'rp_jobs') return 'Resp. Ofertas laborales';
   elseif($rolename == 'rp_posts') return 'Resp. Noticias';
-  elseif($rolename == '') return 'Ninguno';
+  elseif($rolename == '') return null;
   else return $rolename;
 }
 

@@ -341,7 +341,42 @@ function inject_in_all() { ?>
      ***********************************/
     <?php } else if (is_page('configuration-secretary')) { ?>
 
-/*
+
+
+$('body').on('change', '#files-inputfile', function(e){
+  $("#files-placename").empty();
+  var $input = $(this);
+  var inputFiles = this.files;
+  if (inputFiles == undefined || inputFiles.length == 0) return;
+  $.each(inputFiles, function(index, file) {
+    $("#files-placename").append("<li>"+file.name+"</li>");
+  }); 
+  $('input[name="files-filename"]').focus();
+
+});
+/* 
+    var inputFile = inputFiles[0];
+    var fileTypes = ['jpg', 'jpeg', 'png', 'gif']; //extensiones permitidas
+    var extension = inputFile.name.split('.').pop().toLowerCase();
+    var isSuccess = fileTypes.indexOf(extension) > -1;
+    if (isSuccess) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            $('#photo').attr("src", event.target.result); //Selector de la imagen a cambiar
+        };
+        reader.readAsDataURL(inputFile);
+ 
+    } else {
+        alert('Formatos permitidos: jpg, gif, png');
+    }
+    reader.onerror = function(event) {
+        alert("ERROR: " + event.target.error.code);
+    };
+*/
+
+
+        /*
+        //Función para la subida mediante ajax de documentos. Requiere funcion en functions-documentos.php
         $('body').on('click', 'button[value="publish_document"]', function(e){
 
             e.preventDefault;
@@ -372,7 +407,7 @@ function inject_in_all() { ?>
                 }
             });
         });
-*/
+        */
 
 
     /**

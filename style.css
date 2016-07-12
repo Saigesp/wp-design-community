@@ -3755,3 +3755,9 @@ textarea.js-medium-editor,
   border-radius: 100px;
   overflow: hidden;
 }
+.flexboxer .wrap--form .list--appended {
+  margin-left: 49px;
+}
+.flexboxer .wrap--form .list--appended .appendlist p {
+  margin: 0;
+}

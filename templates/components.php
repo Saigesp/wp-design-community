@@ -229,6 +229,7 @@ function wpdc_the_input_file($name, $value, $label, $accept = null, $multiple = 
 		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 			$output .= '<label for="'.$name.'-filename">'.$label.'</label>';
 		$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+		$output .= '<div class="wrap wrap--frame">';
 			$output .= '<input id="'.$name.'-inputfile" type="file" name="'.$name;
 			if($multiple) $output .= '[]';
 			$output .= '" accept="'.$accept.'" class ="inputfile hidden" ';
@@ -238,6 +239,8 @@ function wpdc_the_input_file($name, $value, $label, $accept = null, $multiple = 
 			$output .= '<input type="text" placeholder="Nombre del archivo" name="'.$name.'-filename" id="'.$name.'-filename"';
 			if($disabled) $output .= ' disabled ';
 			$output .= '>';
+	$output .= '</div>';
+	if($multiple) $output .= '<ul id="'.$name.'-placename" class="list list--appended"></ul>';
 	$output .= '</div></div>';
     echo $output;
 }

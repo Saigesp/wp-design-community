@@ -4,16 +4,18 @@ function wpdc_the_pageoptions($menu){
 	$mid_menu = round(sizeof($menu)/2);
 	$cont = 0;
 	$output = '<section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent menu menu--frame">';
-	if(sizeof($menu) > 1) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	if(sizeof($menu) > 0) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
     foreach ($menu as $section => $text) {
     	$cont++;
     	if($cont > $mid_menu) $output .= '<p class="text text--right">';
     	else $output .= '<p>';
-    	$output .= '<a onclick="ToggleSection(this)" class="js-section-launch" data-section="'.$section.'">'.$text.'</a>';
+    	$output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
+    	if($cont == 1) $output .= ' active';
+    	$output .= '" data-section="'.$section.'">'.$text.'</a>';
     	$output .= '</p>';
     	if($cont == $mid_menu && sizeof($menu) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
     }
-	if(sizeof($menu) > 1) $output .= '</div>';
+	if(sizeof($menu) > 0) $output .= '</div>';
 	$output .= '</section>';
     echo $output;
 }

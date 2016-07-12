@@ -58,46 +58,44 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
     ?>
 
     <!-- flexboxer -->
-    <form method="POST" action="">
-
-        <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
+    <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
 
         <!-- Mr Meeseeks -->
-          <?php include(locate_template('templates/sections/meeseeks.php')); ?>
-        
-        </div>
-        <div class="flexboxer flexboxer--page flexboxer--page__secretary">
+        <?php include(locate_template('templates/sections/meeseeks.php')); ?>
+    
+    </div>
+    
+    <div class="flexboxer flexboxer--page flexboxer--page__secretary">
 
-            <!-- admin options -->
-            <?php wpdc_the_pageoptions($pageoptions);?>
+        <!-- admin options -->
+        <?php wpdc_the_pageoptions($pageoptions);?>
 
-            <!-- change status to members -->
-            <?php include(locate_template('templates/sections/config-changememberstatus.php')); ?>
+        <!-- change status to members -->
+        <?php include(locate_template('templates/sections/config-changememberstatus.php')); ?>
 
-            <!-- manage documents -->
-            <?php include(locate_template('templates/sections/config-managedocs.php')); ?>
+        <!-- manage documents -->
+        <?php include(locate_template('templates/sections/config-managedocs.php')); ?>
 
-            <!-- new user -->
-            <?php include(locate_template('templates/sections/user-create.php')); ?>
+        <!-- new user -->
+        <?php include(locate_template('templates/sections/user-create.php')); ?>
 
-            <!-- asociatelist -->
-            <?php
-            $users = $socios;
-            $list_type = 'socios';
-            $list_ID = 'asociatelist';
-            include(locate_template('templates/sections/listing-user.php'));
-            ?>
+        <!-- asociatelist -->
+        <?php
+        $users = $socios;
+        $list_type = 'socios';
+        $list_ID = 'asociatelist';
+        include(locate_template('templates/sections/listing-user.php'));
+        ?>
 
-            <!-- userlist -->
-            <?php
-            $users = $subscribers;
-            $list_type = 'usuarios';
-            $list_ID = 'userlist';
-            include(locate_template('templates/sections/listing-user.php'));
-            ?>
+        <!-- userlist -->
+        <?php
+        $users = $subscribers;
+        $list_type = 'usuarios';
+        $list_ID = 'userlist';
+        include(locate_template('templates/sections/listing-user.php'));
+        ?>
           
-        </div>
-    </form>
+    </div>
 
 <?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
 

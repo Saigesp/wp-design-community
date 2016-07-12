@@ -1792,6 +1792,10 @@ button.secondary:focus {
 .wrap--submit__spaced {
   margin-top: 76px !important;
 }
+.wrap--submit .button {
+  width: initial;
+  min-width: 220px;
+}
 .wrap--checkbox,
 .wrap--buttons {
   min-height: 58px;
@@ -3274,6 +3278,12 @@ pre code {
 }
 .chosen-container ul.chosen-choices {
   height: 100% !important;
+}
+.chosen-container ul.chosen-choices .search-field {
+  width: 100%;
+}
+.chosen-container ul.chosen-choices .search-field input {
+  width: 100% !important;
 }
 .chosen-container-multi .chosen-choices {
   border: 0;

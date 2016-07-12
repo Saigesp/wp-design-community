@@ -1,7 +1,8 @@
-<section id="<?php echo $list_type;?>" class="wrap wrap--content wrap--shadow wrap--userlist wrap--userlist__<?php echo $list_type;?> wrap--hidden js-section">
+<section id="<?php echo $list_type;?>" class="wrap wrap--content wrap--shadow wrap--userlist wrap--userlist__<?php echo $list_type;?> js-section wrap--hidden <?php if($list_type == 'usuarios' ) echo ' active';?>">
     <h3 class="title title--section"><?php echo $list_type;?></h3>
     
     <?php if(is_object($users) && sizeof($users->results) > 0){ ?>
+        <h3 class="sep">Listado de <?php echo $list_type;?></h3>
         <ul class="list">
             <?php foreach($users->results as $user){?>
 
@@ -44,4 +45,8 @@
     <?php }else{
         echo '<p>Todavía no hay '.$list_type.' en la página.</p>';
     } ?>
+
+    <!-- close -->
+    <?php include(locate_template('templates/sections/section-close.php')); ?>
+
 </section>

@@ -22,7 +22,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
 
   <!-- flexboxer -->
   <form method="POST" action="">
-    <div class="flexboxer flexboxer--event">
+    <div class="flexboxer flexboxer--configuration flexboxer--configuration__jobs">
 
       <?php // include(locate_template('templates/harry/harry.php')); ?>
 

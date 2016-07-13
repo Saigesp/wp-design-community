@@ -216,10 +216,7 @@ $members_pending = get_post_meta(get_the_ID(), 'members_pending', true);
       <?php endwhile; ?>
     <?php else : ?>
 
-      <!-- noinfo -->
-      <section class="wrap wrap--content">
-        <h2>No se ha encontrado la información</h2>
-      </section><!-- end of noinfo -->
+      <?php include(locate_template('templates/sections/404-noinfo.php')); ?>
 
     <?php endif; ?>
   </div><!-- end of flexboxer -->

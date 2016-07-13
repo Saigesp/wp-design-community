@@ -1,47 +1,26 @@
-<?php get_header(); ?> 
+<?php get_header(); ?>
+<div class="flexboxer flexboxer--index">
 
-  <!-- flexboxer -->
-  <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--index">
-    <?php if (have_posts()) : ?>
-      <?php while (have_posts()) : the_post(); ?>
-      
-        <!-- thumbnail -->
-        <?php if(has_post_thumbnail()){ ?>
-          <section class="wrap wrap--frame">
-            <header id="header-<?php the_ID(); ?>" class="header header--article">
-              <figure id="thumbnail-<?php the_ID(); ?>" class="thumb thumb--article js-fullheight js-fullheight-thumb">
-                <?php the_post_thumbnail('full');  ?>
-              </figure>
-              <div class="overflow overflow--black"></div>
-              <div id="title-<?php the_ID(); ?>" class="title title--article">
-                <div class="divtextarticle">
-                  <h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-                  <?php if(function_exists('the_subtitle')){?>
-                    <h3 class="subtitletextarticle titlesarticle"><?php the_subtitle(); ?></h3>
-                  <?php } ?>
-                </div>
-              </div>
-              <div class="categoryarticle">
-                <p><?php the_category(', ');?></p>
-              </div>
-            </header>
-          </section>
-        <?php }?><!-- end of thumbnail -->
+  <?php if (have_posts()) : ?>
+    
+    <?php while (have_posts()) : the_post(); ?>
+      <section class="wrap wrap--content wrap--shadow">
+        <h3 class="title title--article__sub"><?php the_title(); ?></h3>
+        <?php if(function_exists('the_subtitle')){?><h3 class="subtitle subtitle--article"><?php the_subtitle(); ?></h3><?php } ?>
+        <div id="content-<?php the_ID(); ?>" class="content">
+          <?php the_content(); ?>
+        </div>
+      </section>
+    <?php endwhile; ?>
 
-        <!-- content -->
-        <section class="wrap wrap--content">
-          <h2><?php the_title();?></h2>
-          <?php the_content();?>
-        </section><!-- end of content -->
+  <?php else : ?>
 
-      <?php endwhile; ?>
-    <?php else : ?>
+    <!-- noinfo -->
+    <section class="wrap wrap--content wrap--transparent">
+      <h3 class="title title--section">Ups!</h3>
+      <p>No hemos encontrado la información que buscabas :(</p>
+    </section>
 
-      <!-- noinfo -->
-      <section class="wrap wrap--content">
-        <h2>No info</h2>
-      </section><!-- end of noinfo -->
-
-    <?php endif; ?>
-  </div><!-- end of flexboxer -->
-<?php get_footer(); ?>
+  <?php endif; ?>
+</div>
+<?php get_footer();?>

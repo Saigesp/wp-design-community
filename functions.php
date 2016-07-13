@@ -54,6 +54,7 @@ register_nav_menus( array(
 // Create pages to extend theme
 new_page_title('Edit Event');
 new_page_title('Edit Profile');
+new_page_title('Edit Concursos');
 new_page_title('Control Users');
 new_page_title('Configuration');
 new_page_title('Configuration presidence');

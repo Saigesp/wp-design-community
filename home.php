@@ -12,7 +12,7 @@ $events_query = new WP_Query( $args );
 
 <div class="flexboxer flexboxer--home">
 
-  <section class="wrap wrap--frame__tocontent wrap--fullwidth wrap--header wrap--flex wrap--transparent">
+  <section class="wrap wrap--frame wrap--frame__tocontent wrap--flex wrap--transparent">
     <div class="wrap wrap--frame wrap--frame__middle">
       <div class="wrap wrap--logo">
         <a href="<?php bloginfo('url'); ?>">
@@ -44,7 +44,7 @@ $events_query = new WP_Query( $args );
     </section>
   <?php } ?>
 
-  <section class="wrap wrap--content wrap--transparent wrap--titlesection">
+  <section class="wrap wrap--content wrap--shadow">
     <h3>Acerca de </h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint odio, veniam possimus et distinctio amet eos suscipit optio, nam nesciunt, facilis labore architecto assumenda minus. Delectus quaerat quibusdam consequuntur tempora?</p>
     <div class="flexboxer flexboxer--disenadores">

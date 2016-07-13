@@ -35,7 +35,7 @@ function inject_in_all() { ?>
     }
 
     function ToggleSelect(select_id){
-      var section = jQuery('#'+select_id+' option:selected').val();
+      var section = jQuery('#'+select_id+'-input option:selected').val();
       if(jQuery('#js-select-'+section).hasClass('active') || select_id == 'close'){
         jQuery('.js-select-'+select_id).removeClass("active");
       }else{
@@ -187,9 +187,16 @@ function inject_in_all() { ?>
 
       beautydate();
 
-
-
-
+      if ($('.js-pikaday').length > 0){
+        var $datepicker = $('.js-pikaday').pikaday({
+            format: 'YYYY-MM-DD h:mm:ss',
+            minDate: new Date(2016, 0, 1),
+            maxDate: new Date(2020, 12, 31),
+            yearRange: [2016,2020],
+            onSelect: function() {
+            },          
+        });
+      }
 
 
 
@@ -293,29 +300,19 @@ function inject_in_all() { ?>
           $('.wrap--submit').addClass('active');
         })
       }
-      if ($("#paymethod").length > 0) {
+      /*if ($("#paymethod").length > 0) {
         $('#paymethod').change(function(){
           $('.wrap--submit').addClass('active');
         })
-      }
+      }*/
 
 
 
     /**
-     * PAGE CONTROL USERS
+     * PAGE TREASURY
      ***********************************/
     <?php } ?>
     <?php if (is_page('configuration-treasury')) { ?>
-
-      console.log('hola');
-      var $datepicker = $('.js-pikaday').pikaday({
-          format: 'YYYY-MM-DD h:mm:ss',
-          minDate: new Date(2016, 0, 1),
-          maxDate: new Date(2020, 12, 31),
-          yearRange: [2016,2020],
-          onSelect: function() {
-          },          
-      });
       
       //$datepicker.pikaday('show').pikaday('nextMonth');
 
@@ -341,73 +338,17 @@ function inject_in_all() { ?>
      ***********************************/
     <?php } else if (is_page('configuration-secretary')) { ?>
 
+      $('body').on('change', '#files-inputfile', function(e){
+        $("#files-placename").empty();
+        var $input = $(this);
+        var inputFiles = this.files;
+        if (inputFiles == undefined || inputFiles.length == 0) return;
+        $.each(inputFiles, function(index, file) {
+          $("#files-placename").append("<li>"+file.name+"</li>");
+        }); 
+        $('input[name="files-filename"]').focus();
 
-
-$('body').on('change', '#files-inputfile', function(e){
-  $("#files-placename").empty();
-  var $input = $(this);
-  var inputFiles = this.files;
-  if (inputFiles == undefined || inputFiles.length == 0) return;
-  $.each(inputFiles, function(index, file) {
-    $("#files-placename").append("<li>"+file.name+"</li>");
-  }); 
-  $('input[name="files-filename"]').focus();
-
-});
-/* 
-    var inputFile = inputFiles[0];
-    var fileTypes = ['jpg', 'jpeg', 'png', 'gif']; //extensiones permitidas
-    var extension = inputFile.name.split('.').pop().toLowerCase();
-    var isSuccess = fileTypes.indexOf(extension) > -1;
-    if (isSuccess) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            $('#photo').attr("src", event.target.result); //Selector de la imagen a cambiar
-        };
-        reader.readAsDataURL(inputFile);
- 
-    } else {
-        alert('Formatos permitidos: jpg, gif, png');
-    }
-    reader.onerror = function(event) {
-        alert("ERROR: " + event.target.error.code);
-    };
-*/
-
-
-        /*
-        //Función para la subida mediante ajax de documentos. Requiere funcion en functions-documentos.php
-        $('body').on('click', 'button[value="publish_document"]', function(e){
-
-            e.preventDefault;
-
-            var fd = new FormData();
-            var files_data = $('#files-inputfile');
-            var title = $('#files-filename').val();
-            
-            // Loop through each data and create an array file[] containing our files data.
-            $.each($(files_data), function(i, obj) {
-                $.each(obj.files,function(j,file){
-                    fd.append('files[' + j + ']', file);
-                })
-            });
-            
-            fd.append('action', 'cvf_upload_files');  
-            
-            fd.append('doc_name', title); 
-
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-                data: fd,
-                contentType: false,
-                processData: false,
-                success: function(response){
-                    alert(response); // Append Server Response
-                }
-            });
-        });
-        */
+      });
 
 
     /**

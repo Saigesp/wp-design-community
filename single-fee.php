@@ -34,24 +34,12 @@ $pageoptions = [
 
     <?php do_action( 'front_end_box/singlefee' );?>
 
-    <?php if(is_user_role('administrator') && !empty($_POST)){ ?>
-      <section class="wrap wrap--content wrap--shadow">
-        <h3 class="title title--section">$_POST</h3>
-        <?php
-        if(is_array($_POST)) { echo '<strong>Array()</strong><br>';
-          foreach ($_POST as $key => $value) {
-            if (is_array($value)){ foreach ($value as $k => $v) { echo $key . '[' . $k . ']: ' . $v . '<br>'; } }
-            else echo $key . ': ' . $value . '<br>';
-          } }else{ var_dump($_POST);}
-        ?>
-      </section>
-    <?php } ?>
-
     <?php if (have_posts()) : ?>
       <?php while (have_posts()) : the_post(); ?> 
 
         <?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
 
+          <!-- page optiona -->
           <?php wpdc_the_pageoptions($pageoptions);?>
           
           <?php if($asociates->total_users > 0){?>
@@ -59,25 +47,20 @@ $pageoptions = [
             <!-- gestión de pago de cuotas -->
             <?php include(locate_template('templates/sections/config-managefee.php')); ?>
 
-          <?php }else{ // No authors in list ?>
+          <?php }else{ ?>
 
-            <section class="wrap wrap--content wrap--transparent">
-              <p>No hay suscriptores :(</p>
-            </section>
+            <?php include(locate_template('templates/sections/404-nousers.php')); ?> 
 
           <?php } ?>
 
-        <?php } //End of admin part ?>
+        <?php } ?>
 
         <?php include(locate_template('templates/sections/fee-pay.php')); ?>
 
       <?php endwhile; ?>
     <?php else : ?>
 
-      <!-- noinfo -->
-      <section class="wrap wrap--content wrap--transparent">
-        <h2>No encontramos lo que pedías :(</h2>
-      </section><!-- end of noinfo -->
+      <?php include(locate_template('templates/sections/404-noinfo.php')); ?>    
 
     <?php endif; ?>
   </div><!-- end of flexboxer -->

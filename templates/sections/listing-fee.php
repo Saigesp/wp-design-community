@@ -1,4 +1,4 @@
-<section id="feelist" class="wrap wrap--content wrap--shadow">
+<section id="feelist" class="wrap wrap--content wrap--shadow js-section wrap--hidden active">
   <h3 class="title title--section">Cuotas</h3>
   
   <h3 class="sep">Listado de cuotas</h3>

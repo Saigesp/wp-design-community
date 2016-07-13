@@ -282,13 +282,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
   }
 
-  $args   = array(
-    'type'          => 'success', //success, info, warning
-    'where'         => 'meeseeks',
-    'auto_close'    => true,
-    'delay'         => '5', // s
-    );
-  if($msg) new Frontend_box( $msg, $args);
+  if($msg) new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
 }
 
 
@@ -317,14 +311,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         update_user_meta($user_id, 'asociation_status', 'validado' );
         $msg .= '<p>El usuario '.$user->user_login.' ahora es socio</p>';
       }
-      // Frontend notification
-      $args   = array(
-        'type'          => 'success', //success, info, warning
-        'where'         => 'meeseeks',
-        'auto_close'    => true,
-        'delay'         => '5', // s
-        );
-      new Frontend_box( $msg, $args);
+      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
     }
 
     if(!empty($_POST['desasociate'])){
@@ -337,14 +324,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         update_user_meta($user_id, 'asociation_status', '' );
         $msg .= '<p>El usuario '.$soc->user_login.' ya no es socio</p>';
       }
-      // Frontend notification
-      $args   = array(
-        'type'          => 'success', //success, info, warning
-        'where'         => 'meeseeks',
-        'auto_close'    => true,
-        'delay'         => '7', // s
-        );
-      new Frontend_box( $msg, $args);
+      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '8' ));
     }
   }
 
@@ -412,22 +392,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
 
     if($msg_e != ''){
-      $args_e   = array(
-          'type'          => 'error', //success, info, warning
-          'where'         => 'meeseeks',
-          'auto_close'    => true,
-          'delay'         => '7', // s
-          );
-      new Frontend_box( $msg_e, $args_e);
+      new Frontend_box( $msg_e, array('type' => 'error', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '8' ));
     }
     if($msg_ok != ''){
-      $args_ok   = array(
-          'type'          => 'success', //success, info, warning
-          'where'         => 'meeseeks',
-          'auto_close'    => true,
-          'delay'         => '4', // s
-          );
-      new Frontend_box( $msg_ok, $args_ok);
+      new Frontend_box( $msg_ok, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
     }
   }
 
@@ -451,13 +419,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         wp_delete_post( $post_id, true );
       }
       $msg = '<p>'.$cont.' paquetes y '.$cont_files.' archivos eliminados</p>';
-      $args   = array(
-          'type'          => 'success', //success, info, warning
-          'where'         => 'meeseeks',
-          'auto_close'    => true,
-          'delay'         => '5', // s
-          );
-      new Frontend_box( $msg, $args);
+      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
     }
   }
 
@@ -519,14 +481,26 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   if ( $_POST['updatesection'] == 'updatefee' ) {
 
   }
+  if ( $_POST['updatesection'] == 'banksaccount' ) {
+
+    $msg = '';
+
+    if(get_option("bank_account") != esc_attr($_POST["bank_account"])){
+      $bank_account = esc_attr($_POST["bank_account"]);
+      update_option("bank_account", $bank_account);
+      $msg .= '<p>Cuenta bancaria actualizada</p>';
+    }
+    
+    if(get_option("paypal_account") != esc_attr($_POST["paypal_account"])){
+      $paypal_account = esc_attr($_POST["paypal_account"]);
+      update_option("paypal_account", $paypal_account);
+      $msg .= '<p>Cuenta de paypal actualizada</p>';
+    }
+
+    if($msg != '') new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+
+  }
 }
-
-
-
-
-
-
- 
 
 
 
@@ -679,10 +653,169 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action'])) {
           update_post_meta($post_id, 'members_pending', $pending_members);
           update_post_meta($post_id, 'members_payed', $payed_members);          
         }
+
+        $msg = '<p>Abonos actualizados</p>';
+        new Frontend_box( $msg, array('type'=>'success','where'=>'singlefee','auto_close'=> true,'delay'=>'5'));
       }
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CONFIGURACIÓN CONCURSOS
+*
+******************************************************/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+
+
+  if ( $_POST['updatesection'] == 'newconcurso' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'concursos';
+    $msg = '';
+
+    if (trim($_POST['concurso_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del concurso!</p>';
+    }
+    if (trim($_POST['concurso_org']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del organismo convocante!</p>';
+    }
+    if (trim($_POST['concurso_bases']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el link a las bases del concurso!</p>';
+    }
+    if (trim($_POST['concurso_quantity']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el premio al que se puede aspirar!</p>';
+    }
+    if (trim($_POST['concurso_date']) === '') {
+      $hasError = true;
+      $msg .= '<p>Se te ha olvidado poner la fecha!</p>';
+    }
+
+    if(!$hasError){
+      $post_information = array(
+          'post_title' => wp_strip_all_tags( $_POST['concurso_name'] ),
+          'post_content' => $_POST['description'],
+          'post_type' => $publish_type,
+          'post_status' => $publish_status,
+      );
+      $post_id = wp_insert_post( $post_information );
+
+      update_post_meta($post_id, 'concurso_org', esc_attr($_POST['concurso_org']));
+      update_post_meta($post_id, 'concurso_bases', esc_attr($_POST['concurso_bases']));
+      update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
+      update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
+      
+      $msg = '<p>Concurso '.$_POST['concurso_name'].' creado</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+}
+
+/* EDITAR CONCURSOS
+*
+******************************************************/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+
+
+  if ( esc_attr($_POST['updatesection']) == 'updateconcurso' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'concursos';
+    $msg = '';
+
+    if (trim($_POST['concurso_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del concurso!</p>';
+    }
+    if (trim($_POST['concurso_org']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del organismo convocante!</p>';
+    }
+    if (trim($_POST['concurso_bases']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el link a las bases del concurso!</p>';
+    }
+    if (trim($_POST['concurso_quantity']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el premio al que se puede aspirar!</p>';
+    }
+    if (trim($_POST['concurso_date']) === '') {
+      $hasError = true;
+      $msg .= '<p>Se te ha olvidado poner la fecha!</p>';
+    }
+    if (!$_POST['id'] > 0) {
+      $hasError = true;
+      $msg .= '<p>Qué intentas?</p>';
+    }
+    if(get_post_type($_POST['id']) != $publish_type){
+      $hasError = true;
+      $msg .= '<p>Qué intentas???</p>';
+    }
+      
+    if(!$hasError){
+
+      $post_id = $_POST['id'];
+      $my_post = array(
+          'ID'           => $post_id,
+          'post_title'   => esc_attr($_POST['concurso_name']),
+          'post_content' => esc_attr($_POST['description']),
+      );
+      wp_update_post( $my_post );
+      update_post_meta($post_id, 'concurso_org', esc_attr($_POST['concurso_org']));
+      update_post_meta($post_id, 'concurso_bases', esc_attr($_POST['concurso_bases']));
+      update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
+      update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
+      
+      $msg = '<p>Concurso '.$_POST['concurso_name'].' actualizado</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+}
+
+
+
 
 
 

@@ -1989,6 +1989,11 @@ button.secondary:focus {
 .list .wrap--buttons {
   min-height: 40px;
 }
+.list .wrap--checkbox {
+  min-height: 40px;
+  height: 44px;
+  text-align: right;
+}
 .list .wrap--photo {
   width: 44px;
   height: 44px;

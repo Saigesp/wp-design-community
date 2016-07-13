@@ -29,14 +29,28 @@
 
     <?php if($members_pending[get_current_user_id()] == '' && $members_payed[get_current_user_id()] == ''){ ?>
       <h3 class="sep">Abonar cuota</h3>
+
       <?php
       $pay_options = [
+        "" => "Selecciona método de pago",
         "transferency" => "Pago mediante transferencia",
         "paypal" => "Pago por paypal",
       ];
-      wpdc_the_input_select_option('paymethod', '', 'Método de pago', $pay_options, $multiple = false);
+      wpdc_the_input_select_option('paymethod', '', 'Método de pago', $pay_options, false, false, 'paymethod');
       ?>
 
+      <?php if(get_option('bank_account') != ''){ ?> 
+        <div id="js-select-transferency" class="wrap wrap--frame wrap--hidden js-select js-select-paymethod">
+          <p>Cuenta donde realizar el ingreso bancario: <strong><?php echo get_option('bank_account');?></strong></p>
+        </div>      
+      <?php } ?>
+
+      <?php if(get_option('paypal_account') != ''){ ?> 
+        <div id="js-select-paypal" class="wrap wrap--frame wrap--hidden js-select js-select-paymethod">
+          <p>Pago mediante PayPal</p>
+        </div>     
+      <?php } ?>
+      
       <?php wpdc_the_submit('updatesection', 'payfee', '', '', 'Pagar cuota');?>
 
     <?php } ?>

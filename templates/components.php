@@ -81,15 +81,17 @@ function wpdc_the_input_number($name, $value, $label, $min = 0, $max = 999, $dis
 /**
  * INPUT SELECT
  ***********************************/
-function wpdc_the_input_select_option($name, $value, $label, $options, $multiple = false){
+function wpdc_the_input_select_option($name, $value, $label, $options, $multiple = false, $disable = false, $onchange = ''){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option';
 	if($multiple) $output .= ' chosen';
+	if($onchange != '') $output .= ' js-select-'.$name;
 	$output .= ' "';
 	if($multiple) $output .= ' multiple="multiple" data-placeholder="Selecciona optiones"';
+	if($onchange != '') $output .= ' onchange="ToggleSelect(\''.$onchange.'\')"';
 	$output .= '/>';
     foreach ($options as $val => $text) {
     	$output .= '<option value="'.$val.'"';

@@ -1652,7 +1652,7 @@ button.secondary:focus {
   background-image: url('img/icons/trash-grey.svg');
 }
 .wrap--form input[type="checkbox"] + label.remove:hover {
-  background-color: #991627;
+  background-color: #FFBEBE;
   color: white;
   background-image: url('img/icons/trash-white.svg');
   border-color: #991627;

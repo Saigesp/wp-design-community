@@ -294,14 +294,15 @@ function wpdc_the_input_file($name, $value, $label, $accept = null, $multiple = 
 function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = null, $text = null){
 	if(!$text) $text = 'Enviar';
 	$output = '<div class="wrap wrap--flex">';
-	$output .= '<div class="wrap wrap--frame wrap--frame__middle"></div>';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '</div>';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle wrap--submit">';
 	if($name_hidden && $value_hidden){
-		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button button-primary">';
+		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button">';
 		$output .= '</input>';
 		$output .= '<input name="'.$name_hidden.'" type="hidden" value="'.$value_hidden.'" />';
 	}else{
-		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button button-primary">';
+		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button">';
 		$output .= $text.'</button>';
 		$output .= '<input name="action" type="hidden" id="action" value="'.current_page_url().'" />';
 	}

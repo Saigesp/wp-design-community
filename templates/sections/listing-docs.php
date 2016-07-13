@@ -1,7 +1,5 @@
 <section id="doclist" class="wrap wrap--content wrap--shadow wrap--doclist js-section wrap--hidden">
     <h3 class="title title--section">Documentos</h3>
-
-
     
    <?php if($documents->have_post()){ ?>
         <h3 class="sep">Listado de documentos</h3>

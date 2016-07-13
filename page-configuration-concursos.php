@@ -2,6 +2,17 @@
 
 if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator')) {
 
+  if(is_user_role('administrator') || is_user_role('editor')) {
+
+    include(locate_template('templates/functions/functions-validation.php'));
+
+    $pageoptions = [
+      "concursolist" => $concursos->post_count." Concursos",
+      "newconcurso" => "Crear concurso",
+      "manageconcursos" => "Gestionar concursos",
+    ];
+  }
+
   $args = array (
     'order' => 'DESC',
     'posts_per_page' => -1,
@@ -9,19 +20,9 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
     //'orderby' => 'meta_value',
     //'meta_key'  => '_start_ts',
   );
-  $concurso_query = new wp_query( $args );
+  $concursos = new wp_query( $args );
 
 
-  if(is_user_role('administrator') || is_user_role('editor')) {
-
-    include(locate_template('templates/functions/functions-validation.php'));
-
-    $pageoptions = [
-      "concursolist" => "Concursos",
-      "newconcurso" => "Crear concurso",
-      "setconcursosoptions" => "Configurar concursos",
-    ];
-  }
 
   ?>
 
@@ -36,11 +37,15 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
       <!-- new concurso -->
       <?php include(locate_template('templates/sections/concurso-create.php')); ?>
 
-      <!-- config concursos -->
-      <?php include(locate_template('templates/sections/concurso-config.php')); ?>
+      <!-- concursos mng -->
+      <?php
+      $concurso_query = $concursos;
+      include(locate_template('templates/sections/concurso-config.php')); ?>
 
       <!-- concursos list -->
-      <?php include(locate_template('templates/sections/listing-concurso.php')); ?>
+      <?php
+      $concurso_query = $concursos;
+      include(locate_template('templates/sections/listing-concurso.php')); ?>
 
     
   </div><!-- end of flexboxer -->

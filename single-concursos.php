@@ -11,6 +11,10 @@ $concurso_date = get_post_meta(get_the_ID(), 'concurso_date', true);
 
 <div class="flexboxer flexboxer--single flexboxer--single__concurso">
 
+  <?php if(is_user_role('author') || is_user_role('editor') || is_user_role('administrator')){ ?>
+    <?php include(locate_template('templates/sections/meeseeks.php')); ?>
+  <?php } ?>
+
   <?php if (have_posts()) : ?>
     
     <section class="wrap wrap--content wrap--shadow">
@@ -31,6 +35,10 @@ $concurso_date = get_post_meta(get_the_ID(), 'concurso_date', true);
         <div id="content-<?php the_ID(); ?>" class="wrap wrap--frame">
           <?php the_content(); ?>
         </div>
+        
+        <?php if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator')){?>
+          <?php wpdc_the_edit_icon(get_bloginfo('url').'/edit-concursos/?id='.get_the_ID());?>
+        <?php } ?>
 
       <?php endwhile; ?>
     </section>

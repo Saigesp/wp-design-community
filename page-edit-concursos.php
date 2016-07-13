@@ -22,7 +22,7 @@ $current_user_id = $current_user->ID;
 
 		  	<input type="hidden" name="id" value="<?php echo $post_id;?>">
 
-		    <?php wpdc_the_input_text('concurso_name', get_the_title(), 'Nombre del concurso', 'Nombre del concurso');?>
+		    <?php wpdc_the_input_text('concurso_name', get_the_title($post_id), 'Nombre del concurso', 'Nombre del concurso');?>
 
 		    <?php wpdc_the_input_text('concurso_org', $concurso_org, 'Organismo convocante', 'Organismo');?>
 		    

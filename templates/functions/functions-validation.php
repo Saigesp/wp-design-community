@@ -747,6 +747,25 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
     }
   }
+  if ( esc_attr($_POST['updatesection']) == 'removeconcurso' ) {
+
+    if(!empty($_POST['concursos_to_remove']) && is_array($_POST['concursos_to_remove'])){
+      $cont = 0;
+      foreach ($_POST['concursos_to_remove'] as $post_id) {
+        if(!empty($post_id) && $post_id > 0){
+          $cont++;
+          wp_delete_post($post_id, true );
+        }
+      }
+      if($cont > 0){
+        $msg = '<p>'.$cont.' Concurso eliminados con éxito</p>';
+        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      }
+    }
+
+
+
+  }
 }
 
 /* EDITAR CONCURSOS
@@ -816,6 +835,165 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CONFIGURACIÓN CONCURSOS
+*
+******************************************************/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator'))) {
+
+
+  if ( $_POST['updatesection'] == 'newjob' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'jobs';
+    $msg = '';
+
+    if (trim($_POST['job_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del puesto!</p>';
+    }
+    if (trim($_POST['job_bussiness']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre de la empresa/organismo!</p>';
+    }
+    if (trim($_POST['job_info']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta una web de referencia!</p>';
+    }
+
+    if(!$hasError){
+      $post_information = array(
+          'post_title' => wp_strip_all_tags( $_POST['job_name'] ),
+          'post_content' => $_POST['description'],
+          'post_type' => $publish_type,
+          'post_status' => $publish_status,
+      );
+      $post_id = wp_insert_post( $post_information );
+
+      update_post_meta($post_id, 'job_bussiness', esc_attr($_POST['job_bussiness']));
+      update_post_meta($post_id, 'job_info', esc_attr($_POST['job_info']));
+      
+      $msg = '<p>Oferta '.$_POST['job_name'].' creada</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+  
+/*
+  if ( esc_attr($_POST['updatesection']) == 'removeconcurso' ) {
+
+    if(!empty($_POST['concursos_to_remove']) && is_array($_POST['concursos_to_remove'])){
+      $cont = 0;
+      foreach ($_POST['concursos_to_remove'] as $post_id) {
+        if(!empty($post_id) && $post_id > 0){
+          $cont++;
+          wp_delete_post($post_id, true );
+        }
+      }
+      if($cont > 0){
+        $msg = '<p>'.$cont.' Concurso eliminados con éxito</p>';
+        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      }
+    }
+  }
+  */
+}
+
+/* EDITAR OFERTA
+*
+******************************************************/
+/* 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+
+
+  if ( esc_attr($_POST['updatesection']) == 'updateconcurso' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'concursos';
+    $msg = '';
+
+    if (trim($_POST['concurso_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del concurso!</p>';
+    }
+    if (trim($_POST['concurso_org']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del organismo convocante!</p>';
+    }
+    if (trim($_POST['concurso_bases']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el link a las bases del concurso!</p>';
+    }
+    if (trim($_POST['concurso_quantity']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el premio al que se puede aspirar!</p>';
+    }
+    if (trim($_POST['concurso_date']) === '') {
+      $hasError = true;
+      $msg .= '<p>Se te ha olvidado poner la fecha!</p>';
+    }
+    if (!$_POST['id'] > 0) {
+      $hasError = true;
+      $msg .= '<p>Qué intentas?</p>';
+    }
+    if(get_post_type($_POST['id']) != $publish_type){
+      $hasError = true;
+      $msg .= '<p>Qué intentas???</p>';
+    }
+      
+    if(!$hasError){
+
+      $post_id = $_POST['id'];
+      $my_post = array(
+          'ID'           => $post_id,
+          'post_title'   => esc_attr($_POST['concurso_name']),
+          'post_content' => esc_attr($_POST['description']),
+      );
+      wp_update_post( $my_post );
+      update_post_meta($post_id, 'concurso_org', esc_attr($_POST['concurso_org']));
+      update_post_meta($post_id, 'concurso_bases', esc_attr($_POST['concurso_bases']));
+      update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
+      update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
+      
+      $msg = '<p>Concurso '.$_POST['concurso_name'].' actualizado</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+}
+
+
+*/
 
 
 

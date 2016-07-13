@@ -21,7 +21,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
   ?>
 
   <!-- flexboxer -->
-  <form method="POST" action="">
+  
 
     <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
 
@@ -51,7 +51,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
       <?php } ?>
       
     </div>
-  </form>
+  
 
 <?php } else header('Location: '.site_url().'?action=nopermission' ); ?>
 

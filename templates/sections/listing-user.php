@@ -19,7 +19,7 @@
                     <div class="wrap wrap--frame wrap--frame__fourth">
                         <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
                     </div>
-                    <div class="wrap wrap--frame wrap--frame__fourth">
+                    <div class="wrap wrap--frame wrap--frame__fifth">
                         <span class="help-info">
                             <?php /*
                             $missing_data = array();

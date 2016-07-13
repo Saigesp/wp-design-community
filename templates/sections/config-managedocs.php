@@ -36,7 +36,7 @@
                                 <?php echo get_the_date(); ?>
                             </div>
                             <div class="wrap wrap--frame wrap--frame__middle wrap--buttons">
-                                <input type="checkbox" class="tolisten hidden" id="checkbox-doc-<?php the_ID(); ?>" name="docs_remove[]" value="<?php the_ID(); ?>">
+                                <input type="checkbox" id="checkbox-doc-<?php the_ID(); ?>" name="docs_remove[]" value="<?php the_ID(); ?>">
                                 <label class="remove" for="checkbox-doc-<?php the_ID(); ?>"></label>
                             </div>
                         </div>

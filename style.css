@@ -3724,9 +3724,6 @@ textarea.js-medium-editor,
 .flexboxer--controlusers form > .wrap--content + .wrap--content {
   padding-top: 5px;
 }
-.list > .item .wrap {
-  flex-shrink: 0;
-}
 .list > .item .wrap.wrap--frame__middle {
   flex-basis: 50%;
 }
@@ -3747,9 +3744,6 @@ textarea.js-medium-editor,
 }
 .list > .item .wrap.wrap--frame__45 {
   flex-basis: 45px;
-}
-.flexboxer > .wrap.wrap--userlist {
-  max-width: initial;
 }
 .flexboxer > .wrap.wrap--userlist .wrap--photo {
   border-radius: 100px;

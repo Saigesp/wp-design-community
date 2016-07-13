@@ -39,10 +39,16 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         )
     );
 
+    $wpdc_docs = array (
+        'post_type' => array('documentos'),
+        'posts_per_page' => '-1',
+    );
+    $documents = new WP_Query( $wpdc_docs );
+
     $pageoptions = [
         "usuarios" => sizeof($subscribers->results)." Usuarios",
         "socios" => sizeof($socios->results)." Socios",
-        "stats2" => sizeof($documents->results)." Documentos",
+        //"doclist" => $documents->post_count." Documentos",
         "newuser" => "Crear usuario",
         "changememberstatus" => "Gestionar socios",
         "managedocs" => "Gestionar documentos",
@@ -66,15 +72,11 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         <!-- change status to members -->
         <?php include(locate_template('templates/sections/config-changememberstatus.php')); ?>
 
+        <!-- doclist -->
+        <?php include(locate_template('templates/sections/listing-docs.php')); ?>
+
         <!-- manage documents -->
-        <?php
-        $wpdc_docs = array (
-            'post_type' => array('documentos'),
-            'posts_per_page' => '-1',
-        );
-        $documents = new WP_Query( $wpdc_docs );
-        include(locate_template('templates/sections/config-managedocs.php'));
-        ?>
+        <?php include(locate_template('templates/sections/config-managedocs.php')); ?>
 
         <!-- new user -->
         <?php include(locate_template('templates/sections/user-create.php')); ?>
@@ -94,6 +96,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         $list_ID = 'userlist';
         include(locate_template('templates/sections/listing-user.php'));
         ?>
+
           
     </div>
 

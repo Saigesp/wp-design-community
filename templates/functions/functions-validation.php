@@ -411,25 +411,56 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       }
     }
 
-    if($msg_e){
+    if($msg_e != ''){
       $args_e   = array(
           'type'          => 'error', //success, info, warning
           'where'         => 'meeseeks',
           'auto_close'    => true,
           'delay'         => '7', // s
           );
-      new Frontend_box( $msg_e, $args);
+      new Frontend_box( $msg_e, $args_e);
     }
-    if($msg_ok){
+    if($msg_ok != ''){
       $args_ok   = array(
           'type'          => 'success', //success, info, warning
           'where'         => 'meeseeks',
           'auto_close'    => true,
           'delay'         => '4', // s
           );
-      new Frontend_box( $msg_ok, $args);
+      new Frontend_box( $msg_ok, $args_ok);
     }
   }
+
+  if ( $_POST['updatesection'] == 'removedoc' ) {
+    $cont = 0;
+    $cont_files = 0;
+    if(!empty($_POST['docs_remove']) && is_array($_POST['docs_remove'])){
+      foreach ($_POST['docs_remove'] as $post_id) {
+        $cont++;
+        $attachments = get_posts( array(
+            'post_type' => 'attachment',
+            'posts_per_page' => -1,
+            'post_parent' => $post_id
+        ));
+        if ($attachments) {
+          foreach ( $attachments as $attachment ) {
+            $cont_files++;
+            wp_delete_attachment( $attachment->ID, true );
+          }
+        }
+        wp_delete_post( $post_id, true );
+      }
+      $msg = '<p>'.$cont.' paquetes y '.$cont_files.' archivos eliminados</p>';
+      $args   = array(
+          'type'          => 'success', //success, info, warning
+          'where'         => 'meeseeks',
+          'auto_close'    => true,
+          'delay'         => '5', // s
+          );
+      new Frontend_box( $msg, $args);
+    }
+  }
+
 
 }
 
@@ -444,19 +475,27 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-/* NUEVA CUOTA
+/* CONFIGURACIÓN TESORERIA
 *
-*****************************************************
-*/
+******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'new-fee'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-treasury'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
 
+
+  if ( $_POST['updatesection'] == 'newfee' ) {
     $hasError = false;
     $publish_status = 'publish';
     $publish_type = 'fee';
+    $msg = '';
 
-    if (trim($_POST['fee_name']) === '') $hasError = true;
-    if (!is_numeric($_POST['fee_quantity'])) $hasError = true;
+    if (trim($_POST['fee_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre de la cuota!</p>';
+    }
+    if (!is_numeric($_POST['fee_quantity'])) {
+      $hasError = true;
+      $msg .= '<p>Falta la cantidad de la cuota!</p>';
+    }
 
     if(!$hasError){
       $post_information = array(
@@ -470,8 +509,16 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
       update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
       
-      //if ( $post_id )  wp_redirect( 'http://xn--diseadoresindustriales-nec.es/preguntas/?send=ok' ); exit;
-    } 
+      $msg = '<p>Cuota '.$_POST['fee_name'].' creada</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+  if ( $_POST['updatesection'] == 'updatefee' ) {
+
+  }
 }
 
 
@@ -479,19 +526,103 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
+ 
 
-/* ACTUALIZAR CUOTA
+
+
+/* PAGAR CUOTA
 *
 *****************************************************
 */
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-fee'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action'])) {
+ 
+  global $post;
+  $action_check = 'fee/'.$post->post_name;
+
+  if ($_POST['action'] == $action_check) {
+
+    if ( $_POST['updatesection'] == 'payfee' ) {
+
+      $post_id = get_the_ID();
+      $user_id = get_current_user_id();
+      $paymethod = $_POST['paymethod'];
+      $hasError = false;
+      $msg = '';
+
+      if ($post_id == ''){
+        $hasError = true;
+        $msg .= '<p>Error :/</p>';
+      }
+      if ($paymethod == ''){
+        $hasError = true;
+        $msg .= '<p>Método de pago no seleccionado</p>';
+      }
+      if (!is_singular('fee')){
+        $hasError = true;
+        $msg .= '<p>¿Qué intentas?</p>';
+      }
+      if (!is_numeric($user_id) || $user_id < 1){
+        $hasError = true;
+        $msg .= '<p>Usuario inválido</p>';
+      }
+
+      if(!$hasError){
+
+        $treasury_page = get_page_by_title('Configuration treasury');
+        $username = wpdc_get_user_name($user_id);
+
+        if($paymethod == 'transferency'){
+
+          $pending_members = get_post_meta($post_id, 'members_pending', true);
+          if(!is_array($pending_members))
+            $pending_members = array();
+          if (!in_array($user_id, $pending_members))
+            $pending_members[$user_id] = current_time('mysql');
+
+          update_post_meta($post_id, 'members_pending', $pending_members);
+          $msg .= '<p>Cuota actualizada</p>';
+          new Frontend_box( $msg, array('type'=>'success','where'=>'singlefee','auto_close'=> true,'delay'=>'5'));
+          $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a><a href="#hidden">'.current_time('mysql').'</a>';
+
+        }elseif($paymethod == 'paypal'){
+          //TODO Pago por paypal
+        }else{
+          //TODO Errores
+        }
+
+      $commentdata = array(
+        'comment_post_ID' => $treasury_page->ID,
+        'comment_author' => $username,
+        'comment_author_email' => get_userdata($user_id)->user_email,
+        'comment_author_url' => get_userdata($user_id)->user_url,
+        'comment_content' => $message,
+        'comment_type' => '',
+        'comment_parent' => 0,
+        'user_id' => 1,
+        'comment_approved' => 1
+      );
+
+      $comment_id = wp_new_comment( $commentdata );
+
+      add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
+
+      }else{
+        new Frontend_box( $msg, array('type'=>'error','where'=>'singlefee','auto_close'=> true,'delay'=>'7'));
+      }
+    }
+    if ( $_POST['updatesection'] == 'updatefee' ) {
 
       //update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
       //update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
-      $post_id = $_POST['fee_id'];
+      $post_id = get_the_ID();;
       $hasError = false;
-      if ($post_id == '') $hasError = true;
+      $msg = '';
+
+      if ($post_id == ''){
+        $hasError = true;
+        $msg .= '<p>Error :/</p>';
+      }
 
       if(!$hasError){
 
@@ -548,93 +679,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
           update_post_meta($post_id, 'members_pending', $pending_members);
           update_post_meta($post_id, 'members_payed', $payed_members);          
         }
-
       }
-
-}
-
-
-
-/* PAGAR CUOTA
-*
-*****************************************************
-*/
- 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'pay-fee' ) {
-
-  $post_id = get_the_ID();
-  $user_id = get_current_user_id();
-  $paymethod = $_POST['paymethod'];
-  $hasError = false;
-  if ($post_id == '') $hasError = true;
-  if ($paymethod == '') $hasError = true;
-  if (!is_singular('fee'))  $hasError = true;
-  if (!is_numeric($user_id) || $user_id < 1)  $hasError = true;
-
-  if(!$hasError){
-
-    $treasury_page = get_page_by_title('Configuration treasury');
-    $username = get_userdata($user_id)->first_name.' '.get_userdata($user_id)->last_name;
-
-    if($paymethod == 'transferency'){
-      $pending_members = get_post_meta($post_id, 'members_pending', true);
-      if(!is_array($pending_members)) $pending_members = array();
-      if (!in_array($user_id, $pending_members)) $pending_members[$user_id] = current_time('mysql');
-      update_post_meta($post_id, 'members_pending', $pending_members);
-      $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a><a href="#hidden">'.current_time('mysql').'</a>';
-    }elseif($paymethod == 'paypal'){
-      //TODO Pago por paypal
-    }else{
-      //TODO Errores
-    }
-
-    $commentdata = array(
-      'comment_post_ID' => $treasury_page->ID,
-      'comment_author' => $username,
-      'comment_author_email' => get_userdata($user_id)->user_email,
-      'comment_author_url' => get_userdata($user_id)->user_url,
-      'comment_content' => $message,
-      'comment_type' => '',
-      'comment_parent' => 0,
-      'user_id' => 1,
-      'comment_approved' => 1
-    );
-
-   $comment_id = wp_new_comment( $commentdata );
-
-   add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
-
-  }else{
-    //TODO Errores
-  }
-
-
-}
-
-
-
-/* ELIMINAR DOCUMENTO y SUS ATACHMENTS
-*
-*****************************************************
-*/
- 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['updatesection'] ) && $_POST['updatesection'] == 'removedoc' ) {
-  if(!empty($_POST['docs_remove']) && is_array($_POST['docs_remove'])){
-    foreach ($_POST['docs_remove'] as $post_id) {
-      $attachments = get_posts( array(
-          'post_type' => 'attachment',
-          'posts_per_page' => -1,
-          'post_parent' => $post_id
-      ));
-      if ($attachments) {
-        foreach ( $attachments as $attachment ) {
-          wp_delete_attachment( $attachment->ID, true );
-        }
-      }
-      wp_delete_post( $post_id, true );
     }
   }
 }
+
+
+
 
 
 ?>

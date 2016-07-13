@@ -89,7 +89,7 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
 	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option';
 	if($multiple) $output .= ' chosen';
 	$output .= ' "';
-	if($multiple) $output .= ' multiple="multiple"';
+	if($multiple) $output .= ' multiple="multiple" data-placeholder="Selecciona optiones"';
 	$output .= '/>';
     foreach ($options as $val => $text) {
     	$output .= '<option value="'.$val.'"';
@@ -113,7 +113,7 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 			if(is_array($user_array) && sizeof($user_array) > 0){
 				$output .= '<select id="'.$name.'-input" name="'.$name;
 				if($multiple) $output .= '[]';
-				$output .= '" class="select select--user chosen"';
+				$output .= '" class="select select--user chosen" data-placeholder="Selecciona usuarios"';
 				if($multiple) $output .= ' multiple="multiple"';
 				$output .= '/>';
 				$output .= '<option value="">Ninguno</option>';
@@ -137,6 +137,46 @@ function wpdc_the_input_select_user($name, $label, $user_array, $user_meta, $mul
 		}
 		$output .= '</div></div>';
 	    echo $output;
+}
+
+/**
+ * INPUT SELECT USER PAYED FEE
+ ***********************************/
+function wpdc_the_input_select_user_payed_fee($name, $label, $user_array, $multiple = false, $disable = false){
+
+	$output = '<div class="wrap wrap--frame wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
+	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+	if(!$disable){
+		if(is_array($user_array) && sizeof($user_array) > 0){
+			$output .= '<select id="'.$name.'-input" name="'.$name;
+			if($multiple) $output .= '[]';
+			$output .= '" class="select select--user chosen" data-placeholder="Selecciona usuarios"';
+			if($multiple) $output .= ' multiple="multiple"';
+			$output .= '/>';
+			$output .= '<option value="">Ninguno</option>';
+		    foreach ($user_array as $user) {
+		    	if($members_pending[$user->ID] != '' || $members_payed[$user->ID] != '') continue;
+		    	$output .= '<option value="'.esc_html($user->ID ).'" ';
+		    	
+		    	$output .= ' >'.wpdc_get_user_name($user->ID).'</option>';
+		    }
+			$output .= '</select>';
+		}else {
+			$output .= '<label>No hay usuarios</label>';
+		}
+	}else {
+		$output .= '<span>';
+		foreach ($user_array as $user) {
+			//if(get_the_author_meta($user_meta, $user->ID) == $name){
+			//	$output .= wpdc_get_user_name($user->ID);
+			//}
+		}
+		$output .= '</span>';
+	}
+	$output .= '</div></div>';
+	echo $output;
 }
 
 /**

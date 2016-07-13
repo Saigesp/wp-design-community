@@ -861,7 +861,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-/* CONFIGURACIÓN CONCURSOS
+/* CONFIGURACIÓN OFERTAS
 *
 ******************************************************/
  
@@ -907,58 +907,50 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
   
-/*
-  if ( esc_attr($_POST['updatesection']) == 'removeconcurso' ) {
 
-    if(!empty($_POST['concursos_to_remove']) && is_array($_POST['concursos_to_remove'])){
+  if ( esc_attr($_POST['updatesection']) == 'removejob' ) {
+
+    if(!empty($_POST['jobs_to_remove']) && is_array($_POST['jobs_to_remove'])){
       $cont = 0;
-      foreach ($_POST['concursos_to_remove'] as $post_id) {
+      foreach ($_POST['jobs_to_remove'] as $post_id) {
         if(!empty($post_id) && $post_id > 0){
           $cont++;
           wp_delete_post($post_id, true );
         }
       }
       if($cont > 0){
-        $msg = '<p>'.$cont.' Concurso eliminados con éxito</p>';
+        $msg = '<p>'.$cont.' ofertas eliminadas con éxito</p>';
         new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
       }
     }
   }
-  */
+
 }
 
 /* EDITAR OFERTA
 *
 ******************************************************/
-/* 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
 
 
-  if ( esc_attr($_POST['updatesection']) == 'updateconcurso' ) {
+  if ( esc_attr($_POST['updatesection']) == 'updatejob' ) {
     $hasError = false;
     $publish_status = 'publish';
-    $publish_type = 'concursos';
+    $publish_type = 'jobs';
     $msg = '';
 
-    if (trim($_POST['concurso_name']) === '') {
+    if (trim($_POST['job_name']) === '') {
       $hasError = true;
-      $msg .= '<p>Falta el nombre del concurso!</p>';
+      $msg .= '<p>Falta el nombre de la oferta!</p>';
     }
-    if (trim($_POST['concurso_org']) === '') {
+    if (trim($_POST['job_bussiness']) === '') {
       $hasError = true;
-      $msg .= '<p>Falta el nombre del organismo convocante!</p>';
+      $msg .= '<p>Falta el nombre de de la empresa!</p>';
     }
-    if (trim($_POST['concurso_bases']) === '') {
+    if (trim($_POST['job_info']) === '') {
       $hasError = true;
-      $msg .= '<p>Falta el link a las bases del concurso!</p>';
-    }
-    if (trim($_POST['concurso_quantity']) === '') {
-      $hasError = true;
-      $msg .= '<p>Falta el premio al que se puede aspirar!</p>';
-    }
-    if (trim($_POST['concurso_date']) === '') {
-      $hasError = true;
-      $msg .= '<p>Se te ha olvidado poner la fecha!</p>';
+      $msg .= '<p>Falta el link de más información!</p>';
     }
     if (!$_POST['id'] > 0) {
       $hasError = true;
@@ -974,16 +966,14 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       $post_id = $_POST['id'];
       $my_post = array(
           'ID'           => $post_id,
-          'post_title'   => esc_attr($_POST['concurso_name']),
+          'post_title'   => esc_attr($_POST['job_name']),
           'post_content' => esc_attr($_POST['description']),
       );
       wp_update_post( $my_post );
-      update_post_meta($post_id, 'concurso_org', esc_attr($_POST['concurso_org']));
-      update_post_meta($post_id, 'concurso_bases', esc_attr($_POST['concurso_bases']));
-      update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
-      update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
+      update_post_meta($post_id, 'job_bussiness', esc_attr($_POST['job_bussiness']));
+      update_post_meta($post_id, 'job_info', esc_attr($_POST['job_info']));
       
-      $msg = '<p>Concurso '.$_POST['concurso_name'].' actualizado</p>';
+      $msg = '<p>Oferta '.$_POST['job_name'].' actualizada</p>';
       new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
       
     }else{
@@ -993,7 +983,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 }
 
 
-*/
 
 
 

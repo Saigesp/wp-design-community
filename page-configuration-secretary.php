@@ -57,7 +57,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
     ?>
 
     <!-- flexboxer -->
-    <div class="flexboxer flexboxer--full flexboxer--meeseeks flexboxer--meeseeks__treasury">
+    <div class="flexboxer flexboxer--full flexboxer--configuration flexboxer--configuration__treasury">
 
         <!-- Mr Meeseeks -->
         <?php include(locate_template('templates/sections/meeseeks.php')); ?>

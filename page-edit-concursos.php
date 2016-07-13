@@ -2,8 +2,8 @@
 get_header(); 
 $current_user_id = $current_user->ID;
 ?>
-<div class="flexboxer flexboxer--concursos">
-	<?php if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_user_role('administrator'))){ ?>
+<div class="flexboxer flexboxer--single flexboxer--single__concurso flexboxer--full">
+	<?php if($_GET['id'] > 0 && (is_user_role('editor') || is_user_role('administrator'))){ ?>
 		<?php
 		include(locate_template('templates/functions/functions-validation.php'));
 		global $post;
@@ -32,7 +32,7 @@ $current_user_id = $current_user->ID;
 		    
 		    <?php wpdc_the_input_date('concurso_date', $concurso_date, 'Cierre de convocatoria');?>
 
-		    <?php wpdc_the_input_textarea('description', '', 'Descripción del concurso');?>
+		    <?php wpdc_the_input_textarea('description', get_post_field('post_content', $post_id), 'Descripción del concurso');?>
 		    
 		    <?php wpdc_the_submit('updatesection', 'updateconcurso', '', '', 'Guardar cambios');?>
 		  </form>

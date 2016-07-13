@@ -27,7 +27,7 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
   ?>
 
   <!-- flexboxer -->
-    <div class="flexboxer flexboxer--event">
+    <div class="flexboxer flexboxer--configuration flexboxer--configuration__concursos flexboxer--full">
 
       <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 

@@ -9,19 +9,19 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
     'posts_per_page' => -1,
     'post_type' => 'jobs',
   );
-  $job_query = new wp_query( $args );
+  $jobs_query = new wp_query( $args );
 
   $pageoptions = [
     "joblist" => "Ofertas de trabajo",
     "newjob" => "Nueva oferta",
-    "managejob" => "Configurar trabajos",
+    "managejob" => "Gestionar ofertas",
   ];
 
 
   ?>
 
   <!-- flexboxer -->
-    <div class="flexboxer flexboxer--configuration flexboxer--configuration__jobs">
+    <div class="flexboxer flexboxer--configuration flexboxer--configuration__jobs flexboxer--full">
 
       <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
@@ -32,10 +32,13 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
       <?php include(locate_template('templates/sections/job-create.php')); ?>
 
       <!-- config job -->
-      <?php include(locate_template('templates/sections/job-config.php')); ?>
+      <?php
+      $job_query = $jobs_query;
+      include(locate_template('templates/sections/job-config.php')); ?>
 
       <!-- job list -->
       <?php
+      $job_query = $jobs_query;
       include(locate_template('templates/sections/listing-jobs.php')); ?>
 
       

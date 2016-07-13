@@ -1,5 +1,3 @@
-
-
 <section id="manageconcursos" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section">
 	<h3 class="title title--section">Configurar concursos</h3>
 	<?php if($concurso_query->have_posts()) { ?>

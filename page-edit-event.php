@@ -19,7 +19,7 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 
 	?> 
 
-	<div class="flexboxer flexboxer--event article <?php if(!has_post_thumbnail($post_id)) echo 'article--nothumb'; ?>">
+	<div class="flexboxer flexboxer--event flexboxer--full">
 		
 		<?php if(has_post_thumbnail($post_id)){ ?>
 

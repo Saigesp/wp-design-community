@@ -28,7 +28,7 @@ $concurso_date = get_post_meta(get_the_ID(), 'concurso_date', true);
           </div>
           <div class="wrap wrap--frame wrap--frame__middle">
             <span><strong>Cierre de convocatoria:</strong> <?php echo $concurso_date;?><br>
-            <strong><a href="<?php echo $concurso_org;?>" target="_blank">Bases del concurso</a></strong></span>
+            <strong><a href="<?php echo $concurso_bases;?>" target="_blank">Bases del concurso</a></strong></span>
           </div>
         </div>
         

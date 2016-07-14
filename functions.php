@@ -56,6 +56,7 @@ new_page_title('Edit Event');
 new_page_title('Edit Profile');
 new_page_title('Edit Concursos');
 new_page_title('Edit Jobs');
+new_page_title('Edit Posts');
 new_page_title('Control Users');
 new_page_title('Configuration');
 new_page_title('Configuration presidence');
@@ -63,6 +64,7 @@ new_page_title('Configuration treasury');
 new_page_title('Configuration secretary');
 new_page_title('Configuration concursos');
 new_page_title('Configuration jobs');
+new_page_title('Configuration posts');
 new_page_title('Invitar');
 
 new_page_title('Disenadores');

@@ -988,4 +988,116 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* CONFIGURACIÓN POSTS
+*
+******************************************************/
+ 
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
+
+
+  if ( $_POST['updatesection'] == 'newposts' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'post';
+    $msg = '';
+
+    if (trim($_POST['post_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del puesto!</p>';
+    }
+    if(!$hasError){
+      $post_information = array(
+          'post_title' => wp_strip_all_tags( $_POST['post_name'] ),
+          'post_content' => $_POST['description'],
+          'post_type' => $publish_type,
+          'post_status' => $publish_status,
+      );
+      $post_id = wp_insert_post( $post_information );
+      
+      $msg = '<p>Artículo '.$_POST['post_name'].' publicado</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+  if ( esc_attr($_POST['updatesection']) == 'removeposts' ) {
+
+    if(!empty($_POST['posts_to_remove']) && is_array($_POST['posts_to_remove'])){
+      $cont = 0;
+      foreach ($_POST['posts_to_remove'] as $post_id) {
+        if(!empty($post_id) && $post_id > 0){
+          $cont++;
+          wp_delete_post($post_id, true );
+        }
+      }
+      if($cont > 0){
+        $msg = '<p>'.$cont.' artículos eliminados con éxito</p>';
+        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      }
+    }
+  }
+
+}
+
+/* EDITAR POST
+*
+******************************************************/
+
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
+
+
+  if ( esc_attr($_POST['updatesection']) == 'updateposts' ) {
+    $hasError = false;
+    $publish_status = 'publish';
+    $publish_type = 'post';
+    $msg = '';
+
+    if (trim($_POST['post_name']) === '') {
+      $hasError = true;
+      $msg .= '<p>Falta el nombre del artículo!</p>';
+    }
+    if (!$_POST['id'] > 0) {
+      $hasError = true;
+      $msg .= '<p>Qué intentas?</p>';
+    }
+    if(get_post_type($_POST['id']) != $publish_type){
+      $hasError = true;
+      $msg .= '<p>Qué intentas???</p>';
+    }
+      
+    if(!$hasError){
+
+      $post_id = $_POST['id'];
+      $my_post = array(
+          'ID'           => $post_id,
+          'post_title'   => esc_attr($_POST['post_name']),
+          'post_content' => esc_attr($_POST['description']),
+      );
+      wp_update_post( $my_post );
+      
+      $msg = '<p>Artículo '.$_POST['post_name'].' actualizado</p>';
+      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      
+    }else{
+      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    }
+  }
+}
+
+
+
+
+
+
+
 ?>

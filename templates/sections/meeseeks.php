@@ -55,7 +55,7 @@ $comments_trash = get_comments( $args_trash );
   </div>
 </section>
 
-<?php if(is_user_role('administrator')){ ?>
+<?php if(is_user_role('administrator') && 1 == 2){ ?>
 <?php if(!empty($_POST)) { ?>
 <section class="wrap wrap--content wrap--shadow">
 

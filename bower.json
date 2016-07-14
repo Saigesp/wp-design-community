@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "chosen": "^1.5.1"
+    "chosen": "^1.5.1",
+    "medium-editor-insert-plugin": "^2.1"
   }
 }

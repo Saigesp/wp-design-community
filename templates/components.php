@@ -10,7 +10,7 @@ function wpdc_the_pageoptions($menu){
     	if($cont > $mid_menu) $output .= '<p class="text text--right">';
     	else $output .= '<p>';
     	$output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
-    	if($cont == 1) $output .= ' active';
+    	//if($cont == 1) $output .= ' active';
     	$output .= '" data-section="'.$section.'">'.$text.'</a>';
     	$output .= '</p>';
     	if($cont == $mid_menu && sizeof($menu) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
@@ -18,6 +18,28 @@ function wpdc_the_pageoptions($menu){
 	if(sizeof($menu) > 0) $output .= '</div>';
 	$output .= '</section>';
     echo $output;
+}
+
+function wpdc_the_postinfo($post_id, $options){
+	if($post_id > 0 && is_array($options)){
+		$cont = 0;
+		$post = get_post($post_id);
+		$mid_array = round(sizeof($options)/2);
+		
+		$output = '<section id="postinfo" class="wrap wrap--content js-section wrap--hidden wrap--shadow wrap--info">';
+			$output .= '<div class="wrap wrap--frame wrap--flex">';
+				if(sizeof($options) > 0) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+					foreach ($options as $key => $value) {
+						$cont++;
+						if($cont > $mid_array) $output .= '<p class="text text--right"><strong>'.$key.':</strong> '.$value.'</p>';
+						else $output .= '<p><strong>'.$key.':</strong> '.$value.'</p>';
+						if($cont == $mid_array && sizeof($options) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+					}
+				if(sizeof($options) > 0) $output .= '</div>';
+		$output .= '</div>';
+		$output .= '</section>';
+		echo $output;
+	}
 }
 
 /**

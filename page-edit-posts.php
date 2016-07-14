@@ -8,25 +8,41 @@ $current_user_id = $current_user->ID;
 		include(locate_template('templates/functions/functions-validation.php'));
 		global $post;
 		$post_id = $_GET['id'];
+		$post = get_post($post_id);
 		$job_bussiness = get_post_meta($post_id, 'job_bussiness', true);
 		$job_info = get_post_meta($post_id, 'job_info', true);
 		?> 
 
 		<?php include(locate_template('templates/sections/meeseeks.php')); ?>
+
+		<?php
+		if(is_user_role('editor') || is_user_role('administrator')){
+
+			$pageoptions = [
+				"postinfo" => "Detalles",
+			];
+      		wpdc_the_pageoptions($pageoptions);
+
+			$infoarray = [
+				"Publicado" => get_the_date('Y-m-d h:i:s'),
+				"Última modificación" => get_the_date('Y-m-d h:i:s'),
+				"Autor" => wpdc_get_user_name($post->post_author),
+			];
+      		wpdc_the_postinfo($post_id, $infoarray);
+		}
+		?>
+
+
 		<section id="newconcurso" class="wrap wrap--content wrap--form wrap--shadow">
-			<h3 class="title title--section">Editar oferta</h3>
+			<h3 class="title title--section">Editar artículo</h3>
 			<form method="POST" action="">
 			  	<input type="hidden" name="id" value="<?php echo $post_id;?>">
 
-			    <?php wpdc_the_input_text('job_name', get_the_title($post_id), 'Nombre de la oferta', 'Prácticas en...');?>
-
-				<?php wpdc_the_input_text('job_bussiness', $job_bussiness, 'Empresa', 'Empresa');?>
-
-				<?php wpdc_the_input_text('job_info', $job_info, 'Más información', 'http://');?>
+			    <?php wpdc_the_input_text('post_name', get_the_title($post_id), 'Título del artículo', 'Título');?>
 
 				<?php wpdc_the_input_textarea('description', get_post_field('post_content', $post_id), 'Descripción de la oferta');?>
 			    
-			    <?php wpdc_the_submit('updatesection', 'updatejob', '', '', 'Guardar cambios');?>
+			    <?php wpdc_the_submit('updatesection', 'updateposts', '', '', 'Guardar cambios');?>
 			</form>
 			<?php include(locate_template('templates/sections/section-close.php')); ?>
 		</section>

@@ -15,30 +15,42 @@ var project = 'wp-design-community',
         dev + 'screenshot.png'
     ],
     min_files_css = [ // CSS Archives to minimize
-        dev + 'plugins/**/*.css',
+        //dev + 'plugins/**/*.css',
         '!' + dev + 'plugins/**/*.min.css',
         node + '*/css/pikaday.css',
-        bower + '*/chosen.css'
+        bower + '*/chosen.css',
     ],
     min_files_js = [ // JS Archives to minimize
-        dev + 'plugins/**/*.js',
+        //dev + 'plugins/**/*.js',
         '!' + dev + 'plugins/**/*.min.js',
         node + '*/src/jquery-ias.js',
         node + '*/js/jquery-imagefill.js',
         node + '*/lib/jquery.printThis.js',
         node + '*/pikaday.js',
-        bower + '*/chosen.jquery.js'
+        bower + '*/chosen.jquery.js',
+        bower + 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+        bower + 'blueimp-file-upload/js/jquery.iframe-transport.js',
+        bower + 'blueimp-file-upload/js/jquery.fileupload.js'
     ],
     css_minimized_files = [ // CSS Archives to copy
         node + 'flickity/*/flickity.min.css',
         node + 'medium-editor/dist/*/medium-editor.min.css',
-        node + 'medium-editor/dist/css/*/flat.min.css'
+        node + 'medium-editor/dist/css/*/flat.min.css',
+        bower + 'medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.min.css'
     ],
     js_minimized_files = [ // JS Archives to copy
-        node + '*/dist/**/*.min.js',
+        //node + '*/dist/**/*.min.js',
         node + 'imagesloaded/imagesloaded.pkgd.min.js',
-        node + 'moment/*/moment.min.js'
+        node + 'moment/*/moment.min.js',
+        bower + 'handlebars/handlebars.runtime.min.js',
+        bower + 'jquery-sortable/source/js/jquery-sortable-min.js',
+        bower + 'medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js'
     ];
+
+
+
+
+
 
 var dist_inject_path_slice = dist.length - 2;
 var favicon_data_file = dev + 'faviconData.json';
@@ -129,13 +141,25 @@ gulp.task('copy:basicfiles:dist', ['clean:dist'], function() {
 /* Copy CSS minimized from modules
  *  
  ***********************************/
-gulp.task('copy:cssminimized:dev', function() {
-    return gulp.src(css_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
+gulp.task('copy:cssminimized:bower', function() {
+    return gulp.src(css_minimized_files, { base: bower }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
-/* Copy JS minimized from modules
+/* Copy CSS minimized from node
  *  
  ***********************************/
-gulp.task('copy:jsminimized:dev', function() {
+gulp.task('copy:cssminimized:node', ['copy:cssminimized:bower'], function() {
+    return gulp.src(css_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
+
+/* Copy JS minimized from bower
+ *  
+ ***********************************/
+gulp.task('copy:jsminimized:bower', function() {
+    return gulp.src(js_minimized_files, { base: bower }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
+
+/* Copy JS minimized from node
+ *  
+ ***********************************/
+gulp.task('copy:jsminimized:node',['copy:jsminimized:bower'], function() {
     return gulp.src(js_minimized_files, { base: node }).pipe(gulp.dest(dev+'plugins/', { overwrite: true })); });
 
 /* Copy & minimize CSS from /dev && node_modules
@@ -151,7 +175,7 @@ gulp.task('min:csstominimize:dev', function() {
 /* Inject CSS to header.php
  *  
  ***********************************/
-gulp.task('inject:css:dev', ['min:csstominimize:dev', 'copy:cssminimized:dev'], function() {
+gulp.task('inject:css:dev', ['min:csstominimize:dev', 'copy:cssminimized:node'], function() {
     return gulp.src(dev + 'header.php')
         .pipe(inject(
             gulp.src([dev + 'plugins/**/*.css'], { read: false }), {
@@ -181,9 +205,9 @@ gulp.task('min:jstominimize:dev', function() {
 /* Inject JS to footer.php
  *  
  ***********************************/
-gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:dev'], function() {
+gulp.task('inject:js:dev', ['min:jstominimize:dev', 'copy:jsminimized:node'], function() {
 	var firstStream = gulp.src([dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
-	var lastStream = gulp.src([dev + 'plugins/**/*.min.js', '!'+ dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
+	var lastStream = gulp.src([dev + 'plugins/**/*min.js', '!'+ dev + 'plugins/**/imagesloaded.pkgd.min.js'], { read: false });
     return gulp.src(dev + 'footer.php')
         .pipe(inject( series(firstStream, lastStream), {
                         transform: function(filepath) {

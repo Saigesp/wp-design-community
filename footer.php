@@ -28,31 +28,48 @@
 
 
   <!-- inject:js -->
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.min.js"></script>
+  <?php /* <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.slim.min.js"></script> */?>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/chosen/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/moment/moment.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/plugins/pikaday.jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/pikaday.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/plugins/pikaday.jquery.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-imagefill/js/jquery-imagefill.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery-plugin-printthis/lib/jquery.printThis.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
+
+  
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/handlebars/handlebars.runtime.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery-sortable/source/js/jquery-sortable-min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery.ui.widget.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery.iframe-transport.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery.fileupload.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js"></script>
   <!-- endinject -->
+
+
+
 <?php wp_footer(); ?>
+
 <script>
 jQuery(document).ready(function($) {
-  $('#widgets').css("width", $(document).width() - $('#controlmenu').outerWidth());
-  $('.listinfo').css("width", $('.listitem').width() - $('.listimage').outerWidth() - 10 - 25);
-  var editor = new MediumEditor('.js-medium-editor',{
-    placeholder: {
-      text: 'Descripción'
-    }
-  })
+
+  if ($('.js-medium-editor').length > 0){
+    var editor = new MediumEditor('.js-medium-editor',{
+      placeholder: {
+        text: 'Descripción'
+      }
+    });
+
+    $('.js-medium-editor').mediumInsert({
+        editor: editor
+    });
+  }
 });
 </script>
-
 </body>
 </html> <!-- The End. what a ride! -->

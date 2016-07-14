@@ -27,24 +27,17 @@ var project = 'wp-design-community',
         node + '*/js/jquery-imagefill.js',
         node + '*/lib/jquery.printThis.js',
         node + '*/pikaday.js',
-        bower + '*/chosen.jquery.js',
-        bower + 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
-        bower + 'blueimp-file-upload/js/jquery.iframe-transport.js',
-        bower + 'blueimp-file-upload/js/jquery.fileupload.js'
+        bower + '*/chosen.jquery.js'
     ],
     css_minimized_files = [ // CSS Archives to copy
         node + 'flickity/*/flickity.min.css',
         node + 'medium-editor/dist/*/medium-editor.min.css',
-        node + 'medium-editor/dist/css/*/flat.min.css',
-        bower + 'medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.min.css'
+        node + 'medium-editor/dist/css/*/flat.min.css'
     ],
     js_minimized_files = [ // JS Archives to copy
         //node + '*/dist/**/*.min.js',
         node + 'imagesloaded/imagesloaded.pkgd.min.js',
-        node + 'moment/*/moment.min.js',
-        bower + 'handlebars/handlebars.runtime.min.js',
-        bower + 'jquery-sortable/source/js/jquery-sortable-min.js',
-        bower + 'medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js'
+        node + 'moment/*/moment.min.js'
     ];
 
 

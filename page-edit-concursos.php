@@ -14,8 +14,6 @@ $current_user_id = $current_user->ID;
 		$concurso_date = get_post_meta($post_id, 'concurso_date', true);
 		?> 
 
-		<?php include(locate_template('templates/sections/meeseeks.php')); ?>
-
 		<section id="newconcurso" class="wrap wrap--content wrap--form wrap--shadow">
 		  <h3 class="title title--section">Editar concurso</h3>
 		  <form method="POST" action="">

@@ -17,7 +17,18 @@
                         <?php wpdc_the_asociation_position($user->ID);?>
                     </div>
                     <div class="wrap wrap--frame wrap--frame__fourth">
-                        <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
+                        <?php
+                        echo '<span';
+                        if(is_array(get_user_meta($user->ID, 'user_registry_track', true))){
+                            $last_status = array_pop((array_slice(get_user_meta($user->ID, 'user_registry_track', true), -1)));
+                            echo ' title="'.$last_status['status'].' desde '.$last_status['date'].'"';
+                        }else{
+                            echo ' title="..."';
+                        }
+                        echo '>';
+                        echo get_user_meta($user->ID, 'asociation_status', true);
+                        echo '</span>';
+                        ?>
                     </div>
                     <div class="wrap wrap--frame wrap--frame__fifth">
                         <span class="help-info">

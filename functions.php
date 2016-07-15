@@ -196,10 +196,29 @@ function update_op_user_meta($user_id, $field, $input){
   } 
 }
 
+// Update user registry process track
+function update_user_registry_track($user_id, $status){
+  if($user_id > 0){
+    
+    $user_registry_track = get_user_meta($user_id, 'user_registry_track', true );
+    
+    if(!is_array($user_registry_track)) $user_registry_track = [];
+
+    $newtrack = [
+      'date' => current_time('mysql'),
+      'status' => $status,
+      'changeby' => get_current_user_id(),
+    ];
+    
+    array_push($user_registry_track, $newtrack);
+    update_user_meta($user_id, 'user_registry_track', $user_registry_track );
+  }
+
+}
+
+
 // Profile image
 function the_profile_photo($user){
-
-
 
   if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
     $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');

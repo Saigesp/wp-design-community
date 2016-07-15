@@ -11,11 +11,6 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_ev
   );
   $wp_query = new wp_query( $args );
 
-
-  if(is_user_role('administrator') || is_user_role('editor')) { 
-    include(locate_template('functions-validation.php'));
-  }
-
   ?>
 
   <!-- flexboxer -->

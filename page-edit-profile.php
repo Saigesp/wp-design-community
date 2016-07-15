@@ -16,8 +16,6 @@
 <div class="flexboxer flexboxer--author flexboxer--author__edit">
 <?php if(is_user_logged_in()){ ?>
 
-  <?php include(locate_template('templates/functions/functions-validation.php')); ?>
-
   <?php include_once(locate_template('templates/forms/form-userdata.php')); ?>
 
   <?php include_once(locate_template('templates/forms/form-authordata.php')); ?>

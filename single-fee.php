@@ -1,8 +1,6 @@
 <?php get_header(); ?> 
 <?php if(is_user_role('administrator') || is_user_role('editor') || is_user_role('author')) { 
 
-include(locate_template('templates/functions/functions-validation.php'));
-
 $asociates = new WP_User_Query(
     array(
         'meta_query' => array(

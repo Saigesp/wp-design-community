@@ -1,9 +1,4 @@
-<?php get_header();
-
-if(is_user_role('administrator') || is_user_role('editor')) { 
-  //include(locate_template('templates/functions/functions-validation.php'));
-}
-?>
+<?php get_header(); } ?>
   <!-- flexboxer -->
 <form method="POST" action="">
   <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--concursos">

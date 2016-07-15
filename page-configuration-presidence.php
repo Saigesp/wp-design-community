@@ -2,8 +2,6 @@
 
 if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator')) {
 
-    include(locate_template('templates/functions/functions-validation.php'));
-
     global $wpdb;
     $blog_id = get_current_blog_id();
 
@@ -35,8 +33,6 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente'
 
     <!-- flexboxer -->
     <div class="flexboxer flexboxer--configuration flexboxer--configuration__presidence flexboxer--full">
-
-        <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
         <!-- admin options -->
         <?php wpdc_the_pageoptions($pageoptions);?>

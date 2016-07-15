@@ -1,5 +1,10 @@
 <?php if('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))){ 
 
+  $alerts_success = '';
+  $alerts_error = '';
+  $alerts_warning = '';
+  $alerts_info = '';
+
   /* CAMBIO DE PERFIL
   *
   *****************************************************
@@ -7,7 +12,7 @@
 
 
 if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) == 'upgrade' && $_POST['updatesection'] == 'upgradeuser')) {
-  if(esc_attr($_POST['action']) == 'update-user') $user_id = $user_id;
+  if(esc_attr($_POST['action']) == 'update-user') $user_id = $user->ID;
   if($_POST['updatesection'] == 'upgradeuser') $user_id = get_current_user_id();
   /* DATOS PERSONALES */
   // NOMBRE
@@ -148,8 +153,7 @@ if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) =
         exit;
     }
 
-  $msg = 'Datos de usuario actualizados';
-  new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  $alerts_success .= 'Datos de usuario actualizados';
 
 }
 
@@ -181,10 +185,16 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 /* UPGRADE USER
 *
 ******************************************************/
-if (esc_attr($_POST['action']) == 'upgrade') {
+if (esc_attr($_POST['action']) == 'upgrade' && !empty(esc_attr($_POST['updatesection']))) {
 
-  if (!empty(esc_attr($_POST['upgradeuser'])) && esc_attr($_POST['updatesection']) == 'general-options'){
+  if (esc_attr($_POST['updatesection']) == 'upgradeuser'){
+    $user_id = get_current_user_id();
+    if($user_id > 0){
 
+      update_user_meta($user_id, 'asociation_status', 'pendiente' );
+      update_user_registry_track($user_id, 'pendiente');
+      $alerts_success .= '<p>Solicitud enviada!</p>';
+    }
   }
   
 }
@@ -203,8 +213,7 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $users_can_register = $_POST["users_can_register"] == 1 ? 1 : 0; update_option("users_can_register", $users_can_register);
     $users_can_asociate = $_POST["users_can_asociate"] == 1 ? 1 : 0; update_option("users_can_asociate", $users_can_asociate);
     $fields_asociate_min = $_POST["fields_asociate_min"]; update_option("fields_asociate_min", $fields_asociate_min);
-    $msg = 'Opciones actualizadas';
-    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+    $alerts_success .= 'Opciones actualizadas';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'twitteroptions'){
     $automate_twitter = esc_attr($_POST["automate_twitter"]); update_option("automate_twitter", $automate_twitter);
@@ -215,22 +224,19 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $tweet_new_user = esc_attr($_POST["tweet_new_user"]); update_option("tweet_new_user", $tweet_new_user);
     $follow_new_user = esc_attr($_POST["follow_new_user"]); update_option("follow_new_user", $follow_new_user);
     $tweet_new_publication = esc_attr($_POST["tweet_new_publication"]); update_option("tweet_new_publication", $tweet_new_publication);
-    $msg = 'Configuración de twitter guardada';
-    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+    $alerts_success .= 'Configuración de twitter guardada';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'tweet-test'){
     $tweet_msg = 'Test';
     $respuesta = sendTweet($tweet_msg);
-    $msg = 'Tweet enviado!';
-    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+    $alerts_success .= 'Tweet enviado!';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'texts-update'){
     $tos_link = esc_attr($_POST["tos_link"]); update_option("tos_link", $tos_link);
     $text_subscriber_upgrade = esc_attr($_POST["text_subscriber_upgrade"]); update_option("text_subscriber_upgrade", $text_subscriber_upgrade);
     $text_register = esc_attr($_POST["text_register"]); update_option("text_register", $text_register);
 
-    $msg = 'Textos actualizados';
-    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+    $alerts_success .= 'Configuración de textos actualizada';
   }
 
 }
@@ -259,6 +265,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('editor');
           $juntal->add_role(esc_attr('author'));
           update_user_meta($juntal->ID, 'asociation_position', '' );
+          update_user_registry_track($juntal->ID, 'sin cargo');
         }
       }
       foreach ($juntales as $juntal) {
@@ -266,7 +273,8 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('author');
           $juntal->add_role(esc_attr('editor'));
           update_user_meta($juntal->ID, 'asociation_position', $cargo );
-          $msg .= '<p>El usuario '.$juntal->user_login.' ahora es '.change_role_name($cargo).'</p>';
+          $msg .= '<p>El usuario '.wpdc_the_user_name($juntal->ID).' ahora es '.change_role_name($cargo).'</p>';
+          update_user_registry_track($juntal->ID, change_role_name($cargo));
         } 
       }
     }
@@ -277,6 +285,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
         $juntal->remove_role('editor');
         $juntal->add_role(esc_attr('author'));
         update_user_meta($juntal->ID, 'asociation_position', '' );
+        update_user_registry_track($juntal->ID, 'sin cargo');
       } 
     }
     foreach ($_POST['vocal'] as $vocal_id) {
@@ -285,7 +294,8 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
       $vocal->remove_role('author');
       $vocal->add_role(esc_attr('editor'));
       update_user_meta($vocal_id, 'asociation_position', 'vocal' );
-      $msg .= '<p>El usuario '.$vocal->user_login.' ahora es vocal</p>';
+      $msg .= '<p>El usuario '.wpdc_the_user_name($vocal_id).' ahora es vocal</p>';
+      update_user_registry_track($vocal_id, change_role_name('vocal'));
     }
 
     // Change responsabilities
@@ -295,6 +305,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           if(is_array($_POST[$responsability])){
             if (get_the_author_meta('asociation_responsability', $user->ID) == $responsability && !in_array($user->ID, $_POST[$responsability])){
               update_user_meta($user->ID, 'asociation_responsability', '' );
+              update_user_registry_track($user->ID, 'sin responsabilidad');
             }
           }
         }
@@ -302,8 +313,8 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           foreach ($_POST[$responsability] as $user_id){
             if (get_the_author_meta('asociation_responsability', $user_id) == $responsability) continue;
             update_user_meta($user_id, 'asociation_responsability', $responsability );
-            $user = get_userdata($user_id);
-            $msg .= '<p>El usuario '.$user->user_login.' ahora es '.change_role_name($responsability).'</p>';
+            $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es '.change_role_name($responsability).'</p>';
+            update_user_registry_track($user_id, change_role_name($responsability));
           }
         }
      // }
@@ -342,6 +353,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('editor');
           $juntal->add_role(esc_attr('author'));
           update_user_meta($juntal->ID, 'asociation_position', '' );
+          update_user_registry_track($juntal->ID, 'sin cargo');
         } 
       }
       foreach ($juntales as $juntal) {
@@ -349,14 +361,15 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('author');
           $juntal->add_role(esc_attr('editor'));
           update_user_meta($juntal->ID, 'asociation_position', 'presidente' );
-          $msg .= '<p>El usuario '.$juntal->user_login.' es el nuevo lider!</p>';
+          $msg .= '<p>El usuario '.wpdc_the_user_name($juntal->ID).' es el nuevo lider!</p>';
+          update_user_registry_track($juntal->ID, change_role_name('presidente'));
         } 
       }
     }
 
   }
 
-  if($msg) new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  if($msg) $alerts_success .= $msg;
 }
 
 
@@ -374,18 +387,19 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
 if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
 
   if (esc_attr($_POST['updatesection']) == 'change_member_status') {  
+    $msg = '';
 
     if(!empty($_POST['asociate'])){
       $new_socis = $_POST['asociate'];
-      $msg = '';
       foreach ($new_socis as $user_id) {
         $user = get_userdata($user_id);
         $user->remove_role('subscriber');
         $user->add_role('author');
         update_user_meta($user_id, 'asociation_status', 'validado' );
-        $msg .= '<p>El usuario '.$user->user_login.' ahora es socio</p>';
+        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es socio</p>';
+        update_user_registry_track($user_id, 'socio');
       }
-      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      $alerts_success .= $msg;
     }
 
     if(!empty($_POST['desasociate'])){
@@ -396,9 +410,10 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         $soc->add_role('subscriber');
         $soc->remove_role('author');
         update_user_meta($user_id, 'asociation_status', '' );
-        $msg .= '<p>El usuario '.$soc->user_login.' ya no es socio</p>';
+        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ya no es socio</p>';
+        update_user_registry_track($user_id, 'exsocio');
       }
-      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '8' ));
+      $alerts_success .= $msg;
     }
   }
 
@@ -406,13 +421,20 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
 
     if(!empty($_POST['members_tovalide']) && is_array($_POST['members_tovalide']) ){
       foreach ($_POST['members_tovalide'] as $user_id){
+        $user = get_userdata($user_id);
+        $user->remove_role('subscriber');
+        $user->add_role('author');
         update_user_meta($user_id, 'asociation_status', 'validado' );
+        update_user_registry_track($user_id, 'validado');
+        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es socio</p>';
+        update_user_registry_track($user_id, 'socio');
       }
     }
 
     if(!empty($_POST['members_tosuspend']) && is_array($_POST['members_tosuspend']) ){
       foreach ($_POST['members_tosuspend'] as $user_id){
-        update_user_meta($user_id, 'asociation_status', 'suspendido' );
+        update_user_meta($user_id, 'asociation_status', '' );
+        update_user_registry_track($user_id, '');
       }
     }
   }
@@ -466,10 +488,10 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
     }
 
     if($msg_e != ''){
-      new Frontend_box( $msg_e, array('type' => 'error', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '8' ));
+      $alerts_error .= $msg_e;
     }
     if($msg_ok != ''){
-      new Frontend_box( $msg_ok, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      $alerts_success .= $msg_ok;
     }
   }
 
@@ -492,8 +514,7 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         }
         wp_delete_post( $post_id, true );
       }
-      $msg = '<p>'.$cont.' paquetes y '.$cont_files.' archivos eliminados</p>';
-      new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+      $alerts_success .= '<p>'.$cont.' paquetes y '.$cont_files.' archivos eliminados</p>';
     }
   }
 
@@ -545,11 +566,10 @@ if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($c
       update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
       update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
       
-      $msg = '<p>Cuota '.$_POST['fee_name'].' creada</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Cuota '.$_POST['fee_name'].' creada</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
   if ( esc_attr($_POST['updatesection']) == 'updatefee' ) {
@@ -577,7 +597,7 @@ if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($c
       $msg .= '<p>Botón de paypal actualizado</p>';
     }
 
-    if($msg != '') new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+    if($msg != '') $alerts_success .= $msg;
 
   }
 }
@@ -635,8 +655,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) 
             $pending_members[$user_id] = current_time('mysql');
 
           update_post_meta($post_id, 'members_pending', $pending_members);
-          $msg .= '<p>Cuota actualizada</p>';
-          new Frontend_box( $msg, array('type'=>'success','where'=>'singlefee','auto_close'=> true,'delay'=>'5'));
+          $alerts_success .= '<p>Cuota actualizada</p>';
           $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a><a href="#hidden">'.current_time('mysql').'</a>';
 
         }elseif($paymethod == 'paypal'){
@@ -662,7 +681,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) 
       add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
 
       }else{
-        new Frontend_box( $msg, array('type'=>'error','where'=>'singlefee','auto_close'=> true,'delay'=>'7'));
+        $alerts_error .= $msg;
       }
     }
     if (esc_attr($_POST['updatesection']) == 'updatefee' ) {
@@ -734,8 +753,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) 
           update_post_meta($post_id, 'members_payed', $payed_members);          
         }
 
-        $msg = '<p>Abonos actualizados</p>';
-        new Frontend_box( $msg, array('type'=>'success','where'=>'singlefee','auto_close'=> true,'delay'=>'5'));
+        $alerts_success .= '<p>Abonos actualizados</p>';
+      }else{
+        $alerts_error .= $msg;
       }
     }
   }
@@ -820,11 +840,10 @@ if (esc_attr($_POST['action']) == 'configuration-concursos'  && (get_user_meta($
       update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
       update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
       
-      $msg = '<p>Concurso '.$_POST['concurso_name'].' creado</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Concurso '.$_POST['concurso_name'].' creado</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
   if (esc_attr($_POST['updatesection']) == 'removeconcurso') {
@@ -838,8 +857,7 @@ if (esc_attr($_POST['action']) == 'configuration-concursos'  && (get_user_meta($
         }
       }
       if($cont > 0){
-        $msg = '<p>'.$cont.' Concurso eliminados con éxito</p>';
-        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+        $alerts_success .= '<p>'.$cont.' Concurso eliminados con éxito</p>';
       }
     }
 
@@ -904,11 +922,10 @@ if (esc_attr($_POST['action']) == 'edit-concursos'  && (get_user_meta($current_u
       update_post_meta($post_id, 'concurso_quantity', esc_attr($_POST['concurso_quantity']));
       update_post_meta($post_id, 'concurso_date', esc_attr($_POST['concurso_date']));
       
-      $msg = '<p>Concurso '.$_POST['concurso_name'].' actualizado</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Concurso '.$_POST['concurso_name'].' actualizado</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
 }
@@ -979,11 +996,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       update_post_meta($post_id, 'job_bussiness', esc_attr($_POST['job_bussiness']));
       update_post_meta($post_id, 'job_info', esc_attr($_POST['job_info']));
       
-      $msg = '<p>Oferta '.$_POST['job_name'].' creada</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Oferta '.$_POST['job_name'].' creada</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
   
@@ -999,8 +1015,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         }
       }
       if($cont > 0){
-        $msg = '<p>'.$cont.' ofertas eliminadas con éxito</p>';
-        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+        $alerts_success .= '<p>'.$cont.' ofertas eliminadas con éxito</p>';
       }
     }
   }
@@ -1053,11 +1068,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       update_post_meta($post_id, 'job_bussiness', esc_attr($_POST['job_bussiness']));
       update_post_meta($post_id, 'job_info', esc_attr($_POST['job_info']));
       
-      $msg = '<p>Oferta '.$_POST['job_name'].' actualizada</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Oferta '.$_POST['job_name'].' actualizada</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
 }
@@ -1104,10 +1118,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       );
       $post_id = wp_insert_post( $post_information );
       
-      $msg = '<p>Artículo '.$_POST['post_name'].' publicado</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Artículo '.$_POST['post_name'].' publicado</p>';
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
   if ( esc_attr($_POST['updatesection']) == 'removeposts' ) {
@@ -1121,8 +1134,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
         }
       }
       if($cont > 0){
-        $msg = '<p>'.$cont.' artículos eliminados con éxito</p>';
-        new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+        $alerts_success .= '<p>'.$cont.' artículos eliminados con éxito</p>';
       }
     }
   }
@@ -1165,19 +1177,18 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       );
       wp_update_post( $my_post );
       
-      $msg = '<p>Artículo '.$_POST['post_name'].' actualizado</p>';
-      new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_success .= '<p>Artículo '.$_POST['post_name'].' actualizado</p>';
       
     }else{
-      new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
+      $alerts_error .= $msg;
     }
   }
 }
 
-
-
-
-
+if($alerts_success != '') new Frontend_box( $alerts_success, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));
+if($alerts_error != '') new Frontend_box( $alerts_error, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));
+if($alerts_warning != '') new Frontend_box( $alerts_warning, array('type'=>'warning','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));
+if($alerts_info != '') new Frontend_box( $alerts_info, array('type'=>'info','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));
 
 
 } ?>

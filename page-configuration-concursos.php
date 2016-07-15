@@ -4,8 +4,6 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
 
   if(is_user_role('administrator') || is_user_role('editor')) {
 
-    include(locate_template('templates/functions/functions-validation.php'));
-
     $pageoptions = [
       "concursolist" => $concursos->post_count." Concursos",
       "newconcurso" => "Crear concurso",
@@ -28,8 +26,6 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_co
 
   <!-- flexboxer -->
     <div class="flexboxer flexboxer--configuration flexboxer--configuration__concursos flexboxer--full">
-
-      <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
       <!-- admin options -->
       <?php if(is_user_role('administrator') || is_user_role('editor')) wpdc_the_pageoptions($pageoptions);?>

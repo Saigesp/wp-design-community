@@ -5,14 +5,12 @@ $current_user_id = $current_user->ID;
 <div class="flexboxer flexboxer--single flexboxer--single__job flexboxer--full">
 	<?php if($_GET['id'] > 0 && (is_user_role('editor') || is_user_role('administrator'))){ ?>
 		<?php
-		include(locate_template('templates/functions/functions-validation.php'));
 		global $post;
 		$post_id = $_GET['id'];
 		$job_bussiness = get_post_meta($post_id, 'job_bussiness', true);
 		$job_info = get_post_meta($post_id, 'job_info', true);
 		?> 
 
-		<?php include(locate_template('templates/sections/meeseeks.php')); ?>
 		<section id="newconcurso" class="wrap wrap--content wrap--form wrap--shadow">
 			<h3 class="title title--section">Editar oferta</h3>
 			<form method="POST" action="">

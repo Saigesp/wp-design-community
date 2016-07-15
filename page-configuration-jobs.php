@@ -2,8 +2,6 @@
 
 if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator')) {
 
-  include(locate_template('templates/functions/functions-validation.php'));
-
   $args = array (
     'order' => 'DESC',
     'posts_per_page' => -1,
@@ -22,8 +20,6 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jo
 
   <!-- flexboxer -->
     <div class="flexboxer flexboxer--configuration flexboxer--configuration__jobs flexboxer--full">
-
-      <?php include(locate_template('templates/sections/meeseeks.php')); ?>
 
       <!-- admin options -->
       <?php wpdc_the_pageoptions($pageoptions);?>

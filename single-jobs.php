@@ -8,10 +8,6 @@ $job_info = get_post_meta($post_id, 'job_info', true);
 
 <div class="flexboxer flexboxer--single flexboxer--single__job">
 
-  <?php if(is_user_role('author') || is_user_role('editor') || is_user_role('administrator')){ ?>
-    <?php include(locate_template('templates/sections/meeseeks.php')); ?>
-  <?php } ?>
-
   <?php if (have_posts()) : ?>
     
     <section class="wrap wrap--content wrap--shadow">

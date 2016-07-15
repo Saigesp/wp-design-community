@@ -1,8 +1,6 @@
 <?php get_header(); ?>
 <?php if(is_user_role('administrator') || is_user_role('editor')) {
 
-	include(locate_template('templates/functions/functions-validation.php'));
-
 	$automate_twitter = get_option("automate_twitter");
 	$consumer_key = get_option("consumer_key");
 	$consumer_secret = get_option("consumer_secret");
@@ -21,8 +19,6 @@
 <!-- flexboxer -->
 
 <div class="flexboxer flexboxer--configuration flexboxer--full">
-
-	<?php include(locate_template('templates/sections/meeseeks.php')); ?>
   
 	<section id="generalconfiguration" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
 		<h3 onclick="ToggleSection(this)" data-section="generalconfiguration" class="js-section-launch">Configuración general</h3>

@@ -2,8 +2,6 @@
 
 if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario' || is_user_role('administrator')) {
 
-    include(locate_template('templates/functions/functions-validation.php'));
-
     global $wpdb;
     $blog_id = get_current_blog_id();
 
@@ -39,6 +37,23 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
         )
     );
 
+    $subscribers_pending = new WP_User_Query(
+        array(
+            'meta_query' => array(
+                array(
+                    'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
+                    'value' => 'subscriber',
+                    'compare' => 'like'
+                ),
+                array(
+                    'key' => 'asociation_status',
+                    'value' => 'pendiente',
+                    'compare' => 'like'
+                )
+            )
+        )
+    );
+
     $wpdc_docs = array (
         'post_type' => array('documentos'),
         'posts_per_page' => '-1',
@@ -55,14 +70,6 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'secretario'
     ];
 
     ?>
-
-    <!-- flexboxer -->
-    <div class="flexboxer flexboxer--full flexboxer--configuration flexboxer--configuration__treasury">
-
-        <!-- Mr Meeseeks -->
-        <?php include(locate_template('templates/sections/meeseeks.php')); ?>
-    
-    </div>
     
     <div class="flexboxer flexboxer--page flexboxer--page__secretary">
 

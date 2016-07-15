@@ -8,6 +8,8 @@
 	  <h3 class="sep">Paypal</h3>
 	  <p class="help help--section">Cuenta donde se harán los ingresos puntuales.</p>
 	  <?php wpdc_the_input_email('paypal_account', get_option("paypal_account"), 'Email usuario Paypal', 'user@example.com');?>
+	  
+	  <?php wpdc_the_input_text('paypal_button_fee', get_option("paypal_button_fee"), 'Código botón PayPal pagar cuota (en desarrollo)', 'X12345A');?>
 
 	  <?php wpdc_the_submit('updatesection', 'banksaccount', '', '', 'Actualizar datos');?>
   </form>

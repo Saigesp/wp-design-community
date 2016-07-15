@@ -1,46 +1,57 @@
-<?php
+<?php if('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))){ 
 
   /* CAMBIO DE PERFIL
   *
   *****************************************************
   */
 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'update-user' ) {
 
+if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) == 'upgrade' && $_POST['updatesection'] == 'upgradeuser')) {
+  if(esc_attr($_POST['action']) == 'update-user') $user_id = $user_id;
+  if($_POST['updatesection'] == 'upgradeuser') $user_id = get_current_user_id();
   /* DATOS PERSONALES */
   // NOMBRE
-  if (!empty($_POST['last-name']) && !empty($_POST['last-name'])) update_user_meta($user->ID, 'last_name', esc_attr($_POST['last-name']));
+  if (!empty(esc_attr($_POST['last_name']))) update_user_meta($user_id, 'last_name', esc_attr($_POST['last_name']));
 
   // APELLIDOS
-  if (!empty($_POST['first-name']) && !empty($_POST['first-name']))  update_user_meta( $user->ID, 'first_name', esc_attr($_POST['first-name']));
+  if (!empty(esc_attr($_POST['first_name'])))  update_user_meta( $user_id, 'first_name', esc_attr($_POST['first_name']));
       
   // DNI
-  if (!empty($_POST['dbem_dnie'])) update_user_meta($user->ID, 'dbem_dnie', esc_attr( $_POST['dbem_dnie'] ) );
+  if (!empty(esc_attr($_POST['dbem_dnie']))) update_user_meta($user_id, 'dbem_dnie', esc_attr($_POST['dbem_dnie']) );
+
+
+  // FECHA DE NACIMIENTO
+  update_user_meta($user_id, 'bornday', $_POST['bornday'] );      
+
+  // POSITION
+  if (!empty(esc_attr($_POST['position']))) update_user_meta($user_id, 'position', esc_attr($_POST['position']) );
 
   // DIRECCIÓN
-  if (!empty($_POST['dbem_address'])) update_user_meta($user->ID, 'dbem_address', esc_attr( $_POST['dbem_address'] ) );
+  if (!empty(esc_attr($_POST['dbem_address']))) update_user_meta($user_id, 'dbem_address', esc_attr($_POST['dbem_address']) );
 
   // TELÉFONO
-  if (!empty($_POST['dbem_phone'])) update_user_meta($user->ID, 'dbem_phone', esc_attr( $_POST['dbem_phone'] ) );
+  if (!empty(esc_attr($_POST['dbem_phone']))) update_user_meta($user_id, 'dbem_phone', esc_attr($_POST['dbem_phone']) );
 
   // EMAIL
   if (!is_email(esc_attr( $_POST['email'] ))) $error[] = 'El email introducido no es válido, por favor inténtalo de nuevo.';
-  elseif(email_exists(esc_attr( $_POST['email'] )) && esc_attr($_POST['email']) != get_the_author_meta('user_email', $user->ID)) $error[] = 'El email introducido ya está siendo usado por otro usuario, prueba con uno diferente';
-  else wp_update_user( array ('ID' => $user->ID, 'user_email' => esc_attr( $_POST['email'] )));
+  elseif(email_exists(esc_attr( $_POST['email'] )) && esc_attr($_POST['email']) != get_the_author_meta('user_email', $user_id)) $error[] = 'El email introducido ya está siendo usado por otro usuario, prueba con uno diferente';
+  else wp_update_user( array ('ID' => $user_id, 'user_email' => esc_attr( $_POST['email'] )));
 
   // IMAGEN DE PERFIL
-  //if (!empty($_POST['async-upload'])) update_user_meta( $user->ID, 'foto_personal', $_POST['html-upload'] );
+  //if (!empty($_POST['async-upload'])) update_user_meta( $user_id, 'foto_personal', $_POST['html-upload'] );
 
   // PÁGINA WEB
-  if (!empty($_POST['user_url'])) wp_update_user( array ('ID' => $user->ID, 'user_url' => esc_attr( $_POST['user_url'] )));
+  if (!empty(esc_attr($_POST['user_url']))) wp_update_user( array ('ID' => $user_id, 'user_url' => esc_attr($_POST['user_url'])));
 
   // PSEUDONIMO
-  if (!empty($_POST['pseudonimo'])) update_user_meta($user->ID, 'pseudonimo', esc_attr( $_POST['pseudonimo'] ) );
+  if (!empty(esc_attr($_POST['pseudonimo']))) update_user_meta($user_id, 'pseudonimo', esc_attr($_POST['pseudonimo']));
 
   // DESCRIPCIÓN
-  if (!empty($_POST['description'])) update_user_meta( $user->ID, 'description', esc_attr( $_POST['description'] ) );
+  if (!empty(esc_attr($_POST['description']))) update_user_meta( $user_id, 'description', esc_attr($_POST['description']));
 
 
+  // FECHA DE NACIMIENTO
+  update_user_meta($user_id, 'bornday', esc_attr($_POST['bornday']) );
 
   /* REDES SOCIALES */
   // TWITTER
@@ -48,47 +59,47 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     $_POST['twitter'] = substr($_POST['twitter'], 1); 
   if (substr($_POST['twitter'], 0, 4) == 'http')
     $_POST['twitter'] = substr(strrchr($_POST['twitter'], "/"), 1);
-  update_user_meta($user->ID, 'twitter', esc_attr($_POST['twitter']));
+  update_user_meta($user_id, 'twitter', esc_attr($_POST['twitter']));
 
   // FACEBOOK
   if (substr($_POST['facebook'], 0, 4) == 'http') $_POST['facebook'] = substr(strrchr($_POST['facebook'], "/"), 1);
-  update_user_meta( $user->ID, 'facebook', esc_attr( $_POST['facebook'] ) );
+  update_user_meta( $user_id, 'facebook', esc_attr( $_POST['facebook'] ) );
 
   // LINKEDIN
   if (substr($_POST['linkedin'], 0, 56) == 'https://www.linkedin.com/profile/public-profile-settings') $_POST['linkedin'] = '';
-  update_user_meta( $user->ID, 'linkedin', esc_attr( $_POST['linkedin'] ) );
+  update_user_meta( $user_id, 'linkedin', esc_attr( $_POST['linkedin'] ) );
           
   // TUMBLR
-  update_user_meta( $user->ID, 'tumblr', esc_attr( $_POST['tumblr'] ) );
+  update_user_meta( $user_id, 'tumblr', esc_attr( $_POST['tumblr'] ) );
 
   // BEHANCE
   if (substr($_POST['behance'], 0, 4) == 'http') $_POST['behance'] = substr(strrchr($_POST['behance'], "/"), 1);
-  update_user_meta( $user->ID, 'behance', esc_attr( $_POST['behance'] ) );
+  update_user_meta( $user_id, 'behance', esc_attr( $_POST['behance'] ) );
   
   //DOMESTIKA
   if (substr($_POST['domestika'], 0, 4) == 'http') $_POST['domestika'] = substr(strrchr($_POST['domestika'], "/"), 1);
-  update_user_meta( $user->ID, 'domestika', esc_attr( $_POST['domestika'] ) );
+  update_user_meta( $user_id, 'domestika', esc_attr( $_POST['domestika'] ) );
 
   // GOOGLE PLUS
-  update_user_meta( $user->ID, 'googleplus', esc_attr( $_POST['googleplus'] ) );
+  update_user_meta( $user_id, 'googleplus', esc_attr( $_POST['googleplus'] ) );
 
 
   /* DATOS PROFESIONALES */
   // TITULACIÓN
-  if (!empty($_POST['titulacion'])) update_user_meta( $user->ID, 'titulacion', esc_attr( $_POST['titulacion'] ) );
+  if (!empty($_POST['titulacion'])) update_user_meta( $user_id, 'titulacion', esc_attr( $_POST['titulacion'] ) );
 
   // CENTRO DE ESTUDIOS
-  if (!empty($_POST['centro_de_estudios'])) update_user_meta( $user->ID, 'centro_de_estudios', esc_attr( $_POST['centro_de_estudios'] ) );
+  if (!empty($_POST['centro_de_estudios'])) update_user_meta( $user_id, 'centro_de_estudios', esc_attr( $_POST['centro_de_estudios'] ) );
 
   // TIPO
-  if (!empty($_POST['type'])) update_user_meta( $user->ID, 'type', $_POST['type']);
+  if (!empty($_POST['type'])) update_user_meta( $user_id, 'type', $_POST['type']);
 
   // ESPECIALIDAD
   if(isset($_POST['especialidad'])){
     if (sizeof($_POST['especialidad']) > 3) {
       $error[] = 'Solo puedes seleccionar 3 áreas de experiencia como máximo.';
     } else {
-      update_user_meta( $user->ID, 'especialidad', $_POST['especialidad']); 
+      update_user_meta( $user_id, 'especialidad', $_POST['especialidad']); 
     }
   } 
 
@@ -99,7 +110,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   /* DATOS DE LA PÁGINA */
   // ROL
   if (!empty($_POST['roles'])){
-    $WP_User = new WP_User($user->ID);
+    $WP_User = new WP_User($user_id);
     foreach( $WP_User->roles as $role ) {
       $role = get_role( $role );
       if ( $role != null ) $user->remove_role($role->name);
@@ -108,11 +119,11 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   }
 
   // CARGO
-  update_user_meta( $user->ID, 'asociation_position', $_POST['asociation_position']);
+  update_user_meta( $user_id, 'asociation_position', $_POST['asociation_position']);
 
   // PERFIL PÚBLICO
   if (!empty($_POST['perfil_publico'])){
-    update_user_meta( $user->ID, 'perfil_publico', $_POST['perfil_publico']);
+    update_user_meta( $user_id, 'perfil_publico', $_POST['perfil_publico']);
     global $wp_rewrite;
     $wp_rewrite->flush_rules( false );
   }
@@ -132,10 +143,14 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
   }
 
   if ( count($error) == 0 ) {
-        do_action('edit_user_profile_update', $user->ID);
+        do_action('edit_user_profile_update', $user_id);
         wp_redirect( get_permalink() );
         exit;
     }
+
+  $msg = 'Datos de usuario actualizados';
+  new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+
 }
 
 
@@ -163,11 +178,70 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
+/* UPGRADE USER
+*
+******************************************************/
+if (esc_attr($_POST['action']) == 'upgrade') {
+
+  if (!empty(esc_attr($_POST['upgradeuser'])) && esc_attr($_POST['updatesection']) == 'general-options'){
+
+  }
+  
+}
+
+
+
+
+
+/* CONFIGURACIÓN ADMIN
+*
+******************************************************/
+ 
+if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrator')) {
+
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'general-options'){
+    $users_can_register = $_POST["users_can_register"] == 1 ? 1 : 0; update_option("users_can_register", $users_can_register);
+    $users_can_asociate = $_POST["users_can_asociate"] == 1 ? 1 : 0; update_option("users_can_asociate", $users_can_asociate);
+    $fields_asociate_min = $_POST["fields_asociate_min"]; update_option("fields_asociate_min", $fields_asociate_min);
+    $msg = 'Opciones actualizadas';
+    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'twitteroptions'){
+    $automate_twitter = esc_attr($_POST["automate_twitter"]); update_option("automate_twitter", $automate_twitter);
+    $consumer_key = esc_attr($_POST["consumer_key"]); update_option("consumer_key", $consumer_key);
+    $consumer_secret = esc_attr($_POST["consumer_secret"]); update_option("consumer_secret", $consumer_secret);
+    $access_token = esc_attr($_POST["access_token"]); update_option("access_token", $access_token);
+    $access_token_secret = esc_attr($_POST["access_token_secret"]); update_option("access_token_secret", $access_token_secret);
+    $tweet_new_user = esc_attr($_POST["tweet_new_user"]); update_option("tweet_new_user", $tweet_new_user);
+    $follow_new_user = esc_attr($_POST["follow_new_user"]); update_option("follow_new_user", $follow_new_user);
+    $tweet_new_publication = esc_attr($_POST["tweet_new_publication"]); update_option("tweet_new_publication", $tweet_new_publication);
+    $msg = 'Configuración de twitter guardada';
+    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'tweet-test'){
+    $tweet_msg = 'Test';
+    $respuesta = sendTweet($tweet_msg);
+    $msg = 'Tweet enviado!';
+    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'texts-update'){
+    $tos_link = esc_attr($_POST["tos_link"]); update_option("tos_link", $tos_link);
+    $text_subscriber_upgrade = esc_attr($_POST["text_subscriber_upgrade"]); update_option("text_subscriber_upgrade", $text_subscriber_upgrade);
+    $text_register = esc_attr($_POST["text_register"]); update_option("text_register", $text_register);
+
+    $msg = 'Textos actualizados';
+    new Frontend_box( $msg, array('type' => 'success', 'where' => 'meeseeks', 'auto_close' => true, 'delay' => '5' ));
+  }
+
+}
+
+
+
 /* CONFIGURACION PRESIDENCIA
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'presidente' || is_user_role('administrator'))) {
 
   $msg = '';
   $cargos = array('presidente', 'vicepresidente', 'secretario', 'tesorero');
@@ -259,7 +333,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
     
   }
-  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'changepresident') {
+  if (esc_attr($_POST['updatesection']) == 'changepresident') {
 
     // Change president
     if (!empty($_POST['presidente'])){
@@ -297,9 +371,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 *****************************************************
 */
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-secretary' ) {
+if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
 
-  if ($_POST['updatesection'] == 'change_member_status') {  
+  if (esc_attr($_POST['updatesection']) == 'change_member_status') {  
 
     if(!empty($_POST['asociate'])){
       $new_socis = $_POST['asociate'];
@@ -328,7 +402,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 
-  if ($_POST['updatesection'] == 'validatemembers') {
+  if (esc_attr($_POST['updatesection']) == 'validatemembers') {
 
     if(!empty($_POST['members_tovalide']) && is_array($_POST['members_tovalide']) ){
       foreach ($_POST['members_tovalide'] as $user_id){
@@ -343,7 +417,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 
-  if ($_POST['updatesection'] == 'publish_document') {
+  if (esc_attr($_POST['updatesection']) == 'publish_document') {
     
     $max_file_archives = 10; // Define how many images can be uploaded to the current post
     $wp_upload_dir = wp_upload_dir();
@@ -399,7 +473,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 
-  if ( $_POST['updatesection'] == 'removedoc' ) {
+  if ( esc_attr($_POST['updatesection']) == 'removedoc' ) {
     $cont = 0;
     $cont_files = 0;
     if(!empty($_POST['docs_remove']) && is_array($_POST['docs_remove'])){
@@ -441,10 +515,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 ******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-treasury'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' || is_user_role('administrator'))) {
 
 
-  if ( $_POST['updatesection'] == 'newfee' ) {
+  if ( esc_attr($_POST['updatesection']) == 'newfee' ) {
     $hasError = false;
     $publish_status = 'publish';
     $publish_type = 'fee';
@@ -478,10 +552,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
     }
   }
-  if ( $_POST['updatesection'] == 'updatefee' ) {
+  if ( esc_attr($_POST['updatesection']) == 'updatefee' ) {
 
   }
-  if ( $_POST['updatesection'] == 'banksaccount' ) {
+  if ( esc_attr($_POST['updatesection']) == 'banksaccount' ) {
 
     $msg = '';
 
@@ -496,6 +570,12 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       update_option("paypal_account", $paypal_account);
       $msg .= '<p>Cuenta de paypal actualizada</p>';
     }
+    
+    if(get_option("paypal_button_fee") != esc_attr($_POST["paypal_button_fee"])){
+      $paypal_account = esc_attr($_POST["paypal_button_fee"]);
+      update_option("paypal_button_fee", $paypal_account);
+      $msg .= '<p>Botón de paypal actualizado</p>';
+    }
 
     if($msg != '') new Frontend_box( $msg, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
 
@@ -509,14 +589,14 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *****************************************************
 */
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action'])) {
+if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) {
  
   global $post;
   $action_check = 'fee/'.$post->post_name;
 
-  if ($_POST['action'] == $action_check) {
+  if (esc_attr($_POST['action']) == $action_check) {
 
-    if ( $_POST['updatesection'] == 'payfee' ) {
+    if ( esc_attr($_POST['updatesection']) == 'payfee' ) {
 
       $post_id = get_the_ID();
       $user_id = get_current_user_id();
@@ -585,7 +665,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action'])) {
         new Frontend_box( $msg, array('type'=>'error','where'=>'singlefee','auto_close'=> true,'delay'=>'7'));
       }
     }
-    if ( $_POST['updatesection'] == 'updatefee' ) {
+    if (esc_attr($_POST['updatesection']) == 'updatefee' ) {
 
       //update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
       //update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
@@ -696,10 +776,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action'])) {
 *
 ******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'configuration-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
 
 
-  if ( $_POST['updatesection'] == 'newconcurso' ) {
+  if (esc_attr($_POST['updatesection']) == 'newconcurso') {
     $hasError = false;
     $publish_status = 'publish';
     $publish_type = 'concursos';
@@ -747,7 +827,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
       new Frontend_box( $msg, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'5'));
     }
   }
-  if ( esc_attr($_POST['updatesection']) == 'removeconcurso' ) {
+  if (esc_attr($_POST['updatesection']) == 'removeconcurso') {
 
     if(!empty($_POST['concursos_to_remove']) && is_array($_POST['concursos_to_remove'])){
       $cont = 0;
@@ -772,10 +852,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 ******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'edit-concursos'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
 
 
-  if ( esc_attr($_POST['updatesection']) == 'updateconcurso' ) {
+  if (esc_attr($_POST['updatesection']) == 'updateconcurso' ) {
     $hasError = false;
     $publish_status = 'publish';
     $publish_type = 'concursos';
@@ -1100,4 +1180,4 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
 
 
-?>
+} ?>

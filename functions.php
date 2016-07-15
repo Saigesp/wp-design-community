@@ -66,6 +66,7 @@ new_page_title('Configuration concursos');
 new_page_title('Configuration jobs');
 new_page_title('Configuration posts');
 new_page_title('Invitar');
+new_page_title('Upgrade');
 
 new_page_title('Disenadores');
 
@@ -198,12 +199,7 @@ function update_op_user_meta($user_id, $field, $input){
 // Profile image
 function the_profile_photo($user){
 
-  if(is_object($user) && is_int($user->ID))
-    $user_id = $user->ID;
-  elseif(is_int($user) && $user > 0){
-    $user_id = $user;
-    $user = get_userdata($user_id);
-  }
+
 
   if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
     $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
@@ -632,14 +628,6 @@ jQuery(document).ready(function($) {
 }
 add_action('admin_head','hide_newtax_languages');
 
-/* // Bloquear nuevos idiomas
-function no_more_languages($term, $taxonomy) {
-    if ('customlanguage' === $taxonomy) {
-        return new WP_Error('term_addition_blocked', __('Bloqueado por el diseñador. Consulta con un administrador o mira en functions.php.'));
-    }
-}
-add_action( 'pre_insert_term', 'no_more_languages', 1, 2); */
-
 // Ocultar link de taxonomía en el admin
 function remove_menu_item() {
  remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=customlanguage' );
@@ -875,56 +863,6 @@ add_action('template_redirect', 'register_a_user');
 
 
 
-
-
-/**
- * FUNCIONES DE FILTRO DE IDIOMA
- ***********************************/
-
-/* Generar url con $_GET de idioma
-*
-* El idioma que se le pase será falseado, por ejemplo
-* hide_lang_url(ES) generará una url del tipo
-* http://www.urlprevia.com/?es=false
-*/
-function hide_lang_url($hide_lang){
-    global $wp;
-    $current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
-    if (strpos($current_url,'?') === false) $current_url .= '/?';
-    if ($hide_lang == 'ES'  || $_GET['es']  == 'false') $current_url .= '&es=false';
-    if ($hide_lang == 'EN'  || $_GET['en']  == 'false') $current_url .= '&en=false';
-    if ($hide_lang == 'CAT' || $_GET['cat'] == 'false') $current_url .= '&cat=false';
-    return $current_url;
-}
-
-/* Generar array de idiomas para la query
-*
-* Se realiza una query de taxonomia de customlanguage
-* en función de los parámetros pasados a través de
-* $_GET (se excluyen los que aparezcan como false)
-*/
-function retrieve_languages() {
-  $languages = array('relation' => 'OR');
-  $languages_reg = get_terms('customlanguage', array(
-    'orderby'    => 'name',
-    'hide_empty' => true,
-  ));
-  if (!empty($languages_reg) && !is_wp_error($languages_reg)){
-    foreach ($languages_reg as $lang) {
-      if ($_GET[strtolower($lang->name)] != 'false'){
-        array_push ($languages, array(
-          'taxonomy' => 'customlanguage',
-          'field' => 'slug',
-          'terms' => strtolower($lang->name)
-        ));
-      }
-    }
-  }
-  return $languages;
-}
-
-
-
 // Translate role names
 function change_role_name($rolename){
   if($rolename == 'subscriber') return 'Suscriptor';
@@ -942,6 +880,19 @@ function change_role_name($rolename){
   elseif($rolename == 'rp_posts') return 'Resp. Noticias';
   elseif($rolename == '') return null;
   else return $rolename;
+}
+// Translate field names
+function change_field_name($fieldname){
+  if($fieldname == 'dbem_dnie')       return "DNI";
+  elseif($fieldname == 'bornday')         return "Fecha de nacimiento";
+  elseif($fieldname == 'dbem_phone')      return "Teléfono";
+  elseif($fieldname == 'dbem_address')      return "Dirección";
+  elseif($fieldname == 'titulacion')      return "Titulacíón";
+  elseif($fieldname == 'centro_de_estudios')  return "Centro de estudios";
+  elseif($fieldname == 'first_name')      return "Nombre";
+  elseif($fieldname == 'last_name')      return "Apellidos";
+  elseif($fieldname == 'email')         return "Email";
+  else return $fieldname;
 }
 
 if(!function_exists('get_my_editable_roles')){

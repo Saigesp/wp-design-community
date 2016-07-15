@@ -49,7 +49,7 @@ $comments_trash = get_comments( $args_trash );
   </div>
 </section>
 
-<?php if(is_user_role('administrator') && 1 == 2){ ?>
+<?php //if(is_user_role('administrator')){ ?>
 <?php if(!empty($_POST)) { ?>
 <section class="wrap wrap--content wrap--shadow">
 
@@ -72,7 +72,7 @@ $comments_trash = get_comments( $args_trash );
 
 </section>
 <?php } ?>
-<?php } ?>
+<?php //} ?>
 
 <?php do_action( 'front_end_box/meeseeks' );?>
 <?php do_action( 'front_end_box/login' );?>

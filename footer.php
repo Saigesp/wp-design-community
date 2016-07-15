@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
   if ($('.js-medium-editor').length > 0){
     var editor = new MediumEditor('.js-medium-editor',{
       placeholder: {
-        text: 'Descripción'
+        text: 'Haz click para empezar a escribir. Selecciona un texto para aplicarle estilos.'
       }
     });
   }

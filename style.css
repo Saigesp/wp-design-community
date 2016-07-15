@@ -485,11 +485,12 @@ body {
 }
 #main .flexboxer > .wrap {
   background: white;
+  min-height: 56px;
 }
 .flexboxer {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
@@ -566,6 +567,10 @@ body {
 .flexboxer .wrap--spaced__bottom {
   margin-top: 0 !important;
 }
+.flexboxer .wrap--box {
+  margin: 30px auto !important;
+  max-width: 400px !important;
+}
 .flexboxer .wrap--controls {
   line-height: 1;
   min-height: 60px;
@@ -606,6 +611,8 @@ body {
   color: inherit;
 }
 .flexboxer > .wrap {
+  width: 100%;
+  box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
@@ -1657,6 +1664,12 @@ button.secondary:focus {
   background-image: url('img/icons/trash-white.svg');
   border-color: #991627;
 }
+.wrap--form input[type="checkbox"] + label + label {
+  vertical-align: top;
+}
+.wrap--form input[type="checkbox"] + label + label a {
+  vertical-align: top;
+}
 .wrap--form input[type="checkbox"]:focus + label {
   color: white;
 }
@@ -1707,6 +1720,12 @@ button.secondary:focus {
 }
 .wrap--form input[type="radio"] + label span {
   margin: 0 15px 0 45px;
+}
+.wrap--form input[type="radio"] + label + label {
+  vertical-align: top;
+}
+.wrap--form input[type="radio"] + label + label a {
+  vertical-align: top;
 }
 .wrap--form input[type="radio"]:focus + label {
   color: white;

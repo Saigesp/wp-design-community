@@ -45,13 +45,14 @@ function wpdc_the_postinfo($post_id, $options){
 /**
  * INPUT TEXT
  ***********************************/
-function wpdc_the_input_text($name, $value, $label, $placeholder, $disabled = false){
+function wpdc_the_input_text($name, $value, $label, $placeholder, $disabled = false, $required = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<input id="'.$name.'-input" type="text" name="'.$name.'" value="'.$value.'" placeholder="'.$placeholder.'"';
 	if($disabled) $output .= ' disabled ';
+	if($required) $output .= ' required ';
 	$output .= '/>';
 	$output .= '</div></div>';
     echo $output;
@@ -108,18 +109,21 @@ function wpdc_the_input_select_option($name, $value, $label, $options, $multiple
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '<label for="'.$name.'-input">'.$label.'</label>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-	$output .= '<select id="'.$name.'-input" name="'.$name.'" class="select select--option';
+	$output .= '<select id="'.$name.'-input" name="'.$name;
+	if($multiple) $output .= '[]';
+	$output .= '" class="select select--option';
 	if($multiple) $output .= ' chosen';
 	if($onchange != '') $output .= ' js-select-'.$name;
 	$output .= ' "';
 	if($multiple) $output .= ' multiple="multiple" data-placeholder="Selecciona optiones"';
 	if($onchange != '') $output .= ' onchange="ToggleSelect(\''.$onchange.'\')"';
 	$output .= '/>';
-    foreach ($options as $val => $text) {
-    	$output .= '<option value="'.$val.'"';
-    	if(get_option($name) == $val) $output .= ' selected';
-    	$output .= '>'.$text.'</option>';
-    }
+	foreach ($options as $val => $text) {
+		$output .= '<option value="'.$val.'"';
+		if($value == '' && get_option($name) == $val) $output .= ' selected';
+		elseif(is_array($value) && in_array($val, $value)) $output .= ' selected';
+		$output .= '>'.$text.'</option>';
+	}
 	$output .= '</select>';
 	$output .= '</div></div>';
     echo $output;
@@ -256,11 +260,20 @@ function wpdc_the_input_select_position($name, $label, $options, $multiple = fal
 /**
  * INPUT TEXTAREA
  ***********************************/
-function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false){
-	$output = '<div class="wrap wrap--frame">';
+function wpdc_the_input_textarea($name, $value, $placeholder, $middle = false, $disabled = false){
+	if($middle) $output = '<div class="wrap wrap--frame wrap--flex">';
+	else $output = '<div class="wrap wrap--frame">';
+	if($middle) {
+		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+		$output .= '<label for="'.$name.'-textarea">'.$placeholder.'</label>';
+		$output .= '</div>';
+		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+	}
+	if(!$middle) $output .= '<label for="'.$name.'-textarea">'.$placeholder.'</label>';
 	$output .= '<textarea id="'.$name.'-textarea" class="description js-medium-editor" name="'.$name.'" placeholder="'.$placeholder.'"';
 	if($disabled) $output .= ' disabled ';
 	$output .= '>'.$value.'</textarea>';
+	if($middle) $output .= '</div>';
 	$output .= '</div>';
     echo $output;
 }
@@ -268,13 +281,14 @@ function wpdc_the_input_textarea($name, $value, $placeholder, $disabled = false)
 /**
  * INPUT CHECKBOX
  ***********************************/
-function wpdc_the_input_checkbox_simple($name, $value = '', $label = '', $placeholder = '', $disabled = false){
+function wpdc_the_input_checkbox_simple($name, $value = '', $label = '', $placeholder = '', $disabled = false, $checked = false){
 	$output = '<div class="wrap wrap--frame wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	if($placeholder != '') $output .= '<span>'.$placeholder.'</span>';
 	$output .= '</div><div class="wrap wrap--frame wrap--frame__middle wrap--checkbox">';
 	$output .= '<input id="'.$name.'-check" type="checkbox" name="'.$name.'"';
 	if($value != '') $output .= ' value="'.$value.'"';
+	if($checked) $output .= ' checked ';
 	if($disabled) $output .= ' disabled ';
 	$output .= '/>';
 	$output .= '<label for="'.$name.'-check">';
@@ -313,21 +327,45 @@ function wpdc_the_input_file($name, $value, $label, $accept = null, $multiple = 
 /**
  * INPUT SUBMIT
  ***********************************/
-function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = null, $text = null){
+function wpdc_the_submit($name, $value, $name_hidden = null, $value_hidden = null, $text = null, $disabled = false){
 	if(!$text) $text = 'Enviar';
 	$output = '<div class="wrap wrap--flex">';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
 	$output .= '</div>';
 	$output .= '<div class="wrap wrap--frame wrap--frame__middle wrap--submit">';
 	if($name_hidden && $value_hidden){
-		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button">';
+		$output .= '<input name="'.$name.'" value="'.$text.'" type="submit" class="button"';
+		if($disabled) $output .= ' disabled';
+		$output .= '>';
 		$output .= '</input>';
 		$output .= '<input name="'.$name_hidden.'" type="hidden" value="'.$value_hidden.'" />';
 	}else{
-		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button">';
+		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button"';
+		if($disabled) $output .= ' disabled';
+		$output .= '>';
 		$output .= $text.'</button>';
 		$output .= '<input name="action" type="hidden" id="action" value="'.current_page_url().'" />';
 	}
+	$output .= '</div></div>';
+	echo $output;
+}
+
+function wpdc_the_submit_double($name, $value, $text, $name2, $value2, $text2, $disabled = false, $disabled2 = false){
+	$output = '<div class="wrap wrap--flex">';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle wrap--submit">';
+	if($name2 != '' && $value2 != '' && $text2 != ''){
+		$output .= '<button name="'.$name2.'" value="'.$value2.'" type="submit" class="button button--secondary"';
+		if($disabled2) $output .= ' disabled';
+		$output .= '>'.$text2.'</button>';
+	}
+	$output .= '</div>';
+	$output .= '<div class="wrap wrap--frame wrap--frame__middle wrap--submit">';
+	if($name != '' && $value != '' && $text != ''){
+		$output .= '<button name="'.$name.'" value="'.$value.'" type="submit" class="button"';
+		if($disabled) $output .= ' disabled';
+		$output .= '>'.$text.'</button>';
+	}
+	$output .= '<input name="action" type="hidden" id="action" value="'.current_page_url().'" />';
 	$output .= '</div></div>';
 	echo $output;
 }

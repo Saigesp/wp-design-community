@@ -1,6 +1,6 @@
 <section id="feeinfo" class="wrap wrap--content wrap--form wrap--shadow wrap--hidden js-section active">
   <h3 class="title title--section">Cuota <?php the_title(); ?></h3>
-  <form method="POST" action="">
+  <form method="POST" action="https://www.paypal.com/cgi-bin/webscr" target="_top">
 
     <div class="wrap wrap--frame wrap--flex">
       <div class="wrap wrap--frame__middle">
@@ -45,9 +45,11 @@
         </div>      
       <?php } ?>
 
-      <?php if(get_option('paypal_account') != ''){ ?> 
+      <?php if(get_option('paypal_account') == ''){ ?> 
         <div id="js-select-paypal" class="wrap wrap--frame wrap--hidden js-select js-select-paymethod">
           <p>Pago mediante PayPal</p>
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="<?php echo get_option('paypal_button_fee');?>">
         </div>     
       <?php } ?>
       

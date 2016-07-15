@@ -6,14 +6,25 @@
     <?php while (have_posts()) : the_post(); 
       $members_payed = is_array(get_post_meta(get_the_ID(), 'members_payed', true)) ? get_post_meta(get_the_ID(), 'members_payed', true) : array();
       $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)) ? get_post_meta(get_the_ID(), 'members_pending', true) : array();
+      $fee_date_start = get_post_meta(get_the_ID(), 'fee_date_start', true);
+      $fee_date_end = get_post_meta(get_the_ID(), 'fee_date_end', true);
       ?>
         <li class="item wrap wrap--flex">
           <div class="wrap wrap--frame wrap--frame__fourth">
             <a href="<?php the_permalink();?>"><?php the_title();?></a>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
-            <span class="js-date"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
-            <span class="js-date-fromnow help-info"><?php echo get_post_meta(get_the_ID(), 'fee_date', true);?></span>
+          <span>
+          <?php
+          if(strtotime($fee_date_start) > time()) echo 'Programado para el <span class="js-date">'.$fee_date_start.'</span>';
+          elseif(strtotime($fee_date_end) < time()) echo 'Finalizado el <span class="js-date">'.$fee_date_end.'</span>';
+          else echo 'Activo hasta el <span class="js-date">'.$fee_date_end.'</span>';
+          ?>
+          <span>
+          <?php /*
+            <span class="js-date"><?php echo $fee_date_start;?></span>
+            <span class="js-date-fromnow help-info"><?php echo $fee_date_start;?></span>
+            */ ?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
             <?php

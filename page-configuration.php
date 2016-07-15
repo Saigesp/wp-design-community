@@ -54,6 +54,7 @@
 		        <?php wpdc_the_input_text('tos_link', get_option("tos_link"), 'Link a términos y condiciones', 'http://');?>
 		        <?php wpdc_the_input_textarea('text_register', get_option("text_register"), 'Texto para el registro');?>
 		        <?php wpdc_the_input_textarea('text_subscriber_upgrade', get_option("text_subscriber_upgrade"), 'Texto para los suscriptores');?>
+		        <?php wpdc_the_input_textarea('text_asociate_payfee', get_option("text_asociate_payfee"), 'Texto que acompaña a pagar cuotas');?>
 		        <!-- submit change status -->
 				<?php wpdc_the_submit('updatesection', 'texts-update', '', '', 'Guardar cambios');?>
 			</form>

@@ -194,10 +194,27 @@ if (esc_attr($_POST['action']) == 'upgrade' && !empty(esc_attr($_POST['updatesec
       update_user_meta($user_id, 'asociation_status', 'pendiente' );
       update_user_registry_track($user_id, 'pendiente');
       $alerts_success .= '<p>Solicitud enviada!</p>';
+      $secreatry_page = get_page_by_title('Configuration secretary');
+      $message = '<a href="'.get_author_posts_url($user_id).'">'.wpdc_get_user_name($user_id).'</a> ha solicidato asociarse <a href="#hidden">'.current_time('mysql').'</a>';
+      $commentdata = array(
+        'comment_post_ID' => $secreatry_page->ID,
+        'comment_author' => wpdc_get_user_name($user_id),
+        'comment_author_email' => get_userdata($user_id)->user_email,
+        'comment_author_url' => get_userdata($user_id)->user_url,
+        'comment_content' => $message,
+        'comment_type' => '',
+        'comment_parent' => 0,
+        'user_id' => 1,
+        'comment_approved' => 1
+      );
+      $comment_id = wp_new_comment( $commentdata );
+      add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
     }
   }
   
 }
+
+
 
 
 
@@ -233,8 +250,9 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'texts-update'){
     $tos_link = esc_attr($_POST["tos_link"]); update_option("tos_link", $tos_link);
-    $text_subscriber_upgrade = esc_attr($_POST["text_subscriber_upgrade"]); update_option("text_subscriber_upgrade", $text_subscriber_upgrade);
     $text_register = esc_attr($_POST["text_register"]); update_option("text_register", $text_register);
+    $text_subscriber_upgrade = esc_attr($_POST["text_subscriber_upgrade"]); update_option("text_subscriber_upgrade", $text_subscriber_upgrade);
+    $text_asociate_payfee = esc_attr($_POST["text_asociate_payfee"]); update_option("text_asociate_payfee", $text_asociate_payfee);
 
     $alerts_success .= 'Configuración de textos actualizada';
   }
@@ -409,9 +427,9 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         $soc = get_userdata($soc_id);
         $soc->add_role('subscriber');
         $soc->remove_role('author');
-        update_user_meta($user_id, 'asociation_status', '' );
-        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ya no es socio</p>';
-        update_user_registry_track($user_id, 'exsocio');
+        update_user_meta($soc_id, 'asociation_status', '' );
+        $msg .= '<p>El usuario '.wpdc_the_user_name($soc_id).' ya no es socio</p>';
+        update_user_registry_track($soc_id, 'exsocio');
       }
       $alerts_success .= $msg;
     }
@@ -532,7 +550,7 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
 
 
 
-/* CONFIGURACIÓN TESORERIA
+/* CONFIGURATION TREASURY
 *
 ******************************************************/
  
@@ -553,6 +571,14 @@ if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($c
       $hasError = true;
       $msg .= '<p>Falta la cantidad de la cuota!</p>';
     }
+    if (!validateDate($_POST['fee_date_start'])) {
+      $hasError = true;
+      $msg .= '<p>Fecha de inicio incorrecta!</p>';
+    }
+    if (!validateDate($_POST['fee_date_end'])) {
+      $hasError = true;
+      $msg .= '<p>Fecha de finalización incorrecta!</p>';
+    }
 
     if(!$hasError){
       $post_information = array(
@@ -563,7 +589,8 @@ if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($c
       );
       $post_id = wp_insert_post( $post_information );
 
-      update_post_meta($post_id, 'fee_date', esc_attr($_POST['fee_date']));
+      update_post_meta($post_id, 'fee_date_start', esc_attr($_POST['fee_date_start']));
+      update_post_meta($post_id, 'fee_date_end', esc_attr($_POST['fee_date_end']));
       update_post_meta($post_id, 'fee_quantity', esc_attr($_POST['fee_quantity']));
       
       $alerts_success .= '<p>Cuota '.$_POST['fee_name'].' creada</p>';
@@ -656,7 +683,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) 
 
           update_post_meta($post_id, 'members_pending', $pending_members);
           $alerts_success .= '<p>Cuota actualizada</p>';
-          $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a><a href="#hidden">'.current_time('mysql').'</a>';
+          $message = '<a href="'.get_permalink($post_id).'">'.$username.' pagará '.get_the_title($post_id).' mediante transferencia</a> <a href="#hidden">'.current_time('mysql').'</a>';
 
         }elseif($paymethod == 'paypal'){
           //TODO Pago por paypal

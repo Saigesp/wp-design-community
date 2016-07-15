@@ -7,7 +7,7 @@ if(get_user_meta($current_user->ID, 'asociation_position', true) == 'tesorero' |
     'posts_per_page' => -1,
     'post_type' => 'fee',
     'orderby' => 'meta_value',
-    'meta_key'  => 'fee_date',
+    'meta_key'  => 'fee_date_end',
   );
   $wp_query = new wp_query( $args );
 

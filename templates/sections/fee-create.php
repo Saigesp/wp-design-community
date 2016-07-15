@@ -5,7 +5,9 @@
 
 	  <?php wpdc_the_input_number('fee_quantity', '', 'Cantidad', 0, 999);?>
 
-	  <?php wpdc_the_input_date('fee_date', '', 'Inicio', false);?>
+	  <?php wpdc_the_input_date('fee_date_start', '', 'Inicio');?>
+
+	  <?php wpdc_the_input_date('fee_date_end', '', 'Fin');?>
 
 	  <?php wpdc_the_submit('updatesection', 'newfee', '', '', 'Crear cuota');?>
 

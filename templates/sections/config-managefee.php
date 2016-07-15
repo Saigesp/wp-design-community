@@ -57,6 +57,8 @@
     </ul>
 
     <?php wpdc_the_input_select_user_payed_fee('members_pending', 'Añadir abono (pendientes)', $asociates->results, true);?>
+
+    <h3 class="sep"><?php if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true)); else echo '0';?> Socios pendientes de pago</h3>
            
     <?php wpdc_the_submit('updatesection', 'updatefee', '', '', 'Actualizar cuota');?>
 

@@ -187,17 +187,6 @@ function inject_in_all() { ?>
 
       beautydate();
 
-      if ($('.js-pikaday').length > 0){
-        var $datepicker = $('.js-pikaday').pikaday({
-            format: 'YYYY-MM-DD h:mm:ss',
-            minDate: new Date(2016, 0, 1),
-            maxDate: new Date(2020, 12, 31),
-            yearRange: [2016,2020],
-            onSelect: function() {
-            },          
-        });
-      }
-
 
 
 /**

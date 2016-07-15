@@ -4,12 +4,13 @@
 
     <div class="wrap wrap--frame wrap--flex">
       <div class="wrap wrap--frame__middle">
-        <p>Fecha: <?php echo get_post_meta(get_the_ID(), 'fee_date', true); ?></p>
+        <p><strong>Inicio:</strong> <?php echo get_post_meta(get_the_ID(), 'fee_date_start', true); ?><br>
+        <strong>Fin:</strong> <?php echo get_post_meta(get_the_ID(), 'fee_date_end', true); ?></p>
       </div>
       <div class="wrap wrap--frame__middle">
-        <p>
+        <p><strong>Cantidad:</strong> <?php echo get_post_meta(get_the_ID(), 'fee_quantity', true).' €';?><br>
+           <strong>Estado:</strong>
           <?php
-          echo get_post_meta(get_the_ID(), 'fee_quantity', true).' € (';
           if($members_payed[get_current_user_id()] != ''){
             echo 'Abonado '.$members_payed[get_current_user_id()].'';
           }elseif($members_pending[get_current_user_id()] != ''){
@@ -17,14 +18,16 @@
           }else{
             echo 'Por abonar';
           }
-          echo ')';
           ?>
         </p>
       </div>
     </div>
+    <div class="wrap wrap--frame">
+      <?php echo html_entity_decode(get_option("text_asociate_payfee")); ?>
+    </div>
 
     <?php
-    
+
     ?>
 
     <?php if($members_pending[get_current_user_id()] == '' && $members_payed[get_current_user_id()] == ''){ ?>

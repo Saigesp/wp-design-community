@@ -158,6 +158,65 @@ if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) =
 }
 
 
+/* AUTHOR MENSAJES
+*
+***************************************************** */
+if (esc_attr($_POST['action']) == 'update-notification' && is_user_logged_in() && is_author()) {
+
+  $user_id = get_query_var('author'); // User id from profile page
+
+  if(esc_attr($_POST['notification']) == 'message'){
+
+    $msg = esc_attr($_POST['msguser-textarea']) == '' ? esc_attr($_POST['msguser']) : esc_attr($_POST['msguser-textarea']);
+
+    if($user_id > 0){ // If user exists
+      if($msg != ''){
+
+        if($user_id == get_current_user_id()){ // If user is viewing itself (message send from user)
+          $message = '<a href="'.get_author_posts_url($user_id).'">'.wpdc_get_user_name($user_id).'</a>: '.$msg.' <a href="#hidden" class="js-date">'.current_time('mysql').'</a>';
+          $secreatry_page = get_page_by_title('Configuration secretary');
+          $commentdata = array(
+            'comment_post_ID' => $secreatry_page->ID,
+            'comment_author' => wpdc_get_user_name($user_id),
+            'comment_author_email' => get_userdata($user_id)->user_email,
+            'comment_author_url' => get_userdata($user_id)->user_url,
+            'comment_content' => $message,
+            'comment_type' => '',
+            'comment_parent' => 0,
+            'user_id' => 1,
+            'comment_approved' => 1
+          );
+          $comment_id = wp_new_comment( $commentdata );
+          add_comment_meta( $comment_id, 'notification', current_time('mysql'), true );
+        }
+
+        add_user_notification_track($user_id, 'message', $msg);
+        $alerts_success .= '<p>Mensaje enviado</p>';
+      }else{
+        $alerts_error .= '<p>Mensaje vacio!</p>';
+      }
+    }
+  }
+  if(esc_attr($_POST['notification']) == 'clean'){
+    clean_user_notification_track($user_id, 'all', 'message');
+    $alerts_success .= '<p>Historial de mensajes eliminado!</p>';
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* INVITAR/CREAR USUARIO
 *
 *****************************************************
@@ -1212,16 +1271,6 @@ if (esc_attr($_POST['action']) == 'edit-posts'  && (get_user_meta($current_user-
   }
 }
 
-
-
-
-if (esc_attr($_POST['action']) == 'update-notification' && is_user_logged_in()) {
-  if(esc_attr($_POST['notification']) == 'message'){
-    $user_id = get_query_var('author');
-    add_user_notification_track($user_id, 'message', esc_attr($_POST['msg']));
-    $alerts_success .= '<p>Mensaje enviado</p>';
-  }
-}
 
 
 

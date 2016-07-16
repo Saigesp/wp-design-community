@@ -27,6 +27,7 @@
 		<?php }elseif (get_user_meta(get_current_user_id(), 'asociation_status', 1) == 'pendiente'){ ?>
 			<div class="wrap wrap--content wrap--alert wrap--alert__info"
 			<p>Tu solicitud se está tramitando en estos momentos. Te rogamos tengas paciencia.</p>
+			</div>
 		<?php } ?>
 	</form>
 </section>

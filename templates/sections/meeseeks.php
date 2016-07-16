@@ -97,7 +97,8 @@
 </section>
 <?php } ?>
 
-<?php //if(is_user_role('administrator')){ ?>
+<?php if(is_user_role('administrator')){ ?>
+<?php //if(false){ ?>
 <?php if(!empty($_POST)) { ?>
 <section class="wrap wrap--content wrap--shadow">
 
@@ -121,5 +122,5 @@
 </section>
 
 <?php } ?>
-<?php //} ?>
+<?php } ?>
 

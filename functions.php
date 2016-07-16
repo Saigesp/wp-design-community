@@ -233,16 +233,24 @@ function update_user_notification_track($user_id, $date, $key, $value){
 } 
 
 // Get user notifications track
-function get_user_notification_track($user_id){
+function get_user_notification_track($user_id, $filterkey = '', $filtervalue = ''){
   if($user_id > 0){
     $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
     if(!is_array($user_notification_track)) $user_notification_track = [];
+    if($filterkey != '' && $filtervalue != ''){
+      $output = [];
+      foreach ($user_notification_track as $track) {
+        if($track[$filterkey] == $filtervalue) array_push($output, $track);
+      }
+      $user_notification_track = $output;
+    }
+
     return $user_notification_track;
   }
 }  
 
 // Clean user notifications track
-function clean_user_notification_track($user_id, $date = ''){
+function clean_user_notification_track($user_id, $date = '', $type = ''){
   if(validateDate($date) && $user_id > 0){
 /* ¿Es necesario volver a ordenar los elementos?
     $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
@@ -264,8 +272,20 @@ function clean_user_notification_track($user_id, $date = ''){
     update_user_meta($user_id, 'user_notification_track', $user_notification_track );
     */
   }elseif($user_id > 0 && $date == 'all'){
-    $user_notification_track = [];
-    update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+    if($type == 'all'){
+      $user_notification_track = [];
+      update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+    }else{
+      $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
+      if(is_array($user_notification_track)){
+        $output = [];
+        foreach ($user_notification_track as $track) {
+          if($track['type'] != $type) array_push($output, $track);
+        }
+        $user_notification_track = $output;
+        update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+      }
+    }
   }
 } 
 

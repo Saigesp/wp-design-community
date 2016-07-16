@@ -445,6 +445,7 @@ ins {
 .wrap.invisible {
   opacity: 0 !important;
   height: 0 !important;
+  min-height: 0 !important;
   pointer-events: none !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -847,6 +848,7 @@ body {
  ***********************************/
 .wrap--meeseeks {
   margin-top: 0 !important;
+  margin-bottom: 0 !important;
   width: 100%;
   background-color: #333 !important;
   color: white;
@@ -902,6 +904,10 @@ body {
   height: 0;
   display: block;
   transition: all 350ms ease;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"] + .options:hover {
+  opacity: 1;
+  height: 50px;
 }
 .wrap--meeseeks .wrap--notification__send input[type="text"] + .options label {
   margin: 5px 5px 0 0;
@@ -3775,6 +3781,78 @@ textarea.js-medium-editor,
 }
 .flexboxer .wrap--userinfo .wrap--frame__middle {
   margin-left: 15px;
+}
+.wrap--messages .list--messages {
+  border: 0;
+}
+.wrap--messages .list--messages .message {
+  background: transparent !important;
+  margin: 5px 0 !important;
+}
+.wrap--messages .list--messages .message .content--message {
+  max-width: 70%;
+  display: inline-block;
+  padding: 5px 8px;
+}
+.wrap--messages .list--messages .message p {
+  margin: 0;
+}
+.wrap--messages .list--messages .message .changeby,
+.wrap--messages .list--messages .message .date {
+  opacity: 0.6;
+  font-size: 1.2rem;
+}
+.wrap--messages .list--messages .message--send {
+  text-align: right;
+}
+.wrap--messages .list--messages .message--send .content--message {
+  background: #bbe4b3;
+}
+.wrap--messages .list--messages .message--receive .content--message {
+  background: #f3f3f3;
+}
+.wrap--messages .message-input {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  overflow: hidden;
+}
+.wrap--messages .message-input textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 15px 105px 15px 15px;
+  transition: all 350ms ease;
+}
+.wrap--messages .message-input textarea:focus {
+  outline: 0;
+  background: rgba(0, 0, 0, 0.1);
+  padding-left: 15px;
+}
+.wrap--messages .message-input textarea:focus + .options {
+  opacity: 1;
+  height: 50px;
+}
+.wrap--messages .message-input textarea + .options {
+  opacity: 0;
+  height: 0;
+  display: block;
+  transition: all 350ms ease;
+}
+.wrap--messages .message-input textarea + .options:hover {
+  opacity: 1;
+  height: 50px;
+}
+.wrap--messages .message-input textarea + .options label {
+  margin: 5px 5px 0 0;
+  padding: 10px 15px;
+  display: inline-block;
+  cursor: pointer;
+  background: #FE6FCA;
+  transition: opacity 350ms ease;
+}
+.wrap--messages .message-input textarea + .options label:hover {
+  opacity: 0.6;
 }
 /**
  * MEDIA QUERYS

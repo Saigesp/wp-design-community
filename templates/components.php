@@ -1,23 +1,25 @@
 <?php
 
 function wpdc_the_pageoptions($menu){
-	$mid_menu = round(sizeof($menu)/2);
-	$cont = 0;
-	$output = '<section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent menu menu--frame">';
-	if(sizeof($menu) > 0) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
-    foreach ($menu as $section => $text) {
-    	$cont++;
-    	if($cont > $mid_menu) $output .= '<p class="text text--right">';
-    	else $output .= '<p>';
-    	$output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
-    	//if($cont == 1) $output .= ' active';
-    	$output .= '" data-section="'.$section.'">'.$text.'</a>';
-    	$output .= '</p>';
-    	if($cont == $mid_menu && sizeof($menu) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-    }
-	if(sizeof($menu) > 0) $output .= '</div>';
-	$output .= '</section>';
-    echo $output;
+	if(sizeof($menu) > 0){
+		$mid_menu = round(sizeof($menu)/2);
+		$cont = 0;
+		$output = '<section class="wrap wrap--content wrap--content__toframe wrap--flex wrap--transparent menu menu--frame">';
+		$output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+		foreach ($menu as $section => $text) {
+			$cont++;
+			if($cont > $mid_menu) $output .= '<p class="text text--right">';
+			else $output .= '<p>';
+			$output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
+			//if($cont == 1) $output .= ' active';
+			$output .= '" data-section="'.$section.'">'.$text.'</a>';
+			$output .= '</p>';
+			if($cont == $mid_menu && sizeof($menu) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+		}
+		if(sizeof($menu) > 0) $output .= '</div>';
+		$output .= '</section>';
+		echo $output;
+	}
 }
 
 /**
@@ -50,6 +52,59 @@ function wpdc_the_section_custom($options, $id = '', $title = '', $hidden = fals
 		echo $output;
 	}
 }
+
+/**
+ * SECTION MESSAGES
+ ***********************************/
+function wpdc_the_section_messages($track, $id = '', $title = '', $hidden = false){
+	if(is_array($track)){
+		$output = '<section id="'.$id.'" class="wrap wrap--content wrap--shadow wrap--messages';
+		if($hidden) $output .= ' js-section wrap--hidden';
+		$output .= '">';
+		if($title != '') $output .= '<h3 class="title title--section">'.$title.'</h3>';
+		$output .= '<ul class="list list--messages';
+		if(sizeof($track) > 6) $output .= ' list--scroll list--scroll__ylarge';
+		$output .= '">';
+		foreach ($track as $entry) {
+			$output .= '<li class="item message';
+			if(get_current_user_id() == $entry['changeby']) $output .= ' message--send';
+			else $output .= ' message--receive';
+			$output .= '">';
+			$output .= '<p class="changeby">'.wpdc_get_user_name($entry['changeby']).'</p>';
+			$output .= '<div class="content--message wrap--shadow">';
+			$output .= '<p class="msg">'.html_entity_decode($entry['msg']).'</p>';
+			$output .= '<p class="date"><span class="js-date">'.$entry['date'].'</span> - <span class="js-date-fromnow">'.$entry['date'].'</span></p>';
+			$output .= '</div>';
+			$output .= '</li>';
+		}
+		$output .= '</ul>';
+		$output .= '<form method="POST" action="" class="message-input">';
+		$output .= '<div class="wrap wrap--icon wrap--icon__remove">
+						<label for="clean-messages">
+							<img src="'.get_stylesheet_directory_uri().'/img/icons/trash.svg" title="Borrar historial" alt="Borrar" class="icon icon--clean icon--corner">
+
+						</label>
+					</div>';
+		$output .= '<textarea name="msguser-textarea"';
+		//if(get_current_user_id()) $output .= ' class="js-medium-editor"';
+		$output .= ' placeholder="Escribe a ';
+		if(get_current_user_id() == get_query_var('author')) $output .= get_option('blogname');
+		else $output .= wpdc_get_user_name(get_query_var('author'));
+		$output .= '"></textarea>
+			<div class="options">
+				<label for="sendmsg-textarea">Enviar</label>
+			</div>
+			<button type="submit" id="sendmsg-textarea" class="hidden" name="notification" value="message"></button>
+			<button type="submit" id="clean-messages" class="hidden" name="notification" value="clean"
+			onclick="return confirm(\'Vas a borrar todos los mensajes. ¿Estás seguro?\');"
+			></button>
+			<input type="hidden" name="action" value="update-notification"/>
+		</form>';
+		$output .= '</section>';
+		echo $output;
+	}
+}
+
 
 /**
  * SECTION REGISTRY TRACK

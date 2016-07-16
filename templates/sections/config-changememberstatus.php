@@ -15,7 +15,7 @@
         <h3 class="sep">Usuarios pendientes de validación</h3>
 
         <!-- valide asociate -->
-        <?php wpdc_the_input_select_user('members_tovalide', 'Validar usuarios', $subscribers_pending->results, 'asociation_status', true);?>
+        <?php wpdc_the_input_select_user('members_tovalide', 'Validar usuarios (hacer asociado)', $subscribers_pending->results, 'asociation_status', true);?>
 
         <!-- suspend asociate -->
         <?php wpdc_the_input_select_user('members_tosuspend', 'Eliminar de pendientes', $subscribers_pending->results, 'asociation_status', true);?>

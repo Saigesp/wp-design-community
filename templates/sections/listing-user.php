@@ -11,7 +11,9 @@
                         <?php wpdc_the_profile_photo($user->ID);?>
                     </div>
                     <div class="wrap wrap--frame wrap--frame__fourth">
+                        <a href="<?php echo get_author_posts_url($user->ID);?>">
                         <?php wpdc_the_user_name($user->ID);?>
+                        </a>
                     </div>
                     <div class="wrap wrap--frame wrap--frame__fourth">
                         <?php wpdc_the_asociation_position($user->ID);?>

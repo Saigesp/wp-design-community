@@ -6,13 +6,12 @@
     $notifications = array_reverse(get_user_notification_track(get_current_user_id()));
     $index = count($track);
     foreach ($notifications as $track) {
+      if($track['changeby'] == get_current_user_id()) continue;
+      if($track['status'] != 'new') continue;
       $output = '<li class="notification">';
       if($track['type'] == 'message') {
-        $output .= '<span class="author">'.wpdc_get_user_name($track['changeby']).'</span>: ';
         $output .= '<span class="msg">'.$track['msg'].'</span> ';
       }
-
-      //foreach ($track as $key => $value) $output .= $key.': '.$value.' | '; //Test purpouses
 
       $output .= ' <span title="'.$track['date'].'" class="js-date-fromnow">'.$track['date'].'</span>';
       $output .= '</li>';
@@ -25,7 +24,7 @@
   <div class="wrap wrap--frame wrap--notification wrap--notification__send">
     <h4><?php echo wpdc_get_user_name(get_query_var('author'));?></h4>
     <form method="POST" action="">
-      <input type="text" name="msg" placeholder="Enviar mensaje a <?php echo wpdc_get_user_name(get_query_var('author'));?>"> 
+      <input type="text" name="msguser" placeholder="Mensaje rápido a <?php echo wpdc_get_user_name(get_query_var('author'));?>"> 
       <div class="options">
         <label for="sendmsg">Enviar</label>
       </div>

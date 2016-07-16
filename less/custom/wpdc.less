@@ -386,8 +386,82 @@
 	}
 }
 
-
-
+.wrap--messages{
+	.list--messages {
+		border: 0;
+		.message {
+			background: transparent !important;
+			margin: 5px 0 !important;
+			.content--message {
+				max-width: 70%;
+				display: inline-block;
+				padding: 5px 8px;
+			}
+			p {
+				margin: 0;
+			}
+			.changeby,
+			.date {
+				opacity: 0.6;
+				font-size: 1.2rem;
+			}
+			&--send {
+				text-align: right;
+				.content--message {
+					background: #bbe4b3;
+				}
+			}
+			&--receive {
+				.content--message {
+					background: #f3f3f3;
+				}
+			}
+		}
+	}
+	.message-input {
+		border-top: 1px solid rgba(0,0,0,0.1);
+    	padding-top: 10px;
+    	overflow: hidden;
+    	textarea{
+			width: 100%;
+			background: transparent;
+			border: 0;
+			background-color: rgba(0,0,0,0.05);
+			padding: 15px 105px 15px 15px;
+			transition: all 350ms ease;
+			&:focus{
+				outline: 0;
+				background: rgba(0,0,0,0.1);
+				padding-left: 15px;
+				+ .options {
+					opacity: 1;
+					height: 50px;
+				}
+			}
+			+ .options {
+				opacity: 0;
+				height: 0;
+				display: block;
+				transition: all 350ms ease;
+				&:hover {
+					opacity: 1;
+					height: 50px;
+			    }
+				label {
+					margin: 5px 5px 0 0;
+					padding: 10px 15px;
+					display: inline-block;
+					cursor: pointer;
+					background: @link-color-primary;
+					transition: opacity 350ms ease;
+					&:hover {
+						opacity: 0.6;
+					}
+				}
+			}
+    	}
+	}
+}
 
 
 

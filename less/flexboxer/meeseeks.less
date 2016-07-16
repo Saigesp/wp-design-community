@@ -7,6 +7,7 @@
  ***********************************/
 .wrap--meeseeks {
 	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 	width: 100%;
 	background-color: @meeseeks-background-color !important;
 	color: @meeseeks-text-color;
@@ -64,6 +65,10 @@
 			    	height: 0;
 			    	display: block;
 			    	transition: all 350ms ease;
+			    	&:hover {
+			    		opacity: 1;
+			    		height: 50px;
+			    	}
 					label {
 						margin: 5px 5px 0 0;
 						padding: 10px 15px;

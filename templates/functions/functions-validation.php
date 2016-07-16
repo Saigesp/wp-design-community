@@ -989,7 +989,7 @@ if (esc_attr($_POST['action']) == 'edit-concursos'  && (get_user_meta($current_u
 *
 ******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'configuration-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator'))) {
 
 
   if ( $_POST['updatesection'] == 'newjob' ) {
@@ -1053,7 +1053,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 ******************************************************/
 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'edit-jobs'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator'))) {
 
 
   if ( esc_attr($_POST['updatesection']) == 'updatejob' ) {
@@ -1123,7 +1123,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 ******************************************************/
  
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'configuration-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'configuration-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
 
 
   if ( $_POST['updatesection'] == 'newposts' ) {
@@ -1172,7 +1172,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 *
 ******************************************************/
 
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POST['action'] == 'edit-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
+if (esc_attr($_POST['action']) == 'edit-posts'  && (get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_posts' || is_user_role('administrator'))) {
 
 
   if ( esc_attr($_POST['updatesection']) == 'updateposts' ) {
@@ -1211,6 +1211,22 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
   }
 }
+
+
+
+
+if (esc_attr($_POST['action']) == 'update-notification' && is_user_logged_in()) {
+  if(esc_attr($_POST['notification']) == 'message'){
+    $user_id = get_query_var('author');
+    add_user_notification_track($user_id, 'message', esc_attr($_POST['msg']));
+    $alerts_success .= '<p>Mensaje enviado</p>';
+  }
+}
+
+
+
+
+
 
 if($alerts_success != '') new Frontend_box( $alerts_success, array('type'=>'success','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));
 if($alerts_error != '') new Frontend_box( $alerts_error, array('type'=>'error','where'=>'meeseeks','auto_close'=> true,'delay'=>'7'));

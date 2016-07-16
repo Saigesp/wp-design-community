@@ -12,26 +12,6 @@ $events_query = new WP_Query( $args );
 
 <div class="flexboxer flexboxer--home">
 
-  <section class="wrap wrap--frame wrap--frame__tocontent wrap--flex wrap--transparent">
-    <div class="wrap wrap--frame wrap--frame__middle">
-      <div class="wrap wrap--logo">
-        <a href="<?php bloginfo('url'); ?>">
-          <?php if(wp_get_attachment_url(get_theme_mod( 'logo_file', true )) != ''){ ?>
-            <img alt="logo" src="<?php echo wp_get_attachment_url(get_theme_mod( 'logo_file', true )); ?>"/>
-          <?php } else { ?>
-            <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
-          <?php } ?>
-        </a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      </div>
-    </div>
-    <div class="wrap wrap--frame wrap--frame__middle">
-        <p class="right">Otro menu</p>
-        <div class="wrap wrap--frame wrap--social">
-        </div>
-    </div>
-  </section>
-
   <?php if ($events_query->have_posts()) { ?>
     <section class="wrap wrap--fullwidth wrap--slider">
       <div id="mainslider" class="main-gallery">

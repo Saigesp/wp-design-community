@@ -196,6 +196,82 @@ function update_op_user_meta($user_id, $field, $input){
   } 
 }
 
+
+/**
+ * USER NOTIFICATIONS
+ ***********************************/
+// Add user notifications track
+function add_user_notification_track($user_id, $type = 'notification', $msg = ''){
+  if($user_id > 0){
+    $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
+    if(!is_array($user_notification_track)) $user_notification_track = [];
+    $newtrack = [
+      'type' => $type,
+      'date' => current_time('mysql'),
+      'status' => 'new',
+      'changeby' => get_current_user_id(),
+      'msg' => $msg
+    ];
+    array_push($user_notification_track, $newtrack);
+    update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+  }
+} 
+// Update user notifications track
+function update_user_notification_track($user_id, $date, $key, $value){
+  if($user_id > 0 && validateDate($date)){
+    $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
+    if(is_array($user_notification_track)){
+      foreach ($user_notification_track as $track) {
+        if($track['date'] == $date) {
+          $track[$key] = $value;
+          break;
+        }
+      }
+      update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+    }
+  }
+} 
+
+// Get user notifications track
+function get_user_notification_track($user_id){
+  if($user_id > 0){
+    $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
+    if(!is_array($user_notification_track)) $user_notification_track = [];
+    return $user_notification_track;
+  }
+}  
+
+// Clean user notifications track
+function clean_user_notification_track($user_id, $date = ''){
+  if(validateDate($date) && $user_id > 0){
+/* ¿Es necesario volver a ordenar los elementos?
+    $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
+    if(is_array($user_notification_track)){
+      $ntf_i = 0;
+      $ntf_s = -1;
+      foreach ($user_notification_track as $track) {
+        if($track['date'] == $date) {
+          $ntf_s = $ntf_i++;
+          break;
+        }
+      }
+      if($ntf_s > -1){
+        unset($user_notification_track[$ntf_s]);
+      }
+
+    }
+    array_push($user_notification_track, $newtrack);
+    update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+    */
+  }elseif($user_id > 0 && $date == 'all'){
+    $user_notification_track = [];
+    update_user_meta($user_id, 'user_notification_track', $user_notification_track );
+  }
+} 
+
+/**
+ * USER REGISTRY TRACK
+ ***********************************/
 // Update user registry process track
 function update_user_registry_track($user_id, $status){
   if($user_id > 0){
@@ -225,20 +301,6 @@ function get_user_registry_track($user_id){
 
 } 
 
-//Unregist post type
-if ( !function_exists( 'unregister_post_type' ) ) {
-  function unregister_post_type( $post_type ) {
-    if(post_type_exists($post_type)){
-      global $wp_post_types;
-        if ( isset( $wp_post_types[ $post_type ] ) ) {
-            unset( $wp_post_types[ $post_type ] );
-            flush_rewrite_rules();
-            return true;
-        }
-        return false;
-    }
-  }
-}
 
 /**
  * REQUIRE WP PLUGINS

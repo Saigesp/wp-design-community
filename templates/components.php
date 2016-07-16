@@ -56,7 +56,7 @@ function wpdc_the_section_custom($options, $id = '', $title = '', $hidden = fals
  ***********************************/
 function wpdc_the_section_registry_track($track, $id = '', $title = '', $hidden = false, $right = false){
 	if(is_array($track)){
-		
+		$index = count($track);
 		$output = '<section id="'.$id.'" class="wrap wrap--content wrap--shadow wrap--info wrap--info__list';
 		if($hidden) $output .= ' js-section wrap--hidden';
 		$output .= '">';
@@ -64,7 +64,8 @@ function wpdc_the_section_registry_track($track, $id = '', $title = '', $hidden 
 		$output .= '<ul class="list';
 		if(sizeof($track) > 6) $output .= ' list--scroll list--scroll__ylarge';
 		$output .= '">';
-		foreach ($track as $entry) {
+		while($index) {
+			$entry = $track[--$index];
 			$output .= '<li class="item">';
 			$output .= '<span class="date"><span class="js-date">'.$entry['date'].'</span> <span class="js-date-fromnow">'.$entry['date'].'</span></span> '.$entry['status'].' por '.wpdc_get_user_name($entry['changeby']);
 			$output .= '</li>';
@@ -417,7 +418,7 @@ function wpdc_the_submit_double($name, $value, $text, $name2, $value2, $text2, $
 function wpdc_the_edit_icon($link, $position = 0){
 	$output = '<div class="wrap wrap--icon wrap--icon__edit">';
 	$output .= '<a href="'.$link.'">';
-	$output .= '<img src="'.get_stylesheet_directory_uri().'/img/icons/pencil.svg" alt="Edit" class="icon icon--edit icon--corner">';
+	$output .= '<img src="'.get_stylesheet_directory_uri().'/img/icons/pencil.svg" alt="Editar" title="Editar" class="icon icon--edit icon--corner">';
 	$output .= '</a>';
 	$output .= '</div>';
 	echo $output;

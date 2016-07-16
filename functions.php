@@ -19,7 +19,7 @@ include_once(locate_template('plugins/frontend-notifications/class-frontend-box.
 
 //AJAX
 function ajax_script_FTW() {
-  wp_enqueue_script( 'ajax', get_template_directory_uri() . '/templates/ajax.js', array( 'jquery' ), '1.0.0', true );
+  wp_enqueue_script( 'ajax', get_template_directory_uri() . '/plugins/ajax.js', array( 'jquery' ), '1.0.0', true );
   wp_localize_script( 'ajax', 'Ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'ajax_script_FTW' );

@@ -72,7 +72,7 @@
             <?php if($comments){ ?>
               <?php foreach ( $comments as $comment ) { ?>
                 <?php 
-                echo '<li id="notification-'.$comment->comment_ID.'" class="notification">'.$comment->comment_content.'<br><span class="date js-date-fromnow">'.$comment->comment_date.'</span> <span class="action action--archive" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="deleteNotification(this)" >Archivar</span> <span class="action action--restore" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="approveNotificationFTW(this)">Restaurar</span> <span class="action action--remove" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="deleteNotificationFTW(this)">Eliminar</span></li>';
+                echo '<li id="notification-'.$comment->comment_ID.'" class="notification">'.$comment->comment_content.'<br><span class="date js-date-fromnow">'.$comment->comment_date.'</span> <span class="action action--archive" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Archivar</span> <span class="action action--restore" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Restaurar</span> <span class="action action--remove" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Eliminar</span></li>';
                 ?>
               <?php } ?>
             <?php } ?>
@@ -83,7 +83,7 @@
             <?php if($comments_trash){ ?>
               <?php foreach ( $comments_trash as $comment ) { ?>
                 <?php 
-                echo '<li id="notification-'.$comment->comment_ID.'" class="notification">'.$comment->comment_content.'<br><span class="date js-date-fromnow">'.$comment->comment_date.'</span> <span class="action action--archive" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="deleteNotification(this)" >Archivar</span> <span class="action action--restore" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="approveNotificationFTW(this)">Restaurar</span> <span class="action action--remove" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'" onclick="deleteNotificationFTW(this)">Eliminar</span></li>';
+                echo '<li id="notification-'.$comment->comment_ID.'" class="notification">'.$comment->comment_content.'<br><span class="date js-date-fromnow">'.$comment->comment_date.'</span> <span class="action action--archive" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Archivar</span> <span class="action action--restore" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Restaurar</span> <span class="action action--remove" data-id="'.$comment->comment_ID.'" data-nonce="'.wp_create_nonce('my_delete_post_nonce').'">Eliminar</span></li>';
                 ?>
               <?php } ?>
             <?php } ?>

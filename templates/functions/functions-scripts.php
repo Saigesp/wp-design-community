@@ -71,15 +71,43 @@ function inject_in_all() { ?>
     }
 
 
-
-
-
     /**
      * ALL PAGES
      ***********************************/
 
 
+
+
     jQuery(document).ready(function($) {
+/*
+      $('.action--remove').on('click', function(){
+          var elem = $(this);
+          var id = elem.data('id');
+          var nonce = elem.data('nonce');
+          $('#notification-'+id).addClass('hide');
+          if($("#notificationhistory .notification").length > 0) $('#archivelaunch').removeClass('hide');
+          else {
+            $('#archivelaunch').addClass('hide').removeClass('active');
+            $('#notificationhistory').removeClass('active');
+          }
+          $.ajax({
+            type: 'post',
+            url: Ajax.ajaxurl,
+            data: {
+              action: 'delete_post_FTW',
+              nonce: nonce,
+              id: id
+            },
+            success: function(){
+              $('#notification-'+id).remove();
+              alert('bien');
+            },
+            error: function(){
+              alert('No se ha podido procesar la solicitud :/');
+              $('#notification-'+id).removeClass('hide');
+            }
+          });
+        }); */
 
       imageresize();
 
@@ -443,5 +471,129 @@ function inject_in_all() { ?>
 
     <?php } ?>
     });
+
+
+
+
+
+
+
+jQuery(document).ready(function($) {
+  $('.action--restore').on('click', function(){
+    var elem = $(this);
+    var id = elem.data('id');
+    var nonce = elem.data('nonce');
+    var elem = $(elem)[0];
+    var id = $(elem).data('id');
+    var nonce = $(elem).data('nonce');
+    var notifications = Number($('.notificationresume .number').text());
+    
+    if(notifications >= 1){
+      notifications++;
+      $('#notificationcount .number').text(notifications);
+    }else{
+      $('#notificationcount').html('Tienes <span class="number">1</span> notificaciones pendiente:');
+    }
+
+    $('#notification-'+id).prependTo('#notificationnow .list');
+    if($("#notificationhistory .notification").length > 0) $('#archivelaunch').removeClass('hide');
+    else {
+      $('#archivelaunch').addClass('hide').removeClass('active');
+      $('#notificationhistory').removeClass('active');
+    }
+
+    $.ajax({
+      type: 'post',
+      url: Ajax.ajaxurl,
+      data: {
+        action: 'approve_post_FTW',
+        nonce: nonce,
+        id: id
+      },
+      success: function(){
+      },
+      error: function(){
+        alert('No se ha podido procesar la solicitud :/');
+        $('#notification-'+id).prependTo('#notificationhistory .list');
+      }
+    });
+  });
+
+  $('.action--archive').on('click', function(){
+    var elem = $(this);
+    var id = elem.data('id');
+    var nonce = elem.data('nonce');
+    var notifications = Number($('.notificationresume .number').text());
+
+    if(notifications > 1){
+      notifications--;
+      $('#notificationcount .number').text(notifications);
+    }else if(notifications == 1) $('#notificationcount').text('Todo está en regla ¡Que tengas un buen día!');
+
+    $('#notification-'+id).prependTo('#notificationhistory .list');
+    if($("#notificationhistory .notification").length > 0) $('#archivelaunch').removeClass('hide');
+    else {
+      $('#archivelaunch').addClass('hide').removeClass('active');
+      $('#notificationhistory').removeClass('active');
+    }
+
+    $.ajax({
+      type: 'post',
+      url: Ajax.ajaxurl,
+      data: {
+        action: 'delete_post',
+        nonce: nonce,
+        id: id
+      },
+      success: function(){
+      },
+      error: function(){
+        alert('No se ha podido procesar la solicitud :/');
+        $('#notification-'+id).prependTo('#notificationnow .list');
+      }
+    });
+
+  });
+
+  $('.action--remove').on('click', function(){
+    var elem = $(this);
+    var id = elem.data('id');
+    var nonce = elem.data('nonce');
+    $('#notification-'+id).addClass('hide');
+
+    if($("#notificationhistory .notification").length > 0) $('#archivelaunch').removeClass('hide');
+    else {
+      $('#archivelaunch').addClass('hide').removeClass('active');
+      $('#notificationhistory').removeClass('active');
+    }
+
+    $.ajax({
+      type: 'post',
+      url: Ajax.ajaxurl,
+      data: {
+        action: 'delete_post_FTW',
+        nonce: nonce,
+        id: id
+      },
+      success: function(){
+        $('#notification-'+id).remove();
+        alert('bien');
+      },
+      error: function(){
+        alert('No se ha podido procesar la solicitud :/');
+        $('#notification-'+id).removeClass('hide');
+      }
+    });
+
+
+  });
+});
+
+
+
+
+
+
+
   </script>
 <?php } ?>

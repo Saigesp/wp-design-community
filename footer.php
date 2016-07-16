@@ -30,18 +30,18 @@
   <!-- inject:js -->
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/chosen/chosen.jquery.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/moment/moment.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/pikaday.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-imagefill/js/jquery-imagefill.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.min.js"></script>
+  
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.slim.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery-plugin-printthis/lib/jquery.printThis.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/plugins/pikaday.jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
   <!-- endinject -->
+  
 
 
 

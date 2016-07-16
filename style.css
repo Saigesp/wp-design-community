@@ -854,6 +854,7 @@ body {
   -moz-box-shadow: inset 1px -2px 20px -6px rgba(0, 0, 0, 0.75);
   box-shadow: inset 1px -2px 20px -6px rgba(0, 0, 0, 0.75);
   padding: 10px;
+  overflow: hidden;
 }
 .wrap--meeseeks h4 {
   font-size: 3rem;
@@ -877,6 +878,41 @@ body {
 }
 .wrap--meeseeks > .wrap {
   max-width: 900px;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"] {
+  background: transparent;
+  border: 0;
+  padding: 15px 15px 15px 3px;
+  color: white;
+  width: 100%;
+  transition: all 350ms ease;
+  display: block;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"]:focus {
+  outline: 0;
+  background: rgba(0, 0, 0, 0.3);
+  padding-left: 15px;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"]:focus + .options {
+  opacity: 1;
+  height: 50px;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"] + .options {
+  opacity: 0;
+  height: 0;
+  display: block;
+  transition: all 350ms ease;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"] + .options label {
+  margin: 5px 5px 0 0;
+  padding: 10px 15px;
+  display: inline-block;
+  cursor: pointer;
+  background: #FE6FCA;
+  transition: opacity 350ms ease;
+}
+.wrap--meeseeks .wrap--notification__send input[type="text"] + .options label:hover {
+  opacity: 0.6;
 }
 .wrap--meeseeks .list--notification {
   margin: 0;
@@ -3434,27 +3470,6 @@ textarea.js-medium-editor,
  * PAGES (SPECIFIC)
  *************************************************************************************************/
 /**
- * HOME (home.php)
- ***********************************/
-.flexboxer--home {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.flexboxer--home .wrap--slider {
-  margin-top: 0;
-}
-.flexboxer--home .wrap--slider .gallery-cell {
-  height: 460px;
-}
-.flexboxer--home .wrap--article {
-  flex: 1 1 300px;
-  margin: 10px !important;
-}
-.flexboxer--home .wrap--article__first {
-  /*	flex: 1 1 100% !important;
-			margin: 10px auto !important;*/
-}
-/**
  * ARCHIVE EVENTS HOME (archive-event.php)
  ***********************************/
 .flexborex--archive__events {
@@ -3515,46 +3530,14 @@ textarea.js-medium-editor,
   display: none;
 }
 /**
- * SINGLE FEE (single-fee.php)
- ***********************************/
-.wrap--userlist td .icon-close {
-  height: 14px;
-  width: 14px;
-  padding: 8px;
-  background: red;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  right: 0;
-}
-/**
  * PAGE EDIT PROFILE (page-edit-profile.php)
  ***********************************/
-.flexboxer--author__edit .wrap--empty {
-  background: rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background 500ms ease;
-}
-.flexboxer--author__edit .wrap--empty:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-.flexboxer--author__edit .wrap--empty:hover .more--section {
-  color: rgba(255, 255, 255, 0.5);
-}
 .flexboxer--author__edit .more--section {
   margin: 0;
   text-align: center;
   color: rgba(0, 0, 0, 0.2);
   transition: color 500ms ease;
   padding: 15px 0;
-}
-.flexboxer--author__edit form {
-  position: relative;
-}
-.flexboxer--author__edit input[type="text"]:focus,
-.flexboxer--author__edit input[type="text"]:hover,
-.flexboxer--author__edit .js-medium-editor:hover {
-  background: rgba(0, 0, 0, 0.1);
 }
 /**
  * PAGE DISEÑADORES (page-disenadores.php)

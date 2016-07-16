@@ -14,6 +14,7 @@
 	-moz-box-shadow: inset 1px -2px 20px -6px rgba(0,0,0,0.75);
 	box-shadow: inset 1px -2px 20px -6px rgba(0,0,0,0.75);
 	padding: 10px;
+	overflow: hidden;
 	h4 {
 		font-size: 3rem;
 		font-weight: 100;
@@ -37,6 +38,46 @@
 	}
 	> .wrap {
     	max-width: 900px;
+	}
+	.wrap--notification {
+		&__receive {}
+		&__send {
+			input[type="text"]{
+				background: transparent;
+			    border: 0;
+			    padding: 15px 15px 15px 3px;
+			    color: white;
+    			width: 100%;
+    			transition: all 350ms ease;
+    			display: block;
+			    &:focus{
+			    	outline: 0;
+			    	background: rgba(0,0,0,0.3);
+			    	padding-left: 15px;
+			    	+ .options {
+			    		opacity: 1;
+			    		height: 50px;
+			    	}
+			    }
+			    + .options {
+			    	opacity: 0;
+			    	height: 0;
+			    	display: block;
+			    	transition: all 350ms ease;
+					label {
+						margin: 5px 5px 0 0;
+						padding: 10px 15px;
+						display: inline-block;
+						cursor: pointer;
+						background: @link-color-primary;
+						transition: opacity 350ms ease;
+						&:hover {
+							opacity: 0.6;
+						}
+					}
+			    }
+			}
+		}
 	}
 	.list--notification {
 		margin: 0;

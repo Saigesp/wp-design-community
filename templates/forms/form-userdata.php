@@ -1,5 +1,5 @@
   <section class="wrap wrap--content wrap--shadow wrap--form wrap--author">
-		<?php the_profile_photo($user);?>
+		<?php wpdc_the_profile_photo($user);?>
 
 		<?php wpdc_the_input_text('login', get_user_meta($user->ID,'nickname', 1), 'Login (No se puede cambiar)', 'login', true);?>
 

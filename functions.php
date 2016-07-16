@@ -214,20 +214,15 @@ function update_user_registry_track($user_id, $status){
     update_user_meta($user_id, 'user_registry_track', $user_registry_track );
   }
 
-}
+} 
+// Get user registry process track
+function get_user_registry_track($user_id){
+  if($user_id > 0){
+    $user_registry_track = get_user_meta($user_id, 'user_registry_track', true );
+    if(!is_array($user_registry_track)) $user_registry_track = [];
+    return $user_registry_track;
+  }
 
-
-// Profile image
-function the_profile_photo($user){
-
-  if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
-    $user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
-  elseif ($user->userphoto_image_file != '')
-    $user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
-  else
-    $user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
-
-    echo '<div class="wrap wrap--photo wrap--photo__mini" title="'.get_the_author_meta('first_name', $user_id).' '.get_the_author_meta('last_name', $user_id).'"><img src="'.$user_photo.'"></div>';
 } 
 
 //Unregist post type

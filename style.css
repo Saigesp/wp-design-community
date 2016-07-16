@@ -740,7 +740,7 @@ body {
   }
   .flexboxer .wrap--content__fullwidth {
     width: 100%;
-    max-width: calc(100% - 20px*3);
+    max-width: 100%;
   }
   .flexboxer .wrap--content.wrap--vertical {
     margin: 0 auto;
@@ -754,9 +754,7 @@ body {
   .flexboxer > .wrap:first-child {
     margin-top: 20px;
   }
-  .flexboxer > .wrap--content {
-    max-width: calc(900px - 20px*2);
-  }
+  .flexboxer > .wrap--content,
   .flexboxer > .wrap--frame,
   .flexboxer > .wrap--content__toframe {
     max-width: 900px;
@@ -801,9 +799,7 @@ body {
   }
 }
 @media only screen and (min-width: 1440px) {
-  .flexboxer > .wrap--content {
-    max-width: calc(1100px - 20px*2);
-  }
+  .flexboxer > .wrap--content,
   .flexboxer > .wrap--frame,
   .flexboxer > .wrap--content__toframe {
     max-width: 1100px;
@@ -1988,7 +1984,7 @@ button.secondary:focus {
   margin-left: 5px;
 }
 .list > .item:nth-child(odd) {
-  background: rgba(0, 0, 0, 0.1);
+  background: #f3f3f3;
 }
 .list > .item + .item {
   margin: 0;
@@ -3778,4 +3774,31 @@ textarea.js-medium-editor,
 }
 .flexboxer .wrap--form .list--appended .appendlist p {
   margin: 0;
+}
+.flexboxer .wrap--info p {
+  margin-bottom: 0;
+}
+.flexboxer .wrap--info__list .list .date {
+  display: block;
+}
+.flexboxer .wrap--info__list .list .js-date-fromnow {
+  opacity: 0.5;
+}
+.flexboxer .wrap--userinfo {
+  margin-top: 0;
+}
+.flexboxer .wrap--userinfo > .wrap--frame {
+  margin-top: 0;
+}
+.flexboxer .wrap--userinfo .wrap--frame__middle {
+  margin-left: 15px;
+}
+/**
+ * MEDIA QUERYS
+ *************************************************************************************************/
+@media only screen and (min-width: 780px) {
+  .flexboxer .wrap--info__list .list .date {
+    display: inline-block;
+    margin-right: 15px;
+  }
 }

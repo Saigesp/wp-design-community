@@ -25,7 +25,7 @@ $current_user_id = $current_user->ID;
 				"Última modificación" => get_the_date('Y-m-d h:i:s'),
 				"Autor" => wpdc_get_user_name($post->post_author),
 			];
-      		wpdc_the_postinfo($post_id, $infoarray);
+      		wpdc_the_section_custom($infoarray, 'postinfo', 'Detalles del artículo', true, true);
 		}
 		?>
 

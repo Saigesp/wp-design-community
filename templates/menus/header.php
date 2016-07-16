@@ -62,7 +62,7 @@
     <div class="wrap wrap--icon wrap--icon__usermenu" onclick="ToggleMenu('menuuser')">
       <?php
       if(!is_user_logged_in()) // the_svg_icon('doner');
-      else the_profile_photo($current_user->ID);
+      else wpdc_the_profile_photo($current_user->ID);
       ?>
 
     </div><!-- end of usermenu -->

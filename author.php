@@ -1,88 +1,58 @@
-<?php get_header(); ?> 
-
-<?php 
-  $pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
-  $post_per_page = get_option( 'posts_per_page', '10' );
+<?php get_header(); 
   $term_slug  = get_query_var( 'author' );
   $user_info  = get_userdata($term_slug);
   $user_meta  = get_user_meta($term_slug);
 ?>
-
-<?php
-  $args = array (
-    'order' => 'DESC',
-    'posts_per_page' => -1,
-    'author' => $term_slug,
-  );
-  $post_count_query = new wp_query( $args );
-  $post_count = $post_count_query->found_posts;
-  $total_post = $post_count ? count($post_count) : 1;
-  $total_pages = 1;
-  $offset = $post_per_page * ($pagec - 1);
-  $total_pages = ceil($total_post / $post_per_page);
-  $args = array( 
-    'order' => 'DESC',
-    'posts_per_page' => $post_per_page,
-    'offset'    => $offset,
-    'author' => $term_slug,
-  );
-  $wp_query = new wp_query( $args );
-?>
 <div class="flexboxer flexboxer--author">
 
   <section class="wrap wrap--content wrap--shadow">
-    <?php the_profile_photo($user_info->ID);?>
+    <div class="wrap wrap--frame wrap--flex wrap--userinfo">
+      <div class="wrap wrap--frame wrap--frame__100">
+        <?php wpdc_the_profile_photo($user_info->ID);?>
+      </div>
+      <div class="wrap wrap--frame wrap--frame__middle">
+        <p>
+          <a href="<?php echo get_author_posts_url( $user_info->ID ); ?>">
+            <?php echo wpdc_get_user_name($user_info->ID); ?>
+          </a>
+          <br><?php echo get_user_meta($user_info->ID, 'position', 1);?>
+          <br><?php echo change_role_name( get_user_meta($user_info->ID, 'asociation_position', 1)); ?>
+        </p>
+      </div>
+    </div>
 
     <?php wpdc_the_edit_icon(get_bloginfo('url').'/edit-profile/?id='.$user_info->ID);?>
       
-    <p class="authorarticlefoot">
-      <a href="<?php echo get_author_posts_url( $user_info->ID ); ?>">
-        <?php echo get_the_author_meta('first_name', $user_info->ID) . ' '. get_the_author_meta('last_name', $term_slug); ?>
-      </a>
-      <br>
-      <?php if ($user_meta['asociation_position'][0] == 'presidente') echo 'Presidente de AEDI';
-        elseif ($user_meta['asociation_position'][0] == 'vicepresidente') echo 'Vicepresidente de AEDI';
-        elseif ($user_meta['asociation_position'][0] == 'tesorero') echo 'Tesorero de AEDI';
-        elseif ($user_meta['asociation_position'][0] == 'secretario') echo 'Secretario de AEDI';
-        elseif ($user_meta['asociation_position'][0] == 'vocal') echo 'Vocal de AEDI';
-        elseif ($user_meta['asociation_position'][0] == 'socio') echo 'Socio de AEDI';
-      else echo '';?>
-      <br>
-      <?php if(get_user_meta($term_slug,twitter,true) != '') { ?>
-      <a href="<?php echo 'https://twitter.com/'.get_user_meta($term_slug,twitter,true);?>">
-        <?php // the_svg_icon('twitter');?>
-      </a>
-      <?php } ?>
-      <?php if(get_user_meta($term_slug,googleplus,true) != '') { ?>
-      <a rel="author" href="<?php echo get_user_meta($term_slug,googleplus,true);?>">
-        <?php // the_svg_icon('gplus');?>
-      </a>
-      <?php } ?>
-      <?php if(get_user_meta($term_slug,linkedin,true) != '') { ?>
-      <a href="<?php echo get_user_meta($term_slug,linkedin,true);?>">
-        <?php // the_svg_icon('linkedin');?>
-      </a>
-      <?php } ?>
+    <div class="description">
+      <?php echo html_entity_decode($user_info->description);?>
     </p>
-    <p class="description"><?php echo $user_info->description;?></p>
-    <div class="wrap wrap--icon wrap--icon__close" >
-      <a href="<?php echo get_bloginfo('url');?>/edit-profile/?id=<?php echo $user_info->ID;?>">
-        <?php // the_svg_icon('edit', 'icon--corner'); ?>
-      </a>
-    </div>
-  </section><!-- end of author -->
-<?php /*
-  <section class="wrap wrap--frame">
-    <div class="main-gallery js-flickity" data-flickity-options='{ "cellAlign": "left", "contain": true, "freeScroll": true, "wrapAround": true, "imagesLoaded": true }'>
-      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-      <div class="gallery-cell"><img src="http://localhost/wp-design-community/wp-content/uploads/2016/02/7716432650_a38ff8068c_h-300x195.jpg" alt=""></div>
-    </div>
   </section>
-  <section class="wrap wrap--content">
-    <p class="description"><?php echo $user_info->description;?></p>
-  </section>
-*/?>
+
+  <?php
+  if(is_user_role('editor') || is_user_role('administrator') || $user_info->ID == get_current_user_id()){
+
+    $userdata = [
+      'DNI' => get_the_author_meta('dbem_dnie', $user_info->ID),
+      'Fecha de nacimiento' => get_the_author_meta('bornday', $user_info->ID),
+      'Teléfono' => get_the_author_meta('dbem_phone', $user_info->ID),
+      'Dirección' => get_the_author_meta('dbem_address', $user_info->ID),
+      'Estudios' => get_the_author_meta('titulacion', $user_info->ID),
+      'Centro de estudios' => get_the_author_meta('centro_de_estudios', $user_info->ID),
+    ];
+
+    if($user_info->ID == get_current_user_id()) $title_section = 'Tus datos de asociado';
+    else $title_section = 'Datos de asociado';
+  
+    wpdc_the_section_custom( $userdata, 'userdata', $title_section);
+  }
+
+  if(is_user_role('editor') || is_user_role('administrator')){
+    wpdc_the_section_registry_track(get_user_registry_track($user_info->ID), 'user_track', 'Historial de estados');
+  }
+
+  
+  ?>
+
+
 </div><!-- end of flexboxer -->
 <?php get_footer(); ?>

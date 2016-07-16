@@ -419,5 +419,63 @@
 			}
 		}
 	}
+	.wrap--info {
+		p {
+			margin-bottom: 0;
+		}
+		&__list {
+			.list {
+				.date {
+					display: block;
+				}
+				.js-date-fromnow {
+				    opacity: 0.5;
+				}
+			}
+		}
+	}
+	.wrap--userinfo {
+		margin-top: 0;
+		> .wrap--frame {
+			margin-top: 0;
+		}
+		.wrap--frame__middle {
+			margin-left: 15px;
+		}
+	}
 }
 
+
+
+
+
+
+/**
+ * MEDIA QUERYS
+ *************************************************************************************************/
+
+@media only screen and (min-width: @query-mobile) {
+
+}
+
+@media only screen and (min-width: @query-tablet) {
+	.flexboxer {
+		.wrap--info {
+			&__list {
+				.list .date {
+					display: inline-block;
+					margin-right: 15px;
+				}
+			}
+		}
+	}
+
+}
+
+@media only screen and (min-width: @query-desktop) {
+
+}
+
+@media only screen and (min-width: @query-fullscreen) {
+
+}

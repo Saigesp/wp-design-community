@@ -223,7 +223,7 @@ $user_query = new WP_User_Query($args);
       
       <td><a href="<?php echo get_bloginfo('url').'/edit-profile/?id='.$user_id;?>"><?php echo $user_id;?></a></td>
       
-      <?php if($pho == true){ ?><td><?php the_profile_photo($user_id);?></td><?php } ?>
+      <?php if($pho == true){ ?><td><?php wpdc_the_profile_photo($user_id);?></td><?php } ?>
       
       <?php if($nam == true){ ?><td><a href="<?php echo get_author_posts_url($user_id);?>"><?php echo get_the_author_meta('first_name',$user_id ). ' '.get_the_author_meta('last_name',$user_id );?></a><br><em style="color: #ccc;"><?php echo get_the_author_meta('pseudonimo',$user_id );?></em></td><?php } ?>
       

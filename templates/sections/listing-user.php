@@ -8,7 +8,7 @@
 
                 <li class="item wrap wrap--frame wrap--flex">
                     <div class="wrap wrap--frame wrap--frame__45">
-                        <?php include(locate_template('templates/sections/profile-photo.php')); ?>
+                        <?php wpdc_the_profile_photo($user->ID);?>
                     </div>
                     <div class="wrap wrap--frame wrap--frame__fourth">
                         <?php wpdc_the_user_name($user->ID);?>

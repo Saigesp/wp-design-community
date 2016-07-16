@@ -300,7 +300,7 @@ body {
 			    }
 				&__fullwidth {
 					width: 100%;
-					max-width: ~"calc(100% - @{wrap-content-padding}*3)";
+					max-width: 100%;
 				}
 			    &.wrap--vertical {
 			    	margin: 0 auto;
@@ -316,9 +316,7 @@ body {
 		> .wrap:first-child{
 			margin-top: 20px;
 		}
-		> .wrap--content {
-		    max-width: ~"calc(900px - @{wrap-content-padding}*2)";
-		}
+		> .wrap--content,
 		> .wrap--frame,
 		> .wrap--content__toframe{
 		    max-width: 900px;
@@ -372,9 +370,7 @@ body {
 
 @media only screen and (min-width: @query-fullscreen) {
 	.flexboxer{
-		> .wrap--content {
-		    max-width: ~"calc(1100px - @{wrap-content-padding}*2)";
-		}
+		> .wrap--content,
 		> .wrap--frame,
 		> .wrap--content__toframe{
 		    max-width: 1100px;

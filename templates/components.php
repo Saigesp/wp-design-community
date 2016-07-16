@@ -20,24 +20,56 @@ function wpdc_the_pageoptions($menu){
     echo $output;
 }
 
-function wpdc_the_postinfo($post_id, $options){
-	if($post_id > 0 && is_array($options)){
+/**
+ * SECTION CUSTOM
+ ***********************************/
+function wpdc_the_section_custom($options, $id = '', $title = '', $hidden = false, $right = false){
+	if(is_array($options)){
 		$cont = 0;
-		$post = get_post($post_id);
 		$mid_array = round(sizeof($options)/2);
 		
-		$output = '<section id="postinfo" class="wrap wrap--content js-section wrap--hidden wrap--shadow wrap--info">';
-			$output .= '<div class="wrap wrap--frame wrap--flex">';
-				if(sizeof($options) > 0) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
-					foreach ($options as $key => $value) {
-						$cont++;
-						if($cont > $mid_array) $output .= '<p class="text text--right"><strong>'.$key.':</strong> '.$value.'</p>';
-						else $output .= '<p><strong>'.$key.':</strong> '.$value.'</p>';
-						if($cont == $mid_array && sizeof($options) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
-					}
-				if(sizeof($options) > 0) $output .= '</div>';
+		$output = '<section id="'.$id.'" class="wrap wrap--content wrap--shadow wrap--info';
+		if($hidden) $output .= ' js-section wrap--hidden';
+		$output .= '">';
+		if($title != '') $output .= '<h3 class="title title--section">'.$title.'</h3>';
+		$output .= '<div class="wrap wrap--frame wrap--flex">';
+		if(sizeof($options) > 0) $output .= '<div class="wrap wrap--frame wrap--frame__middle">';
+			foreach ($options as $key => $value) {
+				$cont++;
+				if($cont > $mid_array) {
+					$output .= '<p class="text ';
+					if($right) $output .= ' text--right';
+					$output .= '"><strong>'.$key.':</strong> '.$value.'</p>';
+				}
+				else $output .= '<p><strong>'.$key.':</strong> '.$value.'</p>';
+				if($cont == $mid_array && sizeof($options) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
+			}
+		if(sizeof($options) > 0) $output .= '</div>';
 		$output .= '</div>';
 		$output .= '</section>';
+		echo $output;
+	}
+}
+
+/**
+ * SECTION REGISTRY TRACK
+ ***********************************/
+function wpdc_the_section_registry_track($track, $id = '', $title = '', $hidden = false, $right = false){
+	if(is_array($track)){
+		
+		$output = '<section id="'.$id.'" class="wrap wrap--content wrap--shadow wrap--info wrap--info__list';
+		if($hidden) $output .= ' js-section wrap--hidden';
+		$output .= '">';
+		if($title != '') $output .= '<h3 class="title title--section">'.$title.'</h3>';
+		$output .= '<ul class="list';
+		if(sizeof($track) > 6) $output .= ' list--scroll list--scroll__ylarge';
+		$output .= '">';
+		foreach ($track as $entry) {
+			$output .= '<li class="item">';
+			$output .= '<span class="date"><span class="js-date">'.$entry['date'].'</span> <span class="js-date-fromnow">'.$entry['date'].'</span></span> '.$entry['status'].' por '.wpdc_get_user_name($entry['changeby']);
+			$output .= '</li>';
+		}
+		$output .= '</ul></section>';
 		echo $output;
 	}
 }
@@ -431,6 +463,22 @@ function wpdc_the_asociation_position($user_id) {
 	if(!empty($res))					$output .= change_role_name($res);
 	
 	echo $output;
+}
+
+// Profile image
+function wpdc_the_profile_photo($usuario){
+	if(is_object($usuario) && is_numeric($usuario->ID)) $user_id = $usuario->ID;
+	elseif(is_numeric($usuario)) $user_id = $usuario;
+	$user = get_userdata($user_id);
+
+	if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user_id, 100, 'medium') != '')
+		$user_photo = get_wp_user_avatar_src($user_id, 100, 'medium');
+	elseif ($user->userphoto_image_file != '')
+		$user_photo = get_bloginfo('url').'/wp-content/uploads/userphoto/'.$user->userphoto_image_file;
+	else
+		$user_photo = get_stylesheet_directory_uri().'/img/default/nophoto.png';
+
+	echo '<div class="wrap wrap--photo" title="'.wpdc_get_user_name($user_id).'"><img src="'.$user_photo.'"></div>';
 }
 
 

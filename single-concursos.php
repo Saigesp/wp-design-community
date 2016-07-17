@@ -14,23 +14,34 @@ $concurso_date      = get_post_meta(get_the_ID(), 'concurso_date', true) == '' ?
 
   <?php if (have_posts()) : ?>
     
-    <section class="wrap wrap--content wrap--shadow">
+    <section class="wrap wrap--frame wrap--shadow">
       <?php while (have_posts()) : the_post(); ?>
-        <h3 class="title title--article__sub"><?php the_title(); ?></h3>
 
-        <div class="wrap wrap--frame wrap--flex">
-          <div class="wrap wrap--frame wrap--frame__middle">
-            <span><strong>Convoca:</strong> <?php echo $concurso_org;?><br>
-            <?php if($concurso_quantity != ''){ ?><strong>Primer premio:</strong> <?php echo $concurso_quantity;?><?php } ?></span>
-          </div>
-          <div class="wrap wrap--frame wrap--frame__middle">
-            <span><strong>Cierre de convocatoria:</strong> <span class="js-date"><?php echo $concurso_date;?></span><br>
-            <?php if($concurso_bases != ''){ ?>Link a las <strong><a href="<?php echo $concurso_bases;?>" target="_blank">bases del concurso</a></strong><?php } ?></span>
-          </div>
+      <?php if(has_post_thumbnail()){ ?>
+        <div class="wrap wrap--wrap wrap--fullwidth">
+            <figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
+              <?php the_post_thumbnail('full');  ?>
+            </figure>
         </div>
-        
-        <div id="content-<?php the_ID(); ?>" class="wrap wrap--frame">
-          <?php the_content(); ?>
+      <?php }?>
+
+        <div class="wrap wrap--content">
+          <h3 class="title title--article__sub"><?php the_title(); ?></h3>
+
+          <div class="wrap wrap--frame wrap--flex">
+            <div class="wrap wrap--frame wrap--frame__middle">
+              <span><strong>Convoca:</strong> <?php echo $concurso_org;?><br>
+              <?php if($concurso_quantity != ''){ ?><strong>Primer premio:</strong> <?php echo $concurso_quantity;?><?php } ?></span>
+            </div>
+            <div class="wrap wrap--frame wrap--frame__middle">
+              <span><strong>Cierre de convocatoria:</strong> <span class="js-date"><?php echo $concurso_date;?></span><br>
+              <?php if($concurso_bases != ''){ ?>Link a las <strong><a href="<?php echo $concurso_bases;?>" target="_blank">bases del concurso</a></strong><?php } ?></span>
+            </div>
+          </div>
+          
+          <div id="content-<?php the_ID(); ?>" class="wrap wrap--frame">
+            <?php the_content(); ?>
+          </div>
         </div>
         
         <?php if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_concursos' || is_user_role('administrator') || is_user_role('editor')){?>

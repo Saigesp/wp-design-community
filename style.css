@@ -3767,6 +3767,12 @@ textarea.js-medium-editor,
 .list > .item .wrap.wrap--frame__45 {
   flex-basis: 45px;
 }
+.list > .item .wrap--linestrech {
+  line-height: 16px;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .flexboxer > .wrap.wrap--userlist .wrap--photo {
   border-radius: 100px;
   overflow: hidden;
@@ -3785,6 +3791,9 @@ textarea.js-medium-editor,
 }
 .flexboxer .wrap--info__list .list .js-date-fromnow {
   opacity: 0.5;
+}
+.flexboxer .thumb--article img {
+  width: 100%;
 }
 .flexboxer .wrap--userinfo {
   margin-top: 0;

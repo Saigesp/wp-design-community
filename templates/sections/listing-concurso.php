@@ -17,7 +17,7 @@
           <div class="wrap wrap--frame wrap--frame__middle">
             <a href="<?php the_permalink();?>"><?php the_title();?></a>
           </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+          <div class="wrap wrap--frame wrap--frame__fourth <?php if(strlen($concurso_org) > 24) echo 'wrap--linestrech' ?>">
             <?php echo $concurso_org; ?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">

@@ -3,49 +3,66 @@
 global $post;
 
 $args = array (
-	'post_type' => array('event'),
-  'posts_per_page' => 5
+	'post_type' => array('event', 'post', 'concursos'),
+  'posts_per_page' => 10
 );
-$events_query = new WP_Query( $args );
-
+$slider_query = new WP_Query( $args );
 ?>
+
+
+  <?php if (get_option('show_slider')) { ?>
+    <?php if ($slider_query->have_posts() && get_option('show_slider')) { ?>
+      <div class="flexboxer flexboxer--full">
+        <section class="wrap wrap--fullwidth wrap--slider">
+          <div id="mainslider" class="main-gallery">
+            <?php while ($slider_query->have_posts()) { $slider_query->the_post(); ?>
+              <div class="gallery-cell">
+                <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>" alt="" style="height:360px;">
+              </div>
+            <?php } ?>
+          </div>
+        </section>
+      </div>
+    <?php } ?>
+  <?php } ?>
 
 <div class="flexboxer flexboxer--home">
 
-  <?php if ($events_query->have_posts()) { ?>
-    <section class="wrap wrap--fullwidth wrap--slider">
-      <div id="mainslider" class="main-gallery">
-        <?php while ($query->have_posts()) { $query->the_post(); ?>
-          <div class="gallery-cell">
-            <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>" alt="" style="height:360px;" >
-          </div>
-        <?php } ?>
-      </div>
-    </section>
-  <?php } ?>
-
-  <section class="wrap wrap--content wrap--shadow">
-    <h3>Acerca de </h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint odio, veniam possimus et distinctio amet eos suscipit optio, nam nesciunt, facilis labore architecto assumenda minus. Delectus quaerat quibusdam consequuntur tempora?</p>
-    <div class="flexboxer flexboxer--disenadores">
+  <?php if (get_option('show_text_about_us')) { ?>
+    <section class="wrap wrap--content wrap--shadow">
+      <?php echo html_entity_decode(get_option('text_about_us'));?>
       <?php
       $original_query = $wp_query;
       $args = array( 
           'exclude' => array( 1 ),
           'role' => 'author',
-          'order' => 'registered',
-          'number' => 10,
+          'orderby' => 'rand',
+          'number' => 999,
       );
-      $user_query = new WP_User_Query($args);
-      if (!empty( $user_query->results)) { 
-        foreach ( $user_query->results as $user ) {
-          if((!function_exists('get_wp_user_avatar_src') || get_wp_user_avatar_src($user->ID, 100, 'medium') == '') && ($user->userphoto_image_file == '') && is_home()) continue;
-          include( locate_template( 'templates/loops/loop-profile.php' ));
-        }
-      }
-      ?>
-    </div>
-  </section>
+      $user_query = new WP_User_Query($args); ?>
+      <?php if (!empty( $user_query->results)) { ?>
+        <div class="wrap wrap--masonry <?php if ($user_query->results > 30) echo ' wrap--masonry__50 ' ?> <?php if ($user_query->results > 100) echo 'wrap--masonry__100' ?> ">
+          <?php 
+          $cont = 0;
+          $limit = 11;
+          foreach ( $user_query->results as $user ) {
+            if($cont >= $limit) continue;
+            $have_photo = false;
+            if(function_exists('get_wp_user_avatar_src') && get_wp_user_avatar_src($user->ID, 100, 'medium') != '') $have_photo = true;
+            elseif ($user->userphoto_image_file != '') $have_photo = true;
+            if(!$have_photo) continue;
+            wpdc_the_profile_photo($user);
+            $cont++;
+          }
+          if(get_option('users_can_asociate')){ ?>
+            <div class="wrap wrap--photo wrap--photo__upgrade" title="">
+              <a href="<?php echo site_url('upgrade');?>">Asóciate</a>
+            </div>
+          <?php } ?>
+        <?php } ?>
+      </div>
+    </section>
+  <?php } ?>
 
   <?php
   $args = array (
@@ -59,7 +76,7 @@ $events_query = new WP_Query( $args );
     $article_count = 0;
     ?>
 
-    <section class="wrap wrap--content wrap--transparent wrap--titlesection">
+    <section class="wrap wrap--content wrap--transparent wrap--titlesection wrap--spaced wrap--spaced__top">
       <h3>Últimas actividades</h3>
     </section>
 

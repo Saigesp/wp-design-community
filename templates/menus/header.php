@@ -11,31 +11,6 @@
           <?php } ?>
         </a><!-- end of logo -->
 
-        <!-- top title -->
-        <div class="wrap wrap--pagetitle">
-          <?php if(is_author()){ ?>
-            <div class="wrap wrap--path showontablet">
-              <h3 class="title"><span class="current"><?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?></span></h3>
-            </div>
-          <?php } ?>
-          <?php if(is_page('Edit Profile')){ ?>
-            <div class="wrap wrap--path showontablet">
-              <h3 class="title"><a href="<?php echo get_author_posts_url( $current_user->ID); ?>">
-                <?php echo get_the_author_meta('first_name', 1) . ' '. get_the_author_meta('last_name', 1); ?></a> / <span class="current">Edit Profile</span></h3>
-            </div>
-          <?php } ?>
-          <?php if(is_page('Edit Event')){ ?>
-            <div class="wrap wrap--path showontablet">
-              <h3 class="title"><span class="current">Crear evento</span></h3>
-            </div>
-          <?php } ?>
-          <?php if(is_single()){  ?>
-            <div class="wrap wrap--share sharecontainer">
-            	<?php // the_svg_icon('share');?>
-            </div>
-          <?php } ?>
-        </div><!-- end of top title -->
-
       </div>
       <div class="wrap wrap--frame wrap--frame__middle text text--right">
         

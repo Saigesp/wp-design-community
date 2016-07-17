@@ -50,7 +50,7 @@
 
 
   <div class="wrap wrap--frame">
-    <h4>Hola <?php echo wpdc_get_user_name(get_current_user_id());?></h4>
+    <h4 class="title">Hola <?php echo wpdc_get_user_name(get_current_user_id());?></h4>
 
       <div class="wrap wrap--frame wrap--flex">
         <div class="wrap wrap--frame wrap--frame__middle">

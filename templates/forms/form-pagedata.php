@@ -5,8 +5,8 @@
 
   <?php wpdc_the_input_date('last_login', date('d M Y H:i', strtotime(get_last_login($user->ID))), 'Último acceso', true);?>
 
-  <?php wpdc_the_input_number('karma', $op_user['karma'], 'Karma', 0, 999, true);?>
+  <?php if(is_object($op_user)) wpdc_the_input_number('karma', $op_user['karma'], 'Karma', 0, 999, true);?>
 
-  <?php wpdc_the_input_number('invitations', $op_user['invitations'], 'Invitaciones', 0, 999, true);?>
+  <?php if(is_object($op_user)) wpdc_the_input_number('invitations', $op_user['invitations'], 'Invitaciones', 0, 999, true);?>
 
 </section>

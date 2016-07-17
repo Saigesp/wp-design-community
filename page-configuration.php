@@ -44,7 +44,15 @@
         </form>
 	</section>
 
-	<?php include(locate_template('templates/sections/config-twitter.php')); ?>
+	<section id="homeconfig" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
+		<h3 onclick="ToggleSection(this)" data-section="homeconfig" class="js-section-launch">Portada (Home)</h3>
+        <form method="POST" action="">
+        	<?php wpdc_the_input_checkbox_simple('show_slider', 1, 'Mostrar slider', 'Mostrar carrusel con últimas actividades', false, get_option('show_slider'));?>
+        	<?php wpdc_the_input_checkbox_simple('show_text_about_us', 1, 'Mostrar "About us"', 'Mostrar texto explicativo en la portada', false, get_option('show_text_about_us'));?>
+        	<?php wpdc_the_input_textarea('text_about_us', get_option("text_about_us"), 'Texto Sobre nosotros');?>
+        	<?php wpdc_the_submit('updatesection', 'home-options', '', '', 'Guardar cambios');?>
+        </form>
+	</section>
 
 	<?php if(get_option('users_can_register')){?>
 		<section id="registryconfiguration" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
@@ -61,6 +69,8 @@
 			</form>
 		</section>
 	<?php } ?>
+
+	<?php include(locate_template('templates/sections/config-twitter.php')); ?>
 
 	<section id="bigbang" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
 		<h3 onclick="ToggleSection(this)" data-section="bigbang" class="js-section-launch">Y dios creó el cielo y la tierra</h3>

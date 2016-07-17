@@ -3746,6 +3746,67 @@ textarea.js-medium-editor,
 .flexboxer--controlusers form > .wrap--content + .wrap--content {
   padding-top: 5px;
 }
+.flexboxer--home .wrap--titlesection {
+  text-align: center;
+}
+.flexboxer--home .wrap--titlesection h3 {
+  font-size: 2.8rem;
+  border-bottom: 1px solid #000000;
+  font-weight: 100;
+}
+.flexboxer--home .wrap--masonry {
+  width: 160px;
+  margin: 0 auto;
+}
+.flexboxer--home .wrap--masonry .wrap--photo {
+  flex: 0 1 166px;
+  height: 166px;
+  overflow: hidden;
+}
+.flexboxer--home .wrap--masonry .wrap--photo img {
+  width: 100%;
+}
+.flexboxer--home .wrap--masonry .wrap--photo__upgrade {
+  background: black;
+  text-align: center;
+}
+.flexboxer--home .wrap--masonry .wrap--photo__upgrade a {
+  display: block;
+  line-height: 162px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 800;
+}
+@media only screen and (min-width: 400px) {
+  .flexboxer--home .wrap--masonry {
+    width: 354px;
+  }
+}
+@media only screen and (min-width: 570px) {
+  .flexboxer--home .wrap--masonry {
+    width: 530px;
+  }
+}
+@media only screen and (min-width: 570px) {
+  .flexboxer--home .wrap--masonry {
+    width: 530px;
+  }
+}
+@media only screen and (min-width: 750px) {
+  .flexboxer--home .wrap--masonry {
+    width: 704px;
+  }
+}
+@media only screen and (min-width: 940px) {
+  .flexboxer--home .wrap--masonry {
+    width: 100%;
+  }
+  .flexboxer--home .wrap--masonry .wrap--photo {
+    flex: 0 1 162px;
+    height: 162px;
+  }
+}
 .list > .item .wrap.wrap--frame__middle {
   flex-basis: 50%;
 }
@@ -3792,8 +3853,18 @@ textarea.js-medium-editor,
 .flexboxer .wrap--info__list .list .js-date-fromnow {
   opacity: 0.5;
 }
-.flexboxer .thumb--article img {
+.flexboxer .wrap--slider {
+  margin: 0 0 15px 0 !important;
+}
+.flexboxer .wrap--slider .main-gallery button {
+  min-width: initial;
+  min-height: initial;
+  background: transparent;
+  margin: 0;
+}
+.flexboxer .thumb img {
   width: 100%;
+  height: auto;
 }
 .flexboxer .wrap--userinfo {
   margin-top: 0;

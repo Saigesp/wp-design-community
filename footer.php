@@ -47,17 +47,30 @@
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script>
 jQuery(document).ready(function($) {
-    var ias = $.ias({
-     container: "#ias",
-     item: ".ias-item",
-     pagination: ".navigation",
-     next: "a.next",
-   });
+  var ias = $.ias({
+    container: "#ias",
+    item: ".ias-item",
+    pagination: ".navigation",
+   next: "a.next",
+  });
 
-   ias.extension(new IASTriggerExtension({offset: 2}));
-   ias.extension(new IASSpinnerExtension());
-   ias.extension(new IASNoneLeftExtension());
-    });
+  ias.on('render', function(items) { $(items).css({ opacity: 0 });});
+
+  ias.on('rendered', function(items) {
+    $(items).css({ opacity: 1 });
+  });
+
+  ias.extension(new IASSpinnerExtension({
+      src: 'http://xn--diseadoresindustriales-nec.es/wp-content/themes/disindu/img/ajax-loader.gif', // optionally
+  }));
+  ias.extension(new IASTriggerExtension({
+      text: 'Ver más',
+      offset: 5,
+  }));
+  ias.extension(new IASNoneLeftExtension({
+    text: "No hay más resultados",
+  })); 
+});
   </script>
 
 

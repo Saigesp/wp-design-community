@@ -3862,6 +3862,11 @@ textarea.js-medium-editor,
   background: transparent;
   margin: 0;
 }
+.flexboxer .ias-trigger,
+.flexboxer .ias-spinner,
+.flexboxer .ias-noneleft {
+  margin: 0 auto 10px;
+}
 .flexboxer .thumb img {
   width: 100%;
   height: auto;
@@ -3986,5 +3991,17 @@ textarea.js-medium-editor,
   .flexboxer .wrap--info__list .list .date {
     display: inline-block;
     margin-right: 15px;
+  }
+  .flexboxer .ias-trigger,
+  .flexboxer .ias-spinner,
+  .flexboxer .ias-noneleft {
+    max-width: 900px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .flexboxer .ias-trigger,
+  .flexboxer .ias-spinner,
+  .flexboxer .ias-noneleft {
+    max-width: 1100px;
   }
 }

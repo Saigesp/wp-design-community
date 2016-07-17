@@ -12,6 +12,12 @@
   <?php } ?>
   <div class="wrap wrap--content content content--archive">
     <h2 class="title title--archive" ><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
+    <p class="info info--post">
+      <?php if(!is_user_role('administrator', get_the_author_meta('ID')))
+        echo 'Por <a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.wpdc_get_user_name(get_the_author_meta('ID')).'</a> ';
+      ?>
+      <span class="js-date"><?php echo get_the_date('Y-m-d H:i:s');?></span>
+    <p>
     <div class="content">
       <?php the_excerpt(); ?>
     </div>

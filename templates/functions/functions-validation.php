@@ -289,7 +289,7 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $users_can_register = $_POST["users_can_register"] == 1 ? 1 : 0; update_option("users_can_register", $users_can_register);
     $users_can_asociate = $_POST["users_can_asociate"] == 1 ? 1 : 0; update_option("users_can_asociate", $users_can_asociate);
     $fields_asociate_min = $_POST["fields_asociate_min"]; update_option("fields_asociate_min", $fields_asociate_min);
-    $alerts_success .= 'Opciones actualizadas';
+    $alerts_success .= '<p>Opciones actualizadas</p>';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'twitteroptions'){
     $automate_twitter = esc_attr($_POST["automate_twitter"]); update_option("automate_twitter", $automate_twitter);
@@ -300,20 +300,47 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $tweet_new_user = esc_attr($_POST["tweet_new_user"]); update_option("tweet_new_user", $tweet_new_user);
     $follow_new_user = esc_attr($_POST["follow_new_user"]); update_option("follow_new_user", $follow_new_user);
     $tweet_new_publication = esc_attr($_POST["tweet_new_publication"]); update_option("tweet_new_publication", $tweet_new_publication);
-    $alerts_success .= 'Configuración de twitter guardada';
+    $alerts_success .= '<p>Configuración de twitter guardada</p>';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'tweet-test'){
     $tweet_msg = 'Test';
     $respuesta = sendTweet($tweet_msg);
-    $alerts_success .= 'Tweet enviado!';
+    $alerts_success .= '<p>Tweet enviado!</p>';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'texts-update'){
     $tos_link = esc_attr($_POST["tos_link"]); update_option("tos_link", $tos_link);
     $text_register = esc_attr($_POST["text_register"]); update_option("text_register", $text_register);
     $text_subscriber_upgrade = esc_attr($_POST["text_subscriber_upgrade"]); update_option("text_subscriber_upgrade", $text_subscriber_upgrade);
     $text_asociate_payfee = esc_attr($_POST["text_asociate_payfee"]); update_option("text_asociate_payfee", $text_asociate_payfee);
+    $text_asociate_payfee_banks = esc_attr($_POST["text_asociate_payfee_banks"]); update_option("text_asociate_payfee_banks", $text_asociate_payfee_banks);
 
-    $alerts_success .= 'Configuración de textos actualizada';
+    $alerts_success .= '<p>Configuración de textos actualizada</p>';
+  }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'big-bang'){
+    if (!empty($_POST['bigbang']) && $_POST['bigbang'] == 'user-roles'){
+      $users = get_users();
+      foreach ($users as $user) {
+        if(is_user_role('administrator', $user->ID)) {
+          $user->remove_role('soc');
+          continue;
+        }
+        $user->add_role('subscriber');
+        $user->remove_role('contributor');
+        $user->remove_role('author');
+        $user->remove_role('editor');
+        //$user->remove_role('jun');
+        //$user->remove_role('ex-socio');
+        //$user->remove_role('presi');
+        //$user->remove_role('secre');
+        //$user->remove_role('soc');
+        //$user->remove_role('teso');
+        //$user->remove_role('vice');
+        //$user->remove_role('vocal');
+        //$user->remove_role('vocal');
+      }
+      $alerts_success .= '<p>BOOOM!! A la mierda los egos!</p>';
+    }
+    
   }
 
 }
@@ -350,7 +377,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('author');
           $juntal->add_role(esc_attr('editor'));
           update_user_meta($juntal->ID, 'asociation_position', $cargo );
-          $msg .= '<p>El usuario '.wpdc_the_user_name($juntal->ID).' ahora es '.change_role_name($cargo).'</p>';
+          $msg .= '<p>El usuario '.wpdc_get_user_name($juntal->ID).' ahora es '.change_role_name($cargo).'</p>';
           update_user_registry_track($juntal->ID, change_role_name($cargo));
         } 
       }
@@ -371,7 +398,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
       $vocal->remove_role('author');
       $vocal->add_role(esc_attr('editor'));
       update_user_meta($vocal_id, 'asociation_position', 'vocal' );
-      $msg .= '<p>El usuario '.wpdc_the_user_name($vocal_id).' ahora es vocal</p>';
+      $msg .= '<p>El usuario '.wpdc_get_user_name($vocal_id).' ahora es vocal</p>';
       update_user_registry_track($vocal_id, change_role_name('vocal'));
     }
 
@@ -390,7 +417,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           foreach ($_POST[$responsability] as $user_id){
             if (get_the_author_meta('asociation_responsability', $user_id) == $responsability) continue;
             update_user_meta($user_id, 'asociation_responsability', $responsability );
-            $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es '.change_role_name($responsability).'</p>';
+            $msg .= '<p>El usuario '.wpdc_get_user_name($user_id).' ahora es '.change_role_name($responsability).'</p>';
             update_user_registry_track($user_id, change_role_name($responsability));
           }
         }
@@ -438,7 +465,7 @@ if (esc_attr($_POST['action']) == 'configuration-presidence'  && (get_user_meta(
           $juntal->remove_role('author');
           $juntal->add_role(esc_attr('editor'));
           update_user_meta($juntal->ID, 'asociation_position', 'presidente' );
-          $msg .= '<p>El usuario '.wpdc_the_user_name($juntal->ID).' es el nuevo lider!</p>';
+          $msg .= '<p>El usuario '.wpdc_get_user_name($juntal->ID).' es el nuevo lider!</p>';
           update_user_registry_track($juntal->ID, change_role_name('presidente'));
         } 
       }
@@ -473,7 +500,7 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         $user->remove_role('subscriber');
         $user->add_role('author');
         update_user_meta($user_id, 'asociation_status', 'validado' );
-        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es socio</p>';
+        $msg .= '<p>El usuario '.wpdc_get_user_name($user_id).' ahora es socio</p>';
         update_user_registry_track($user_id, 'socio');
       }
       $alerts_success .= $msg;
@@ -487,7 +514,7 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         $soc->add_role('subscriber');
         $soc->remove_role('author');
         update_user_meta($soc_id, 'asociation_status', '' );
-        $msg .= '<p>El usuario '.wpdc_the_user_name($soc_id).' ya no es socio</p>';
+        $msg .= '<p>El usuario '.wpdc_get_user_name($soc_id).' ya no es socio</p>';
         update_user_registry_track($soc_id, 'exsocio');
       }
       $alerts_success .= $msg;
@@ -503,7 +530,7 @@ if (esc_attr($_POST['action']) == 'configuration-secretary' ) {
         $user->add_role('author');
         update_user_meta($user_id, 'asociation_status', 'validado' );
         update_user_registry_track($user_id, 'validado');
-        $msg .= '<p>El usuario '.wpdc_the_user_name($user_id).' ahora es socio</p>';
+        $msg .= '<p>El usuario '.wpdc_get_user_name($user_id).' ahora es socio</p>';
         update_user_registry_track($user_id, 'socio');
       }
     }

@@ -511,17 +511,28 @@ function wpdc_get_user_name($user_id) {
  ***********************************/
 function wpdc_the_asociation_position($user_id) {
 	$output = '';
-	$pos = get_the_author_meta('asociation_position', $user_id);
-	$res = get_the_author_meta('asociation_responsability', $user_id);
-
-	if(!empty($pos)) 					$output .= change_role_name($pos);
-	if(!empty($pos) && !empty($res)) 	$output .= ' | ';
-	if(!empty($res))					$output .= change_role_name($res);
 	
+	if(is_user_role('subscriber', $user_id)){
+		$output .= change_role_name('subscriber');
+		if(get_the_author_meta('asociation_status', $user_id) == 'pendiente') $output .= ' | Pendiente de asociaciarse';
+	}else{
+		$pos = get_the_author_meta('asociation_position', $user_id);
+		$res = get_the_author_meta('asociation_responsability', $user_id);
+
+		if(!empty($pos)) 					$output .= change_role_name($pos);
+		if(!empty($pos) && !empty($res)) 	$output .= ' | ';
+		if(!empty($res))					$output .= change_role_name($res);
+
+		if(empty($res) && empty($pos))		$output .= change_role_name('author');
+		
+	}
+
 	echo $output;
 }
 
-// Profile image
+/**
+ * GET USER PROFILE IMAGE
+ ***********************************/
 function wpdc_the_profile_photo($usuario){
 	if(is_object($usuario) && is_numeric($usuario->ID)) $user_id = $usuario->ID;
 	elseif(is_numeric($usuario)) $user_id = $usuario;

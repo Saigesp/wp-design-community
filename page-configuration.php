@@ -54,14 +54,21 @@
 		        <?php wpdc_the_input_text('tos_link', get_option("tos_link"), 'Link a términos y condiciones', 'http://');?>
 		        <?php wpdc_the_input_textarea('text_register', get_option("text_register"), 'Texto para el registro');?>
 		        <?php wpdc_the_input_textarea('text_subscriber_upgrade', get_option("text_subscriber_upgrade"), 'Texto para los suscriptores');?>
-		        <?php wpdc_the_input_textarea('text_asociate_payfee', get_option("text_asociate_payfee"), 'Texto que acompaña a pagar cuotas');?>
+		        <?php wpdc_the_input_textarea('text_asociate_payfee', get_option("text_asociate_payfee"), 'Texto inserto en cada cuotas');?>
+		        <?php wpdc_the_input_textarea('text_asociate_payfee_banks', get_option("text_asociate_payfee_banks"), 'Texto explicativo para el pago por transferencia bancaria');?>
 		        <!-- submit change status -->
 				<?php wpdc_the_submit('updatesection', 'texts-update', '', '', 'Guardar cambios');?>
 			</form>
 		</section>
 	<?php } ?>
 
-	
+	<section id="bigbang" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
+		<h3 onclick="ToggleSection(this)" data-section="bigbang" class="js-section-launch">Y dios creó el cielo y la tierra</h3>
+        <form method="POST" action="">
+        	<?php wpdc_the_submit('bigbang', 'user-roles', '', '', 'Resetear roles');?>
+        	<input type="hidden" name="updatesection" value="big-bang"/>
+        </form>
+	</section>
   
 </div><!-- end of flexboxer -->
 

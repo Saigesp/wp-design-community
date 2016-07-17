@@ -14,7 +14,6 @@
     is_page('Configuration concursos') ||
     is_page('Configuration jobs') ||
     is_page('Configuration posts') ||
-    is_singular('fee') ||
     is_author()
     )
   )
@@ -97,8 +96,8 @@
 </section>
 <?php } ?>
 
-<?php if(is_user_role('administrator')){ ?>
-<?php //if(false){ ?>
+<?php //if(is_user_role('administrator')){ ?>
+<?php if(false){ ?>
 <?php if(!empty($_POST)) { ?>
 <section class="wrap wrap--content wrap--shadow">
 

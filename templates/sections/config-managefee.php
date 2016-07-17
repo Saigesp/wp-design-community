@@ -58,9 +58,34 @@
 
     <?php wpdc_the_input_select_user_payed_fee('members_pending', 'Añadir abono (pendientes)', $asociates->results, true);?>
 
-    <h3 class="sep"><?php if(get_post_meta(get_the_ID(), 'members_pending', true) != '') echo sizeof(get_post_meta(get_the_ID(), 'members_pending', true)); else echo '0';?> Socios pendientes de pago</h3>
-           
     <?php wpdc_the_submit('updatesection', 'updatefee', '', '', 'Actualizar cuota');?>
+    
+    <h3 class="sep">Miembros que no han pagado (y deberían)</h3>
+    <ul class="list list--userlist">
+      <?php
+      foreach ($asociates->results as $user) {
+        $user_id = $user->ID;
+        if($members_payed[$user_id] != '' || $members_pending[$user_id] != '') continue;
+        $user = get_userdata($user_id);
+        ?>
+        <li class="item wrap wrap--frame wrap--flex">
+          <div class="wrap wrap--frame wrap--frame__45">
+              <?php wpdc_the_profile_photo($user->ID);?>
+          </div>
+          <div class="wrap wrap--frame wrap--frame__fourth">
+              <?php wpdc_the_user_name($user->ID);?>
+          </div>
+          <div class="wrap wrap--frame wrap--frame__fourth">
+              <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
+          </div>
+          <div class="wrap wrap--frame wrap--frame__fourth">
+          </div>
+          <div class="wrap wrap--frame wrap--frame__fifth">
+          </div>
+        </li>
+      <?php }?>
+    </ul>
+           
 
   </form>
 </section>

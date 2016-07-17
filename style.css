@@ -904,6 +904,7 @@ body {
   height: 0;
   display: block;
   transition: all 350ms ease;
+  overflow: hidden;
 }
 .wrap--meeseeks .wrap--notification__send input[type="text"] + .options:hover {
   opacity: 1;
@@ -1444,17 +1445,29 @@ ins {
   color: white !important;
   background: #F96B85 !important;
 }
+.wrap--alert__error a {
+  color: #78577d;
+}
 .wrap--alert__success {
   color: white !important;
   background: #5FD694 !important;
+}
+.wrap--alert__success a {
+  color: #327344;
 }
 .wrap--alert__warning {
   color: #333 !important;
   background: #FFD478 !important;
 }
+.wrap--alert__warning a {
+  color: #ff6d3d;
+}
 .wrap--alert__info {
   color: white !important;
   background: #63C8FF !important;
+}
+.wrap--alert__info a {
+  color: #4c6cd0;
 }
 .wrap--alert p {
   margin: 0;
@@ -3781,6 +3794,38 @@ textarea.js-medium-editor,
 }
 .flexboxer .wrap--userinfo .wrap--frame__middle {
   margin-left: 15px;
+}
+.flexboxer .content--article img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+.flexboxer .content--article img.size-full {
+  width: 100%;
+}
+.flexboxer .content--article img.alignleft {
+  float: left;
+}
+.flexboxer .content--article img.alignright {
+  float: right;
+}
+.flexboxer .content--article hr {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.flexboxer h1,
+.flexboxer .title {
+  font-size: 3rem;
+}
+.flexboxer h2 {
+  font-size: 2.4rem;
+}
+.flexboxer h3 {
+  font-size: 1.6rem;
+}
+.flexboxer h4 {
+  font-size: 1.2rem;
+  opacity: 0.8;
 }
 .wrap--messages .list--messages {
   border: 0;

@@ -13,6 +13,20 @@ $asociates = new WP_User_Query(
         )
     )
 );
+$directive = new WP_User_Query(
+    array(
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => $wpdb->get_blog_prefix( $blog_id ) . 'capabilities',
+                'value' => 'editor',
+                'compare' => 'like'
+            )
+        )
+    )
+);
+
+$asociates->results = array_merge($asociates->results, $directive->results);
 
 $members_payed = is_array(get_post_meta(get_the_ID(), 'members_payed', true)) ? get_post_meta(get_the_ID(), 'members_payed', true) : array();
 $members_pending = is_array(get_post_meta(get_the_ID(), 'members_pending', true)) ? get_post_meta(get_the_ID(), 'members_pending', true) : array();

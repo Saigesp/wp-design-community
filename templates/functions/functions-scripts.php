@@ -79,35 +79,7 @@ function inject_in_all() { ?>
 
 
     jQuery(document).ready(function($) {
-/*
-      $('.action--remove').on('click', function(){
-          var elem = $(this);
-          var id = elem.data('id');
-          var nonce = elem.data('nonce');
-          $('#notification-'+id).addClass('hide');
-          if($("#notificationhistory .notification").length > 0) $('#archivelaunch').removeClass('hide');
-          else {
-            $('#archivelaunch').addClass('hide').removeClass('active');
-            $('#notificationhistory').removeClass('active');
-          }
-          $.ajax({
-            type: 'post',
-            url: Ajax.ajaxurl,
-            data: {
-              action: 'delete_post_FTW',
-              nonce: nonce,
-              id: id
-            },
-            success: function(){
-              $('#notification-'+id).remove();
-              alert('bien');
-            },
-            error: function(){
-              alert('No se ha podido procesar la solicitud :/');
-              $('#notification-'+id).removeClass('hide');
-            }
-          });
-        }); */
+
 
       imageresize();
 
@@ -577,7 +549,6 @@ jQuery(document).ready(function($) {
       },
       success: function(){
         $('#notification-'+id).remove();
-        alert('bien');
       },
       error: function(){
         alert('No se ha podido procesar la solicitud :/');

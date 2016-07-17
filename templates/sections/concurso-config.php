@@ -7,20 +7,19 @@
 		      <?php while ($concurso_query->have_posts()) : $concurso_query->the_post(); ?>
 		        <?php
 		        $post_id = get_the_ID();
-		        $concurso_org = get_post_meta($post_id, 'concurso_org', true);
-		        $concurso_bases = get_post_meta($post_id, 'concurso_bases', true);
-		        $concurso_quantity = get_post_meta($post_id, 'concurso_quantity', true);
-		        $concurso_date = get_post_meta($post_id, 'concurso_date', true);
+		        $concurso_org       = get_post_meta(get_the_ID(), 'concurso_org', true) == '' ? get_post_meta(get_the_ID(), 'wpcf-conorg')[0] : get_post_meta(get_the_ID(), 'concurso_org', true);
+		        $concurso_bases     = get_post_meta(get_the_ID(), 'concurso_bases', true) == '' ? get_post_meta(get_the_ID(), 'wpcf-conbas')[0] : get_post_meta(get_the_ID(), 'concurso_bases', true);
+		        $concurso_quantity  = get_post_meta(get_the_ID(), 'concurso_quantity', true);
+		        $concurso_date      = get_post_meta(get_the_ID(), 'concurso_date', true) == '' ? date('Y-m-d H:i:s',get_post_meta(get_the_ID(), 'wpcf-confecha')[0]) : get_post_meta(get_the_ID(), 'concurso_date', true);
+
 		        ?>
 		        <li class="item wrap wrap--frame wrap--flex">
-		          <div class="wrap wrap--frame wrap--frame__fourth">
+		          <div class="wrap wrap--frame wrap--frame__middle">
 		            <a href="<?php the_permalink();?>"><?php the_title();?></a>
 		          </div>
 		          <div class="wrap wrap--frame wrap--frame__fourth">
 		            <a href="<?php echo $concurso_bases; ?>"><span class="js-date"><?php echo $concurso_date; ?></span></a>
 		            <span class="js-date-fromnow help-info"><?php echo $concurso_date; ?></span>
-		          </div>
-		          <div class="wrap wrap--frame wrap--frame__fourth">
 		          </div>
 		          <div class="wrap wrap--frame wrap--frame__fourth wrap--checkbox">
 					<input type="checkbox" id="cx-rv-concurso-<?php echo $post_id;?>" name="concursos_to_remove[]" value="<?php echo $post_id;?>"/>

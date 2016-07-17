@@ -27,41 +27,11 @@ $args = array(
   'post_type' => 'event'
 );
 $wp_query = new wp_query( $args );
-
+$article_count = 1;
 ?>
 
-<script>
-jQuery(document).ready(function($) {
-  console.log();
-
-  var ias = $.ias({
-    container: "#flexborexarchiveevents",
-    item: ".wrap--article",
-    pagination: ".navigation",
-    next: "a.next"
-  });   
-
-  ias.on('render', function(items) {
-    $(items).css({ opacity: 0 });
-  });
-
-  ias.on('rendered', function(items) {
-    $('.js-imagefill').imagefill();
-    beautydate();
-    $(items).css({ opacity: 1 });
-  });  
-
-  ias.extension(new IASSpinnerExtension());            // shows a spinner (a.k.a. loader)
-  ias.extension(new IASTriggerExtension({offset: 3})); // shows a trigger after page 3
-  ias.extension(new IASNoneLeftExtension({
-    text: 'There are no more pages left to load.'      // override text when no pages left
-  }));
-
-});
-</script>
-
 <!-- flexboxer -->
-<div id="flexborexarchiveevents" class="flexboxer flexboxer--archive flexborex--archive__events">
+<div id="ias" class="flexboxer flexboxer--full flexboxer--archive flexborex--archive__events">
 
   <?php if (have_posts()) : while (have_posts()) : the_post();
     include(locate_template('templates/loops/loop-event.php'));
@@ -71,11 +41,11 @@ jQuery(document).ready(function($) {
 
 <!-- navigation -->
 <div class="navigation">
-  <?php $base = get_bloginfo( 'url' ). '%_%';
+  <?php $base = strtok($_SERVER["REQUEST_URI"],'?').'%_%';
   echo paginate_links( array(
     'base' => $base,
     'total' => $wp_query->max_num_pages,
-    'format'   => '/events/?pag=%#%',
+    'format'   => '?pag=%#%',
     'current'  => $pagec,
   )); ?>
 </div><!-- end of navigation -->

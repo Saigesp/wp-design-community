@@ -45,7 +45,7 @@
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
-  <script>
+  <script> 
 jQuery(document).ready(function($) {
   var ias = $.ias({
     container: "#ias",
@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
   ias.extension(new IASNoneLeftExtension({
     text: "No hay más resultados",
   })); 
-});
+}); 
   </script>
 
 

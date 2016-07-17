@@ -3491,10 +3491,10 @@ textarea.js-medium-editor,
 /**
  * ARCHIVE EVENTS HOME (archive-event.php)
  ***********************************/
-.flexborex--archive__events {
+#ias.flexborex--archive__events {
   max-width: 100%;
 }
-.flexborex--archive__events .wrap--article {
+#ias.flexborex--archive__events .wrap--article {
   flex: 1 1 100%;
   margin: 0;
   border-top: 1px solid white;
@@ -3502,14 +3502,15 @@ textarea.js-medium-editor,
   max-width: 100%;
   box-shadow: none !important;
   transition: opacity 350ms ease;
+  overflow: hidden;
 }
-.flexborex--archive__events .wrap--article:hover .overflow {
+#ias.flexborex--archive__events .wrap--article:hover .overflow {
   opacity: 0.5;
 }
-.flexborex--archive__events .wrap--article + .wrap--article {
+#ias.flexborex--archive__events .wrap--article + .wrap--article {
   border-top: 0;
 }
-.flexborex--archive__events .content {
+#ias.flexborex--archive__events .content {
   position: absolute;
   top: 0;
   left: 0;
@@ -3519,33 +3520,33 @@ textarea.js-medium-editor,
   padding: 40px 20px;
   box-sizing: border-box;
 }
-.flexborex--archive__events .content h2 {
+#ias.flexborex--archive__events .content h2 {
   font-weight: 900;
   font-size: 2.4rem;
   line-height: 1.2;
 }
-.flexborex--archive__events .content h2 a {
+#ias.flexborex--archive__events .content h2 a {
   color: white;
 }
-.flexborex--archive__events .dates {
+#ias.flexborex--archive__events .dates {
   position: absolute;
   color: white;
   bottom: 20px;
   left: 20px;
 }
-.flexborex--archive__events .dates span {
+#ias.flexborex--archive__events .dates span {
   text-transform: uppercase;
   font-size: 1.2rem;
 }
-.flexborex--archive__events .dates .status {
+#ias.flexborex--archive__events .dates .status {
   font-weight: 900;
   font-size: 1.2rem;
 }
-.flexborex--archive__events .dates .status a {
+#ias.flexborex--archive__events .dates .status a {
   color: white;
   transition: opacity 350ms ease-in;
 }
-.flexborex--archive__events .description {
+#ias.flexborex--archive__events .description {
   display: none;
 }
 /**
@@ -3987,6 +3988,14 @@ textarea.js-medium-editor,
 /**
  * MEDIA QUERYS
  *************************************************************************************************/
+@media only screen and (min-width: 550px) {
+  #ias.flexborex--archive__events .content {
+    height: 240px;
+  }
+  #ias.flexborex--archive__events .content h2 {
+    font-size: 3rem;
+  }
+}
 @media only screen and (min-width: 780px) {
   .flexboxer .wrap--info__list .list .date {
     display: inline-block;
@@ -3997,11 +4006,176 @@ textarea.js-medium-editor,
   .flexboxer .ias-noneleft {
     max-width: 900px;
   }
+  #ias.flexborex--archive__events {
+    flex-direction: row;
+  }
+  #ias.flexborex--archive__events .wrap--article {
+    flex: 1 1 50%;
+    margin: 0;
+    border: 0;
+  }
+}
+@media only screen and (min-width: 1120px) {
+  .article .content .align-imgright,
+  .article .content .wp-caption.alignright,
+  .article .content .align-imgleft,
+  .article .content .wp-caption.alignleft {
+    max-width: 900px;
+    width: 100% !important;
+    margin: 0 auto;
+  }
+  .article .content .align-imgright img {
+    margin: 10px;
+    float: right;
+    max-width: 400px;
+  }
+  .article .content .align-imgleft img {
+    margin: 10px;
+    float: left;
+    max-width: 400px;
+  }
+  .article .content .wp-caption.alignright img,
+  .article .content .wp-caption.alignleft img {
+    max-width: 80%;
+    margin: 20px 0;
+    display: inline-block;
+  }
+  .article .content .wp-caption.alignright img figcaption,
+  .article .content .wp-caption.alignleft img figcaption {
+    width: 18%;
+    display: inline-block;
+    vertical-align: top;
+    border-top: 1px solid #666;
+  }
+  .article .content .wp-caption.alignright figcaption {
+    margin: 20px 2% 0 0;
+    text-align: right;
+    float: left;
+  }
+  .article .content .wp-caption.alignleft figcaption {
+    margin: 20px 0 0 2%;
+    text-align: left;
+    float: right;
+  }
+  #ias.flexborex--archive__events .wrap--article {
+    flex: 1 1 33%;
+    max-width: 100%;
+  }
+  #ias.flexborex--archive__events .wrap--article .content {
+    flex: 1 1 33%;
+    max-width: 100%;
+    padding: 100px 30px;
+    height: 360px;
+  }
+  #ias.flexborex--archive__events .wrap--article .thumb {
+    height: 360px;
+    opacity: 0;
+    transition: all 600ms ease-in;
+  }
+  #ias.flexborex--archive__events .wrap--article .thumb img {
+    transition: all 600ms ease-in;
+  }
+  #ias.flexborex--archive__events .wrap--article h2 a {
+    color: black;
+    transition: color 350ms ease;
+  }
+  #ias.flexborex--archive__events .wrap--article .dates {
+    bottom: 100px;
+    left: 30px;
+    color: black;
+    transition: color 350ms ease;
+  }
+  #ias.flexborex--archive__events .wrap--article:hover .thumb {
+    opacity: 1;
+  }
+  #ias.flexborex--archive__events .wrap--article:hover .thumb img {
+    transform: scale(1.05);
+  }
+  #ias.flexborex--archive__events .wrap--article:hover h2 a,
+  #ias.flexborex--archive__events .wrap--article:hover .dates {
+    color: white;
+  }
+  #ias.flexborex--archive__events .wrap--article:hover .overflow {
+    opacity: 0.8;
+  }
+  #ias.flexborex--archive__events .wrap--article__medium {
+    flex: 1 1 50%;
+  }
+  #ias.flexborex--archive__events .wrap--article__full {
+    flex: 1 1 100%;
+  }
+  #ias.flexborex--archive__events .wrap--article__full .content {
+    flex: 1 1 100%;
+    max-width: 100%;
+    height: 500px;
+    padding: 250px 0 100px;
+  }
+  #ias.flexborex--archive__events .wrap--article__full .thumb {
+    height: 500px;
+  }
+  #ias.flexborex--archive__events .wrap--article__full h2 {
+    max-width: 80%;
+    padding: 0 45px;
+    margin: 0 auto;
+    font-size: 3vw;
+  }
+  #ias.flexborex--archive__events .wrap--article__full h2 a,
+  #ias.flexborex--archive__events .wrap--article__full .dates {
+    position: static;
+    top: initial;
+    left: initial;
+    max-width: 80%;
+    bottom: initial;
+    margin: 40px auto 0;
+  }
+  #ias.flexborex--archive__events .wrap--article__special .thumb {
+    opacity: 1;
+  }
+  #ias.flexborex--archive__events .wrap--article__special h2 a,
+  #ias.flexborex--archive__events .wrap--article__special .dates {
+    color: white;
+  }
+  #ias.flexborex--archive__events .wrap--article__middle {
+    flex: 1 1 50%;
+  }
 }
 @media only screen and (min-width: 1440px) {
   .flexboxer .ias-trigger,
   .flexboxer .ias-spinner,
   .flexboxer .ias-noneleft {
     max-width: 1100px;
+  }
+}
+/**
+* MEDIA IMRPESION
+***********************************/
+@media print {
+  @page {
+    margin: 10%;
+  }
+  /* Menu */
+  #navtop,
+  #headertop {
+    display: none;
+  }
+  /* Artículo */
+  #title {
+    position: relative;
+  }
+  .article .title {
+    color: black;
+  }
+  .article .wrap--author,
+  .article .wrap--category {
+    display: none;
+  }
+  .video-wrap,
+  .commentsarticle,
+  .relatedarticles {
+    display: none;
+  }
+  /* Share buttons */
+  .buttons-share {
+    display: none;
   }
 }

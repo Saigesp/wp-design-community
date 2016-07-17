@@ -4,11 +4,10 @@ $EM_Tickets = $EM_Event->get_tickets();
 $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->event_start_time);
 ?>
 
-<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--shadow wrap--article
+<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--shadow wrap--article ias-item
   <?php if($article_count == 0 && $pagec == 1) echo ' wrap--article__full wrap--article__special';?>
   <?php if($article_count%8 >= 0 && $article_count%8 < 2) echo ' wrap--article__medium';?>
-  <?php if(round(rand(0,7)) >= 6) echo ' wrap--article__special';?>
-  ">
+  <?php if(round(rand(0,7)) >= 6) echo ' wrap--article__special';?>">
   <?php if(has_post_thumbnail()){?>
     <figure class="thumb thumb--archive">
       <a href="<?php the_permalink() ?>">

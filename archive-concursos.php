@@ -1,21 +1,67 @@
-<?php get_header(); } ?>
-  <!-- flexboxer -->
-<form method="POST" action="">
-  <div id="flexboxer-<?php the_ID(); ?>" class="flexboxer flexboxer--concursos">
+<?php
 
-    <?php if (have_posts()) : ?>
-      <?php while (have_posts()) : the_post(); ?>
+get_header(); 
 
+$pagec = $_GET['pag'] == '' ? '1' : $_GET['pag'];
+$post_per_page = get_option( 'posts_per_page', '10' );
 
-      <?php endwhile; ?>
-    <?php else : ?>
+$args = array (
+  'order' => 'DESC',
+  'posts_per_page' => -1,
+  'post_type' => 'concursos',
+);
+$post_count_query = new wp_query( $args );
+$post_count = $post_count_query->found_posts;
+$total_post = $post_count ? count($post_count) : 1;
+$total_pages = 1;
+$offset = $post_per_page * ($pagec - 1);
+$total_pages = ceil($total_post / $post_per_page);
+$args = array( 
+  'order' => 'DESC',
+  'posts_per_page' => $post_per_page,
+  'offset'    => $offset,
+  'post_type' => 'concursos',
+);
+$wp_query = new wp_query( $args );
+?>
 
-      <!-- noinfo -->
-      <section class="wrap wrap--content wrap--transparent">
-        <h2>No hay concursos creados</h2>
-      </section><!-- end of noinfo -->
+<!-- flexboxer -->
+<div id="ias" class="flexboxer flexboxer--page flexboxer--ias">
 
-    <?php endif; ?>
-  </div><!-- end of flexboxer -->
-</form>
+  <?php if (have_posts()) : while (have_posts()) : the_post();
+    include( locate_template(  'templates/loops/loop-concurso.php' ));
+  endwhile; endif; ?>
+
+</div><!-- end of flexboxer -->
+
+<!-- navigation -->
+<div class="navigation">
+  <?php /*
+    echo paginate_links( array(
+      'base' => $base,
+      'format' => '&pag=%#%',
+      'prev_text' => __('&laquo; Previous'),
+      'next_text' => __('Next &raquo;'),
+      'total' => $total_pages,
+      'current' => $page,
+      'end_size' => 1,
+      'mid_size' => 5,
+      'add_args' => false,
+  )); */ 
+    //$base = get_bloginfo( 'url' ). '%_%';
+    $base = $_SERVER['HOST'].strtok($_SERVER["REQUEST_URI"],'?').'%_%';
+    echo paginate_links( array(
+      'base' => $base,
+      'total' => $wp_query->max_num_pages,
+      'format'   => '?pag=%#%',
+      'current'  => $pagec,
+    ));
+    ?>
+</div><!-- end of navigation -->
+
 <?php get_footer(); ?>
+
+
+
+
+  

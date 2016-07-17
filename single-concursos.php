@@ -19,7 +19,7 @@ $concurso_date      = get_post_meta(get_the_ID(), 'concurso_date', true) == '' ?
 
       <?php if(has_post_thumbnail()){ ?>
         <div class="wrap wrap--wrap wrap--fullwidth">
-            <figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
+            <figure id="thumbnail" class="thumb--article">
               <?php the_post_thumbnail('full');  ?>
             </figure>
         </div>

@@ -427,6 +427,14 @@ function inject_in_all() { ?>
 
 
 jQuery(document).ready(function($) {
+
+
+  
+
+
+
+
+
   $('.action--restore').on('click', function(){
     var elem = $(this);
     var id = elem.data('id');

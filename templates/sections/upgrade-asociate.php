@@ -1,7 +1,14 @@
 <section class="wrap wrap--content wrap--shadow wrap--form">
 	<form method="post" action="">
 		<div class="wrap wrap--frame">
-			<?php echo html_entity_decode(get_option("text_subscriber_upgrade")); ?>
+			<?php
+			if(get_option("text_subscriber_upgrade") != ''){
+				echo html_entity_decode(get_option("text_subscriber_upgrade"));
+			}else{
+				echo '<h3 class="title title--section">Asociarse a '.get_option('blogname').'</h3>';
+			}
+			?>
+			
 		</div>
 		<?php
 		$current_user_status = get_user_meta(get_current_user_id(), 'asociation_status', 1);

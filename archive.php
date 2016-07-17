@@ -21,11 +21,10 @@ $args = array(
   'offset'    => $offset,
 );
 $wp_query = new wp_query( $args );
-
 ?>
 
 <!-- flexboxer -->
-<div class="flexboxer flexboxer--page">
+<div id="ias" class="flexboxer flexboxer--page flexboxer--ias">
 
   <?php if (have_posts()) : while (have_posts()) : the_post();
     include( locate_template(  'templates/loops/loop-box.php' ));
@@ -47,7 +46,8 @@ $wp_query = new wp_query( $args );
       'mid_size' => 5,
       'add_args' => false,
   )); */ 
-    $base = get_bloginfo( 'url' ). '%_%';
+    //$base = get_bloginfo( 'url' ). '%_%';
+    $base = $_SERVER['HOST'].strtok($_SERVER["REQUEST_URI"],'?').'%_%';
     echo paginate_links( array(
       'base' => $base,
       'total' => $wp_query->max_num_pages,

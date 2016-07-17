@@ -10,7 +10,7 @@
 
 	<?php include(locate_template('templates/sections/upgrade-asociate.php')); ?>
 
-<?php }elseif(is_user_role('author')){ ?>
+<?php }elseif(is_user_role('author') || is_user_role('editor') || is_user_role('administrator')){ ?>
 	
 	<?php include(locate_template('templates/sections/upgrade-payfee.php')); ?>
 

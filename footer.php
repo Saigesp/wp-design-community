@@ -1,5 +1,7 @@
 </div><!-- end of wrapper -->
 
+
+
 <!-- footer -->
 <footer id="footer" class="wrap wrap--footer">
   <div class="flexboxer">
@@ -26,13 +28,11 @@
   </div>
 </footer> <!-- end footer -->
 
-
   <!-- inject:js -->
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/chosen/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/pikaday.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/flickity/dist/flickity.pkgd.min.js"></script>
-  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-imagefill/js/jquery-imagefill.min.js"></script>
   
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/jquery/dist/jquery.slim.min.js"></script>
@@ -41,7 +41,24 @@
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/pikaday/plugins/pikaday.jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/medium-editor/dist/js/medium-editor.min.js"></script>
   <!-- endinject -->
+
   
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/plugins/github-ias/src/jquery-ias.min.js"></script>
+  <script>
+jQuery(document).ready(function($) {
+    var ias = $.ias({
+     container: "#ias",
+     item: ".ias-item",
+     pagination: ".navigation",
+     next: "a.next",
+   });
+
+   ias.extension(new IASTriggerExtension({offset: 2}));
+   ias.extension(new IASSpinnerExtension());
+   ias.extension(new IASNoneLeftExtension());
+    });
+  </script>
 
 
 
@@ -70,6 +87,8 @@ jQuery(document).ready(function($) {
   }
 
 });
+
+
 </script>
 </body>
 </html> <!-- The End. what a ride! -->

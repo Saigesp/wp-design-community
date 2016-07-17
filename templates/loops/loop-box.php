@@ -1,24 +1,20 @@
-<?php if(has_post_thumbnail()){ ?>
-  
-  <!-- thumbnail -->
-  <section class="wrap wrap--frame wrap--article">
-    <header id="header-<?php the_ID(); ?>" class="header header--article">
-      <figure id="thumbnail" class="thumb thumb--article js-fullheight js-fullheight-thumb">
-        <?php the_post_thumbnail('full');  ?>
-      </figure>
-      <div class="overflow overflow--black"></div>
-      <div id="title" class="title title--article">
-        <div class="divtextarticle">
-          <h2 class="titletextarticle titlesarticle" ><?php the_title(); ?></h2>
-          <?php if(function_exists('the_subtitle')){?>
-            <h3 class="subtitletextarticle titlesarticle"><?php the_subtitle(); ?></h3>
-          <?php } ?>
-        </div>
-      </div>
-      <div class="categoryarticle">
-        <p><?php the_category(', ');?></p>
-      </div>
-    </header>
-  </section><!-- end of thumbnail -->
+<section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--shadow wrap--article ias-item
+  <?php if($article_count == 0 && $pagec == 1) echo ' wrap--article__full wrap--article__special';?>
+  <?php if($article_count%8 >= 0 && $article_count%8 < 2) echo ' wrap--article__medium';?>
+  <?php if(round(rand(0,7)) >= 6) echo ' wrap--article__special';?>
+  ">
+  <?php if(has_post_thumbnail()){?>
+    <figure class="thumb thumb--archive">
+      <a href="<?php the_permalink() ?>">
+        <?php the_post_thumbnail('full');?>
+      </a>
+    </figure>
+  <?php } ?>
+  <div class="wrap wrap--content content content--archive">
+    <h2 class="title title--archive" ><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
+    <div class="content">
+      <?php the_excerpt(); ?>
+    </div>
+  </div>
+</section>
 
-<?php }?>

@@ -44,6 +44,17 @@
         </form>
 	</section>
 
+	<section id="orgconfig" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
+		<h3 onclick="ToggleSection(this)" data-section="orgconfig" class="js-section-launch">Datos de la organización</h3>
+        <form method="POST" action="">
+			<?php wpdc_the_input_text('asoc_name', get_option("asoc_name"), 'Nombre completo de la organización', 'Entidad para la ...');?>
+			<?php wpdc_the_input_text('asoc_adress', get_option("asoc_adress"), 'Dirección', 'Calle, Ciudad, CP...');?>
+			<?php wpdc_the_input_text('asoc_email', get_option("asoc_email"), 'Email de contacto', 'info@organización.com');?>
+			<?php wpdc_the_input_text('asoc_tlf', get_option("asoc_tlf"), 'Teléfono de contacto', '+34 600 000 000');?>
+        	<?php wpdc_the_submit('updatesection', 'org-options', '', '', 'Guardar cambios');?>
+        </form>
+	</section>
+
 	<section id="homeconfig" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
 		<h3 onclick="ToggleSection(this)" data-section="homeconfig" class="js-section-launch">Portada (Home)</h3>
         <form method="POST" action="">

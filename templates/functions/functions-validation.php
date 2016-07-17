@@ -291,10 +291,16 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $fields_asociate_min = $_POST["fields_asociate_min"]; update_option("fields_asociate_min", $fields_asociate_min);
     $alerts_success .= '<p>Opciones actualizadas</p>';
   }
+  if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'org-options'){
+    $asoc_name = esc_attr($_POST["asoc_name"]); update_option("asoc_name", $asoc_name);
+    $asoc_adress = esc_attr($_POST["asoc_adress"]); update_option("asoc_adress", $asoc_adress);
+    $asoc_email = esc_attr($_POST["asoc_email"]); update_option("asoc_email", $asoc_email);
+    $asoc_tlf = esc_attr($_POST["asoc_tlf"]); update_option("asoc_tlf", $asoc_tlf);
+    $alerts_success .= '<p>Datos organizativos actualizados</p>';
+  }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'home-options'){
     $show_slider = $_POST["show_slider"] == 1 ? 1 : 0; update_option("show_slider", $show_slider);
     $show_text_about_us = $_POST["show_text_about_us"] == 1 ? 1 : 0; update_option("show_text_about_us", $show_text_about_us);
-    $text_about_us = esc_attr($_POST["text_about_us"]); update_option("text_about_us", $text_about_us);
     $alerts_success .= '<p>Portada actualizada</p>';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'twitteroptions'){

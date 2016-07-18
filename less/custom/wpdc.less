@@ -256,16 +256,15 @@
 /**
  * MANAGE BOOKINGS in PAGE EDIT EVENT (page-edit-event.php)
  ***********************************/
-.booking_status {
+#bookingmanager-form{
 
-}
+	.booking_status--1 { background: darkseagreen; }
+	.booking_status--2, .booking_status--3 { background: darksalmon; }
+	.booking_status--0, .booking_status--4, .booking_status--5 { }
 
-.booking_status--1 { background: darkseagreen; }
-.booking_status--2, .booking_status--3 { background: darksalmon; }
-.booking_status--0, .booking_status--4, .booking_status--5 { }
-
-#bookingmanager-form .wrap--submit .submit {
-	width: 100%;
+	.wrap--submit .submit {
+		width: 100%;
+	}
 }
 
 
@@ -582,7 +581,15 @@
 	}
 }
 
+.wrap--photo {
+	overflow: hidden;
+}
 
+.article {
+	.wrap--fullwidth{
+		margin-top: 0 !important;
+	}
+}
 
 /**
  * MEDIA QUERYS
@@ -620,6 +627,37 @@
 			flex: 1 1 50%;
 			margin: 0;
 			border: 0;
+		}
+	}
+	.article {
+		.thumb--article {
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+		.wrap--title {
+			bottom: 100px;
+		}
+		.title--article {
+			font-size: 4vw;
+			line-height: 6vw;
+		}
+		.title--article__sub {
+			font-size: 2.5vw;
+			line-height: 3vw;
+		}
+		.content {
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+		.content h1,
+		.content h2 {
+			font-weight: 300;
+			font-size: 2rem;
+			line-height: 2.6rem;
 		}
 	}
 }

@@ -3695,11 +3695,11 @@ textarea.js-medium-editor,
 /**
  * MANAGE BOOKINGS in PAGE EDIT EVENT (page-edit-event.php)
  ***********************************/
-.booking_status--1 {
+#bookingmanager-form .booking_status--1 {
   background: darkseagreen;
 }
-.booking_status--2,
-.booking_status--3 {
+#bookingmanager-form .booking_status--2,
+#bookingmanager-form .booking_status--3 {
   background: darksalmon;
 }
 #bookingmanager-form .wrap--submit .submit {
@@ -3985,6 +3985,12 @@ textarea.js-medium-editor,
 .wrap--messages .message-input textarea + .options label:hover {
   opacity: 0.6;
 }
+.wrap--photo {
+  overflow: hidden;
+}
+.article .wrap--fullwidth {
+  margin-top: 0 !important;
+}
 /**
  * MEDIA QUERYS
  *************************************************************************************************/
@@ -4013,6 +4019,31 @@ textarea.js-medium-editor,
     flex: 1 1 50%;
     margin: 0;
     border: 0;
+  }
+  .article .thumb--article img {
+    width: 100%;
+    height: auto;
+  }
+  .article .wrap--title {
+    bottom: 100px;
+  }
+  .article .title--article {
+    font-size: 4vw;
+    line-height: 6vw;
+  }
+  .article .title--article__sub {
+    font-size: 2.5vw;
+    line-height: 3vw;
+  }
+  .article .content img {
+    width: 100%;
+    height: auto;
+  }
+  .article .content h1,
+  .article .content h2 {
+    font-weight: 300;
+    font-size: 2rem;
+    line-height: 2.6rem;
   }
 }
 @media only screen and (min-width: 1120px) {

@@ -65,6 +65,7 @@ new_page_title('Configuration secretary');
 new_page_title('Configuration concursos');
 new_page_title('Configuration jobs');
 new_page_title('Configuration posts');
+new_page_title('Configuration events');
 new_page_title('Invitar');
 new_page_title('Upgrade');
 
@@ -86,6 +87,17 @@ function new_page_title($post_title){
     $post_id = wp_insert_post($new_post);
   }
 }
+
+function my_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/default/logo600x600.png);
+            background-size: 80px 80px;
+        }
+        #nav { display: none; }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 // Configure meta title
 function filter_wp_title($title) {

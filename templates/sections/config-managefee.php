@@ -11,13 +11,11 @@
           <div class="wrap wrap--frame wrap--frame__45">
               <?php wpdc_the_profile_photo($user_id);?>
           </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+          <div class="wrap wrap--frame wrap--frame__middle">
               <?php wpdc_the_user_name($user->ID);?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
-              <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
-          </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+              <?php wpdc_the_asociation_position($user->ID); ?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fifth wrap--checkbox">
             <input type="checkbox" id="checkbox-pay-<?php echo $user_id;?>" name="members_paydown[]" value="<?php echo $user_id;?>"/>
@@ -38,13 +36,11 @@
           <div class="wrap wrap--frame wrap--frame__45">
               <?php wpdc_the_profile_photo($user->ID);?>
           </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+          <div class="wrap wrap--frame wrap--frame__middle">
               <?php wpdc_the_user_name($user->ID);?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
-              <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
-          </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+              <?php wpdc_the_asociation_position($user->ID); ?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fifth wrap--checkbox">
             <input type="checkbox" id="checkbox-topay-<?php echo $user_id;?>" name="members_validate[]" value="<?php echo $user_id;?>"/>
@@ -72,15 +68,11 @@
           <div class="wrap wrap--frame wrap--frame__45">
               <?php wpdc_the_profile_photo($user->ID);?>
           </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
+          <div class="wrap wrap--frame wrap--frame__middle">
               <?php wpdc_the_user_name($user->ID);?>
           </div>
           <div class="wrap wrap--frame wrap--frame__fourth">
-              <?php echo get_user_meta($user->ID, 'asociation_status', true); ?>
-          </div>
-          <div class="wrap wrap--frame wrap--frame__fourth">
-          </div>
-          <div class="wrap wrap--frame wrap--frame__fifth">
+              <?php wpdc_the_asociation_position($user->ID); ?>
           </div>
         </li>
       <?php }?>

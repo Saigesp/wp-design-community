@@ -1,6 +1,6 @@
 <?php get_header();
 
-if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator')) {
+if(get_user_meta(get_current_user_id(), 'asociation_responsability', true) == 'rp_jobs' || is_user_role('administrator')) {
 
   $args = array (
     'order' => 'DESC',

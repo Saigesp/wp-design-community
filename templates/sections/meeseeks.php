@@ -14,6 +14,7 @@
     is_page('Configuration concursos') ||
     is_page('Configuration jobs') ||
     is_page('Configuration posts') ||
+    is_page('Configuration events') ||
     is_author()
     )
   )

@@ -4,21 +4,6 @@
 
 	<?php if(sizeof($EM_Event->bookings->bookings) > 0){ ?>
 
-	<div class="wrap wrap--flex do_not_print">
-		<div class="wrap wrap--frame wrap--frame__decim">
-			<strong>Nombre</strong>
-		</div>
-		<div class="wrap wrap--frame wrap--frame__decim">
-			<strong>Plazas</strong>
-		</div>
-		<div class="wrap wrap--frame wrap--frame__decim">
-			<strong>Total €</strong>
-		</div>
-		<div class="wrap wrap--frame wrap--frame__decim">
-			<strong>Estado</strong>
-		</div>
-
-	</div>
 
 	<div class="wrap wrap--flex hide">
 		<h2 class="title title--event">Reservas de <?php the_title(); ?></h2>
@@ -42,7 +27,7 @@
 		//var_dump($booking->tickets_bookings->booking->timestamp);
 
 	?>
-		<div class="wrap wrap--flex">
+		<div class="wrap wrap--flex wrap--form">
 
 			<?php $valide = $_GET['valide'] == 'ok' ? true : false; ?>
 
@@ -50,7 +35,6 @@
 				<span class="hide"><strong>Nombre: </strong></span>
 
 				<?php echo get_user_meta($person_id,'first_name', 1).' '.get_user_meta($person_id,'last_name', 1);
-					//$booking->set_status($_REQUEST['booking_status'], false, true);
 				?>
 			</div>
 
@@ -63,12 +47,12 @@
 
 			<div class="wrap wrap--frame wrap--frame__decim">
 				<span class="hide"><strong>Fecha de registro: </strong></span>
-				<span class="hide"><?php echo $booking_date; ?></span>
-				<span class="hide"><strong>Espacios: </strong></span>
-				<?php echo $booking_spaces; ?>
+				<span><?php echo $booking_date; ?></span>
 			</div>
 
 			<div class="wrap wrap--frame wrap--frame__decim do_not_print">
+				<span class="hide"><strong>Espacios: </strong></span>
+				<?php echo $booking_spaces; ?> espacios -
 				<span class="hide"><strong>Ingreso: </strong></span>
 				<?php echo round($booking_price, 2).' €'; ?>
 			</div>

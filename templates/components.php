@@ -10,9 +10,11 @@ function wpdc_the_pageoptions($menu){
 			$cont++;
 			if($cont > $mid_menu) $output .= '<p class="text text--right">';
 			else $output .= '<p>';
-			$output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
+			if(substr($section, 0, 4) != "http") $output .= '<a onclick="ToggleSection(this)" class="js-section-launch';
+			else $output .= '<a href="'.$section.'" class="';
 			//if($cont == 1) $output .= ' active';
-			$output .= '" data-section="'.$section.'">'.$text.'</a>';
+			if(substr($section, 0, 4) != "http") $output .= '" data-section="'.$section.'">'.$text.'</a>';
+			else $output .= '">'.$text.'</a>';
 			$output .= '</p>';
 			if($cont == $mid_menu && sizeof($menu) > 1) $output .= '</div><div class="wrap wrap--frame wrap--frame__middle">';
 		}

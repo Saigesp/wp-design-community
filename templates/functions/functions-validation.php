@@ -1,4 +1,4 @@
-<?php if('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))){ 
+<?php if($_SERVER['REQUEST_METHOD'] == 'POST' && esc_attr($_POST['action']) != ''){ 
 
   $alerts_success = '';
   $alerts_error = '';
@@ -16,26 +16,26 @@ if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) =
   if($_POST['updatesection'] == 'upgradeuser') $user_id = get_current_user_id();
   /* DATOS PERSONALES */
   // NOMBRE
-  if (!empty(esc_attr($_POST['last_name']))) update_user_meta($user_id, 'last_name', esc_attr($_POST['last_name']));
+  if (esc_attr($_POST['last_name']) != '') update_user_meta($user_id, 'last_name', esc_attr($_POST['last_name']));
 
   // APELLIDOS
-  if (!empty(esc_attr($_POST['first_name'])))  update_user_meta( $user_id, 'first_name', esc_attr($_POST['first_name']));
+  if (esc_attr($_POST['first_name']) != '')  update_user_meta( $user_id, 'first_name', esc_attr($_POST['first_name']));
       
   // DNI
-  if (!empty(esc_attr($_POST['dbem_dnie']))) update_user_meta($user_id, 'dbem_dnie', esc_attr($_POST['dbem_dnie']) );
+  if (esc_attr($_POST['dbem_dnie']) != '') update_user_meta($user_id, 'dbem_dnie', esc_attr($_POST['dbem_dnie']) );
 
 
   // FECHA DE NACIMIENTO
   update_user_meta($user_id, 'bornday', $_POST['bornday'] );      
 
   // POSITION
-  if (!empty(esc_attr($_POST['position']))) update_user_meta($user_id, 'position', esc_attr($_POST['position']) );
+  if (esc_attr($_POST['position']) != '') update_user_meta($user_id, 'position', esc_attr($_POST['position']) );
 
   // DIRECCIÓN
-  if (!empty(esc_attr($_POST['dbem_address']))) update_user_meta($user_id, 'dbem_address', esc_attr($_POST['dbem_address']) );
+  if (esc_attr($_POST['dbem_address']) != '') update_user_meta($user_id, 'dbem_address', esc_attr($_POST['dbem_address']) );
 
   // TELÉFONO
-  if (!empty(esc_attr($_POST['dbem_phone']))) update_user_meta($user_id, 'dbem_phone', esc_attr($_POST['dbem_phone']) );
+  if (esc_attr($_POST['dbem_phone']) != '') update_user_meta($user_id, 'dbem_phone', esc_attr($_POST['dbem_phone']) );
 
   // EMAIL
   if (!is_email(esc_attr( $_POST['email'] ))) $error[] = 'El email introducido no es válido, por favor inténtalo de nuevo.';
@@ -43,16 +43,16 @@ if (esc_attr($_POST['action']) == 'update-user' || (esc_attr($_POST['action']) =
   else wp_update_user( array ('ID' => $user_id, 'user_email' => esc_attr( $_POST['email'] )));
 
   // IMAGEN DE PERFIL
-  //if (!empty($_POST['async-upload'])) update_user_meta( $user_id, 'foto_personal', $_POST['html-upload'] );
+  //if ($_POST['async-upload']) != '') update_user_meta( $user_id, 'foto_personal', $_POST['html-upload'] );
 
   // PÁGINA WEB
-  if (!empty(esc_attr($_POST['user_url']))) wp_update_user( array ('ID' => $user_id, 'user_url' => esc_attr($_POST['user_url'])));
+  if (esc_attr($_POST['user_url']) != '') wp_update_user( array ('ID' => $user_id, 'user_url' => esc_attr($_POST['user_url'])));
 
   // PSEUDONIMO
-  if (!empty(esc_attr($_POST['pseudonimo']))) update_user_meta($user_id, 'pseudonimo', esc_attr($_POST['pseudonimo']));
+  if (esc_attr($_POST['pseudonimo']) != '') update_user_meta($user_id, 'pseudonimo', esc_attr($_POST['pseudonimo']));
 
   // DESCRIPCIÓN
-  if (!empty(esc_attr($_POST['description']))) update_user_meta( $user_id, 'description', esc_attr($_POST['description']));
+  if (esc_attr($_POST['description']) != '') update_user_meta( $user_id, 'description', esc_attr($_POST['description']));
 
 
   // FECHA DE NACIMIENTO
@@ -244,7 +244,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 /* UPGRADE USER
 *
 ******************************************************/
-if (esc_attr($_POST['action']) == 'upgrade' && !empty(esc_attr($_POST['updatesection']))) {
+if (esc_attr($_POST['action']) == 'upgrade' && esc_attr($_POST['updatesection']) != '') {
 
   if (esc_attr($_POST['updatesection']) == 'upgradeuser'){
     $user_id = get_current_user_id();
@@ -729,12 +729,22 @@ if (esc_attr($_POST['action']) == 'configuration-treasury'  && (get_user_meta($c
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* PAGAR CUOTA
 *
 *****************************************************
 */
  
-if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty(esc_attr($_POST['action']))) {
+if ('POST' == $_SERVER['REQUEST_METHOD'] && esc_attr($_POST['action']) != '') {
  
   global $post;
   $action_check = 'fee/'.$post->post_name;
@@ -991,6 +1001,15 @@ if (esc_attr($_POST['action']) == 'configuration-concursos'  && (get_user_meta($
   }
 }
 
+
+
+
+
+
+
+
+
+
 /* EDITAR CONCURSOS
 *
 ******************************************************/
@@ -1063,26 +1082,6 @@ if (esc_attr($_POST['action']) == 'edit-concursos'  && (get_user_meta($current_u
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* CONFIGURACIÓN OFERTAS
 *
 ******************************************************/
@@ -1146,6 +1145,15 @@ if (esc_attr($_POST['action']) == 'configuration-jobs'  && (get_user_meta($curre
   }
 
 }
+
+
+
+
+
+
+
+
+
 
 /* EDITAR OFERTA
 *

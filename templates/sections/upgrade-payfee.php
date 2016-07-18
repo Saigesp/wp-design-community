@@ -5,7 +5,7 @@
 			if(get_option("text_asociate_payfee") != ''){
 				echo html_entity_decode(get_option("text_asociate_payfee"));
 			}else{
-				//echo 'Asóciate';
+				echo 'Ya estás asociado!';
 			}
 
 			?>

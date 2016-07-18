@@ -1,9 +1,9 @@
 <?php 
 
 add_action( 'wp_head', 'inject_in_all' );
-
+// <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 function inject_in_all() { ?>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  
   <script>
 
     function ToggleMenu(args){
@@ -329,21 +329,17 @@ function inject_in_all() { ?>
         $('.inside').each(function(){
             var elemClass = $(this).attr('class').split(/\s+/);
             elemClass = 'wrap--'+elemClass[1]
-            $(this).prev('h3').andSelf().wrapAll('<div class="wrap wrap--content hide '+elemClass+'"/>');
+            $(this).prev('h3').andSelf().wrapAll('<div class="wrap wrap--content wrap--shadow '+elemClass+'"/>');
         });
-        $(".wrap--event-form-image").addClass("wrap--frame").removeClass("wrap--content hide");
-        $('.flexboxer--event__edit + p.submit').addClass('hide').children('input').attr("value", "Presentar evento");
+        $(".wrap--event-form-image").addClass("wrap--frame wrap--shadow").removeClass("wrap--content");
+        $('.flexboxer--event__edit + p.submit').children('input').attr("value", "Publicar evento");
 
         // Add default image && resize
         $(".wrap--event-form-image")
-        .prepend('<div class="overflow overflow--black__hover js-thumbnail-upload"></div><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/default/noimage600x600.png"><div class="title title--article"><div class="divtextarticle"><h2 class="titletextarticle titlesarticle"></h2></div></div>')
+        .prepend('<div class="overflow overflow--black__hover js-thumbnail-upload"></div><label for="event-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/default/noimage600x600.png"></label><div class="title title--article"><div class="divtextarticle"><h2 class="titletextarticle titlesarticle"></h2></div></div>')
         .imagefill()
-        .children('img').animate({ opacity: 1}, 3000);
+        .children('label').children('img').animate({ opacity: 1}, 3000);
 
-        // Trigger upload thumbnail
-        $(".js-thumbnail-upload").click(function() {
-            $("#event-image").trigger('click');
-        });
         $("#event-image").change(function(){
           $('.wrap--event-form-image').css("opacity", 0);
           var $input = $(this);
@@ -360,11 +356,8 @@ function inject_in_all() { ?>
                   $('.wrap--event-form-image')
                     .imagefill()
                     .animate({ opacity: 1}, 3000);
-
-                  $('.wrap--event-form-name').removeClass('hide');
               };
               reader.readAsDataURL(inputFile);
-
           } else {
               alert('Formatos permitidos: jpg, gif, png');
               $('.wrap--event-form-name').addClass('hide');
@@ -375,6 +368,7 @@ function inject_in_all() { ?>
         });
 
         // Update title in thumbnail
+        /*
         $('.event-form-name input').on('keyup', function() {
           var text = $('.event-form-name input').val();
           if(text != '' && text.length > 0) {
@@ -383,14 +377,7 @@ function inject_in_all() { ?>
           } 
           $('.titletextarticle').text(text);
         });
-
-        /* Habilite form details */
-        $('.event-form-when .em-date-end').change(function() {
-          $('.wrap--event-form-details').removeClass('hide');
-        });
-        $('.event-form-when .em-date-end').change(function() {
-          $('.wrap--event-form-details').removeClass('hide');
-        });
+        */
 
         // Create medium editor
         var editor = new MediumEditor('#em-editor-content', {
@@ -406,12 +393,7 @@ function inject_in_all() { ?>
           } 
         });
 
-        /* Location && submit */
-        $('#location-name').change(function() {
-          $('.wrap--event-form-bookings').removeClass('hide');
-          $('p.submit').removeClass('hide');
-        });
-
+        // Location && categories
         $(".event-categories select").chosen();
         $('#location-country').chosen(); 
 
@@ -427,13 +409,6 @@ function inject_in_all() { ?>
 
 
 jQuery(document).ready(function($) {
-
-
-  
-
-
-
-
 
   $('.action--restore').on('click', function(){
     var elem = $(this);

@@ -570,7 +570,7 @@ body {
 }
 .flexboxer .wrap--box {
   margin: 30px auto !important;
-  max-width: 400px !important;
+  max-width: 600px !important;
 }
 .flexboxer .wrap--controls {
   line-height: 1;

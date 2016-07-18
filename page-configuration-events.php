@@ -28,9 +28,10 @@ if(get_user_meta($current_user->ID, 'asociation_responsability', true) == 'rp_ev
 
       <?php include(locate_template('templates/sections/events-config.php')); ?> 
 
+      <?php include(locate_template('templates/sections/events-managebookings.php')); ?> 
+
       <?php include(locate_template('templates/sections/listing-events.php')); ?> 
 
-    
   </div><!-- end of flexboxer -->
 
 <?php } else header('Location: '.site_url().'?action=nopermission' ); ?>

@@ -32,11 +32,11 @@
               <img alt="logo" src="<?php echo get_template_directory_uri(); ?>/img/default/logo.png"/>
             <?php } ?>
           </a>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <p><?php echo get_option('blogdescription');?></p>
         </div>
       </div>
       <div class="wrap wrap--frame wrap--frame__middle">
-          <p class="text text--right">Inicia sesión</p>
+          <!--<p class="text text--right">Inicia sesión</p>-->
           <div class="wrap wrap--frame wrap--social">
           </div>
       </div>

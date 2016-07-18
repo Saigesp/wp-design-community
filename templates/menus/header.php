@@ -17,7 +17,7 @@
         <?php if(!is_user_logged_in()){ ?>
           <ul class="menu">
             <li>
-              <a href="">Iniciar sesión</a>
+              <a href="<?php echo site_url('login');?>">Iniciar sesión</a>
             </li>
           </ul>
         <?php }else{ 

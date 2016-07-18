@@ -216,7 +216,7 @@ function update_op_user_meta($user_id, $field, $input){
 function add_user_notification_track($user_id, $type = 'notification', $msg = ''){
   if($user_id > 0){
     $user_notification_track = get_user_meta($user_id, 'user_notification_track', true );
-    if(!is_array($user_notification_track)) $user_notification_track = [];
+    if(!is_array($user_notification_track)) $user_notification_track = array();
     $newtrack = [
       'type' => $type,
       'date' => current_time('mysql'),
@@ -875,6 +875,7 @@ add_action( 'edit_user_profile_update', 'wpdc_save_custom_user_profile_fields' )
 * FUNCIONES DE LOGIN
 *********************************************/
 /* redirect users after login */
+
 function no_admin_init() {      
     // Is this the admin interface?
     if (stripos($_SERVER['REQUEST_URI'],'/wp-admin/') !== false // Look for the presence of /wp-admin/ in the url
@@ -892,14 +893,14 @@ function no_admin_init() {
 // Add the action with maximum priority
 add_action('init','no_admin_init',0);
 
-/* redirect all users after logout */
+// redirect all users after logout
 function go_home(){
   wp_redirect( home_url() );
   exit();
 }
 add_action('wp_logout','go_home');
 
-/* redirect after fail login */
+// redirect after fail login 
 function my_front_end_login_fail($username){
     $referrer = $_SERVER['HTTP_REFERER'];
     if(!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin')){

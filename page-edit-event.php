@@ -9,9 +9,6 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 
 	$EM_Event = em_get_event($post_id, 'post_id');
 
-
-
-
 	/* Date */
 	$event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->event_start_time);
 	$event_end_date = new DateTime($EM_Event->event_end_date.' '.$EM_Event->event_end_time);
@@ -24,7 +21,7 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 		<?php if(has_post_thumbnail($post_id)){ ?>
 
 			<!-- thumbnail -->
-			<section class="wrap wrap--frame ">
+			<section class="wrap wrap--frame wrap--shadow">
 				<header id="header-<?php the_ID(); ?>" class="header header--article">
 					<figure id="thumbnail" class="thumb--article js-fullheight js-fullheight-thumb">
 						<?php echo get_the_post_thumbnail($post_id, 'full');  ?>
@@ -47,7 +44,7 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 		<?php } else{ ?>
 
 			<!-- title without thumbnail -->
-			<section class="wrap wrap--content">
+			<section class="wrap wrap--content wrap--shadow">
 				<h2 class="title title--event"><?php the_title(); ?></h2>
 				<?php if(function_exists('the_subtitle')){?>
 					<h3 class="subtitle subtitle--event"><?php the_subtitle(); ?></h3>
@@ -57,7 +54,7 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 		<?php } ?>
 
 		<!-- relevant info -->
-		<section class="wrap wrap--content">
+		<section class="wrap wrap--content wrap--shadow">
 			<h3>Detalles</h3>
 			<div class="wrap wrap--frame wrap--flex">
 				<div class="wrap wrap--frame__middle">
@@ -104,14 +101,14 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 		</section><!-- end of relevant info -->
 
 		<!-- description -->
-		<section class="wrap wrap--content">
+		<section class="wrap wrap--content wrap--shadow">
 			<h3><?php echo get_the_title($post_id); ?></h3>
 			<?php echo $EM_Event->output('#_EVENTNOTES');?>
 		</section><!-- end of description -->
 
 		<!-- localization -->
 		<?php if($EM_Event->location_id > 0){?>
-			<section class="wrap wrap--frame wrap--flex">
+			<section class="wrap wrap--frame wrap--flex wrap--shadow">
 				<div class="wrap wrap--content__middle">
 					<h3>Localización</h3>
 					<p><strong><?php echo $EM_Event->output('#_LOCATIONNAME');?></strong><br>
@@ -145,7 +142,7 @@ if($_GET['id'] > 0 && (is_user_role('author') || is_user_role('editor') || is_us
 	</div><!-- end of flexboxer -->
 
 <?php }elseif (is_user_role('author') || is_user_role('editor') || is_user_role('administrator')){
-	echo '<div class="js-showonload js-showonload-active">';
+	echo '<div class="wrap--form js-showonload js-showonload-active">';
 	em_event_form();
 	echo '</div>';
 }else{

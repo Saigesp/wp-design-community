@@ -21,7 +21,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 	<?php if(has_post_thumbnail()){ ?>
 
 		<!-- thumbnail -->
-		<section class="wrap wrap--fullwidth">
+		<section class="wrap wrap--sublayered">
 			<header id="header-<?php the_ID(); ?>" class="header header--article">
 				<figure id="thumbnail" class="thumb--article">
 					<?php the_post_thumbnail('full');  ?>
@@ -114,7 +114,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 				<p><strong><?php echo $EM_Event->output('#_LOCATIONNAME');?></strong><br>
 				<?php echo $EM_Event->output('#_LOCATIONADDRESS').', '.$EM_Event->output('#_LOCATIONTOWN');?></p>
 			</div>
-			<div class="wrap wrap--frame wrap--frame__middle">
+			<div class="wrap wrap--frame wrap--frame__middle wrap--googlemap">
 				<?php echo $EM_Event->output('#_LOCATIONMAP');?>
 			</div>
 		</section>

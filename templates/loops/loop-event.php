@@ -11,7 +11,7 @@ $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->even
   <?php if(has_post_thumbnail()){?>
     <figure class="thumb thumb--archive">
       <a href="<?php the_permalink() ?>">
-        <?php the_post_thumbnail('full');?>
+        <?php the_post_thumbnail('large');?>
       </a>
     </figure>
   <?php } ?>

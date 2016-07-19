@@ -20,11 +20,14 @@
               <a href="<?php echo site_url('login');?>">Iniciar sesión</a>
             </li>
           </ul>
-        <?php }else{ 
-          if (has_nav_menu('menuheader')) {
-            wp_nav_menu( array( 'theme_location' => 'menuheader', 'container' => false ) );
-          }
-        } ?>
+        <?php }else{ ?>
+          <?php if (has_nav_menu('menuheader')) wp_nav_menu( array( 'theme_location' => 'menuheader', 'container' => false));?>
+          <ul class="menu">
+            <li>
+              <a href="<?php echo get_author_posts_url(get_current_user_id());?>">Perfil</a>
+            </li>
+          </ul>
+        <?php } ?>
 
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/hamburguer.svg" alt="Menú" class="icon icon--menu icon--menu__inline" onclick="ToggleMenu('menutop')">
 

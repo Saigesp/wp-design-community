@@ -1,8 +1,10 @@
 <section class="wrap wrap--content wrap--shadow wrap--form wrap--box">
-	<h3 class="title title--article__sub">Regístrate</h3>
-	<div class="wrap wrap--frame">
-
+	<?php if(get_option("text_register") == '') { ?>
+		<h3 class="title title--article__sub">Regístrate</h3>
+	<?php }else{ ?>
 		<?php echo html_entity_decode(get_option("text_register")); ?>
+	<?php } ?>
+	<div class="wrap wrap--frame">
 
 		<form name="registerform" action="<?php echo add_query_arg('do', 'register', home_url('/configuration-secretary/')); ?>" method="post">
 			<?php wpdc_the_input_email('user_login', '', 'Email', 'user@example.com');?>

@@ -4,7 +4,7 @@ global $post;
 
 $args = array (
 	'post_type' => array('event', 'post', 'concursos'),
-  'posts_per_page' => 10
+  'posts_per_page' => 6,
 );
 $slider_query = new WP_Query( $args );
 ?>
@@ -12,12 +12,12 @@ $slider_query = new WP_Query( $args );
 
   <?php if (get_option('show_slider')) { ?>
     <?php if ($slider_query->have_posts() && get_option('show_slider')) { ?>
-      <div class="flexboxer flexboxer--full">
+      <div class="flexboxer flexboxer--full js-showonload js-showonload-active">
         <section class="wrap wrap--fullwidth wrap--slider">
           <div id="mainslider" class="main-gallery">
             <?php while ($slider_query->have_posts()) { $slider_query->the_post(); ?>
               <div class="gallery-cell">
-                <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>" alt="" style="height:360px;">
+                <img src="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' ); echo $thumb[0];?>" alt="" style="height:360px;">
               </div>
             <?php } ?>
           </div>

@@ -283,7 +283,7 @@ if (esc_attr($_POST['action']) == 'upgrade' && esc_attr($_POST['updatesection'])
 *
 ******************************************************/
  
-if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrator')) {
+if (esc_attr($_POST['action']) == 'configuration-admin'  && is_user_role('administrator')) {
 
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'general-options'){
     $users_can_register = $_POST["users_can_register"] == 1 ? 1 : 0; update_option("users_can_register", $users_can_register);
@@ -296,6 +296,9 @@ if (esc_attr($_POST['action']) == 'configuration'  && is_user_role('administrato
     $asoc_adress = esc_attr($_POST["asoc_adress"]); update_option("asoc_adress", $asoc_adress);
     $asoc_email = esc_attr($_POST["asoc_email"]); update_option("asoc_email", $asoc_email);
     $asoc_tlf = esc_attr($_POST["asoc_tlf"]); update_option("asoc_tlf", $asoc_tlf);
+    $asoc_facebook = esc_attr($_POST["asoc_facebook"]); update_option("asoc_facebook", $asoc_facebook);
+    $asoc_twitter = esc_attr($_POST["asoc_twitter"]); update_option("asoc_twitter", $asoc_twitter);
+    $asoc_instagram = esc_attr($_POST["asoc_instagram"]); update_option("asoc_instagram", $asoc_tlf);
     $alerts_success .= '<p>Datos organizativos actualizados</p>';
   }
   if (!empty($_POST['updatesection']) && $_POST['updatesection'] == 'home-options'){

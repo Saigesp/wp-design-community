@@ -80,6 +80,7 @@ function inject_in_all() { ?>
 
     jQuery(document).ready(function($) {
 
+      $(".js-showonload").removeClass("js-showonload-active");
 
       imageresize();
 
@@ -102,7 +103,6 @@ function inject_in_all() { ?>
         });
       }
 
-      $(".js-showonload").removeClass("js-showonload-active");
 
       if ( $(".chosen").length > 0){
         $('.chosen').chosen();

@@ -58,7 +58,7 @@ new_page_title('Edit Concursos');
 new_page_title('Edit Jobs');
 new_page_title('Edit Posts');
 new_page_title('Control Users');
-new_page_title('Configuration');
+new_page_title('Configuration admin');
 new_page_title('Configuration presidence');
 new_page_title('Configuration treasury');
 new_page_title('Configuration secretary');

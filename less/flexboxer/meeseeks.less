@@ -40,6 +40,13 @@
 	> .wrap {
     	max-width: 900px;
 	}
+	.wrap--logo {
+		text-align: center;
+		img {
+			width: 100%;
+    		max-width: 200px;
+		}
+	}
 	.wrap--notification {
 		&__receive {}
 		&__send {
@@ -130,6 +137,30 @@
 			opacity: 1;
 		}
 	}
+}
+
+
+
+/**
+ * MEDIA QUERYS
+ *************************************************************************************************/
+@media only screen and (min-width: @query-mobile) {
+}
+
+@media only screen and (min-width: @query-tablet) {
+	.wrap--meeseeks {
+		.wrap--logo {
+			img {
+				max-width: initial;
+				height: 100px;
+				width: auto;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: @query-desktop) {
+
 }
 
 @media only screen and (min-width: @query-fullscreen) {

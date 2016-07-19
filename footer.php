@@ -19,8 +19,12 @@
       <div class="wrap wrap--frame__middle text--right">
         <ul>
           <li>
-          <a href="https://www.facebook.com/aedisevilla/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/facebook.svg" alt="Facebook" class="icon icon--rrss"></a>
-          <a href="https://twitter.com/AEDISevilla" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/twitter.svg" alt="Twitter" class="icon icon--rrss"></a>
+          <?php if(get_option('asoc_facebook') != ''){?>
+            <a href="<?php echo get_option('asoc_facebook');?>" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/facebook.svg" alt="Facebook" class="icon icon--rrss"></a>
+          <?php } ?>
+          <?php if(get_option('asoc_twitter') != ''){?>
+            <a href="<?php echo get_option('asoc_twitter');?>" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/icons/twitter.svg" alt="Twitter" class="icon icon--rrss"></a>
+          <?php } ?>
           </li>
         </ul>
       </div>

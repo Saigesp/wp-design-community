@@ -23,9 +23,10 @@
 	<section id="generalconfiguration" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
 		<h3 onclick="ToggleSection(this)" data-section="generalconfiguration" class="js-section-launch">Configuración general</h3>
         <form method="POST" action="">
+        	<h3 class="sep">Registro de usuarios</h3>
         	<?php wpdc_the_input_checkbox_simple('users_can_register', 1, 'Permitir registro de usuarios', '', false, get_option('users_can_register'));?>
-        	<?php wpdc_the_input_checkbox_simple('users_can_asociate', 1, 'Permitir que usuarios se asocien', '', false, get_option('users_can_asociate'));?>
         	<h3 class="sep">Registro de asociados</h3>
+        	<?php wpdc_the_input_checkbox_simple('users_can_asociate', 1, 'Permitir que usuarios se asocien', '', false, get_option('users_can_asociate'));?>
 	        <?php
 	        $options = [
 				"dbem_dnie" => change_field_name("dbem_dnie"),
@@ -47,10 +48,15 @@
 	<section id="orgconfig" class="wrap wrap--content wrap--collapse js-section wrap--shadow wrap--form">
 		<h3 onclick="ToggleSection(this)" data-section="orgconfig" class="js-section-launch">Datos de la organización</h3>
         <form method="POST" action="">
+        	<h3 class="sep">Datos corporativos</h3>
 			<?php wpdc_the_input_text('asoc_name', get_option("asoc_name"), 'Nombre completo de la organización', 'Entidad para la ...');?>
 			<?php wpdc_the_input_text('asoc_adress', get_option("asoc_adress"), 'Dirección', 'Calle, Ciudad, CP...');?>
 			<?php wpdc_the_input_text('asoc_email', get_option("asoc_email"), 'Email de contacto', 'info@organización.com');?>
 			<?php wpdc_the_input_text('asoc_tlf', get_option("asoc_tlf"), 'Teléfono de contacto', '+34 600 000 000');?>
+			<h3 class="sep">Redes sociales</h3>
+			<?php wpdc_the_input_text('asoc_facebook', get_option("asoc_facebook"), 'Url página de Facebook', 'http://...');?>
+			<?php wpdc_the_input_text('asoc_twitter', get_option("asoc_twitter"), 'Url cuenta de twitter', 'http://...');?>
+			<?php wpdc_the_input_text('asoc_instagram', get_option("asoc_instagram"), 'Url cuenta de instagram', 'http://...');?>
         	<?php wpdc_the_submit('updatesection', 'org-options', '', '', 'Guardar cambios');?>
         </form>
 	</section>

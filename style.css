@@ -122,13 +122,13 @@ body {
   background: #f5f5f5;
 }
 a {
-  color: #FE6FCA;
+  color: #00A79D;
   text-decoration: none;
   cursor: pointer;
 }
 a:focus {
   outline: 0;
-  color: #FE6FCA;
+  color: #14CE90;
 }
 a:hover,
 a:active {
@@ -136,7 +136,7 @@ a:active {
 }
 a:active,
 a:hover {
-  color: #FE6FCA;
+  color: #006C65;
 }
 h1,
 h2,
@@ -943,7 +943,7 @@ body {
   padding: 10px 15px;
   display: inline-block;
   cursor: pointer;
-  background: #FE6FCA;
+  background: #00A79D;
   transition: opacity 350ms ease;
 }
 .wrap--meeseeks .wrap--notification__send input[type="text"] + .options label:hover {
@@ -1184,13 +1184,13 @@ ins {
   display: inline-block;
 }
 .wrap--header .menu li a {
-  color: #FE6FCA;
+  color: #00A79D;
   line-height: 40px;
   display: block;
   padding: 0 10px;
 }
 .wrap--header .menu li a:hover {
-  color: #FE6FCA;
+  color: #006C65;
 }
 .wrap--header .menu li + li {
   margin-left: 20px;
@@ -3521,6 +3521,14 @@ textarea.js-medium-editor,
   font-family: 'Open Sans', sans-serif;
   font-style: normal;
 }
+.wrap--header .icon--menu__user {
+  background: #BE1E2D;
+  transition: background 200ms ease;
+  opacity: 1;
+}
+.wrap--header .icon--menu__user:hover {
+  background: #BE1E2D;
+}
 .flexboxer .wrap--flex .em-location-map-container {
   width: 100% !important;
 }
@@ -4026,7 +4034,7 @@ textarea.js-medium-editor,
   padding: 10px 15px;
   display: inline-block;
   cursor: pointer;
-  background: #FE6FCA;
+  background: #00A79D;
   transition: opacity 350ms ease;
 }
 .wrap--messages .message-input textarea + .options label:hover {

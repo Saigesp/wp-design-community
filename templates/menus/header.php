@@ -29,29 +29,41 @@
           </ul>
         <?php } ?>
 
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/user-white.svg" alt="Menú" class="icon icon--menu icon--menu__user icon--menu__inline" onclick="ToggleMenu('menuuser')">
+
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/hamburguer.svg" alt="Menú" class="icon icon--menu icon--menu__inline" onclick="ToggleMenu('menutop')">
 
       </div>
     </section>
-
-<?php /*
-
-    <!-- usermenu -->
-    <div class="wrap wrap--icon wrap--icon__usermenu" onclick="ToggleMenu('menuuser')">
-      <?php
-      if(!is_user_logged_in()) // the_svg_icon('doner');
-      else wpdc_the_profile_photo($current_user->ID);
-      ?>
-
-    </div><!-- end of usermenu -->
-    
-*/ ?>
-    
   </div>
 </header>
 
 
-<?php /*
+
+
+<?php 
+
+$args = array(
+  'echo'           => true,
+  'remember'       => true,
+  'redirect'       => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+  'form_id'        => 'loginform',
+  'id_username'    => 'user_login',
+  'id_password'    => 'user_pass',
+  'id_remember'    => 'rememberme',
+  'id_submit'      => 'wp-submit',
+  'label_username' => __( 'Username' ),
+  'label_password' => __( 'Password' ),
+  'label_remember' => __( 'Remember Me' ),
+  'label_log_in'   => __( 'Log In' ),
+  'value_username' => '',
+  'value_remember' => false
+);
+
+//wp_login_form( $args );
+
+
+/*
 
 <!-- rightmenu -->
 <?php if (has_nav_menu('menutop')) { ?>

@@ -7,7 +7,8 @@ $event_start_date = new DateTime($EM_Event->event_start_date.' '.$EM_Event->even
 <section id="article-<?php the_ID(); ?>" class="wrap wrap--frame wrap--shadow wrap--article ias-item
   <?php if($article_count == 0 && $pagec == 1) echo ' wrap--article__full wrap--article__special';?>
   <?php if($article_count%8 >= 0 && $article_count%8 < 2) echo ' wrap--article__medium';?>
-  <?php if(round(rand(0,7)) >= 6) echo ' wrap--article__special';?>">
+  <?php if(round(rand(0,7)) >= 6) echo ' wrap--article__special';?>
+  <?php if(get_post_meta($post->ID, 'has_title_in_thmbnail', true)) echo ' wrap--article__titlethumbnail';?>">
   <?php if(has_post_thumbnail()){?>
     <figure class="thumb thumb--archive">
       <a href="<?php the_permalink() ?>">

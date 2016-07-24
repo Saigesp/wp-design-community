@@ -45,6 +45,7 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 				if($EM_Event->location->location_id > 0){
 					echo '<br><span class="breaklinetablet"><strong>Localización:</strong> </span><span class="breaklinetablet">'.$EM_Event->location->location_name.'</span>';
 				}?>
+				<?php if(is_user_role('administrator')) wpdc_the_edit_icon(get_option('siteurl').'/edit-event/?id='.$post->ID); ?>
 			</div>
 			<div class="wrap wrap--frame__middle">
 				<?php

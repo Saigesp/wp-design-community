@@ -9,10 +9,10 @@ function inject_in_all() { ?>
     function ToggleMenu(args){
       if(jQuery('#'+args).hasClass('active') || args == 'close'){
         jQuery('.js-menu').removeClass("active");
-        //jQuery('#overlaybody').removeClass("active");
+        jQuery('#overlaybody').removeClass("active");
       }else{
         jQuery('.js-menu').removeClass("active");
-        //jQuery('#overlaybody').addClass("active");
+        jQuery('#overlaybody').addClass("active");
         jQuery('#'+args).addClass("active");
       }
     }

@@ -898,9 +898,16 @@ body {
 .wrap--meeseeks .wrap--logo {
   text-align: center;
 }
+.wrap--meeseeks .wrap--logo a {
+  opacity: 1;
+}
 .wrap--meeseeks .wrap--logo img {
   width: 100%;
   max-width: 200px;
+  transition: opacity 200ms ease;
+}
+.wrap--meeseeks .wrap--logo img:hover {
+  opacity: 0.7;
 }
 .wrap--meeseeks .wrap--notification__send input[type="text"] {
   background: transparent;

@@ -31,25 +31,6 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 
 	<?php } ?>
 
-	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
-
-		<!-- admin options -->
-		<?php wpdc_the_pageoptions($pageoptions);?>
-
-	<!-- booking management -->
-	<section id="bookingmanager" class="wrap wrap--content wrap--shadow wrap--hidden js-section">
-	    <h3>Gestión de reservas</h3>
-	    <?php include(locate_template('templates/loops/loop-booking.php')); ?>
-	    <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
-	    	<?php // the_svg_icon('close', 'icon--corner js-close-alert'); ?>
-	    </div>
-	    <div class="wrap wrap--icon wrap--icon__pdf" onclick="">
-	    	<?php // the_svg_icon('pdf', 'icon--corner icon--corner__second'); ?>
-	    </div>
-	</section><!-- end of booking management -->
-
-<?php } ?>
-
 
 	<!-- relevant info -->
 	<section class="wrap wrap--content wrap--shadow">
@@ -97,6 +78,25 @@ $booking_end_date = new DateTime($EM_Event->event_rsvp_date.' '.$EM_Event->event
 			</div>
 		</div>
 	</section><!-- end of relevant info -->
+
+	<?php if(is_user_role('administrator') || is_user_role('editor')) { ?>
+
+		<!-- admin options -->
+		<?php wpdc_the_pageoptions($pageoptions);?>
+
+	<!-- booking management -->
+	<section id="bookingmanager" class="wrap wrap--content wrap--shadow wrap--hidden js-section">
+	    <h3>Gestión de reservas</h3>
+	    <?php include(locate_template('templates/loops/loop-booking.php')); ?>
+	    <div class="wrap wrap--icon wrap--icon__close js-section-launch" onclick="ToggleSection(this)" data-section="close">
+	    	<?php // the_svg_icon('close', 'icon--corner js-close-alert'); ?>
+	    </div>
+	    <div class="wrap wrap--icon wrap--icon__pdf" onclick="">
+	    	<?php // the_svg_icon('pdf', 'icon--corner icon--corner__second'); ?>
+	    </div>
+	</section><!-- end of booking management -->
+
+<?php } ?>
 
 	<!-- description -->
 	<section class="wrap wrap--content wrap--shadow">
